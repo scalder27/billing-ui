@@ -1,2 +1,2 @@
 import Paging from "./Paging.jsx";
-module.exports = Paging;
+export default Paging;

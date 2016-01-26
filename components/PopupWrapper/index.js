@@ -1,2 +1,2 @@
 import Popup from "./Popup.jsx";
-module.exports = Popup;
+export default Popup;
