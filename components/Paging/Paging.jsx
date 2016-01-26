@@ -1,10 +1,10 @@
-import React, { PropTypes } from "react";
+import { Component, PropTypes } from "react";
 import classnames from "classnames";
 import "./Pagimg.scss";
 
 const edgeCount = 5;
 
-class Paging extends React.Component {
+class Paging extends Component {
     getPage(pageCount, counter) {
         const { CurrentPage, isSmall, onChange } = this.props;
 

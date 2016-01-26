@@ -1,10 +1,11 @@
-import React, { PropTypes } from "react";
+import { Component, PropTypes } from "react";
+
 import ReactDOM from "react-dom";
 import popup from "exports?Popup!ContentBase/scripts/Popup/Popup";
 import styles from "./Popup.scss";
 import classnames from "classnames";
 
-class Popup extends React.Component {
+class Popup extends Component {
     componentDidMount() {
         const { shouldUpdate } = this.props;
         if (!this.popupControl && shouldUpdate) {
@@ -83,7 +84,7 @@ class Popup extends React.Component {
         });
 
         if (onClose) {
-            this.popupControl.onHide(() => onClose())
+            this.popupControl.onHide(() => onClose());
         }
     }
 
