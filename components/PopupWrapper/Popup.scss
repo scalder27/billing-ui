@@ -1,0 +1,27 @@
+@import "../../Shared/scss/placeholders";
+@import "../../Shared/scss/variables";
+
+:local {
+    .popup {
+        position: relative;
+        background: $bgWhiteColor;
+        box-shadow: $shadowActionsPopup;
+        border-top: 1px solid $borderLightColor;
+        border-radius: 1px;
+    }
+
+    .close-link {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 10px;
+        height: 10px;
+        cursor: pointer;
+        z-index: 1;
+        background: transparent url("/ContentBase/img/window/delete_cross.png") 0 0 no-repeat;
+
+        &:hover {
+            background-position: 0 -10px;
+        }
+    }
+}
