@@ -1,11 +1,11 @@
-import { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
 import ReactDOM from "react-dom";
 import popup from "exports?Popup!ContentBase/scripts/Popup/Popup";
 import styles from "./Popup.scss";
 import classnames from "classnames";
 
-class Popup extends Component {
+class Popup extends React.Component {
     componentDidMount() {
         const { shouldUpdate } = this.props;
         if (!this.popupControl && shouldUpdate) {
