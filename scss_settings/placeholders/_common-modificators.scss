@@ -1,0 +1,45 @@
+%as-hidden {
+    display: none;
+}
+
+%as-inline-block {
+    display: inline-block;
+
+    vertical-align: top;
+}
+
+%as-link {
+    background: none;
+
+    color: #3285b7;
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: #d04000;
+    }
+}
+
+%as-clearfix {
+    &:after,
+    &:before {
+        content: " ";
+
+        display: table;
+
+        clear: both;
+    }
+}
+
+%as-word-break {
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+%as-text-overflow-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

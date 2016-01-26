@@ -1,0 +1,93 @@
+@import "../variables";
+
+%input-base {
+    transition: border-color, box-shadow .2s ease-in-out;
+
+    border: none;
+    border-bottom: 1px solid #e4e4e4;
+
+    color: $textBaseColor;
+}
+
+%input-base-focused {
+    border: none;
+    border-bottom: 1px solid #008eff;
+    outline: 0;
+    box-shadow: 0 1px #008eff;
+}
+
+%input-readonly-focused {
+    border: none;
+    border-bottom: 1px dashed #e4e4e4;
+    background: none;
+
+    color: #e4e4e4;
+}
+
+%input-base-invalid {
+    border: none;
+    border-bottom: 1px solid $borderErrorColor;
+    border-radius: 0;
+    outline: none;
+    outline-offset: 0;
+    box-shadow: 0 1px $borderErrorColor;
+}
+
+@mixin material-input($width) {
+    @extend %input-base;
+
+    width: $width;
+
+    font-size: $fontSizeBig;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    // todo: либо потерялось, либо нужно выпилить
+    & .placeholder {
+        position: relative;
+        top: 2px;
+
+        color: $textInactiveColor;
+    }
+    &[type="password"]:focus,
+    &[type="text"]:focus {
+        @extend %input-base-focused;
+    }
+    &[readonly],
+    &[readonly]:focus {
+        @extend %input-readonly-focused;
+    }
+    &[type="password"].input-validation-error:focus,
+    &[type="text"].input-validation-error:focus,
+    &[type="text"].validation-error:focus,
+    &[type="password"].input-validation-error,
+    &[type="text"].input-validation-error,
+    &[type="text"].validation-error,
+    &[type="text"].invalidDate {
+        @extend %input-base-invalid;
+    }
+}
+
+
+@mixin material-textarea($width: auto) {
+    @extend %input-base;
+
+    width: $width;
+    box-sizing: border-box;
+
+    resize: none;
+
+    &:focus {
+        @extend %input-base-focused;
+    }
+    &[readonly],
+    &[readonly]:focus {
+        @extend %input-readonly-focused;
+    }
+    &.input-validation-error,
+    &.input-validation-error:focus,
+    &.validation-error,
+    &.validation-error:focus {
+        @extend %input-base-invalid;
+    }
+}
