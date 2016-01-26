@@ -1,2 +1,2 @@
-import popupWrapper from "./Popup.jsx";
-module.exports = popupWrapper;
+import Popup from "./Popup.jsx";
+module.exports = Popup;
