@@ -1,6 +1,6 @@
 import { Component, PropTypes } from "react";
-import SpecialCharacters from "../../Shared/SpecialCharacters";
-import Popup from "../../Shared/Popup/Popup";
+import SpecialCharacters from "../SpecialCharacters";
+import Popup from "../Popup";
 
 import styles from "./Actions.scss";
 import classnames from "classnames";
