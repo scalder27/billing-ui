@@ -19,7 +19,7 @@ class Paging extends Component {
         const leftEdge = CurrentPage - edgeCount;
         const rightEdge = CurrentPage + edgeCount;
         if (counter !== 1 && counter !== pageCount && (leftEdge >= counter || rightEdge <= counter)) {
-            return leftEdge === counter || rightEdge === counter ? <span key="ellipsis">...</span> : null;
+            return leftEdge === counter || rightEdge === counter ? <span key={`ellipsis_${counter}`}>...</span> : null;
         }
 
         if (CurrentPage === counter) {
