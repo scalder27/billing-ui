@@ -1,0 +1,53 @@
+@import "../../scss_settings/placeholders";
+@import "../../scss_settings/variables";
+
+:local {
+    .popup {
+        position: relative;
+        width: 290px;
+        background: $bgWhiteColor;
+        box-shadow: $shadowActionsPopup;
+        border-top: 1px solid $borderLightColor;
+        border-radius: 1px;
+    }
+
+    .close-link {
+        position: absolute;
+        right: 6px;
+        top: -3px;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .action {
+        display: block;
+        padding: 15px 20px 10px;
+        font-size: $fontSizeBig;
+        color: $textBaseColor;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            color: $textBaseColor;
+            background: $bgElementActiveLightColor;
+        }
+    }
+
+    .icon {
+        @extend %as-inline-block;
+        position: absolute;
+        top: -3px;
+        margin-right: 5px;
+        font-size: $fontSizeGreat;
+        left: 20px;
+        top: 15px;
+    }
+
+    .description {
+        @extend %as-inline-block;
+        padding-left: 27px;
+        line-height: $lineHeightRegular;
+    }
+
+}
