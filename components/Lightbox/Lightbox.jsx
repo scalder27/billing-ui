@@ -13,8 +13,11 @@ class Lightbox extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.shouldUpdate && this.removeLightbox();
-        this.open(nextProps.isOpen);
+        if (nextProps.shouldUpdate) {
+            this.removeLightbox();
+        } else {
+            this.open(nextProps.isOpen);
+        }
     }
 
     shouldComponentUpdate(nextProps) {
