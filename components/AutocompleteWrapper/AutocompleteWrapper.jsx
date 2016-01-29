@@ -40,14 +40,10 @@ class AutocompleteWrapper extends Component {
     }
 
     render() {
-        const { placeholder, defaultValue } = this.props;
-
         return (
-            <Autocomplete
+            <Autocomplete {...this.props}
                 source={value => this.search(value)}
                 renderItem={data => this.renderItem(data)}
-                placeholder={placeholder}
-                defaultValue={defaultValue}
                 onChange={(evt, data) => this.changedValue(data)} />
         );
     }
@@ -57,8 +53,6 @@ AutocompleteWrapper.propTypes = {
     onSelect: PropTypes.func,
     url: PropTypes.string.isRequired,
     renderItem: PropTypes.func,
-    defaultValue: PropTypes.string,
-    placeholder: PropTypes.string,
     requestData: PropTypes.object
 };
 
