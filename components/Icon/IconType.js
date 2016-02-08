@@ -1,5 +1,6 @@
 const IconType = {
     Disc: "\ue001",
+    SmallDisc: "\ue068",
     Tick: "\ue006",
     Print: "\ue010",
     User: "\ue020",
