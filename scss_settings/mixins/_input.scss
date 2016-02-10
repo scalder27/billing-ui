@@ -4,21 +4,21 @@
     transition: border-color, box-shadow .2s ease-in-out;
 
     border: none;
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid $borderInputColor;
 
     color: $textBaseColor;
 }
 
 %input-base-focused {
     border: none;
-    border-bottom: 1px solid #008eff;
+    border-bottom: 1px solid $borderFocusColor;
     outline: 0;
-    box-shadow: 0 1px #008eff;
+    box-shadow: 0 1px $borderFocusColor;
 }
 
 %input-readonly-focused {
     border: none;
-    border-bottom: 1px dashed #e4e4e4;
+    border-bottom: 1px dashed $borderInputColor;
     background: none;
 
     color: #e4e4e4;

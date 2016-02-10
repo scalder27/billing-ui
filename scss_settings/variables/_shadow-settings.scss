@@ -1,7 +1,9 @@
-$elementBaseShadow: 0 1px 4px #cfccc6;
-$shadowBlock: 0 1px 2px #cfccc6, 0 1px 0 rgba(0, 0, 0, .15);
+@import "./color-settings";
+
+$elementBaseShadow: 0 1px 4px $shadowElementBaseColor;
+$shadowBlock: 0 1px 2px $shadowElementBaseColor, 0 1px 0 rgba(0, 0, 0, .15);
 $shadowActionsPopup: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
 
 // input shadows
-$inputErrorShadow: 0 1px #d92b2b;
-$inputFocusShadow: 0 1px #008eff;
+$inputErrorShadow: 0 1px $shadowErrorColor;
+$inputFocusShadow: 0 1px $shadowFocusColor;
