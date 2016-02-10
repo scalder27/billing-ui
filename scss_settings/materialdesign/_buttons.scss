@@ -1,0 +1,24 @@
+﻿@import "../variables";
+@import "../mixins/buttons";
+$background: #ececec;
+$backgroundShadow: darken( $background, 15% );
+
+%stylized-button {
+    @include stylized-button-base($background, $textBaseColor);
+}
+
+%stylized-button-small {
+    @extend %stylized-button;
+
+    padding: 7px 0;
+
+    box-shadow: 0 2px 0 $backgroundShadow;
+
+    &:hover {
+        box-shadow: 0 3px 0 $backgroundShadow;
+    }
+}
+
+%stylized-button-blue {
+    @include stylized-button-base(#4a9ede, white);
+}

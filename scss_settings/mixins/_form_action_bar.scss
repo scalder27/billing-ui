@@ -1,0 +1,25 @@
+﻿@import "../variables";
+@import "../materialdesign/buttons";
+@import "../placeholders";
+
+@mixin action-bar {
+    .actionsBar {
+        margin: 30px -30px -20px;
+        padding: 15px 30px;
+
+        background: $bgLightColor;
+    }
+
+    .actionSubmit {
+        @extend %stylized-button;
+    }
+
+    .actionCancel {
+        @extend %as-inline-block;
+        @extend %as-link;
+
+        margin: 11px 0 0 10px;
+
+        font-size: 16px;
+    }
+}

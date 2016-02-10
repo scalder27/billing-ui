@@ -1,0 +1,12 @@
+﻿@mixin windowLessOrEqual($width: 1248px, $needIeFallback: false) {
+    @if($needIeFallback){
+        // todo: only for IE8 support; kill after IE8 dies; JS as well
+        .windowLessOrEqual#{$width} & {
+            @content;
+        }
+    }
+
+    @media only screen and (max-width: $width) {
+        @content;
+    }
+}

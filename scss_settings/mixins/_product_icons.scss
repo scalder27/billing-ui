@@ -1,0 +1,105 @@
+﻿$productIconSpriteUrl: "/ContentBase/img/ProductIcons/product_icons_20x20.png";
+
+$transparentType: transparent;
+$filledType: filled;
+$halfFilledType: half;
+
+$transparentIcons: (
+    customs: 0px -460px,
+    diadoc: 0px -20px,
+    diadoc-custom: 0px -20px,
+    otchetru: 0px -520px,
+    evrika: 0px -80px,
+    pii: 0px -260px,
+    kemb: 0px 0px,
+    focus: 0px -40px,
+    fms: 0px -480px,
+    kep: 0px -300px,
+    kepegais: 0px -300px,
+    dopuc: 0px -300px,
+    rosreestr: 0px -300px,
+    smev: 0px -300px,
+    sertum: -20px -300px,
+    edi: 0px -220px
+);
+
+$filledIcons: (
+    customs: -20px -460px,
+    diadoc: -20px -20px,
+    diadoc-custom: 0px -20px,
+    otchetru: -20px -520px,
+    evrika: -20px -80px,
+    pii: -20px -260px,
+    kemb: -20px 0px,
+    focus: -20px -40px,
+    fms: -20px -480px,
+    kep: 0px -300px,
+    kepegais: 0px -300px,
+    dopuc: 0px -300px,
+    sertum: -20px -300px,
+    rosreestr: 0px -300px,
+    smev: 0px -300px,
+    edi: -20px -220px
+);
+
+$halfFilledIcons: (
+    customs: -40px -460px,
+    diadoc: -40px -20px,
+    diadoc-custom: -40px -20px,
+    otchetru: -40px -520px,
+    evrika: -40px -80px,
+    pii: -40px -260px,
+    kemb: -40px 0px,
+    focus: -40px -40px,
+    fms: -40px -480px,
+    kep: -40px -300px,
+    kepegais: -40px -300px,
+    dopuc: -40px -300px,
+    sertum: -40px -300px,
+    rosreestr: -40px -300px,
+    smev: -40px -300px,
+    edi: -40px -220px
+);
+
+@function getProducts($type) {
+    @if $type == $transparentType {
+        @return $transparentIcons;
+    }
+    @if $type == $filledType {
+        @return $filledIcons;
+    }
+    @if $type == $halfFilledType {
+        @return $halfFilledIcons;
+    }
+    @warn "Unfortunately, there is no such product type as `#{$type}`. "
+        + "Please make sure it is defined.";
+    @return $filledIcons;
+}
+
+@mixin product-icons($type: $filledType) {
+    $products: getProducts($type);
+
+    @each $product, $position in $products {
+        &.#{$product} {
+            background-image: url($productIconSpriteUrl);
+            background-repeat: no-repeat;
+            background-position: #{$position};
+        }
+    }
+}
+
+@mixin product-icon($product, $type: $filledType) {
+    $products: getProducts($type);
+
+    @if map-has-key($products, $product) {
+        &.#{$product} {
+            background-image: url($productIconSpriteUrl);
+            background-repeat: no-repeat;
+            background-position: #{map-get($products, $product)};
+        }
+    }
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$product}`. "
+        + "Please make sure it is defined in `$products` map.";
+    }
+}

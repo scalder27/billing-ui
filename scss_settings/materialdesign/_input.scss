@@ -1,0 +1,19 @@
+﻿@import "../mixins";
+
+%material-input {
+    @include material-input(350px);
+}
+
+%material-input-text-big {
+    @include material-input(440px);
+}
+
+%material-input-text-small {
+    @include material-input(105px);
+}
+
+%material-input-date {
+    @include material-input(114px);
+
+    padding: 4px 3px !important;
+}

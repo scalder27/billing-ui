@@ -1,0 +1,111 @@
+﻿@import "../variables";
+@import "../placeholders";
+
+%stylized-checkBox {
+    @extend %as-hidden;
+
+    &:checked ~ %stylized-checkBox-label:hover:before {
+        opacity: 1;
+
+        transition: all .1s ease-out;
+    }
+
+    &:checked ~ %stylized-checkBox-label:after {
+        opacity: 1;
+
+        transition: all .3s ease-out;
+
+        background: url("/ContentBase/img/Shared/checkBlack.png") 0 0 no-repeat;
+    }
+
+    &:checked ~ %stylized-checkBox-label:before {
+        opacity: 0;
+    }
+
+    &:checked ~ %stylized-checkBox-label {
+        color: $textBaseColor;
+    }
+
+    .ie-lt9 & {
+        display: inline-block;
+    }
+
+    &:disabled, &:disabled ~ %stylized-checkBox-label {
+        opacity: 0.5;
+
+        color: $textBaseColor;
+    }
+
+    &:disabled ~ %stylized-checkBox-label:hover:after,
+    &:disabled:checked ~ %stylized-checkBox-label:before,
+    &:disabled:checked ~ %stylized-checkBox-label:hover:before {
+        opacity: 0;
+    }
+
+    &:disabled ~ %stylized-checkBox-label:before,
+    &:disabled:checked ~ %stylized-checkBox-label:after,
+    &:disabled:checked ~ %stylized-checkBox-label:hover:after {
+        opacity: 1;
+    }
+}
+
+%stylized-checkBox-label {
+    position: relative;
+
+    display: inline-block;
+
+    color: $textInactiveColor;
+    line-height: 1.2;
+
+    &:hover {
+        color: $textBaseColor;
+
+        cursor: pointer;
+    }
+
+    .ie-lt9 &:after,
+    .ie-lt9 &:before {
+        display: none;
+    }
+
+    .ie-lt9 & {
+        color: $textBaseColor;
+    }
+
+    &:before {
+        content: "";
+
+        position: relative;
+        top: 3px;
+
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        border: 2px solid #e0e0e0;
+    }
+
+    &:after {
+        content: "";
+
+        position: absolute;
+        top: 6px;
+        left: 4px;
+
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        opacity: 0;
+    }
+
+    &:hover:after {
+        opacity: 1;
+
+        transition: all .1s ease-out;
+
+        background: url("/ContentBase/img/Shared/check.png") 0 0 no-repeat;
+    }
+}

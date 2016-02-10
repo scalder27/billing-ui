@@ -1,0 +1,106 @@
+﻿@import "../placeholders";
+@import "../variables";
+
+@mixin stylized-button-base($background, $color) {
+    $backgroundShadow: darken( $background, 15% );
+
+    position: relative;
+
+    min-width: 120px;
+    min-height: 0;
+    margin-bottom: 3px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+
+    transition: top .2s;
+
+    border: none;
+    border-radius: 2px;
+    background-color: $background;
+    box-shadow: 0 4px 0 $backgroundShadow;
+
+    color: $color;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    word-wrap: normal;
+
+    cursor: pointer;
+
+    &:hover {
+        top: -1px;
+
+        box-shadow: 0 5px 0 $backgroundShadow;
+    }
+
+    &:active,
+    &.as-active {
+        top: 4px;
+
+        box-shadow: none;
+    }
+
+    &:hover,
+    &:active,
+    &.as-active,
+    &:focus {
+        color: $color;
+    }
+
+    &:disabled,
+    &.button-disabled,
+    &.button-disabled:hover {
+        top: 0;
+
+        background-color: #f1f1f1;
+        box-shadow: none;
+
+        color: $textDisabledColor;
+
+        cursor: default;
+    }
+
+    &.loader {
+        opacity: 1 !important;
+
+        background: #ececec !important;
+    }
+
+    &.loader:hover,
+    &.loader:active,
+    &.loader.as-active {
+        top: 0;
+
+        box-shadow: 0 4px 0 $shadowElementBaseColor;
+
+        cursor: default;
+    }
+
+    &.loader:after {
+        content: "";
+
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+
+        width: 0;
+        height: 4px;
+
+        animation: showLoader .8s linear infinite;
+
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        background: #b0b0b0;
+    }
+}
+
+@keyframes showLoader {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+

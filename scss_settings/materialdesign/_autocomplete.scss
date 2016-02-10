@@ -1,0 +1,26 @@
+﻿%material-autocomplete-options {
+    z-index: 51;
+
+    display: none;
+    width: 355px;
+    margin-top: 6px;
+
+    border: 1px solid #cfccc6;
+    border-radius: 0;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .30);
+
+    & %autocomplete-notfound {
+        padding: 10px 20px;
+    }
+}
+
+%material-autocomplete-option {
+    padding: 15px 3px;
+
+    cursor: pointer;
+
+    &:hover,
+    &%autocomplete-option-active {
+        background: #f8f8f8;
+    }
+}

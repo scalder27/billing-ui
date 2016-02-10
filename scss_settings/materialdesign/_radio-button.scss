@@ -1,0 +1,94 @@
+﻿@import "../placeholders";
+@import "../variables";
+
+%stylized-radio {
+    @extend %as-hidden;
+
+    .ie-lt9 & {
+        display: inline-block;
+    }
+
+    &:checked ~ %stylized-radio-label {
+        color: $textBaseColor;
+
+        &:hover:before {
+            opacity: 1;
+
+            transition: all .1s ease-out;
+        }
+
+        &:after {
+            opacity: 1;
+
+            transition: all .3s ease-out;
+
+            background: url("/ContentBase/img/Shared/checkBlack.png") 0 0 no-repeat;
+        }
+
+        &:before {
+            opacity: 0;
+        }
+    }
+}
+
+%stylized-radio-label {
+    position: relative;
+
+    display: inline-block;
+
+    color: $textInactiveColor;
+    line-height: 1.2;
+
+    &:hover {
+        color: $textBaseColor;
+
+        cursor: pointer;
+    }
+
+    &:after,
+    &:before {
+        content: "";
+
+        .ie-lt9 & {
+            @extend %as-hidden;
+        }
+    }
+
+    &:before {
+        position: relative;
+        top: 4px;
+
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        border: 2px solid $borderLightColor;
+        border-radius: 50%;
+    }
+
+    &:after {
+        position: absolute;
+        top: 7px;
+        left: 4px;
+
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        opacity: 0;
+    }
+
+    &:hover:after {
+        opacity: 1;
+
+        transition: all .1s ease-out;
+
+        background: url("/ContentBase/img/Shared/check.png") 0 0 no-repeat;
+    }
+
+    .ie-lt9 & {
+        color: $textBaseColor;
+    }
+}
