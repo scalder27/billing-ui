@@ -21,6 +21,7 @@
     },
     "peerDependencies": {
         "react": ">= 0.14.6 < 0.15",
-        "react-dom": ">= 0.14.6 < 0.15"
+        "react-dom": ">= 0.14.6 < 0.15",
+        "classnames": "~2.2.3"
     }
 }
