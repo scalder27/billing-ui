@@ -1,0 +1,91 @@
+﻿@import "../variables";
+@import "../placeholders";
+@import "../materialdesign";
+
+@mixin material-dropdown-header() {
+    .material-dropdown-header.dds-select {
+        @extend %material-dropdown;
+
+        width: 100%;
+
+        font-size: $fontSizeRegularHeader;
+
+        &:hover {
+            background: $bgBaseColor;
+        }
+
+        & .dds-select-icon {
+            @extend %dds-select-icon;
+
+            top: 30px;
+            right: 25px;
+
+            width: 12px;
+            height: 7px;
+
+            border-top: 0;
+            background: url("/Content/img/Shared/Icons/dds_arrow_down.png") no-repeat 0 0;
+
+            &:before {
+                content: "другой отчет";
+
+                position: absolute;
+                top: -5px;
+                left: -115px;
+
+                width: 110px;
+
+                font-size: $fontSizeBig;
+                font-weight: bold;
+                text-align: right;
+            }
+        }
+
+        & .dds-select-input {
+            padding: 22px 33px 15px;
+        }
+    }
+
+    .material-dropdown-header-popup {
+        @extend %material-dropdown-popup;
+        @extend %segoe-font;
+
+        & .dds-option,
+        & .dds-option:first-child {
+            @extend %dds-option;
+
+            padding: 0;
+
+            border-top: 1px solid $borderLightColor;
+
+            font-size: $fontSizeRegularHeader;
+
+            &:hover {
+                background: $bgBaseColor;
+            }
+
+            & .dds-option-link {
+                padding: 22px 33px 15px;
+            }
+        }
+
+        & .dds-option:first-child {
+            padding: 0;
+
+            border-top: none;
+
+            &:before {
+                content: "";
+
+                position: absolute;
+                top: 30px;
+                right: 29px;
+
+                width: 12px;
+                height: 7px;
+
+                background: url("/Content/img/Shared/Icons/dds_arrow_down.png") no-repeat 0 -6px;
+            }
+        }
+    }
+}

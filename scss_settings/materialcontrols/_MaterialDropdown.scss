@@ -1,0 +1,60 @@
+﻿@import "../variables";
+@import "../placeholders";
+
+@mixin material-dropdown() {
+    .material-dropdown.dds-select {
+        @extend %segoe-font;
+
+        border: none;
+        border-bottom: 1px solid $borderInputColor;
+        border-radius: 0;
+        background: none;
+        box-shadow: none;
+
+        font-size: $fontSizeBig;
+
+        & .dds-caption {
+            line-height: 1.3;
+        }
+
+        & .dds-select-icon {
+            top: 15px;
+            right: 4px;
+
+            width: 0;
+
+            border-top: 4px solid #ababab;
+            border-right: 4px solid transparent;
+            border-left: 4px solid transparent;
+            background: none;
+        }
+
+        & .dds-select-input {
+            padding-top: 5px;
+            padding-bottom: 3px;
+
+            line-height: 1.3;
+        }
+    }
+
+    .material-dropdown-popup {
+        @extend %segoe-font;
+
+        border: 1px solid #cfccc6;
+        border-radius: 0;
+        box-shadow: 0 1px 6px 0 rgba(0,0,0,.30);
+
+        & .dds-caption {
+            line-height: 1.3;
+        }
+    }
+
+    .material-dropdown-popup .dds-option,
+    .material-dropdown-popup .dds-option:first-child {
+        padding: 3px 15px 7px;
+
+        border-radius: 0;
+
+        font-size: $fontSizeBig;
+    }
+}

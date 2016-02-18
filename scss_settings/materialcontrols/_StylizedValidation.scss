@@ -1,0 +1,105 @@
+﻿@import "../variables";
+
+@mixin stylized-validation() {
+    .stylized-validation-error-message {
+        display: none;
+        width: 250px;
+        padding: 10px;
+
+        border: 1px solid #c5c5c5;
+        border-left: 2px solid $borderErrorColor;
+        background: $bgWhiteColor;
+        box-shadow: 0 0 5px 0 #cccccc;
+
+        line-height: $lineHeightRegular;
+
+        &:before,
+        &:after {
+            content: "";
+
+            position: absolute;
+            top: 29px;
+
+            width: 0;
+            height: 0;
+            margin-top: -5px;
+
+            border-width: 5px 0;
+            border-style: solid;
+            border-color: transparent;
+        }
+
+        &:before {
+            left: -6px;
+
+            border-right-width: 5px;
+            border-right-color: $borderErrorColor;
+        }
+
+        &:after {
+            left: -4px;
+
+            border-right-width: 6px;
+            border-right-color: $borderWhiteColor;
+        }
+
+        &.bottom {
+            border-top: 2px solid $borderErrorColor;
+            border-left: 0;
+
+            &:before,
+            &:after {
+                left: 20px;
+
+                margin-top: 0;
+
+                border-width: 0 5px;
+                border-right-color: transparent;
+            }
+
+            &:before {
+                top: -7px;
+
+                border-bottom-width: 5px;
+                border-bottom-color: $borderErrorColor;
+            }
+
+            &:after {
+                top: -5px;
+
+                border-bottom-width: 6px;
+                border-bottom-color: $borderWhiteColor;
+            }
+        }
+
+        &.center {
+            border-top: 2px solid $borderErrorColor;
+            border-left: 0;
+
+            &:before,
+            &:after {
+                left: 50%;
+
+                margin-top: 0;
+                margin-left: -5px;
+
+                border-width: 0 5px;
+                border-right-color: transparent;
+            }
+
+            &:before {
+                top: -7px;
+
+                border-bottom-width: 5px;
+                border-bottom-color: $borderErrorColor;
+            }
+
+            &:after {
+                top: -5px;
+
+                border-bottom-width: 6px;
+                border-bottom-color: $borderWhiteColor;
+            }
+        }
+    }
+}

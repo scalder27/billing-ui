@@ -1,0 +1,13 @@
+﻿@import "../variables";
+@import "../mixins";
+@import "../materialdesign";
+
+@mixin stylized-button {
+    .stylized-button {
+        @extend %stylized-button;
+    }
+
+    .stylized-button-blue {
+        @extend %stylized-button-blue;
+    }
+}

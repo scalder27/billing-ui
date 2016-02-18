@@ -1,0 +1,86 @@
+﻿@import "../variables";
+
+@mixin stylized-radio-button {
+    .ie-lt9 .stylized-radio {
+        display: inline-block;
+    }
+
+    .stylized-radio {
+        display: none;
+    }
+
+    .stylized-radio-label {
+        position: relative;
+
+        display: inline-block;
+
+        line-height: $lineHeightSmall;
+    }
+
+    .stylized-radio-label:hover {
+        color: #4a4a4a;
+
+        cursor: pointer;
+    }
+
+    .ie-lt9 .stylized-radio-label:after,
+    .ie-lt9 .stylized-radio-label:before {
+        display: none;
+    }
+
+    .stylized-radio-label:before {
+        content: "";
+
+        position: relative;
+        top: 4px;
+
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        border: 2px solid #e0e0e0;
+        border-radius: 50%;
+    }
+
+    .stylized-radio-label:after {
+        content: "";
+
+        position: absolute;
+        top: 7px;
+        left: 4px;
+
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        opacity: 0;
+    }
+
+    .stylized-radio-label:hover:after {
+        opacity: 1;
+
+        transition: all .1s ease-out;
+
+        background: url("/Content/img/Shared/check.png") 0 0 no-repeat;
+    }
+
+    .stylized-radio:checked ~ .stylized-radio-label:hover:before {
+        opacity: 1;
+
+        transition: all .1s ease-out;
+    }
+
+    .stylized-radio:checked ~ .stylized-radio-label:after {
+        opacity: 1;
+
+        transition: all $transitionBaseTime ease-out;
+
+        background: url("/Content/img/Shared/checkBlack.png") 0 0 no-repeat;
+    }
+
+    .stylized-radio:checked ~ .stylized-radio-label:before {
+        opacity: 0;
+    }
+}

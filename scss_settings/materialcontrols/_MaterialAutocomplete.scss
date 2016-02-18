@@ -1,0 +1,20 @@
+﻿@import "../materialdesign";
+
+@mixin material-autocomplete() {
+    .material-autocomplete-options {
+        @extend %material-autocomplete-options;
+
+        & .autocomplete-notfound {
+            @extend %autocomplete-notfound;
+        }
+    }
+
+    .material-autocomplete-option {
+        @extend %material-autocomplete-option;
+
+        &:hover,
+        &.autocomplete-option-active {
+            @extend %autocomplete-option-active;
+        }
+    }
+}

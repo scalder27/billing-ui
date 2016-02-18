@@ -1,0 +1,160 @@
+﻿@import "../variables";
+
+@mixin compact-material-input() {
+    %focused-textinput-label {
+        top: -12px;
+
+        font-size: 14px;
+    }
+
+    %focused-textarea-label {
+        top: -2px;
+    }
+
+    .stylized-inputWrapper {
+        position: relative;
+
+        &, .stylized-groupItem {
+            box-sizing: border-box;
+        }
+
+        & + .field-validation-error {
+            display: block;
+        }
+    }
+
+    .stylized-textInput {
+        width: 100%;
+        padding: 5px 3px 3px;
+
+        transition: border-color, box-shadow .2s ease-in-out;
+
+        color: $textBaseColor;
+        font-size: 16px;
+
+        &:focus {
+            & ~ .stylized-textInput-highlight {
+                animation: inputHighlighter .3s ease;
+            }
+
+            & ~ .stylized-textInput-label {
+                @extend %focused-textinput-label;
+            }
+        }
+    }
+
+    .stylized-textArea {
+        min-height: 38px;
+        padding: 15px 3px 0;
+
+        resize: none;
+
+        &:focus {
+            & ~ .stylized-textArea-label {
+                @extend %focused-textarea-label;
+            }
+        }
+    }
+
+    input[type="text"],
+    textarea {
+        &.stylized-textInput,
+        &.stylized-textArea {
+            display: block;
+
+            border: none;
+            border-bottom: 1px solid #e4e4e4;
+
+            &:focus {
+                border: none;
+                border-bottom: 1px solid $borderFocusColor;
+                outline: 0;
+                box-shadow: 0 1px $shadowFocusColor;
+            }
+
+            &.input-validation-error,
+            &.input-validation-error:focus,
+            &.validation-error,
+            &.validation-error:focus {
+                border: none;
+                border-bottom: 1px solid $borderErrorColor;
+                border-radius: 0;
+                outline: none;
+                outline-offset: 0;
+                box-shadow: 0 1px $shadowErrorColor;
+
+                & ~ .stylized-textInput-highlight {
+                    animation: inputErrorHighlighter .3s ease;
+                }
+            }
+        }
+    }
+
+    .stylized-textInput-label {
+        position: absolute;
+        top: 9px;
+        left: 3px;
+
+        transition: .2s ease all;
+
+        color: $textSecondaryColor;
+        font-size: 16px;
+        font-weight: normal;
+
+        cursor: text;
+        pointer-events: none;
+    }
+
+    .stylized-textArea-label {
+        top: 15px;
+    }
+
+    .stylized-textInput-filled {
+        & ~ .stylized-textInput-label {
+            @extend %focused-textinput-label;
+        }
+
+        & ~ .stylized-textArea-label {
+            @extend %focused-textarea-label;
+        }
+    }
+
+    .stylized-textInput-highlight {
+        position: absolute;
+        top: 25%;
+        left: 0;
+
+        width: 100px;
+        height: 50%;
+
+        opacity: .5;
+
+        pointer-events: none;
+    }
+
+    %inputHighlighter-to {
+        width: 0;
+
+        background: transparent;
+    }
+
+    @keyframes inputHighlighter {
+        from {
+            background: #5264ae;
+        }
+
+        to {
+            @extend %inputHighlighter-to;
+        }
+    }
+
+    @keyframes inputErrorHighlighter {
+        from {
+            background: $shadowErrorColor;
+        }
+
+        to {
+            @extend %inputHighlighter-to;
+        }
+    }
+}

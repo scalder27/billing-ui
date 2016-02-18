@@ -1,0 +1,96 @@
+﻿@import "../variables";
+@import "../placeholders";
+
+@mixin stylized-checkbox {
+    .ie-lt9 .stylized-checkBox {
+        display: inline-block;
+    }
+
+    .ie-lt9 .stylized-checkBox-label {
+        color: $textBaseColor;
+    }
+
+
+    .stylized-checkBox {
+        @extend %as-hidden;
+
+        &:checked ~ .stylized-checkBox-label:hover:before {
+            opacity: 1;
+
+            transition: all .1s ease-out;
+        }
+
+        &:checked ~ .stylized-checkBox-label:after {
+            opacity: 1;
+
+            transition: all $transitionBaseTime ease-out;
+
+            background: url("/Content/img/Shared/checkBlack.png") 0 0 no-repeat;
+        }
+
+        &:checked ~ .stylized-checkBox-label:before {
+            opacity: 0;
+        }
+
+        &:checked ~ .stylized-checkBox-label {
+            color: $textBaseColor;
+        }
+    }
+
+    .stylized-checkBox-label {
+        position: relative;
+
+        display: inline-block;
+
+        color: $textInactiveColor;
+        line-height: $lineHeightSmall;
+
+        &:hover {
+            color: $textBaseColor;
+
+            cursor: pointer;
+        }
+
+        .ie-lt9 &:after,
+        .ie-lt9 &:before {
+            display: none;
+        }
+
+        &:before {
+            content: "";
+
+            position: relative;
+            top: 3px;
+
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+
+            border: 2px solid #e0e0e0;
+        }
+
+        &:after {
+            content: "";
+
+            position: absolute;
+            top: 6px;
+            left: 4px;
+
+            display: block;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+
+            opacity: 0;
+        }
+
+        &:hover:after {
+            opacity: 1;
+
+            transition: all .1s ease-out;
+
+            background: url("/Content/img/Shared/check.png") 0 0 no-repeat;
+        }
+    }
+}

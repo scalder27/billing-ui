@@ -1,0 +1,126 @@
+﻿@import "../variables";
+
+@mixin material-input() {
+    .material-input {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .material-input.text.big {
+        width: 440px;
+    }
+
+    .material-input.text.small {
+        width: 105px;
+    }
+
+    .material-input.text.normal {
+        width: 350px;
+    }
+
+    .material-input.date {
+        width: 114px;
+        padding: 4px 3px !important;
+    }
+
+    .material-input.text,
+    .material-input.date {
+        transition: border-color, box-shadow .2s ease-in-out;
+
+        border: none;
+        border-bottom: 1px solid $borderInputColor;
+
+        color: $textBaseColor;
+        font-size: $fontSizeBig;
+    }
+
+    .placeholder {
+        position: relative;
+        top: 2px;
+
+        color: $textInactiveColor;
+    }
+
+    input[type="text"].material-input:focus,
+    input[type="password"].material-input:focus {
+        border: none;
+        border-bottom: 1px solid $borderFocusColor;
+        outline: 0;
+        box-shadow: 0 1px $shadowFocusColor;
+    }
+
+    .material-input[readonly],
+    .material-input[readonly]:focus {
+        border: none;
+        border-bottom: 1px dashed $borderInputColor;
+        background: none;
+
+        color: #e4e4e4;
+    }
+
+    input[type="password"].material-input.input-validation-error:focus,
+    input[type="text"].material-input.input-validation-error:focus,
+    input[type="text"].material-input.validation-error:focus,
+    input[type="password"].material-input.input-validation-error,
+    input[type="text"].material-input.input-validation-error,
+    input[type="text"].material-input.validation-error,
+    input[type="text"].material-input.invalidDate {
+        border: none;
+        border-bottom: 1px solid $borderErrorColor;
+        border-radius: 0;
+        outline: none;
+        outline-offset: 0;
+        box-shadow: 0 1px $shadowErrorColor;
+    }
+
+    input[type="text"].material-input.input-validation-error:focus ~ .material-input-highlight,
+    input[type="text"].material-input.validation-error:focus ~ .material-input-highlight {
+        animation: inputErrorHighlighter $transitionBaseTime ease;
+    }
+
+    .material-inputWrapper + .field-validation-error {
+        display: block;
+    }
+
+    .material-textInput-highlight {
+        /*todo: нужно встроить span с классом material-textInput-highlight перед input material-input - что бы заработало так как хотелось*/
+        position: absolute;
+        top: 25%;
+        left: 0;
+
+        width: 100px;
+        height: 50%;
+
+        opacity: .5;
+
+        pointer-events: none;
+    }
+
+    .material-textInput:focus ~ .material-textInput-highlight {
+        animation: inputHighlighter $transitionBaseTime ease;
+    }
+
+    @keyframes inputHighlighter {
+        from {
+            background: #5264ae;
+        }
+
+        to {
+            width: 0;
+
+            background: transparent;
+        }
+    }
+
+    @keyframes inputErrorHighlighter {
+        from {
+            background: #d92b2b;
+        }
+
+        to {
+            width: 0;
+
+            background: transparent;
+        }
+    }
+}
