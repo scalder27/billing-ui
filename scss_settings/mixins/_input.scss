@@ -1,4 +1,4 @@
-@import "../variables";
+﻿@import "../variables";
 
 %input-base {
     transition: border-color, box-shadow .2s ease-in-out;
@@ -49,14 +49,17 @@
 
         color: $textInactiveColor;
     }
+
     &[type="password"]:focus,
     &[type="text"]:focus {
         @extend %input-base-focused;
     }
+
     &[readonly],
     &[readonly]:focus {
         @extend %input-readonly-focused;
     }
+
     &[type="password"].input-validation-error:focus,
     &[type="text"].input-validation-error:focus,
     &[type="text"].validation-error:focus,
@@ -80,10 +83,12 @@
     &:focus {
         @extend %input-base-focused;
     }
+
     &[readonly],
     &[readonly]:focus {
         @extend %input-readonly-focused;
     }
+
     &.input-validation-error,
     &.input-validation-error:focus,
     &.validation-error,

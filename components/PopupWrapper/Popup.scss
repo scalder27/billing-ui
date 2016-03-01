@@ -1,24 +1,28 @@
-@import "./../../scss_settings/placeholders";
+﻿@import "./../../scss_settings/placeholders";
 @import "./../../scss_settings/variables";
 
 :local {
     .popup {
         position: relative;
-        background: $bgWhiteColor;
-        box-shadow: $shadowActionsPopup;
+
         border-top: 1px solid $borderLightColor;
         border-radius: 1px;
+        background: $bgWhiteColor;
+        box-shadow: $shadowActionsPopup;
     }
 
     .close-link {
         position: absolute;
+        z-index: 1;
         top: 8px;
         right: 8px;
+
         width: 10px;
         height: 10px;
-        cursor: pointer;
-        z-index: 1;
+
         background: transparent url("./delete_cross.png") 0 0 no-repeat;
+
+        cursor: pointer;
 
         &:hover {
             background-position: 0 -10px;

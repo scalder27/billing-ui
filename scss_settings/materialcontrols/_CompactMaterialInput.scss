@@ -1,6 +1,25 @@
 ﻿@import "../variables";
 
 @mixin compact-material-input() {
+    @keyframes inputHighlighter {
+        from {
+            background: #5264ae;
+        }
+
+        to {
+            @extend %inputHighlighter-to;
+        }
+    }
+    @keyframes inputErrorHighlighter {
+        from {
+            background: $shadowErrorColor;
+        }
+
+        to {
+            @extend %inputHighlighter-to;
+        }
+    }
+
     %focused-textinput-label {
         top: -12px;
 
@@ -136,25 +155,5 @@
         width: 0;
 
         background: transparent;
-    }
-
-    @keyframes inputHighlighter {
-        from {
-            background: #5264ae;
-        }
-
-        to {
-            @extend %inputHighlighter-to;
-        }
-    }
-
-    @keyframes inputErrorHighlighter {
-        from {
-            background: $shadowErrorColor;
-        }
-
-        to {
-            @extend %inputHighlighter-to;
-        }
     }
 }

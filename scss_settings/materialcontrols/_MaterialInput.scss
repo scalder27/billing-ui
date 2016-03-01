@@ -1,6 +1,29 @@
 ﻿@import "../variables";
 
 @mixin material-input() {
+    @keyframes inputHighlighter {
+        from {
+            background: #5264ae;
+        }
+
+        to {
+            width: 0;
+
+            background: transparent;
+        }
+    }
+    @keyframes inputErrorHighlighter {
+        from {
+            background: #d92b2b;
+        }
+
+        to {
+            width: 0;
+
+            background: transparent;
+        }
+    }
+
     .material-input {
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -98,29 +121,5 @@
 
     .material-textInput:focus ~ .material-textInput-highlight {
         animation: inputHighlighter $transitionBaseTime ease;
-    }
-
-    @keyframes inputHighlighter {
-        from {
-            background: #5264ae;
-        }
-
-        to {
-            width: 0;
-
-            background: transparent;
-        }
-    }
-
-    @keyframes inputErrorHighlighter {
-        from {
-            background: #d92b2b;
-        }
-
-        to {
-            width: 0;
-
-            background: transparent;
-        }
     }
 }

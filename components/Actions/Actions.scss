@@ -1,52 +1,65 @@
-@import "../../scss_settings/placeholders";
+﻿@import "../../scss_settings/placeholders";
 @import "../../scss_settings/variables";
 
 :local {
     .popup {
         position: relative;
+
         width: 290px;
-        background: $bgWhiteColor;
-        box-shadow: $shadowActionsPopup;
+
         border-top: 1px solid $borderLightColor;
         border-radius: 1px;
+        background: $bgWhiteColor;
+        box-shadow: $shadowActionsPopup;
     }
 
     .close-link {
         position: absolute;
-        right: 6px;
-        top: -3px;
-        font-size: 30px;
-        cursor: pointer;
         z-index: 1;
+        top: -3px;
+        right: 6px;
+
+        font-size: 30px;
+
+        cursor: pointer;
     }
 
     .action {
+        position: relative;
+
         display: block;
         padding: 15px 20px 10px;
-        font-size: $fontSizeBig;
+
         color: $textBaseColor;
-        position: relative;
+        font-size: $fontSizeBig;
+
         cursor: pointer;
 
         &:hover {
-            color: $textBaseColor;
             background: $bgElementActiveLightColor;
+
+            color: $textBaseColor;
         }
     }
 
     .icon {
         @extend %as-inline-block;
+
         position: absolute;
         top: -3px;
-        margin-right: 5px;
-        font-size: $fontSizeGreat;
-        left: 20px;
         top: 15px;
+        left: 20px;
+
+        margin-right: 5px;
+
+        font-size: $fontSizeGreat;
     }
 
     .description {
         @extend %as-inline-block;
+
         padding-left: 27px;
+
         line-height: $lineHeightRegular;
     }
 

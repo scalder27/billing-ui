@@ -52,6 +52,7 @@
     & .dds-option,
     & .dds-option:first-child {
         position: relative;
+
         padding: 0;
 
         border-radius: 0;
@@ -67,8 +68,8 @@
     & .dds-option-icon,
     & %dds-option-icon {
         position: absolute;
-        left: 18px;
         top: 10px;
+        left: 18px;
     }
 
     & .dds-option-link,
