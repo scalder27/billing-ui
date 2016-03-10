@@ -1,5 +1,12 @@
-export const priceFormatter = amount =>
+const defaultPriceFormatOptions = {
+    fractionSeparator: ".",
+    alwaysWithFraction: false
+};
+
+export const priceFormatter = (amount, options = defaultPriceFormatOptions) =>
 {
+    const settings = options !== defaultPriceFormatOptions ? { ...defaultPriceFormatOptions, ...options } : options;
+
     let isNegative = amount < 0;
     amount = Math.abs(amount);
     const integralPart = Math.floor(amount);
@@ -14,8 +21,8 @@ export const priceFormatter = amount =>
         integralNumberString = integralNumberString.slice(0, sliceEdge);
     }
 
-    const fractionalFormat = fractionalPart !== 0
-        ? `.${fractionalPart < 10 ? `0${fractionalPart}` : fractionalPart % 10 === 0 ? fractionalPart / 10 : fractionalPart}`
+    const fractionalFormat = settings.alwaysWithFraction || fractionalPart !== 0
+        ? `${settings.fractionSeparator}${fractionalPart < 10 ? `0${fractionalPart}` : fractionalPart % 10 === 0 ? fractionalPart / 10 : fractionalPart}`
         : "";
 
     return (isNegative ? "-" : "") + integralFormat.join(" ") + fractionalFormat;

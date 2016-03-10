@@ -9,16 +9,24 @@ const CurrencySymbol = () => (
     </span>
 );
 
-const PriceFormat = ({amount, hasCurrencySymbol}) => (
+const PriceFormat = ({amount, hasCurrencySymbol, fractionSeparator, alwaysWithFraction}) => (
     <span className="base-priceFormat">
-        {priceFormatter(amount).replace(/ /g, "\u00a0")}
+        { priceFormatter(amount, {fractionSeparator, alwaysWithFraction}).replace(/ /g, "\u00a0") }
         { hasCurrencySymbol && <CurrencySymbol /> }
     </span>
 );
 
 PriceFormat.propTypes = {
     amount: PropTypes.number.isRequired,
-    hasCurrencySymbol: PropTypes.bool
+    hasCurrencySymbol: PropTypes.bool,
+    fractionSeparator: PropTypes.string,
+    alwaysWithFraction: PropTypes.bool
+};
+
+PriceFormat.defaultProps = {
+    hasCurrencySymbol: false,
+    fractionSeparator: ".",
+    alwaysWithFraction: false
 };
 
 export default PriceFormat;
