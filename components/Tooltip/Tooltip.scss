@@ -1,0 +1,27 @@
+@import "../../scss_settings/variables";
+@import "../../scss_settings/placeholders";
+
+:local {
+    .tooltip {
+        position: absolute;
+        background: $bgWhiteColor;
+        padding: 15px 20px;
+        line-height: $lineHeightRegular;
+        box-shadow: $elementBaseShadow;
+        border-radius: 1px;
+        visibility: hidden;
+        z-index: $popupZIndex;
+
+        .ie-lt9 & {
+            border: 1px solid $borderBaseColor;
+        }
+
+        &.as-open {
+            visibility: visible;
+        }
+
+        &:before {}
+
+        &:after {}
+    }
+}
