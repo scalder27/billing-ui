@@ -1,4 +1,4 @@
 import Tooltip, * as props from "./Tooltip.jsx";
-export const TriggerTypes = props.TriggerType;
-export const PositionTypes = props.PositionType;
+export const TriggerType = props.TriggerTypes;
+export const PositionType = props.PositionTypes;
 export default Tooltip;
