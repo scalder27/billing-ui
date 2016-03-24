@@ -22,12 +22,210 @@
 
         &.as-open {
             visibility: visible;
+            animation-duration: 0.3s;
+            animation-fill-mode: both;
         }
 
-        &:before {
-        }
-
+        &:before,
         &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent;
+        }
+
+        &:global(.bottom) {
+            &.as-open {
+                :global {
+                    animation-name: fadeInDown;
+                }
+            }
+
+            &:before,
+            &:after {
+                border-width: 0 7px;
+            }
+
+            &:before {
+                top: -8px;
+                border-bottom-width: 8px;
+                border-bottom-color: #dcdada;
+            }
+
+            &:after {
+                top: -7px;
+                border-bottom-width: 7px;
+                border-bottom-color: #fff;
+            }
+        }
+
+        &:global(.top) {
+            &.as-open {
+                :global {
+                    animation-name: fadeInUp;
+                }
+            }
+
+            &:before,
+            &:after {
+                border-width: 0 7px;
+            }
+
+            &:before {
+                bottom: -8px;
+                border-top-width: 8px;
+                border-top-color: #dcdada;
+            }
+
+            &:after {
+                bottom: -7px;
+                border-top-width: 7px;
+                border-top-color: #fff;
+            }
+        }
+
+        &:global(.left) {
+            &.as-open {
+                :global {
+                    animation-name: fadeInRight;
+                }
+            }
+
+            &:before,
+            &:after {
+                border-width: 7px 0;
+            }
+
+            &:before {
+                right: -8px;
+                border-left-width: 8px;
+                border-left-color: #dcdada;
+            }
+
+            &:after {
+                right: -7px;
+                border-left-width: 7px;
+                border-left-color: #fff;
+            }
+        }
+
+        &:global(.right) {
+            &.as-open {
+                :global {
+                    animation-name: fadeInLeft;
+                }
+            }
+
+            &:before,
+            &:after {
+                border-width: 7px 0;
+            }
+
+            &:before {
+                left: -8px;
+                border-right-width: 8px;
+                border-right-color: #dcdada;
+            }
+
+            &:after {
+                left: -7px;
+                border-right-width: 7px;
+                border-right-color: #fff;
+            }
+        }
+
+        &:global(.arrow-center) {
+            &:before,
+            &:after {
+                left: 50%;
+                margin-left: -7px;
+            }
+        }
+
+        &:global(.arrow-middle) {
+            &:before,
+            &:after {
+                top: 50%;
+                margin-top: -7px;
+            }
+        }
+
+        &:global(.arrow-left) {
+            &:before,
+            &:after {
+                left: 20px;
+            }
+        }
+
+        &:global(.arrow-right) {
+            &:before,
+            &:after {
+                right: 20px;
+            }
+        }
+
+        &:global(.arrow-top) {
+            &:before,
+            &:after {
+                top: 15px;
+            }
+        }
+
+        &:global(.arrow-bottom) {
+            &:before,
+            &:after {
+                bottom: 15px;
+            }
+        }
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -20%, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 20%, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translate3d(-20%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translate3d(20%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
         }
     }
 }
