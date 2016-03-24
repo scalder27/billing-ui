@@ -75,25 +75,25 @@ class Tooltip extends Component {
         this.setPosition();
 
         if (trigger === TriggerType.hover) {
-            this._target.addEventListener("mouseenter", this.toggleTooltip.bind(this));
-            this._target.addEventListener("mouseleave", this.toggleTooltip.bind(this));
+            this._target.onmouseover = this.toggleTooltip.bind(this, true);
+            this._target.onmouseleave = this.toggleTooltip.bind(this, false);
         }
 
         if (trigger === TriggerType.click) {
-            this._target.addEventListener("click", this.toggleTooltip.bind(this));
+            this._target.onclick = this.toggleTooltip.bind(this, !this._isOpen);
         }
 
         if (trigger === TriggerType.focus) {
-            this._target.addEventListener("focus", this.toggleTooltip.bind(this));
+            this._target.onfocus = this.toggleTooltip.bind(this, !this._isOpen);
         }
     }
 
-    toggleTooltip() {
+    toggleTooltip(show) {
         const { className, positionType } = this.props;
-        this._isOpen = !this._isOpen;
+        this._isOpen = show;
 
         const classNames = classnames(className, styles.tooltip, positionType, {
-            [styles["as-open"]]: this._isOpen
+            [styles["as-open"]]: show
         });
         this._tooltip.className = classNames;
     }
@@ -107,6 +107,7 @@ class Tooltip extends Component {
     remove() {
         this._tooltip.remove();
         this._tooltip = null;
+        this._target = null;
     }
 
     render() {

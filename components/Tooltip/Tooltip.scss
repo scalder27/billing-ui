@@ -5,12 +5,16 @@
     .tooltip {
         position: absolute;
         background: $bgWhiteColor;
-        padding: 15px 20px;
-        line-height: $lineHeightRegular;
+        padding: 10px 20px;
         box-shadow: $elementBaseShadow;
         border-radius: 1px;
         visibility: hidden;
         z-index: $popupZIndex;
+        font-size: $fontSizeBig;
+
+        & * {
+            line-height: $lineHeightRegular;
+        }
 
         .ie-lt9 & {
             border: 1px solid $borderBaseColor;
@@ -20,8 +24,10 @@
             visibility: visible;
         }
 
-        &:before {}
+        &:before {
+        }
 
-        &:after {}
+        &:after {
+        }
     }
 }
