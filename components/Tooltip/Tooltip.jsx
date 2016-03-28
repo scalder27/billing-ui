@@ -46,11 +46,12 @@ class Tooltip extends Component {
 
     createTooltipItemHtml({ positionType, className, isOpen }) {
         const tooltipItemHtml = document.createElement("div");
-        const position = positionType.split(" ");
-        const classNames = classnames(className, styles.tooltip, position[0], `arrow-${position[1]}`, {
-            ["as-open"]: isOpen
+
+        const [tooltipPos, arrowPos] = positionType.split(" ");
+        tooltipItemHtml.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
+            [styles["as-open"]]: isOpen
         });
-        tooltipItemHtml.className = classNames;
+
         return tooltipItemHtml;
     }
 
@@ -92,12 +93,11 @@ class Tooltip extends Component {
     toggleTooltip(show) {
         const { className, positionType } = this.props;
         this._isOpen = show;
-        const position = positionType.split(" ");
 
-        const classNames = classnames(className, styles.tooltip, position[0], `arrow-${position[1]}`, {
+        const [tooltipPos, arrowPos] = positionType.split(" ");
+        this._tooltip.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
             [styles["as-open"]]: show
         });
-        this._tooltip.className = classNames;
     }
 
     setPosition() {

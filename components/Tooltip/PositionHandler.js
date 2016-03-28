@@ -1,5 +1,7 @@
 const MARGIN = 15;
-const ARROW_MARGIN = 20;
+const ARROW_RIGHT_MARGIN = 20;
+const ARROW_LEFT_MARGIN = 25;
+const ARROW_VERTICAL_MARGIN = 15;
 
 export const getPosition = (positionType, target, tooltip) => {
     const positionTarget = target.getBoundingClientRect();
@@ -31,20 +33,20 @@ export const getPosition = (positionType, target, tooltip) => {
             left = scrollLeft + positionTarget.left + positionTarget.width / 2 - tooltip.offsetWidth / 2;
             break;
         case "left":
-            left = scrollLeft + positionTarget.left - 25;
+            left = scrollLeft + positionTarget.left - ARROW_LEFT_MARGIN;
             break;
         case "right":
-            left = scrollLeft + positionTarget.left + positionTarget.width - tooltip.offsetWidth + 20;
+            left = scrollLeft + positionTarget.left + positionTarget.width - tooltip.offsetWidth + ARROW_RIGHT_MARGIN;
             break;
 
         case "middle":
             top = scrollTop + positionTarget.top + positionTarget.height / 2 - tooltip.offsetHeight / 2;
             break;
         case "top":
-            top = scrollTop + positionTarget.top - 15;
+            top = scrollTop + positionTarget.top - ARROW_VERTICAL_MARGIN;
             break;
         case "bottom":
-            top = top = scrollTop + positionTarget.top + positionTarget.height - tooltip.offsetHeight + 15;
+            top = top = scrollTop + positionTarget.top + positionTarget.height - tooltip.offsetHeight + ARROW_VERTICAL_MARGIN;
             break;
     }
 
