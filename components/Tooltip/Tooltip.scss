@@ -1,5 +1,6 @@
 @import "../../scss_settings/variables";
 @import "../../scss_settings/placeholders";
+@import "./AnimationFideIn";
 
 :local {
     .tooltip {
@@ -36,7 +37,7 @@
             border-color: transparent;
         }
 
-        &:global(.bottom) {
+        &.bottom {
             &.as-open {
                 :global {
                     animation-name: fadeInDown;
@@ -61,7 +62,7 @@
             }
         }
 
-        &:global(.top) {
+        &.top {
             &.as-open {
                 :global {
                     animation-name: fadeInUp;
@@ -86,7 +87,7 @@
             }
         }
 
-        &:global(.left) {
+        &.left {
             &.as-open {
                 :global {
                     animation-name: fadeInRight;
@@ -111,7 +112,7 @@
             }
         }
 
-        &:global(.right) {
+        &.right {
             &.as-open {
                 :global {
                     animation-name: fadeInLeft;
@@ -136,7 +137,7 @@
             }
         }
 
-        &:global(.arrow-center) {
+        &.arrow-center {
             &:before,
             &:after {
                 left: 50%;
@@ -144,7 +145,7 @@
             }
         }
 
-        &:global(.arrow-middle) {
+        &.arrow-middle {
             &:before,
             &:after {
                 top: 50%;
@@ -152,80 +153,32 @@
             }
         }
 
-        &:global(.arrow-left) {
+        &.arrow-left {
             &:before,
             &:after {
                 left: 20px;
             }
         }
 
-        &:global(.arrow-right) {
+        &.arrow-right {
             &:before,
             &:after {
                 right: 20px;
             }
         }
 
-        &:global(.arrow-top) {
+        &.arrow-top {
             &:before,
             &:after {
                 top: 15px;
             }
         }
 
-        &:global(.arrow-bottom) {
+        &.arrow-bottom {
             &:before,
             &:after {
                 bottom: 15px;
             }
-        }
-    }
-
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translate3d(0, -10px, 0);
-        }
-
-        to {
-            opacity: 1;
-            transform: none;
-        }
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translate3d(0, 10px, 0);
-        }
-
-        to {
-            opacity: 1;
-            transform: none;
-        }
-    }
-
-    @keyframes fadeInLeft {
-        from {
-            opacity: 0;
-            transform: translate3d(-10px, 0, 0);
-        }
-
-        to {
-            opacity: 1;
-            transform: none;
-        }
-    }
-
-    @keyframes fadeInRight {
-        from {
-            opacity: 0;
-            transform: translate3d(10px, 0, 0);
-        }
-
-        to {
-            opacity: 1;
-            transform: none;
         }
     }
 }
