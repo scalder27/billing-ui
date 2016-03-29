@@ -33,8 +33,10 @@ class TooltipControl {
         }
 
         this._timer = setTimeout(function() {
-            this._positionType = getPositionType(positionType, this._target, this._tooltip);
-            this._setPosition();
+            if (this._tooltip) {
+                this._positionType = getPositionType(positionType, this._target, this._tooltip);
+                this._setPosition();
+            }
             delete this._timer;
         }.bind(this), 100);
     }
@@ -45,8 +47,8 @@ class TooltipControl {
         events.removeEventListener(this._target, 'click', this._toggleTooltip);
         events.removeEventListener(this._target, 'focus', this._toggleTooltip);
 
-        events.removeEventListener(window, 'resize', this.redraw);
-        events.removeEventListener(this._mainWrapper, 'scroll', this.redraw);
+        events.removeEventListener(window, 'resize', this.redraw.bind(this));
+        events.removeEventListener(this._mainWrapper, 'scroll', this.redraw.bind(this));
 
         this._tooltip.remove();
         this._tooltip = null;
