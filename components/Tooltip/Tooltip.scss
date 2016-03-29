@@ -10,7 +10,7 @@
         box-shadow: $elementBaseShadow;
         border-radius: 1px;
         visibility: hidden;
-        z-index: $popupZIndex;
+        z-index: 50;
         font-size: $fontSizeBig;
 
         & * {

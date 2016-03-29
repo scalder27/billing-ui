@@ -1,6 +1,7 @@
 import {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
-import {getPosition} from "./PositionHandler";
+import events from 'add-event-listener';
+import {getPosition, getPositionType} from "./PositionHandler";
 import classnames from "classnames";
 import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
@@ -9,24 +10,16 @@ import styles from "./Tooltip.scss";
 
 class Tooltip extends Component {
     componentDidMount() {
-        const { shouldUpdate } = this.props;
-        if (!this._tooltip && shouldUpdate) {
+        if (!this._tooltip) {
             this.init();
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        nextProps.shouldUpdate && this.remove();
-    }
-
-    shouldComponentUpdate(nextProps) {
-        return nextProps.shouldUpdate;
-    }
-
     componentDidUpdate() {
-        const { shouldUpdate } = this.props;
-        if (!this._tooltip && shouldUpdate) {
+        if (!this._tooltip) {
             this.init();
+        } else {
+            this.redraw();
         }
     }
 
@@ -46,8 +39,8 @@ class Tooltip extends Component {
 
     createTooltipItemHtml({ positionType, className, isOpen }) {
         const tooltipItemHtml = document.createElement("div");
-
-        const [tooltipPos, arrowPos] = positionType.split(" ");
+        this._positionType = getPositionType(positionType, this._target, tooltipItemHtml);
+        const [tooltipPos, arrowPos] = this._positionType.split(" ");
         tooltipItemHtml.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
             [styles["as-open"]]: isOpen
         });
@@ -67,14 +60,21 @@ class Tooltip extends Component {
     }
 
     init() {
-        const { trigger, isOpen, getTarget } = this.props;
+        const { isOpen, getTarget } = this.props;
 
         this._isOpen = isOpen;
         this._target = getTarget();
+        this._mainWrapper = document.getElementById("MainWrapper");
         this._tooltip = this.createAndInsertTooltipToDOM(this.props);
         ReactDOM.render(this.generateMarkUp(), this._tooltip);
 
+        this.setSize();
         this.setPosition();
+        this.attachEventListener();
+    }
+
+    attachEventListener() {
+        const { trigger } = this.props;
 
         if (trigger === TriggerType.hover) {
             this._target.onmouseover = this.toggleTooltip.bind(this, true);
@@ -88,28 +88,54 @@ class Tooltip extends Component {
         if (trigger === TriggerType.focus) {
             this._target.onfocus = this.toggleTooltip.bind(this, !this._isOpen);
         }
+
+        events.addEventListener(window, "resize", this.redraw.bind(this));
+        events.addEventListener(this._mainWrapper, "scroll", this.redraw.bind(this));
     }
 
     toggleTooltip(show) {
-        const { className, positionType } = this.props;
+        const { className } = this.props;
         this._isOpen = show;
 
-        const [tooltipPos, arrowPos] = positionType.split(" ");
+        const [tooltipPos, arrowPos] = this._positionType.split(" ");
         this._tooltip.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
             [styles["as-open"]]: show
         });
     }
 
-    setPosition() {
+    redraw() {
         const { positionType } = this.props;
-        const position = getPosition(positionType, this._target, this._tooltip);
+
+        if (this._timer) {
+            clearTimeout(this._timer);
+        }
+
+        this._timer = setTimeout(function() {
+            this._positionType = getPositionType(positionType, this._target, this._tooltip);
+            this.setPosition();
+            delete this._timer;
+        }.bind(this), 100);
+    }
+
+    setPosition() {
+        const position = getPosition(this._positionType, this._target, this._tooltip);
         Object.keys(position).map(property => this._tooltip.style[property] = position[property]);
+    }
+
+    setSize() {
+        const computedStyle = getComputedStyle(this._tooltip);
+
+        this._tooltip.style.width = computedStyle.width;
+        this._tooltip.style.height = computedStyle.height;
     }
 
     remove() {
         this._tooltip.remove();
         this._tooltip = null;
         this._target = null;
+
+        events.removeEventListener(window, 'resize', this.redraw);
+        events.removeEventListener(this._mainWrapper, 'scroll', this.redraw);
     }
 
     render() {
