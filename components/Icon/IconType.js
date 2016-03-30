@@ -47,6 +47,7 @@ const IconType = {
     Clock: "\ue021",
     Bell: "\ue06c",
     Edit: "\ue00f",
+    Archive: "\ue076",
 
     Back: "\ue065",
     ToRight: "\ue066",
