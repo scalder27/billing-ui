@@ -5,15 +5,13 @@ import Popup from "../PopupWrapper";
 import styles from "./Actions.scss";
 import classnames from "classnames";
 
-const position = { top: 0, right: 0 };
-
 class Actions extends Component {
     getCloseLink() {
         return this._closeLink;
     }
 
     render() {
-        const { className, children, getBindItem } = this.props;
+        const { className, children, getBindItem, position } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
 
         return (
@@ -30,11 +28,13 @@ class Actions extends Component {
 }
 
 Actions.propRypes = {
+    position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string
 };
 
 Actions.defaultProps = {
+    position: { top: 0, right: 0 },
     className: ""
 };
 
