@@ -1,0 +1,50 @@
+@import "../../scss_settings/variables";
+@import "../../scss_settings/mixins/buttons";
+
+:local {
+    .button {
+    }
+
+    .default {
+        @include stylized-button-base($bgButtonColor, $textBaseColor);
+        $backgroundShadow: darken($bgButtonColor, 15%);
+
+        &.small {
+            box-shadow: 0 2px 0 $backgroundShadow;
+
+            &:hover {
+                box-shadow: 0 3px 0 $backgroundShadow;
+            }
+        }
+    }
+
+    .important {
+        @include stylized-button-base($bgImportantButtonColor, $textWhiteColor);
+        $backgroundShadow: darken($bgImportantButtonColor, 15%);
+
+        &.small {
+            box-shadow: 0 2px 0 $backgroundShadow;
+
+            &:hover {
+                box-shadow: 0 3px 0 $backgroundShadow;
+            }
+        }
+    }
+
+    .delete {
+        $backgroundShadow: #9E4643;
+        @include stylized-button-base($bgDeleteColor, $textWhiteColor, $backgroundShadow);
+
+        &.small {
+            box-shadow: 0 2px 0 $backgroundShadow;
+
+            &:hover {
+                box-shadow: 0 3px 0 $backgroundShadow;
+            }
+        }
+    }
+
+    .small {
+        padding: 7px 0;
+    }
+}
