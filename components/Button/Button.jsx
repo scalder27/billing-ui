@@ -4,18 +4,18 @@ import ButtonSize from "./ButtonSize";
 import ButtonType from "./ButtonType";
 import Link from "../Link";
 import classnames from "classnames";
-import styles from "./Button.scss";
+import buttonStyles from "./Button.scss";
 
 class Button extends Component {
     render() {
-        const { href, target, className, onClick, additionalClass, children, appearance, type, size, disabled, active } = this.props;
+        const { href, target, className, onClick, children, appearance, type, size, disabled, active, styles } = this.props;
         const classNames = classnames(
+            styles.button,
             className,
-            additionalClass,
             styles[AppearanceType[appearance]],
-            styles[ButtonSize[size]], {
+            styles["size-" + ButtonSize[size]], {
                 "disabled": disabled,
-                "as-active": active
+                "as-active": !disabled && active
             });
 
         if (href) {
@@ -37,18 +37,21 @@ Button.propTypes = {
     href: PropTypes.string,
     target: PropTypes.string,
     className: PropTypes.string,
-    additionalClass: PropTypes.string,
+    styles: PropTypes.shape({
+        button: PropTypes.string
+    }).isRequired,
     type: PropTypes.oneOf(Object.keys(ButtonType).map((key) => ButtonType[key])),
     size: PropTypes.oneOf(Object.keys(ButtonSize).map((key) => ButtonSize[key])),
     appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key]))
 };
 
 Button.defaultProps = {
+    className: "",
     active: false,
     disabled: false,
-    className: styles.button,
-    size: ButtonSize.default,
-    appearance: AppearanceType.default
+    styles: buttonStyles,
+    appearance: AppearanceType.default,
+    size: ButtonSize.default
 };
 
 export default Button;

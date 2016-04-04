@@ -1,5 +1,5 @@
 const ButtonSize = {
-    default: "",
+    default: "default",
     big: "big",
     small: "small"
 };

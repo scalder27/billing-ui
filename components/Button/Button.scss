@@ -2,14 +2,11 @@
 @import "../../scss_settings/mixins/buttons";
 
 :local {
-    .button {
-    }
-
     .default {
         @include stylized-button-base($bgButtonColor, $textBaseColor);
         $backgroundShadow: darken($bgButtonColor, 15%);
 
-        &.small {
+        &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
             &:hover {
@@ -22,7 +19,7 @@
         @include stylized-button-base($bgImportantButtonColor, $textWhiteColor);
         $backgroundShadow: darken($bgImportantButtonColor, 15%);
 
-        &.small {
+        &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
             &:hover {
@@ -35,7 +32,7 @@
         $backgroundShadow: #9E4643;
         @include stylized-button-base($bgDeleteColor, $textWhiteColor, $backgroundShadow);
 
-        &.small {
+        &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
             &:hover {
@@ -44,7 +41,9 @@
         }
     }
 
-    .small {
-        padding: 7px 0;
+    .button {
+        .size-small {
+            padding: 7px 0;
+        }
     }
 }
