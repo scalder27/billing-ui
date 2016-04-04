@@ -1,0 +1,17 @@
+@import "../../scss_settings/_materialdesign.scss";
+@import "../../scss_settings/_placeholders.scss";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+        position: relative;
+    }
+
+    .checkbox {
+        @extend %stylized-checkBox;
+    }
+
+    .label {
+        @extend %stylized-checkBox-label;
+    }
+}
