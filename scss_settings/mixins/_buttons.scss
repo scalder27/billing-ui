@@ -1,9 +1,10 @@
 ﻿@import "../placeholders";
 @import "../variables";
 
-@mixin stylized-button-base($background, $color) {
-    $backgroundShadow: darken( $background, 15% );
-
+@mixin stylized-button-base($background, $color, $backgroundShadow: null) {
+    @if($backgroundShadow == null) {
+        $backgroundShadow: darken( $background, 15% );
+    }
     position: relative;
 
     min-width: 120px;
