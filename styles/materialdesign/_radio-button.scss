@@ -29,6 +29,24 @@
             opacity: 0;
         }
     }
+
+    &:disabled, &:disabled ~ %stylized-radio-label {
+        opacity: 0.5;
+
+        color: $textBaseColor;
+    }
+
+    &:disabled ~ %stylized-radio-label:hover:after,
+    &:disabled:checked ~ %stylized-radio-label:before,
+    &:disabled:checked ~ %stylized-radio-label:hover:before {
+        opacity: 0;
+    }
+
+    &:disabled ~ %stylized-radio-label:before,
+    &:disabled:checked ~ %stylized-radio-label:after,
+    &:disabled:checked ~ %stylized-radio-label:hover:after {
+        opacity: 1;
+    }
 }
 
 %stylized-radio-label {
