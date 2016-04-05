@@ -4,7 +4,8 @@ import classnames from "classnames";
 
 class Checkbox extends Component {
     render() {
-        const {checked, onChange, checkboxClassName, labelClassName, wrapperClassName, styles, children, disabled} = this.props;
+        const {checked, onChange, checkboxClassName, labelClassName, wrapperClassName, styles,
+               children, disabled} = this.props;
         const labelClassNames = classnames(styles.label, labelClassName);
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const checkboxClassNames = classnames(styles.checkbox, checkboxClassName, {
@@ -13,7 +14,11 @@ class Checkbox extends Component {
 
         return (
             <label className={wrapperClassNames}>
-                <input checked={checked} className={checkboxClassNames} type="checkbox" onChange={onChange}/>
+                <input checked={checked}
+                    disabled={disabled}
+                    className={checkboxClassNames}
+                    type="checkbox"
+                    onChange={onChange}/>
                 <span className={labelClassNames}>
                     {children}
                 </span>
