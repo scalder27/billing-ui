@@ -1,0 +1,29 @@
+@import "../../scss_settings/variables";
+@import "../../scss_settings/placeholders";
+@import "../../scss_settings/materialdesign";
+
+:local {
+    .wrapper {
+
+    }
+
+    .input {
+        box-sizing: border-box;
+    }
+
+    .label {
+        box-sizing: border-box;
+
+        &.filled {
+
+        }
+    }
+
+    .highlight {
+        box-sizing: border-box;
+    }
+
+    .bar {
+        box-sizing: border-box;
+    }
+}

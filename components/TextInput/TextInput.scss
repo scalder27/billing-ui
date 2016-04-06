@@ -1,0 +1,27 @@
+@import "../../scss_settings/variables";
+@import "../../scss_settings/placeholders";
+@import "../../scss_settings/materialdesign";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+        position: relative;
+    }
+
+    .input {
+        @extend %as-inline-block;
+        @extend %material-input;
+    }
+
+    .placeholder {
+        @extend %as-inline-block;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 4px;
+        color: $textSecondaryColor;
+
+        &.as-hidden {
+            display: none;
+        }
+    }
+}
