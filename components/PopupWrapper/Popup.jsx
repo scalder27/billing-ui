@@ -69,7 +69,8 @@ class Popup extends Component {
     initPopup() {
         const {getBindItem, position, getCloseLink, getOpenLink, className, onClose} = this.props;
 
-        const popupItemHtml = this.createAndInsertPopupToDOM(className);
+        const classNames = classnames(styles.popup, className);
+        const popupItemHtml = this.createAndInsertPopupToDOM(classNames);
         ReactDOM.render(this.generateMarkUp(), popupItemHtml);
 
         const closeLink = getCloseLink ? getCloseLink() : this.getCloseLink(popupItemHtml);
@@ -111,7 +112,6 @@ Popup.propTypes = {
 };
 
 Popup.defaultProps = {
-    className: styles.popup,
     shouldUpdate: true
 };
 

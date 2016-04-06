@@ -6,9 +6,7 @@ import styles from "./Actions.scss";
 import classnames from "classnames";
 
 class Actions extends Component {
-    getCloseLink() {
-        return this._closeLink;
-    }
+    _closeLink = null;
 
     render() {
         const { className, children, getBindItem, position } = this.props;
@@ -18,9 +16,9 @@ class Actions extends Component {
             <Popup className={classNamesPopup}
                    getBindItem={getBindItem}
                    position={position}
-                   getCloseLink={this.getCloseLink.bind(this)}
+                   getCloseLink={() => this._closeLink}
                    getOpenLink={getBindItem}>
-                <span className={styles["close-link"]} ref={ref => this._closeLink = ref}>{SpecialCharacters.Ellipsis}</span>
+                <span className={styles["close-link"]} ref={node => this._closeLink = node}>{SpecialCharacters.Ellipsis}</span>
                 {children}
             </Popup>
         );
