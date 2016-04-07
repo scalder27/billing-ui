@@ -8,10 +8,13 @@ class TextInput extends Component {
     }
 
     render() {
-        const { value, maxLength, disabled, styles, wrapperClassName, inputClassName, placeholderClassName, placeholder, width,
+        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, placeholderClassName, placeholder, width,
                 onChange, onBlur, onFocus, onKeyDown} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
-        const inputClassNames = classnames(styles.input, inputClassName);
+        const inputClassNames = classnames(styles.input, inputClassName, {
+            "readonly": readonly,
+            "disabled": disabled
+        });
         const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
         const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {
             [styles["as-hidden"]]: value
@@ -29,6 +32,7 @@ class TextInput extends Component {
                     value={value}
                     maxLength={maxLength}
                     disabled={disabled}
+                    readOnly={readonly}
                     onChange={onChange}
                     onBlur={onBlur}
                     onFocus={onFocus}
@@ -43,6 +47,7 @@ TextInput.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
     maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),

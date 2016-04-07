@@ -19,6 +19,7 @@ TextInputWrapper.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
     maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),

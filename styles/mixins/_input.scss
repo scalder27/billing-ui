@@ -17,10 +17,10 @@
 }
 
 %input-readonly-focused {
+    box-shadow: none;
+    background: none;
     border: none;
     border-bottom: 1px dashed $borderInputColor;
-    background: none;
-
     color: #e4e4e4;
 }
 
@@ -55,11 +55,6 @@
         @extend %input-base-focused;
     }
 
-    &[readonly],
-    &[readonly]:focus {
-        @extend %input-readonly-focused;
-    }
-
     &[type="password"].input-validation-error:focus,
     &[type="text"].input-validation-error:focus,
     &[type="text"].validation-error:focus,
@@ -69,8 +64,20 @@
     &[type="text"].invalidDate {
         @extend %input-base-invalid;
     }
-}
 
+    &[type="text"] {
+        &.disabled,
+        &.disabled:focus,
+        &[disabled],
+        &[disabled]:focus,
+        &.readonly,
+        &.readonly:focus,
+        &[readonly],
+        &[readonly]:focus {
+            @extend %input-readonly-focused;
+        }
+    }
+}
 @mixin material-textarea($width: auto) {
     @extend %input-base;
 
@@ -83,6 +90,12 @@
         @extend %input-base-focused;
     }
 
+    &.disabled,
+    &.disabled:focus,
+    &[disabled],
+    &[disabled]:focus,
+    &.readonly,
+    &.readonly:focus,
     &[readonly],
     &[readonly]:focus {
         @extend %input-readonly-focused;

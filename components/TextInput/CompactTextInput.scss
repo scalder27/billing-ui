@@ -1,8 +1,19 @@
 @import "../../scss_settings/variables";
 @import "../../scss_settings/placeholders";
+@import "../../scss_settings/materialdesign";
 @import "./AnimationHighlighter";
 
 :local {
+    %filled-text {
+        top: -12px;
+        font-size: $fontSizeRegular;
+    }
+
+    %no-filled-text {
+        top: 9px;
+        font-size: $fontSizeBig;
+    }
+
     .wrapper {
         position: relative;
         box-sizing: border-box;
@@ -10,26 +21,17 @@
 
     input[type="text"].input,
     .input {
+        @extend %material-input;
+
         display: block;
         width: 100%;
         padding: 5px 3px 3px;
-        transition: border-color, box-shadow 0.2s ease-in-out;
-        color: $textBaseColor;
         font-size: $fontSizeBig;
-        border: none;
-        border-bottom: 1px solid #e4e4e4;
         box-sizing: border-box;
 
-        &:focus  {
-            display: block;
-            border: none;
-            border-bottom: 1px solid $borderFocusColor;
-            outline: 0;
-            box-shadow: 0 1px $shadowFocusColor;
-
+        &:focus {
             & ~ .label {
-                top: -12px;
-                font-size: $fontSizeRegular;
+                @extend %filled-text;
             }
 
             & ~ .highlight {
@@ -44,23 +46,41 @@
                 }
             }
         }
+
+        &[readonly],
+        &[readonly]:focus,
+        &[disabled],
+        &[disabled]:focus {
+            & ~ .label {
+                @extend %no-filled-text;
+
+                &.filled {
+                    @extend %filled-text;
+                }
+            }
+
+            & ~ .highlight {
+                :global {
+                    animation: none;
+                }
+            }
+        }
     }
 
     .label {
+        @extend %no-filled-text;
+
         position: absolute;
-        top: 9px;
         left: 3px;
         transition: .2s ease all;
         color: #b7b7b7;
-        font-size: $fontSizeBig;
         font-weight: normal;
         cursor: text;
         pointer-events: none;
         box-sizing: border-box;
 
         &.filled {
-            top: -12px;
-            font-size: $fontSizeRegular;
+            @extend %filled-text;
         }
     }
 
