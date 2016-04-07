@@ -8,12 +8,13 @@ class TextInput extends Component {
     }
 
     render() {
-        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, placeholderClassName, placeholder, width,
-                onChange, onBlur, onFocus, onKeyDown} = this.props;
+        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, placeholderClassName,
+                placeholder, width, isValid, onChange, onBlur, onFocus, onKeyDown} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName, {
-            "readonly": readonly,
-            "disabled": disabled
+            [styles["input-validation-error"]]: !isValid,
+            [styles.readonly]: readonly,
+            [styles.disabled]: disabled
         });
         const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
         const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {

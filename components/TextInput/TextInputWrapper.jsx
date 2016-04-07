@@ -41,6 +41,7 @@ TextInputWrapper.defaultProps = {
     labelClassName: "",
     placeholderClassName: "",
     width: "auto",
+    isValid: true,
     type: TextInputType.default
 };
 

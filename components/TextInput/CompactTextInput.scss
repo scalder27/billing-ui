@@ -40,7 +40,7 @@
                 }
             }
 
-            &.error ~ .highlight {
+            &.input-validation-error ~ .highlight {
                 :global {
                     animation-name: inputErrorHighlighter;
                 }

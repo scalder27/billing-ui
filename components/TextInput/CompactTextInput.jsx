@@ -4,12 +4,13 @@ import classnames from "classnames";
 
 class CompactTextInput extends Component {
     render() {
-        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, labelClassName, placeholder, width,
-            onChange, onBlur, onFocus, onKeyDown} = this.props;
+        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, labelClassName,
+            placeholder, width, isValid, onChange, onBlur, onFocus, onKeyDown} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName, {
-            "readonly": readonly,
-            "disabled": disabled
+            [styles["input-validation-error"]]: !isValid,
+            [styles.readonly]: readonly,
+            [styles.disabled]: disabled
         });
         const labelClassNames = classnames(styles.label, labelClassName, {
             [styles.filled]: value
