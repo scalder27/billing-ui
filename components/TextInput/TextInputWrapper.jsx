@@ -26,6 +26,8 @@ TextInputWrapper.propTypes = {
     width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
+    maskChar: PropTypes.string,
+    alwaysShowMask: PropTypes.bool,
     value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,

@@ -15,6 +15,7 @@
     },
     "authors": "KonturBilling",
     "devDependencies": {
+    "react-input-mask": "^0.6.4",
         "autoprefixer": "^6.3.3",
         "babel-core": ">= 6.7.4",
         "babel-eslint": ">= 6.0.2",

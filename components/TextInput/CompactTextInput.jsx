@@ -1,11 +1,12 @@
-import { Component, PropTypes } from "react";
+import { Component, PropTypes, Children, cloneElement } from "react";
+import Input from "./Input";
 import compactTextInputStyles from "./CompactTextInput.scss";
 import classnames from "classnames";
 
 class CompactTextInput extends Component {
     render() {
-        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, labelClassName,
-            placeholder, width, isValid, onChange, onBlur, onFocus, onKeyDown} = this.props;
+        const { value, readonly, disabled, styles, wrapperClassName, inputClassName, labelClassName,
+            placeholder, isValid} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName, {
             [styles["input-validation-error"]]: !isValid,
@@ -18,18 +19,7 @@ class CompactTextInput extends Component {
 
         return (
             <div className={wrapperClassNames}>
-                <input
-                    style={{"width": width}}
-                    className={inputClassNames}
-                    type="text"
-                    value={value}
-                    maxLength={maxLength}
-                    disabled={disabled}
-                    readOnly={readonly}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                    onKeyDown={onKeyDown} />
+                <Input {...this.props} inputClassName={inputClassNames} />
                 <span className={styles.highlight}></span>
                 <span className={labelClassNames}>{placeholder}</span>
             </div>
@@ -49,6 +39,8 @@ CompactTextInput.propTypes = {
     width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
+    maskChar: PropTypes.string,
+    alwaysShowMask: PropTypes.bool,
     value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,

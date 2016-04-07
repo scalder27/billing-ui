@@ -1,4 +1,5 @@
-import { Component, PropTypes } from "react";
+import { Component, PropTypes, Children, cloneElement } from "react";
+import Input from "./Input";
 import textInputStyles from "./TextInput.scss";
 import classnames from "classnames";
 
@@ -8,17 +9,17 @@ class TextInput extends Component {
     }
 
     render() {
-        const { value, maxLength, readonly, disabled, styles, wrapperClassName, inputClassName, placeholderClassName,
-                placeholder, width, isValid, onChange, onBlur, onFocus, onKeyDown} = this.props;
+        const { value, styles, wrapperClassName, placeholderClassName, placeholder, inputClassName,
+            isValid, readonly, disabled} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
+        const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
+        const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {
+            [styles["as-hidden"]]: value
+        });
         const inputClassNames = classnames(styles.input, inputClassName, {
             [styles["input-validation-error"]]: !isValid,
             [styles.readonly]: readonly,
             [styles.disabled]: disabled
-        });
-        const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
-        const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {
-            [styles["as-hidden"]]: value
         });
 
         return (
@@ -26,18 +27,9 @@ class TextInput extends Component {
                 <span className={placeholderWrapperClassNames} onClick={this.resolveFocus.bind(this)}>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
-                <input
-                    style={{"width": width}}
-                    className={inputClassNames}
-                    type="text"
-                    value={value}
-                    maxLength={maxLength}
-                    disabled={disabled}
-                    readOnly={readonly}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                    onKeyDown={onKeyDown} ref={(el) => {this.input = el}}/>
+                <Input {...this.props} inputClassName={inputClassNames} ref={(el) => {
+                    this.input = ReactDOM.findDOMNode(el);
+                }} />
             </span>
         );
     }
@@ -55,6 +47,8 @@ TextInput.propTypes = {
     width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
+    maskChar: PropTypes.string,
+    alwaysShowMask: PropTypes.bool,
     value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,
