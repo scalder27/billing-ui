@@ -9,7 +9,7 @@ class CompactTextInput extends Component {
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName);
         const labelClassNames = classnames(styles.label, labelClassName, {
-            [styles.filled]: value !== ""
+            [styles.filled]: value
         });
 
         return (
@@ -25,9 +25,8 @@ class CompactTextInput extends Component {
                     onBlur={onBlur}
                     onFocus={onFocus}
                     onKeyDown={onKeyDown} />
-                <span classNmae={styles.highlight}></span>
-                <span classNmae={styles.bar}></span>
-                <span classNmae={labelClassNames}>{placeholder}</span>
+                <span className={styles.highlight}></span>
+                <span className={labelClassNames}>{placeholder}</span>
             </div>
         );
     }

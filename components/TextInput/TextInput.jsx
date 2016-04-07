@@ -9,7 +9,7 @@ class TextInput extends Component {
 
     render() {
         const { value, maxLength, disabled, styles, wrapperClassName, inputClassName, placeholderClassName, placeholder, width,
-            onChange, onBlur, onFocus, onKeyDown} = this.props;
+                onChange, onBlur, onFocus, onKeyDown} = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName);
         const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
