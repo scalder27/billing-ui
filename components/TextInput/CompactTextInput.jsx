@@ -5,21 +5,16 @@ import classnames from "classnames";
 
 class CompactTextInput extends Component {
     render() {
-        const { styles, wrapperClassName, inputClassName, labelClassName, placeholder, disabled, readonly, value, isValid, ...inputProps} = this.props;
+        const { styles, wrapperClassName, labelClassName, placeholder, value, ...inputProps } = this.props;
 
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
-        const inputClassNames = classnames(styles.input, inputClassName, {
-            [styles["input-validation-error"]]: !isValid,
-            [styles.readonly]: readonly,
-            [styles.disabled]: disabled
-        });
         const labelClassNames = classnames(styles.label, labelClassName, {
             [styles.filled]: value
         });
 
         return (
             <div className={wrapperClassNames}>
-                <Input {...inputProps} inputClassName={inputClassNames} disabled={disabled} readonly={readonly} value={value}/>
+                <Input {...inputProps} value={value} styles={styles} />
                 <span className={styles.highlight}></span>
                 <span className={labelClassNames}>{placeholder}</span>
             </div>

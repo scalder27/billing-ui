@@ -4,34 +4,23 @@ import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
 class DefaultTextInput extends Component {
-    resolveFocus() {
-        this.input.focus();
-    }
-
     render() {
-        const { styles, wrapperClassName, placeholderClassName, placeholder, inputClassName, disabled, readonly, value,
-            isValid, ...inputProps } = this.props;
+        const { styles, wrapperClassName, placeholderClassName, placeholder, value, ...inputProps } = this.props;
+
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
         const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {
             [styles["as-hidden"]]: value
         });
-        const inputClassNames = classnames(styles.input, inputClassName, {
-            [styles["input-validation-error"]]: !isValid,
-            [styles.readonly]: readonly,
-            [styles.disabled]: disabled
-        });
 
         return (
             <span className={wrapperClassNames}>
-                <span className={placeholderWrapperClassNames} onClick={this.resolveFocus.bind(this)}>
+                <span className={placeholderWrapperClassNames} onClick={() => {this.input.focus()}}>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
                 <Input {...inputProps}
                     value={value}
-                    disabled={disabled}
-                    readonly={readonly}
-                    inputClassName={inputClassNames}
+                    styles={styles}
                     ref={(el) => {
                         this.input = ReactDOM.findDOMNode(el);
                     }} />

@@ -10,7 +10,7 @@ class TextInputWrapper extends Component {
         return (
             type === TextInputType.compact
                 ? <CompactTextInput {...others} labelClassName={labelClassName} />
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName}/>
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} />
         );
     }
 }

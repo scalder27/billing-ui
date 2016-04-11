@@ -72,8 +72,8 @@
 
         position: absolute;
         left: 3px;
-        transition: .2s ease all;
-        color: #b7b7b7;
+        transition: 0.2s ease all;
+        color: $textSecondaryColor;
         font-weight: normal;
         cursor: text;
         pointer-events: none;
