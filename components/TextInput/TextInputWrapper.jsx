@@ -1,5 +1,5 @@
 import { Component, PropTypes } from "react";
-import TextInput from "./TextInput";
+import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 
@@ -9,7 +9,7 @@ class TextInputWrapper extends Component {
         return (
             type === TextInputType.compact
                 ? <CompactTextInput {...this.props} />
-                : <TextInput {...this.props} />
+                : <DefaultTextInput {...this.props} />
         );
     }
 }

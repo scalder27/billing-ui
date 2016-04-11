@@ -1,6 +1,6 @@
-import { Component, PropTypes, Children, cloneElement } from "react";
-import Input from "./Input";
-import compactTextInputStyles from "./CompactTextInput.scss";
+import { Component, PropTypes } from "react";
+import Input from "./TextInput";
+import textInputStyles from "./CompactTextInput.scss";
 import classnames from "classnames";
 
 class CompactTextInput extends Component {
@@ -49,7 +49,7 @@ CompactTextInput.propTypes = {
 };
 
 CompactTextInput.defaultProps = {
-    styles: compactTextInputStyles
+    styles: textInputStyles
 };
 
 export default CompactTextInput;
