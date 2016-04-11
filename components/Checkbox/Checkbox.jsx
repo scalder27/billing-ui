@@ -18,6 +18,7 @@ class Checkbox extends Component {
                 <input {...checkboxProps}
                     checked={checked}
                     disabled={disabled}
+                    readonly={readonly}
                     className={checkboxClassNames}
                     type="checkbox"
                     onChange={onChange}/>
