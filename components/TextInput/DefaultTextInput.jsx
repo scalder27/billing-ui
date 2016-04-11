@@ -4,13 +4,13 @@ import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
 class DefaultTextInput extends Component {
-    resolveFocus(evt) {
+    resolveFocus() {
         this.input.focus();
     }
 
     render() {
-        const { value, styles, wrapperClassName, placeholderClassName, placeholder, inputClassName,
-            isValid, readonly, disabled} = this.props;
+        const { styles, wrapperClassName, placeholderClassName, placeholder, inputClassName, disabled, readonly, value,
+            isValid, ...inputProps } = this.props;
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const placeholderClassNames = classnames(styles.placeholder, placeholderClassName);
         const placeholderWrapperClassNames = classnames(styles["placeholder-wrapper"], {
@@ -27,9 +27,14 @@ class DefaultTextInput extends Component {
                 <span className={placeholderWrapperClassNames} onClick={this.resolveFocus.bind(this)}>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
-                <Input {...this.props} inputClassName={inputClassNames} ref={(el) => {
-                    this.input = ReactDOM.findDOMNode(el);
-                }} />
+                <Input {...inputProps}
+                    value={value}
+                    disabled={disabled}
+                    readonly={readonly}
+                    inputClassName={inputClassNames}
+                    ref={(el) => {
+                        this.input = ReactDOM.findDOMNode(el);
+                    }} />
             </span>
         );
     }
@@ -42,14 +47,14 @@ DefaultTextInput.propTypes = {
     onKeyDown: PropTypes.func,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
+    value: PropTypes.string,
     isValid: PropTypes.bool,
-    maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
-    width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
-    value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,
     placeholderClassName: PropTypes.string,

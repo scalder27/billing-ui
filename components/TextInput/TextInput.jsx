@@ -3,20 +3,12 @@ import MaskedInput from "react-input-mask";
 
 class TextInput extends Component {
     render() {
-        const { value, maxLength, readonly, disabled, width, mask, maskChar, alwaysShowMask, inputClassName,
-            onChange, onBlur, onFocus, onKeyDown} = this.props;
+        const { width, mask, maskChar, alwaysShowMask, inputClassName, ...others } = this.props;
         const inputProps = {
+            ...others,
             style: { "width": width },
             type: "text",
-            className: inputClassName,
-            value: value,
-            maxLength: maxLength,
-            disabled: disabled,
-            readOnly: readonly,
-            onChange: onChange,
-            onBlur: onBlur,
-            onFocus: onFocus,
-            onKeyDown: onKeyDown
+            className: inputClassName
         };
 
         if (mask) {
@@ -35,14 +27,14 @@ TextInput.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    value: PropTypes.string,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
-    isValid: PropTypes.bool,
     maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     mask: PropTypes.string,
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
-    value: PropTypes.string,
     inputClassName: PropTypes.string
 };
 

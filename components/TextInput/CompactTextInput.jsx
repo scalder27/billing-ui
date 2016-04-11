@@ -5,8 +5,8 @@ import classnames from "classnames";
 
 class CompactTextInput extends Component {
     render() {
-        const { value, readonly, disabled, styles, wrapperClassName, inputClassName, labelClassName,
-            placeholder, isValid} = this.props;
+        const { styles, wrapperClassName, inputClassName, labelClassName, placeholder, disabled, readonly, value, isValid, ...inputProps} = this.props;
+
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const inputClassNames = classnames(styles.input, inputClassName, {
             [styles["input-validation-error"]]: !isValid,
@@ -19,7 +19,7 @@ class CompactTextInput extends Component {
 
         return (
             <div className={wrapperClassNames}>
-                <Input {...this.props} inputClassName={inputClassNames} />
+                <Input {...inputProps} inputClassName={inputClassNames} disabled={disabled} readonly={readonly} value={value}/>
                 <span className={styles.highlight}></span>
                 <span className={labelClassNames}>{placeholder}</span>
             </div>
@@ -34,14 +34,14 @@ CompactTextInput.propTypes = {
     onKeyDown: PropTypes.func,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
+    value: PropTypes.string,
     isValid: PropTypes.bool,
-    maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
-    width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
-    value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,
     labelClassName: PropTypes.string,

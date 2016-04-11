@@ -5,11 +5,12 @@ import TextInputType from "./TextInputType";
 
 class TextInputWrapper extends Component {
     render() {
-        const { type } = this.props;
+        const { type, placeholderClassName, labelClassName, ...others } = this.props;
+
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...this.props} />
-                : <DefaultTextInput {...this.props} />
+                ? <CompactTextInput {...others} labelClassName={labelClassName} />
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName}/>
         );
     }
 }
@@ -21,20 +22,21 @@ TextInputWrapper.propTypes = {
     onKeyDown: PropTypes.func,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
+    value: PropTypes.string,
     isValid: PropTypes.bool,
-    maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
-    width: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
-    value: PropTypes.string,
     wrapperClassName: PropTypes.string,
     inputClassName: PropTypes.string,
     labelClassName: PropTypes.string,
     placeholderClassName: PropTypes.string,
     styles: PropTypes.object,
     type: PropTypes.oneOf(Object.keys(TextInputType).map((key) => TextInputType[key]))
+    //Так же можно передать остальные стандартные атрибуты текстового инпута, но визуально они ни как не обрабатываются
 };
 
 TextInputWrapper.defaultProps = {
