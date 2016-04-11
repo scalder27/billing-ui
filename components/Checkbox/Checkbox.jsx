@@ -5,16 +5,18 @@ import classnames from "classnames";
 class Checkbox extends Component {
     render() {
         const {checked, onChange, checkboxClassName, labelClassName, wrapperClassName, styles,
-               children, disabled} = this.props;
+               children, disabled, readonly, ...checkboxProps} = this.props;
         const labelClassNames = classnames(styles.label, labelClassName);
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const checkboxClassNames = classnames(styles.checkbox, checkboxClassName, {
-            "disabled": disabled
+            "disabled": disabled,
+            "readonly": readonly
         });
 
         return (
             <label className={wrapperClassNames}>
-                <input checked={checked}
+                <input {...checkboxProps}
+                    checked={checked}
                     disabled={disabled}
                     className={checkboxClassNames}
                     type="checkbox"
@@ -31,10 +33,12 @@ Checkbox.propTypes = {
     onChange: PropTypes.func,
     checked: PropTypes.bool.isRequired,
     disabled: PropTypes.bool.isRequired,
+    readonly: PropTypes.bool,
     labelClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     checkboxClassName: PropTypes.string,
     styles: PropTypes.object
+    //Так же можно передать остальные стандартные атрибуты чекбокса, но визуально они ни как не обрабатываются
 };
 
 Checkbox.defaultProps = {
