@@ -1,25 +1,15 @@
 import { Component, PropTypes } from "react";
 import Clipboard from "clipboard";
-import { throttle } from "underscore";
-import events from "add-event-listener";
+
+import { checkClipboard } from "./ClipboardChecker";
+
+const copyToClipboardAvailableCheck = checkClipboard();
 
 class ClipboardWrapper extends Component {
     _clipboardTarget = null;
+    state = {copyToClipboardAvailable: false};
 
-    constructor(props) {
-        super(props);
-        this.state = {copyToClipboardAvailable: false};
-    }
-
-    componentWillMount() {
-        const copyToClipboardAvailableCheck = throttle(() => {
-            events.removeEventListener(window, "mousemove", copyToClipboardAvailableCheck);
-            this.setState({copyToClipboardAvailable: document.queryCommandSupported("copy")});
-        }, 100);
-        events.addEventListener(window, "mousemove", copyToClipboardAvailableCheck);
-    }
-
-    _initClipboard() {
+    _reinitClipboard() {
         const { value } = this.props;
         const { copyToClipboardAvailable } = this.state;
 
@@ -31,12 +21,19 @@ class ClipboardWrapper extends Component {
         }
     }
 
+    _resolveCopyToClipboard() {
+        copyToClipboardAvailableCheck
+            .then(() => {this.setState({copyToClipboardAvailable: true})})
+            .catch(() => {this.setState({copyToClipboardAvailable: false})});
+    }
+
     componentDidMount() {
-        this._initClipboard();
+        this._resolveCopyToClipboard();
+        this._reinitClipboard();
     }
 
     componentDidUpdate() {
-        this._initClipboard();
+        this._reinitClipboard();
     }
 
     render() {
