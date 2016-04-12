@@ -51,7 +51,7 @@ class ClipboardWrapper extends Component {
             );
         }
 
-        return <div></div>;
+        return null;
     }
 }
 
