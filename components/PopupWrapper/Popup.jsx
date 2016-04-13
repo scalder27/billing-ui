@@ -41,7 +41,7 @@ class Popup extends Component {
     }
 
     generateMarkUp() {
-        const {getCloseLink} = this.props;
+        const { getCloseLink } = this.props;
         const closeClassNames = classnames("js-closePopup", styles["close-link"]);
 
         return (
@@ -75,7 +75,7 @@ class Popup extends Component {
     }
 
     initPopup() {
-        const {getBindItem, position, getCloseLink, getOpenLink, className, onClose} = this.props;
+        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose } = this.props;
 
         const classNames = classnames(styles.popup, className);
         this._popupItemHtml = this.createAndInsertPopupToDOM(classNames);
