@@ -1,7 +1,7 @@
 import { Component, PropTypes } from "react";
 import Clipboard from "clipboard";
 
-import { copyCommandSupportChecker } from "./QueryCommandSupportChecker";
+import { copyCommandSupportChecker } from "./../../common_scripts/QueryCommandSupportChecker";
 
 const copyToClipboardAvailableCheck = copyCommandSupportChecker();
 
