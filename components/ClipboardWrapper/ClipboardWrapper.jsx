@@ -29,7 +29,6 @@ class ClipboardWrapper extends Component {
 
     componentDidMount() {
         this._resolveCopyToClipboard();
-        this._reinitClipboard();
     }
 
     componentDidUpdate() {
