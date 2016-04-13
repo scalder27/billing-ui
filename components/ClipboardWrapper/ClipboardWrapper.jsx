@@ -1,9 +1,9 @@
 import { Component, PropTypes } from "react";
 import Clipboard from "clipboard";
 
-import { checkClipboard } from "./ClipboardChecker";
+import { copyCommandSupportChecker } from "./QueryCommandSupportChecker";
 
-const copyToClipboardAvailableCheck = checkClipboard();
+const copyToClipboardAvailableCheck = copyCommandSupportChecker();
 
 class ClipboardWrapper extends Component {
     _clipboardTarget = null;
@@ -14,11 +14,15 @@ class ClipboardWrapper extends Component {
         const { copyToClipboardAvailable } = this.state;
 
         if (copyToClipboardAvailable) {
-            this._clipboard && this._clipboard.destroy();
+            this._removeClipboard();
             this._clipboard = new Clipboard(this._clipboardTarget, {
                 text: () => value
             });
         }
+    }
+
+    _removeClipboard() {
+        this._clipboard && this._clipboard.destroy();
     }
 
     _resolveCopyToClipboard() {
@@ -33,6 +37,10 @@ class ClipboardWrapper extends Component {
 
     componentDidUpdate() {
         this._reinitClipboard();
+    }
+
+    componentWillUnmount() {
+        this._removeClipboard();
     }
 
     render() {
