@@ -6,6 +6,8 @@ import styles from "./Popup.scss";
 import classnames from "classnames";
 
 class Popup extends Component {
+    _popupItemHtml = null;
+
     componentDidMount() {
         const { shouldUpdate } = this.props;
         if (!this.popupControl && shouldUpdate) {
@@ -18,13 +20,15 @@ class Popup extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.shouldUpdate;
+        return (nextProps.shouldUpdate || nextProps.hotReload);
     }
 
     componentDidUpdate() {
-        const { shouldUpdate } = this.props;
+        const { shouldUpdate, hotReload } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+        } else if (hotReload) {
+            this.hotReloadPopup();
         }
     }
 
@@ -49,8 +53,12 @@ class Popup extends Component {
     }
 
     createPopupItemHtml(className) {
+        const { width } = this.props;
         const popupItemHtml = document.createElement("div");
         popupItemHtml.className = className;
+        if (width) {
+            popupItemHtml.style.width = `${width}px`;
+        }
 
         return popupItemHtml;
     }
@@ -70,14 +78,14 @@ class Popup extends Component {
         const {getBindItem, position, getCloseLink, getOpenLink, className, onClose} = this.props;
 
         const classNames = classnames(styles.popup, className);
-        const popupItemHtml = this.createAndInsertPopupToDOM(classNames);
-        ReactDOM.render(this.generateMarkUp(), popupItemHtml);
+        this._popupItemHtml = this.createAndInsertPopupToDOM(classNames);
+        ReactDOM.render(this.generateMarkUp(), this._popupItemHtml);
 
-        const closeLink = getCloseLink ? getCloseLink() : this.getCloseLink(popupItemHtml);
+        const closeLink = getCloseLink ? getCloseLink() : this.getCloseLink(this._popupItemHtml);
         const openLink = getOpenLink ? getOpenLink() : null;
 
         this.popupControl = new popup({
-            popupItem: popupItemHtml,
+            popupItem: this._popupItemHtml,
             bindItem: getBindItem(),
             closeLink: closeLink,
             openLink: openLink,
@@ -86,6 +94,13 @@ class Popup extends Component {
 
         if (onClose) {
             this.popupControl.onHide(() => onClose());
+        }
+    }
+
+    hotReloadPopup() {
+        const { width } = this.props;
+        if (width) {
+            this._popupItemHtml.style.width = `${width}px`;
         }
     }
 
@@ -105,14 +120,17 @@ Popup.propTypes = {
     onClose: PropTypes.func,
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
+    hotReload: PropTypes.bool,
     getCloseLink: PropTypes.func,
     getOpenLink: PropTypes.func,
     getBindItem: PropTypes.func.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    width: PropTypes.number
 };
 
 Popup.defaultProps = {
-    shouldUpdate: true
+    shouldUpdate: true,
+    hotReload: false
 };
 
 export default Popup;
