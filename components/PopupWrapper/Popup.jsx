@@ -20,15 +20,15 @@ class Popup extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return (nextProps.shouldUpdate || nextProps.hotReload);
+        return (nextProps.shouldUpdate || nextProps.updateWithoutClosing);
     }
 
     componentDidUpdate() {
-        const { shouldUpdate, hotReload } = this.props;
+        const { shouldUpdate, updateWithoutClosing } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
-        } else if (hotReload) {
-            this.hotReloadPopup();
+        } else if (updateWithoutClosing) {
+            this.updatePopup();
         }
     }
 
@@ -97,7 +97,7 @@ class Popup extends Component {
         }
     }
 
-    hotReloadPopup() {
+    updatePopup() {
         const { width } = this.props;
         if (width) {
             this._popupItemHtml.style.width = `${width}px`;
@@ -120,7 +120,8 @@ Popup.propTypes = {
     onClose: PropTypes.func,
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
-    hotReload: PropTypes.bool,
+    // todo: попробовать сделать ресайз покрасивее при рефакторинге (выбор контейнера?)
+    updateWithoutClosing: PropTypes.bool,
     getCloseLink: PropTypes.func,
     getOpenLink: PropTypes.func,
     getBindItem: PropTypes.func.isRequired,
@@ -130,7 +131,7 @@ Popup.propTypes = {
 
 Popup.defaultProps = {
     shouldUpdate: true,
-    hotReload: false
+    updateWithoutClosing: false
 };
 
 export default Popup;
