@@ -9,19 +9,24 @@ class Actions extends Component {
     _closeLink = null;
 
     render () {
-        const { className, children, getBindItem, position, updateWithoutClosing, onOpen, onClose, ellipsisClassName } = this.props;
+        const { className, children, getBindItem, position, onOpen, onClose, show, ellipsisClassName } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
         const ellipsisClassNames = classnames(styles["close-link"], ellipsisClassName);
 
         return (
             <Popup className={classNamesPopup}
-                   getBindItem={getBindItem}
                    position={position}
-                   getCloseLink={() => this._closeLink}
+
+                   getBindItem={getBindItem}
                    getOpenLink={getBindItem}
+                   getCloseLink={() => this._closeLink}
+
                    onOpen={onOpen}
                    onClose={onClose}
-                   updateWithoutClosing={updateWithoutClosing}>
+
+                   show={show}
+            >
+
                 <span className={ellipsisClassNames} ref={node => this._closeLink = node}>
                     {SpecialCharacters.Ellipsis}
                 </span>
@@ -34,11 +39,14 @@ class Actions extends Component {
 Actions.propRypes = {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
+
+    isOpen: PropTypes.bool,
+    show: PropTypes.bool.isRequired,
+
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
-    ellipsisClassName: PropTypes.string,
-    updateWithoutClosing: PropTypes.bool
+    ellipsisClassName: PropTypes.string
 };
 
 Actions.defaultProps = {

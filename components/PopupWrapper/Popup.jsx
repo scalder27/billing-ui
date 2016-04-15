@@ -16,7 +16,7 @@ class Popup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.shouldUpdate && this.removePopup();
+        nextProps.shouldUpdate && !nextProps.show && this.removePopup();
     }
 
     shouldComponentUpdate(nextProps) {
@@ -24,9 +24,14 @@ class Popup extends Component {
     }
 
     componentDidUpdate() {
-        const { shouldUpdate, updateWithoutClosing } = this.props;
+        const { shouldUpdate, updateWithoutClosing, show } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+
+            if(show) {
+                this.popupControl.show();
+            }
+
         } else if (updateWithoutClosing) {
             this.updatePopup();
         }
@@ -136,7 +141,8 @@ Popup.propTypes = {
 
 Popup.defaultProps = {
     shouldUpdate: true,
-    updateWithoutClosing: false
+    updateWithoutClosing: false,
+    show: false
 };
 
 export default Popup;
