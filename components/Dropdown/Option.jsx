@@ -3,6 +3,8 @@ import optionStyles from "./Option.scss";
 import classnames from "classnames";
 
 class Option extends Component {
+    _optionNode = null;
+
     handleClick() {
         const { disabled, isSelected, onClick, value, caption } = this.props;
 
@@ -28,7 +30,8 @@ class Option extends Component {
         });
 
         return (
-            <div className={classNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}>
+            <div className={classNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}
+                ref={ node => this._optionNode = node }>
                 <span className={styles.caption}>{caption}</span>
                 <span className={styles["additional-text"]}>{additionalData}</span>
             </div>

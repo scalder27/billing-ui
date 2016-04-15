@@ -10,66 +10,112 @@ const getAvailableOptions = (options, value) => {
     return options.filter(option => option.type === Option && !option.props.disabled && value !== option.props.value);
 };
 
-const getPreviousOption = (indexActiveOption, options) => {
-    if (indexActiveOption === -1 || indexActiveOption === 0) {
-        return options[options.length - 1]
+const getScrollTopMenu = (scrollTop, topOption, heightOption, heightMenu) => {
+    if (topOption - scrollTop < 0) {
+        return topOption;
     }
 
-    return options[indexActiveOption - 1];
+    if (topOption + heightOption - scrollTop > heightMenu) {
+        return topOption + heightOption - heightMenu;
+    }
+
+    return scrollTop;
 };
 
-const getNextOption = (indexActiveOption, options) => {
-    if (indexActiveOption === -1 || indexActiveOption === options.length - 1) {
-        return options[0]
+const getSiblingOptions = (optionValues, activeOption) => {
+    const indexActiveOption = optionValues.indexOf(activeOption);
+    const lastIndex = optionValues.length - 1;
+
+    let previous = optionValues[indexActiveOption - 1]
+    if (indexActiveOption === -1 || indexActiveOption === 0) {
+        previous = optionValues[lastIndex]
     }
 
-    return options[indexActiveOption + 1];
+    let next = optionValues[indexActiveOption + 1];
+    if (indexActiveOption === -1 || indexActiveOption === lastIndex) {
+        next = optionValues[0]
+    }
+
+
+    return {
+        previous: previous,
+        next: next,
+        first: optionValues[0],
+        last: optionValues[lastIndex],
+    }
 };
 
 class Dropdown extends Component {
     state = {
         activeOption: null,
-        isOpen: false
+        isOpened: false
     };
-    mounted = true;
+    _ignoreMouseOver = false;
+    _optionsListNode = null;
+    _ignoreTimeout = null;
+    _handleDocumentClick = this.handleDocumentClick.bind(this);
+    _handleKeyDown = this.handleKeyDown.bind(this);
 
     componentWillMount() {
-        events.addEventListener(document, "click", this.handleDocumentClick.bind(this));
-        events.addEventListener(document, "keydown", this.handleKeyDown.bind(this));
+        events.addEventListener(document, "click", this._handleDocumentClick);
+        events.addEventListener(document, "keydown", this._handleKeyDown);
     }
 
     componentDidMount() {
-        this.initOptions();
+        this._initOptions();
     }
 
     componentDidUpdate() {
-        this.initOptions();
+        const { value, children } = this.props;
+        const { activeOption } = this.state;
+        this._initOptions();
+
+        clearTimeout(this._ignoreTimeout);
+        if (this._optionsListNode && activeOption) {
+            const activeOptionNode = ReactDOM.findDOMNode(this.refs[activeOption]);
+
+            this._optionsListNode.scrollTop = getScrollTopMenu(this._optionsListNode.scrollTop,
+                activeOptionNode.offsetTop,
+                activeOptionNode.offsetHeight,
+                this._optionsListNode.offsetHeight);
+
+            this._ignoreTimeout = setTimeout(() => {
+                this._ignoreMouseOver = false;
+            }, 200);
+        }
     }
 
     componentWillUnmount() {
-        this.mounted = false;
-        events.removeEventListener(document, 'click', this.handleDocumentClick.bind(this));
-        events.removeEventListener(document, 'keydown', this.handleKeyDown.bind(this));
-    }
-
-    setValue(value, caption) {
-        this.toggleOptions(false);
-        this.fireChangeEvent(value, caption);
+        events.removeEventListener(document, "click", this._handleDocumentClick);
+        events.removeEventListener(document, "keydown", this._handleKeyDown);
     }
 
     setActiveOption(activeOption) {
         const newState = {
             ...this.state,
-            activeOption: activeOption,
+            activeOption: activeOption
         };
+
         this.setState(newState);
     }
 
-    fireChangeEvent(newValue, newCaption) {
+    setValue(newValue, newCaption) {
         const { value, onSelect } = this.props;
+        this.toggleOptions(false);
 
         if (newValue !== value && onSelect) {
             onSelect(newValue, newCaption);
+        }
+    }
+
+    toggleOptions(isOpened) {
+        const { disabled } = this.props;
+
+        if (!disabled) {
+            this.setState({
+                activeOption: null,
+                isOpened: isOpened
+            })
         }
     }
 
@@ -77,57 +123,69 @@ class Dropdown extends Component {
         evt.stopPropagation();
         evt.preventDefault();
 
-        this.toggleOptions(!this.state.isOpen);
-    }
-
-    toggleOptions(isOpen) {
-        const { disabled } = this.props;
-
-        if (!disabled) {
-            this.setState({
-                activeOption: null,
-                isOpen: isOpen
-            })
-        }
+        this.toggleOptions(!this.state.isOpened);
     }
 
     handleDocumentClick(evt) {
-        if (this.state.isOpen && this.mounted && !ReactDOM.findDOMNode(this).contains(evt.target)) {
+        if (this.state.isOpened && !ReactDOM.findDOMNode(this).contains(evt.target)) {
             this.toggleOptions(false);
         }
     }
 
     handleKeyDown(evt) {
-        const { activeOption, isOpen } = this.state;
+        const { activeOption, isOpened } = this.state;
 
-        if (!isOpen || !this.optionValues) {
+        if (!isOpened || !this.optionValues) {
             return;
         }
 
-        const indexActiveOption = this.optionValues.indexOf(activeOption);
-        const previousOption = getPreviousOption(indexActiveOption, this.optionValues)
-        const nextOption = getNextOption(indexActiveOption, this.optionValues);
+        evt.stopPropagation();
+        const siblingOptions = getSiblingOptions(this.optionValues, activeOption);
 
         switch (evt.keyCode) {
             case KeyCodes.top:
-                this.setActiveOption(previousOption);
+                this.setActiveOption(siblingOptions.previous);
+                this._ignoreMouseOver = true;
                 break;
             case KeyCodes.bottom:
-                this.setActiveOption(nextOption);
+                this.setActiveOption(siblingOptions.next);
+                this._ignoreMouseOver = true;
+                break;
+            case KeyCodes.home:
+                this.setActiveOption(siblingOptions.first);
+                this._ignoreMouseOver = true;
+                break;
+            case KeyCodes.end:
+                this.setActiveOption(siblingOptions.last);
+                this._ignoreMouseOver = true;
+                break;
+            case KeyCodes.pageUp:
+                this._optionsListNode.scrollTop -= this._optionsListNode.offsetHeight;
+                break;
+            case KeyCodes.pageDown:
+                this._optionsListNode.scrollTop += this._optionsListNode.offsetHeight;
                 break;
             case KeyCodes.esc:
                 this.toggleOptions(false);
                 break;
             case KeyCodes.enter:
-                activeOption && this.setValue(activeOption, this.optionCaptions[activeOption]);
+                if (activeOption) {
+                    this.setValue(activeOption, this.optionCaptions[activeOption]);
+                }
                 break;
         }
     }
 
-    initOptions() {
+    handleMouseOver(activeOption) {
+        if (!this._ignoreMouseOver) {
+            this.setActiveOption(activeOption);
+        }
+    }
+
+    _initOptions() {
         const { value, styles, children } = this.props;
 
-        const availableOptions = getAvailableOptions(children, value);
+        const availableOptions = children.filter(option => option.type === Option && !option.props.disabled && value !== option.props.value);
         this.optionValues = availableOptions.map(option => option.props.value);
         this.optionCaptions = availableOptions.reduce((result, option) => {
             result[option.props.value] = option.props.caption;
@@ -135,7 +193,7 @@ class Dropdown extends Component {
         }, {});
     }
 
-    getOptions() {
+    getOptionsList() {
         const { value, styles, children } = this.props;
 
         const options = Children.map(children, option => {
@@ -144,16 +202,17 @@ class Dropdown extends Component {
                         key: option.props.value,
                         isSelected: value === option.props.value,
                         isActive: this.state.activeOption === option.props.value,
+                        ref: option.props.value,
                         onClick: this.setValue.bind(this),
-                        onMouseOver: this.setActiveOption.bind(this)
+                        onMouseOver: this.handleMouseOver.bind(this)
                     }
-                )
+                );
             }
             return option;
         });
 
         return (
-            <div className={styles.options}>
+            <div className={styles.options} ref={node => this._optionsListNode = node}>
                 {options}
             </div>
         )
@@ -161,15 +220,14 @@ class Dropdown extends Component {
 
     render() {
         const { value, caption, additionalData, width, disabled, styles, className } = this.props;
-        const options = this.state.isOpen && this.getOptions();
-        const classNames = classnames(styles.wrapper, className);
+        const wrapperClassNames = classnames(styles.wrapper, className);
         const selectClassNames = classnames(styles.select, {
             [styles.disabled]: disabled,
-            [styles["inactive"]]: !value
+            [styles.inactive]: !value
         });
 
         return (
-            <div className={classNames}>
+            <div className={wrapperClassNames}>
                 <span className={selectClassNames} onClick={this.handleClick.bind(this)}>
                     <span className={styles["select-input"]} style={{"width": width}}>
                         <span className={styles.caption}>{caption}</span>
@@ -178,7 +236,7 @@ class Dropdown extends Component {
                     <Icon className={styles.icon} type={IconTypes.ArrowTriangleDown} />
                 </span>
 
-                {options}
+                {this.state.isOpened && this.getOptionsList()}
             </div>
         );
     }
