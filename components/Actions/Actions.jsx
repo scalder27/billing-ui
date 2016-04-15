@@ -16,17 +16,13 @@ class Actions extends Component {
         return (
             <Popup className={classNamesPopup}
                    position={position}
-
                    getBindItem={getBindItem}
                    getOpenLink={getBindItem}
                    getCloseLink={() => this._closeLink}
-
                    onOpen={onOpen}
                    onClose={onClose}
-
                    show={show}
             >
-
                 <span className={ellipsisClassNames} ref={node => this._closeLink = node}>
                     {SpecialCharacters.Ellipsis}
                 </span>
@@ -39,10 +35,7 @@ class Actions extends Component {
 Actions.propRypes = {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
-
-    isOpen: PropTypes.bool,
     show: PropTypes.bool.isRequired,
-
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
