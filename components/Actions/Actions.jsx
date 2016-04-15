@@ -8,17 +8,22 @@ import classnames from "classnames";
 class Actions extends Component {
     _closeLink = null;
 
-    render() {
-        const { className, children, getBindItem, position } = this.props;
+    render () {
+        const { className, children, getBindItem, position, isOpen, onClose, ellipsisClassName } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
+        var _ellipsisClassName = classnames(styles["close-link"], ellipsisClassName);
 
         return (
             <Popup className={classNamesPopup}
                    getBindItem={getBindItem}
                    position={position}
                    getCloseLink={() => this._closeLink}
-                   getOpenLink={getBindItem}>
-                <span className={styles["close-link"]} ref={node => this._closeLink = node}>{SpecialCharacters.Ellipsis}</span>
+                   getOpenLink={getBindItem}
+                   isOpen={isOpen}
+                   onClose={onClose}>
+                <span className={_ellipsisClassName} ref={node => this._closeLink = node}>
+                    {SpecialCharacters.Ellipsis}
+                </span>
                 {children}
             </Popup>
         );
@@ -26,9 +31,12 @@ class Actions extends Component {
 }
 
 Actions.propRypes = {
+    isOpen: PropTypes.bool,
+    onClose: PropTypes.func,
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    ellipsisClassName: PropTypes.string
 };
 
 Actions.defaultProps = {

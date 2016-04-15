@@ -75,7 +75,7 @@ class Popup extends Component {
     }
 
     initPopup() {
-        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose } = this.props;
+        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose, onOpen } = this.props;
 
         const classNames = classnames(styles.popup, className);
         this._popupItemHtml = this.createAndInsertPopupToDOM(classNames);
@@ -94,6 +94,10 @@ class Popup extends Component {
 
         if (onClose) {
             this.popupControl.onHide(() => onClose());
+        }
+
+        if(onOpen) {
+            this.popupControl.onShow(() => onOpen());
         }
     }
 
@@ -118,6 +122,8 @@ class Popup extends Component {
 
 Popup.propTypes = {
     onClose: PropTypes.func,
+    onOpen: PropTypes.func,
+
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
     // todo: попробовать сделать ресайз покрасивее при рефакторинге (выбор контейнера?)
