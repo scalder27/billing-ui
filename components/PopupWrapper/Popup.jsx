@@ -123,7 +123,6 @@ class Popup extends Component {
 Popup.propTypes = {
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
-
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
     // todo: попробовать сделать ресайз покрасивее при рефакторинге (выбор контейнера?)

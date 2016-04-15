@@ -11,7 +11,7 @@ class Actions extends Component {
     render () {
         const { className, children, getBindItem, position, isOpen, onClose, ellipsisClassName } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
-        var _ellipsisClassName = classnames(styles["close-link"], ellipsisClassName);
+        const ellipsisClassName = classnames(styles["close-link"], ellipsisClassName);
 
         return (
             <Popup className={classNamesPopup}
@@ -21,7 +21,7 @@ class Actions extends Component {
                    getOpenLink={getBindItem}
                    isOpen={isOpen}
                    onClose={onClose}>
-                <span className={_ellipsisClassName} ref={node => this._closeLink = node}>
+                <span className={ellipsisClassName} ref={node => this._closeLink = node}>
                     {SpecialCharacters.Ellipsis}
                 </span>
                 {children}
