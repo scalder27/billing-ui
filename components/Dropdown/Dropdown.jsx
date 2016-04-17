@@ -6,10 +6,6 @@ import Option from "./Option.jsx";
 import dropdownStyles from "./Dropdown.scss";
 import classnames from "classnames";
 
-const getAvailableOptions = (options, value) => {
-    return options.filter(option => option.type === Option && !option.props.disabled && value !== option.props.value);
-};
-
 const getScrollTopMenu = (scrollTop, topOption, heightOption, heightMenu) => {
     if (topOption - scrollTop < 0) {
         return topOption;
@@ -26,7 +22,7 @@ const getSiblingOptions = (optionValues, activeOption) => {
     const indexActiveOption = optionValues.indexOf(activeOption);
     const lastIndex = optionValues.length - 1;
 
-    let previous = optionValues[indexActiveOption - 1]
+    let previous = optionValues[indexActiveOption - 1];
     if (indexActiveOption === -1 || indexActiveOption === 0) {
         previous = optionValues[lastIndex]
     }
@@ -41,7 +37,7 @@ const getSiblingOptions = (optionValues, activeOption) => {
         previous: previous,
         next: next,
         first: optionValues[0],
-        last: optionValues[lastIndex],
+        last: optionValues[lastIndex]
     }
 };
 
@@ -66,7 +62,6 @@ class Dropdown extends Component {
     }
 
     componentDidUpdate() {
-        const { value, children } = this.props;
         const { activeOption } = this.state;
         this._initOptions();
 
@@ -183,7 +178,7 @@ class Dropdown extends Component {
     }
 
     _initOptions() {
-        const { value, styles, children } = this.props;
+        const { value, children } = this.props;
 
         const availableOptions = children.filter(option => option.type === Option && !option.props.disabled && value !== option.props.value);
         this.optionValues = availableOptions.map(option => option.props.value);
