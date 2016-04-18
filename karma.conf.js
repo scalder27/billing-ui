@@ -39,13 +39,11 @@ module.exports = function (config) {
                         ],
                         loader: "babel"
                     },
-                    { test: /\.(jpe?g|png|gif|svg)$/i, loader: "null" },
-                    { test: /\.css$/, loader: "null" },
-                    { test: /\.scss$/, loader: "null" }
+                    { test: /\.(css|sass|scss|less)$/i, loader: "null" },
                 ]
             },
             resolve: {
-                modulesDirectories: [__dirname, "components", "node_modules"],
+                modulesDirectories: [__dirname, "node_modules"],
                 extensions: ["", ".js"],
                 root: __dirname
             }
