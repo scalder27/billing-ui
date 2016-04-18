@@ -20,8 +20,7 @@ module.exports = function (config) {
 
         // list of files to exclude
         exclude: [
-            "node_modules",
-            "bower_components"
+            "node_modules"
         ],
 
         // preprocess matching files before serving them to the browser
@@ -36,9 +35,7 @@ module.exports = function (config) {
                 loaders: [
                     { test: /\.jsx?$/,
                         include: [
-                            path.join(__dirname, "components"),
-                            /retail-ui/,
-                            /billing-ui/
+                            path.join(__dirname, "components")
                         ],
                         loader: "babel"
                     },
@@ -48,7 +45,7 @@ module.exports = function (config) {
                 ]
             },
             resolve: {
-                modulesDirectories: [__dirname, "components", "node_modules", "bower_components"],
+                modulesDirectories: [__dirname, "components", "node_modules"],
                 extensions: ["", ".js"],
                 root: __dirname
             }
