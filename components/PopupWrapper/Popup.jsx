@@ -16,7 +16,7 @@ class Popup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.shouldUpdate && this.removePopup();
+        nextProps.shouldUpdate && !nextProps.isActive && this.removePopup();
     }
 
     shouldComponentUpdate(nextProps) {
@@ -24,9 +24,14 @@ class Popup extends Component {
     }
 
     componentDidUpdate() {
-        const { shouldUpdate, updateWithoutClosing } = this.props;
+        const { shouldUpdate, updateWithoutClosing, isActive } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+
+            if(isActive) {
+                this.popupControl.show();
+            }
+
         } else if (updateWithoutClosing) {
             this.updatePopup();
         }
@@ -125,18 +130,24 @@ Popup.propTypes = {
     onOpen: PropTypes.func,
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
+
     // todo: попробовать сделать ресайз покрасивее при рефакторинге (выбор контейнера?)
+    // todo: deprecated!!! Кажется что обновление без закрытия должно работать и без внешнего контракта.
+    // todo: Т.е. нужно доточить реализацию Popup, перевести на react
     updateWithoutClosing: PropTypes.bool,
+
     getCloseLink: PropTypes.func,
     getOpenLink: PropTypes.func,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
-    width: PropTypes.number
+    width: PropTypes.number,
+    isActive: PropTypes.bool.isRequired
 };
 
 Popup.defaultProps = {
     shouldUpdate: true,
-    updateWithoutClosing: false
+    updateWithoutClosing: false,
+    isActive: false
 };
 
 export default Popup;
