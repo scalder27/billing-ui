@@ -9,7 +9,7 @@ class Actions extends Component {
     _closeLink = null;
 
     render () {
-        const { className, children, getBindItem, position, onOpen, onClose, show, ellipsisClassName } = this.props;
+        const { className, children, getBindItem, position, onOpen, onClose, isActive, ellipsisClassName } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
         const ellipsisClassNames = classnames(styles["close-link"], ellipsisClassName);
 
@@ -21,7 +21,7 @@ class Actions extends Component {
                    getCloseLink={() => this._closeLink}
                    onOpen={onOpen}
                    onClose={onClose}
-                   show={show}
+                   isActive={isActive}
             >
                 <span className={ellipsisClassNames} ref={node => this._closeLink = node}>
                     {SpecialCharacters.Ellipsis}
@@ -35,7 +35,7 @@ class Actions extends Component {
 Actions.propRypes = {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
-    show: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool.isRequired,
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
