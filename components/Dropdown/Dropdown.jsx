@@ -5,41 +5,7 @@ import Icon, { IconTypes } from "../Icon";
 import Option from "./Option.jsx";
 import dropdownStyles from "./Dropdown.scss";
 import classnames from "classnames";
-
-const getScrollTopMenu = (scrollTop, topOption, heightOption, heightMenu) => {
-    if (topOption - scrollTop < 0) {
-        return topOption;
-    }
-
-    if (topOption + heightOption - scrollTop > heightMenu) {
-        return topOption + heightOption - heightMenu;
-    }
-
-    return scrollTop;
-};
-
-const getSiblingOptions = (optionValues, activeOption) => {
-    const indexActiveOption = optionValues.indexOf(activeOption);
-    const lastIndex = optionValues.length - 1;
-
-    let previous = optionValues[indexActiveOption - 1];
-    if (indexActiveOption === -1 || indexActiveOption === 0) {
-        previous = optionValues[lastIndex]
-    }
-
-    let next = optionValues[indexActiveOption + 1];
-    if (indexActiveOption === -1 || indexActiveOption === lastIndex) {
-        next = optionValues[0]
-    }
-
-
-    return {
-        previous: previous,
-        next: next,
-        first: optionValues[0],
-        last: optionValues[lastIndex]
-    }
-};
+import { getScrollTopMenu, getSiblingOptions } from "./DropdownHelpers";
 
 class Dropdown extends Component {
     state = {
@@ -49,6 +15,7 @@ class Dropdown extends Component {
     _ignoreMouseOver = false;
     _optionsListNode = null;
     _ignoreTimeout = null;
+    _caption = "Выберите";
     _handleDocumentClick = this.handleDocumentClick.bind(this);
     _handleKeyDown = this.handleKeyDown.bind(this);
 
@@ -57,27 +24,12 @@ class Dropdown extends Component {
         events.addEventListener(document, "keydown", this._handleKeyDown);
     }
 
-    componentDidMount() {
-        this._initOptions();
+    componentWillUpdate(nextProps) {
+        this._initOptions({ ...nextProps });
     }
 
     componentDidUpdate() {
-        const { activeOption } = this.state;
-        this._initOptions();
-
-        clearTimeout(this._ignoreTimeout);
-        if (this._optionsListNode && activeOption) {
-            const activeOptionNode = ReactDOM.findDOMNode(this.refs[activeOption]);
-
-            this._optionsListNode.scrollTop = getScrollTopMenu(this._optionsListNode.scrollTop,
-                activeOptionNode.offsetTop,
-                activeOptionNode.offsetHeight,
-                this._optionsListNode.offsetHeight);
-
-            this._ignoreTimeout = setTimeout(() => {
-                this._ignoreMouseOver = false;
-            }, 200);
-        }
+        this.setScrollTop();
     }
 
     componentWillUnmount() {
@@ -94,23 +46,39 @@ class Dropdown extends Component {
         this.setState(newState);
     }
 
-    setValue(newValue, newCaption) {
+    setValue(newValue) {
         const { value, onSelect } = this.props;
         this.toggleOptions(false);
 
         if (newValue !== value && onSelect) {
-            onSelect(newValue, newCaption);
+            onSelect(newValue);
         }
     }
 
     toggleOptions(isOpened) {
-        const { disabled } = this.props;
-
-        if (!disabled) {
+        if (!this.props.disabled) {
             this.setState({
                 activeOption: null,
                 isOpened: isOpened
             })
+        }
+    }
+
+    setScrollTop() {
+        const { activeOption } = this.state;
+
+        clearTimeout(this._ignoreTimeout);
+        if (this._optionsListNode && activeOption) {
+            const activeOptionNode = ReactDOM.findDOMNode(this.refs[activeOption]);
+
+            this._optionsListNode.scrollTop = getScrollTopMenu(this._optionsListNode.scrollTop,
+                activeOptionNode.offsetTop,
+                activeOptionNode.offsetHeight,
+                this._optionsListNode.offsetHeight);
+
+            this._ignoreTimeout = setTimeout(() => {
+                this._ignoreMouseOver = false;
+            }, 200);
         }
     }
 
@@ -135,6 +103,7 @@ class Dropdown extends Component {
         }
 
         evt.stopPropagation();
+        evt.preventDefault();
         const siblingOptions = getSiblingOptions(this.optionValues, activeOption);
 
         switch (evt.keyCode) {
@@ -165,7 +134,7 @@ class Dropdown extends Component {
                 break;
             case KeyCodes.enter:
                 if (activeOption) {
-                    this.setValue(activeOption, this.optionCaptions[activeOption]);
+                    this.setValue(activeOption);
                 }
                 break;
         }
@@ -177,15 +146,17 @@ class Dropdown extends Component {
         }
     }
 
-    _initOptions() {
-        const { value, children } = this.props;
+    _initOptions({ value, children }) {
+        const options = children.filter(option => option.type === Option);
 
-        const availableOptions = children.filter(option => option.type === Option && !option.props.disabled && value !== option.props.value);
+        const availableOptions = options.filter(option => !option.props.disabled && value !== option.props.value);
         this.optionValues = availableOptions.map(option => option.props.value);
-        this.optionCaptions = availableOptions.reduce((result, option) => {
+
+        const optionCaptions = options.reduce((result, option) => {
             result[option.props.value] = option.props.caption;
             return result;
         }, {});
+        this._caption = value ? optionCaptions[value] : "Выберите";
     }
 
     getOptionsList() {
@@ -214,7 +185,7 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { value, caption, additionalData, width, disabled, styles, className } = this.props;
+        const { value, additionalData, width, disabled, styles, className } = this.props;
         const wrapperClassNames = classnames(styles.wrapper, className);
         const selectClassNames = classnames(styles.select, {
             [styles.disabled]: disabled,
@@ -225,7 +196,7 @@ class Dropdown extends Component {
             <div className={wrapperClassNames}>
                 <span className={selectClassNames} onClick={this.handleClick.bind(this)}>
                     <span className={styles["select-input"]} style={{"width": width}}>
-                        <span className={styles.caption}>{caption}</span>
+                        <span className={styles.caption}>{this._caption}</span>
                         <span className={styles["additional-text"]}>{additionalData}</span>
                     </span>
                     <Icon className={styles.icon} type={IconTypes.ArrowTriangleDown} />
@@ -240,7 +211,6 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.string,
-    caption: PropTypes.string.isRequired,
     additionalData: PropTypes.string,
     onSelect: PropTypes.func,
     disabled: PropTypes.bool,
@@ -249,8 +219,7 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-    styles: dropdownStyles,
-    caption: "Выберите"
+    styles: dropdownStyles
 };
 
 export default Dropdown;
