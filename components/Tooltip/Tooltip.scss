@@ -1,16 +1,20 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 @import "../../styles/placeholders";
 @import "./AnimationFadeIn";
 
 :local {
     .tooltip {
         position: absolute;
-        background: $bgWhiteColor;
-        padding: 10px 20px;
-        box-shadow: $elementBaseShadow;
-        border-radius: 1px;
-        visibility: hidden;
         z-index: 50;
+
+        padding: 10px 20px;
+
+        visibility: hidden;
+
+        border-radius: 1px;
+        background: $bgWhiteColor;
+        box-shadow: $elementBaseShadow;
+
         font-size: $fontSizeBig;
 
         & * {
@@ -23,16 +27,21 @@
 
         &.as-open {
             visibility: visible;
+
             animation-duration: 0.3s;
+
             animation-fill-mode: both;
         }
 
         &:before,
         &:after {
             content: "";
+
             position: absolute;
+
             width: 0;
             height: 0;
+
             border-style: solid;
             border-color: transparent;
         }
@@ -51,12 +60,14 @@
 
             &:before {
                 top: -8px;
+
                 border-bottom-width: 8px;
                 border-bottom-color: #dcdada;
             }
 
             &:after {
                 top: -7px;
+
                 border-bottom-width: 7px;
                 border-bottom-color: #fff;
             }
@@ -76,12 +87,14 @@
 
             &:before {
                 bottom: -8px;
+
                 border-top-width: 8px;
                 border-top-color: #dcdada;
             }
 
             &:after {
                 bottom: -7px;
+
                 border-top-width: 7px;
                 border-top-color: #fff;
             }
@@ -101,12 +114,14 @@
 
             &:before {
                 right: -8px;
+
                 border-left-width: 8px;
                 border-left-color: #dcdada;
             }
 
             &:after {
                 right: -7px;
+
                 border-left-width: 7px;
                 border-left-color: #fff;
             }
@@ -126,12 +141,14 @@
 
             &:before {
                 left: -8px;
+
                 border-right-width: 8px;
                 border-right-color: #dcdada;
             }
 
             &:after {
                 left: -7px;
+
                 border-right-width: 7px;
                 border-right-color: #fff;
             }
@@ -141,6 +158,7 @@
             &:before,
             &:after {
                 left: 50%;
+
                 margin-left: -7px;
             }
         }
@@ -149,6 +167,7 @@
             &:before,
             &:after {
                 top: 50%;
+
                 margin-top: -7px;
             }
         }

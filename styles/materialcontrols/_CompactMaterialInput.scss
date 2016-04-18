@@ -33,7 +33,8 @@
     .stylized-inputWrapper {
         position: relative;
 
-        &, .stylized-groupItem {
+        &,
+        .stylized-groupItem {
             box-sizing: border-box;
         }
 

@@ -30,7 +30,8 @@
         display: inline-block;
     }
 
-    &:disabled, &:disabled ~ %stylized-checkBox-label {
+    &:disabled,
+    &:disabled ~ %stylized-checkBox-label {
         opacity: 0.5;
 
         color: $textBaseColor;

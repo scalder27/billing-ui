@@ -1,10 +1,11 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 @import "../../styles/mixins/buttons";
 
 :local {
     .default {
-        @include stylized-button-base($bgButtonColor, $textBaseColor);
         $backgroundShadow: darken($bgButtonColor, 15%);
+
+        @include stylized-button-base($bgButtonColor, $textBaseColor);
 
         &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
@@ -16,8 +17,9 @@
     }
 
     .important {
-        @include stylized-button-base($bgImportantButtonColor, $textWhiteColor);
         $backgroundShadow: darken($bgImportantButtonColor, 15%);
+
+        @include stylized-button-base($bgImportantButtonColor, $textWhiteColor);
 
         &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
@@ -30,6 +32,7 @@
 
     .delete {
         $backgroundShadow: #9E4643;
+
         @include stylized-button-base($bgDeleteColor, $textWhiteColor, $backgroundShadow);
 
         &.size-small {

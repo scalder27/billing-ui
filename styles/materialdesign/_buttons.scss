@@ -1,7 +1,7 @@
 ﻿@import "../variables";
 @import "../mixins/buttons";
 $background: #ececec;
-$backgroundShadow: darken( $background, 15% );
+$backgroundShadow: darken($background, 15%);
 
 %stylized-button {
     @include stylized-button-base($background, $textBaseColor);
