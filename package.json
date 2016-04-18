@@ -3,14 +3,16 @@
   "version": "0.0.1",
   "description": "KonturBilling ui components",
   "private": true,
-  "scripts": {},
+  "scripts": {
+      "eslint": "eslint ./**/**.js* --cache"
+  },
   "repository": {
     "type": "git",
     "url": "git@git.skbkontur.ru:catalogue/retail-ui.git"
   },
   "authors": "KonturBilling",
   "devDependencies": {
-    "babel-eslint": ">= 5.0.0",
+    "babel-eslint": ">= 6.0.2",
     "babel-core": ">= 6.7.4",
     "babel-loader": ">= 6.2.4",
     "babel-plugin-add-module-exports": ">= 0.1.2",
@@ -21,10 +23,11 @@
     "babel-preset-react": ">= 6.5.0",
     "babel-preset-stage-0": ">= 6.5.0",
     "babel-runtime": ">= 6.6.1",
-    "eslint": "~1.9.0",
-    "eslint-config-airbnb": "~2.0.0",
-    "eslint-plugin-babel": "~2.1.1",
-    "eslint-plugin-react": "~3.8.0",
+    "eslint": ">= 2.7.0",
+    "eslint-plugin-babel": ">= 3.2.0",
+    "eslint-plugin-jsx-a11y": ">= 0.6.2",
+    "eslint-plugin-promise": ">= 1.1.0",
+    "eslint-plugin-react": ">= 4.3.0",
     "autoprefixer": "^6.3.3",
     "gulp": "^3.9.1",
     "gulp-bom": "^1.0.0",
