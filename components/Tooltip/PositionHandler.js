@@ -8,7 +8,7 @@ export const getPosition = (positionType, target, tooltip) => {
     const mainWrapper = document.getElementById("MainWrapper");
     const scrollTop = mainWrapper.scrollTop;
     const scrollLeft = mainWrapper.scrollLeft;
-    const [tooltipPos, arrowPos] =  positionType.split(" ");
+    const [tooltipPos, arrowPos] = positionType.split(" ");
 
     let top = 0;
     let left = 0;
@@ -59,7 +59,7 @@ export const getPosition = (positionType, target, tooltip) => {
 export const getPositionType = (positionType, target, tooltip) => {
     const positionTarget = target.getBoundingClientRect();
     const mainWrapper = document.getElementById("MainWrapper");
-    let [tooltipPos, arrowPos] =  positionType.split(" ");
+    let [tooltipPos, arrowPos] = positionType.split(" ");
 
     switch (tooltipPos) {
         case "bottom":

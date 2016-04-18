@@ -27,8 +27,8 @@ class ClipboardWrapper extends Component {
 
     _resolveCopyToClipboard() {
         copyToClipboardAvailableCheck
-            .then(() => {this.setState({copyToClipboardAvailable: true})})
-            .catch(() => {this.setState({copyToClipboardAvailable: false})});
+            .then(() => { this.setState({copyToClipboardAvailable: true}) })
+            .catch(() => { this.setState({copyToClipboardAvailable: false}) });
     }
 
     componentDidMount() {
