@@ -3,9 +3,9 @@ const ARROW_RIGHT_MARGIN = 20;
 const ARROW_LEFT_MARGIN = 25;
 const ARROW_VERTICAL_MARGIN = 15;
 
-export const getPosition = (positionType, target, tooltip) => {
+export const getPosition = (positionType, target, tooltip, wrapper) => {
     const positionTarget = target.getBoundingClientRect();
-    const mainWrapper = document.getElementById("MainWrapper");
+    const mainWrapper = wrapper || document.getElementById("MainWrapper");
     const scrollTop = mainWrapper.scrollTop;
     const scrollLeft = mainWrapper.scrollLeft;
     const [tooltipPos, arrowPos] =  positionType.split(" ");
@@ -56,9 +56,9 @@ export const getPosition = (positionType, target, tooltip) => {
     }
 };
 
-export const getPositionType = (positionType, target, tooltip) => {
+export const getPositionType = (positionType, target, tooltip, wrapper) => {
     const positionTarget = target.getBoundingClientRect();
-    const mainWrapper = document.getElementById("MainWrapper");
+    const mainWrapper = wrapper || document.getElementById("MainWrapper");
     let [tooltipPos, arrowPos] =  positionType.split(" ");
 
     switch (tooltipPos) {
