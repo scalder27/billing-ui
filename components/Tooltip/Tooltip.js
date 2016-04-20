@@ -1,4 +1,4 @@
-import events from 'add-event-listener';
+import events from "add-event-listener";
 import {getPosition, getPositionType} from "./PositionHandler";
 import classnames from "classnames";
 import PositionType from "./PositionType";
@@ -42,13 +42,13 @@ class TooltipControl {
     }
 
     remove() {
-        events.removeEventListener(this._target, 'mouseover', this._toggleTooltip);
-        events.removeEventListener(this._target, 'mouseleave', this._toggleTooltip);
-        events.removeEventListener(this._target, 'click', this._toggleTooltip);
-        events.removeEventListener(this._target, 'focus', this._toggleTooltip);
+        events.removeEventListener(this._target, "mouseover", this._toggleTooltip);
+        events.removeEventListener(this._target, "mouseleave", this._toggleTooltip);
+        events.removeEventListener(this._target, "click", this._toggleTooltip);
+        events.removeEventListener(this._target, "focus", this._toggleTooltip);
 
-        events.removeEventListener(window, 'resize', this.redraw.bind(this));
-        events.removeEventListener(this._mainWrapper, 'scroll', this.redraw.bind(this));
+        events.removeEventListener(window, "resize", this.redraw.bind(this));
+        events.removeEventListener(this._mainWrapper, "scroll", this.redraw.bind(this));
 
         this._tooltip.remove();
         this._tooltip = null;
@@ -105,7 +105,7 @@ class TooltipControl {
         const tooltipItemHtml = document.createElement("div");
         this._positionType = getPositionType(positionType, this._target, tooltipItemHtml);
         const [tooltipPos, arrowPos] = this._positionType.split(" ");
-        tooltipItemHtml.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
+        tooltipItemHtml.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`], {
             [styles["as-open"]]: isOpen
         });
 
@@ -128,7 +128,7 @@ class TooltipControl {
         this._isOpen = show;
 
         const [tooltipPos, arrowPos] = this._positionType.split(" ");
-        this._tooltip.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`],{
+        this._tooltip.className = classnames(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`], {
             [styles["as-open"]]: show
         });
     }

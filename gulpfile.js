@@ -3,6 +3,7 @@
 const postcssScss = require("postcss-scss");
 const postcssSorting = require("postcss-sorting");
 const autoprefixer = require("autoprefixer");
+const perfectionist = require("perfectionist");
 const gulp = require("gulp");
 const plugins = require("gulp-load-plugins")({
     pattern: ["gulp-*", "gulp.*"],
@@ -15,6 +16,16 @@ gulp.task("sass:comb", function() {
     return gulp.src("**/*.{scss, sass}")
         .pipe(plugins.postcss([
             autoprefixer({ add: false, browsers: [] }),
+            perfectionist({
+                cascade: true,
+                format: "expanded",
+                indentSize: 4,
+                maxAtRuleLength: 80,
+                maxSelectorLength: 5,
+                maxValueLength: 80,
+                sourcemap: false,
+                syntax: "scss"
+            }),
             postcssSorting({
                 "sort-order": sortOrder,
                 "empty-lines-between-children-rules": 1

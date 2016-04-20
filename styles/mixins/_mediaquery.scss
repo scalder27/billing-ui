@@ -1,5 +1,5 @@
 ﻿@mixin windowLessOrEqual($width: 1248px, $needIeFallback: false) {
-    @if($needIeFallback){
+    @if ($needIeFallback) {
         // todo: only for IE8 support; kill after IE8 dies; JS as well
         .windowLessOrEqual#{$width} & {
             @content;

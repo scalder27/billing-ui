@@ -28,7 +28,7 @@ class Popup extends Component {
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
 
-            if(isActive) {
+            if (isActive) {
                 this.popupControl.show();
             }
 
@@ -101,7 +101,7 @@ class Popup extends Component {
             this.popupControl.onHide(() => onClose());
         }
 
-        if(onOpen) {
+        if (onOpen) {
             this.popupControl.onShow(() => onOpen());
         }
     }

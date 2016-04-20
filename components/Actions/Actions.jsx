@@ -8,7 +8,7 @@ import classnames from "classnames";
 class Actions extends Component {
     _closeLink = null;
 
-    render () {
+    render() {
         const { className, children, getBindItem, position, onOpen, onClose, isActive, ellipsisClassName } = this.props;
         const classNamesPopup = classnames(styles.popup, className);
         const ellipsisClassNames = classnames(styles["close-link"], ellipsisClassName);
