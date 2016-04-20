@@ -1,1 +1,2 @@
-export { default as default } from "./ClipboardWrapper.jsx";
+import ClipboardWrapper from "./ClipboardWrapper.jsx";
+export default ClipboardWrapper;

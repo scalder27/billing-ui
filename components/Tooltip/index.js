@@ -1,3 +1,7 @@
-export {default as TriggerTypes } from "./TriggerType";
-export {default as PositionTypes } from "./PositionType";
-export {default as default } from "./Tooltip.jsx";
+import TriggerTypes  from "./TriggerType";
+import PositionTypes  from "./PositionType";
+import Tooltip from "./Tooltip.jsx";
+
+export { TriggerTypes as TriggerTypes };
+export { PositionTypes as PositionTypes };
+export default Tooltip;

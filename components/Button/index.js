@@ -1,4 +1,9 @@
-export {default as ButtonType } from "./ButtonType";
-export {default as AppearanceType } from "./AppearanceType";
-export {default as ButtonSize } from "./ButtonSize";
-export {default as default } from "./Button.jsx";
+import ButtonType from "./ButtonType";
+import AppearanceType from "./AppearanceType";
+import ButtonSize from "./ButtonSize";
+import Button from "./Button.jsx";
+
+export { ButtonType as ButtonType };
+export { AppearanceType as AppearanceType };
+export { ButtonSize as ButtonSize };
+export default Button;
