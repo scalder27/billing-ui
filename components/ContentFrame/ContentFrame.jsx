@@ -8,7 +8,7 @@ class ContentFrame extends Component {
 
         return (
             <div className={styles.frame}>
-                <a href={closeUrl} className={styles.close} />
+                {closeUrl && <a href={closeUrl} className={styles.close} />}
                 {this.props.children}
             </div>
         );
@@ -16,7 +16,7 @@ class ContentFrame extends Component {
 }
 
 ContentFrame.propTypes = {
-    closeUrl: PropTypes.string.isRequired
+    closeUrl: PropTypes.string
 };
 
 export default ContentFrame;
