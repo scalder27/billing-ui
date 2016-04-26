@@ -1,11 +1,26 @@
 import { Component, PropTypes } from "react";
 import Input from "./TextInput";
+import Clear from "./Clear";
+
 import textInputStyles from "./CompactTextInput.scss";
 import classnames from "classnames";
 
 class CompactTextInput extends Component {
+    change(value, evt) {
+        const { onChange } = this.props;
+
+        if (onChange) {
+            onChange(value || "", evt);
+        }
+    }
+
+    clear(evt) {
+        this.input.focus();
+        this.change("", evt);
+    }
+
     render() {
-        const { styles, wrapperClassName, labelClassName, placeholder, value, ...inputProps } = this.props;
+        const { styles, wrapperClassName, labelClassName, placeholder, value, clearable, width, ...inputProps } = this.props;
 
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const labelClassNames = classnames(styles.label, labelClassName, {
@@ -13,10 +28,15 @@ class CompactTextInput extends Component {
         });
 
         return (
-            <div className={wrapperClassNames}>
-                <Input {...inputProps} value={value} styles={styles} />
+            <div className={wrapperClassNames} style={{"width": width}}>
+                <Input {...inputProps} value={value} styles={styles} width={width}
+                    onChange={(evt) => this.change(evt.target.value, evt)}
+                    ref={(el) => {
+                        this.input = ReactDOM.findDOMNode(el);
+                    }} />
                 <span className={styles.highlight}></span>
                 <span className={labelClassNames}>{placeholder}</span>
+                {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
             </div>
         );
     }
@@ -27,6 +47,7 @@ CompactTextInput.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     value: PropTypes.string,
@@ -44,7 +65,8 @@ CompactTextInput.propTypes = {
 };
 
 CompactTextInput.defaultProps = {
-    styles: textInputStyles
+    styles: textInputStyles,
+    clearable: false
 };
 
 export default CompactTextInput;

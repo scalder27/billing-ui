@@ -1,6 +1,6 @@
-@import "../../scss_settings/variables";
-@import "../../scss_settings/placeholders";
-@import "../../scss_settings/materialdesign";
+@import "../../styles/variables";
+@import "../../styles/placeholders";
+@import "../../styles/materialdesign";
 @import "./AnimationHighlighter";
 
 :local {
@@ -93,6 +93,21 @@
         opacity: 0.5;
         pointer-events: none;
         box-sizing: border-box;
+    }
+
+    .clear {
+        position: absolute;
+        top: 50%;
+        right: 1px;
+        margin-top: -6px;
+        font-size: $fontSizeBig;
+        color: $textSecondaryColor;
+        cursor: pointer;
+        z-index: 21;
+
+        &:hover {
+            color: $textErrorColor;
+        }
     }
 }
 

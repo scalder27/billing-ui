@@ -20,6 +20,7 @@ TextInputWrapper.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     value: PropTypes.string,
@@ -44,7 +45,7 @@ TextInputWrapper.defaultProps = {
     inputClassName: "",
     labelClassName: "",
     placeholderClassName: "",
-    width: "auto",
+    width: 180,
     isValid: true,
     type: TextInputType.default
 };

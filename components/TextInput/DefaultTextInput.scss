@@ -1,6 +1,6 @@
-@import "../../scss_settings/variables";
-@import "../../scss_settings/placeholders";
-@import "../../scss_settings/materialdesign";
+@import "../../styles/variables";
+@import "../../styles/placeholders";
+@import "../../styles/materialdesign";
 
 :local {
     .wrapper {
@@ -34,5 +34,20 @@
 
     .placeholder {
         color: $textSecondaryColor;
+    }
+
+    .clear {
+        position: absolute;
+        top: 50%;
+        right: 6px;
+        margin-top: -6px;
+        font-size: $fontSizeBig;
+        color: $textSecondaryColor;
+        cursor: pointer;
+        z-index: 21;
+
+        &:hover {
+            color: $textErrorColor;
+        }
     }
 }
