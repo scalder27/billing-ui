@@ -10,7 +10,7 @@ class ClipboardWrapper extends Component {
     state = {copyToClipboardAvailable: false};
 
     _reinitClipboard() {
-        const { value } = this.props;
+        const { value, onSuccess, onError } = this.props;
         const { copyToClipboardAvailable } = this.state;
 
         if (copyToClipboardAvailable) {
@@ -18,6 +18,18 @@ class ClipboardWrapper extends Component {
             this._clipboard = new Clipboard(this._clipboardTarget, {
                 text: () => value
             });
+
+            if (onSuccess) {
+                this._clipboard.on("success", e => {
+                    onSuccess(e);
+                });
+            }
+
+            if (onError) {
+                this._clipboard.on("error", e => {
+                    onError(e);
+                });
+            }
         }
     }
 
@@ -61,7 +73,9 @@ class ClipboardWrapper extends Component {
 
 ClipboardWrapper.propTypes = {
     value: PropTypes.string.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onSuccess: PropTypes.func,
+    onError: PropTypes.func
 };
 
 export default ClipboardWrapper;
