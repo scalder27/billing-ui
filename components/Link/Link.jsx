@@ -3,27 +3,20 @@ import classnames from "classnames";
 
 import styles from "./Link.scss";
 
-class Link extends Component {
-    render() {
-        const {href, children, className} = this.props;
-
-        if (href !== undefined) {
-            return (<a {...this.props}>{children}</a>);
-        }
-        else {
-            return (
-                <span {...this.props} className={classnames(className, styles.link)} >
-                    {children}
-                </span>
-            );
-        }
+const Link = (props) => {
+    const {href, children, className} = props;
+    if (href) {
+        return (
+            <a {...props}>
+                {children}
+            </a>);
     }
-}
 
-Link.propTypes = {
-    href: PropTypes.string,
-    target: PropTypes.string,
-    className: PropTypes.string
-}
+    return (
+        <span {...props} className={classnames(className, styles.link)}>
+            {children}
+        </span>
+    )
+};
 
 export default Link;
