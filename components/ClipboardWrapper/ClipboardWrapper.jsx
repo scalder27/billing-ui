@@ -1,9 +1,14 @@
-import { Component, PropTypes } from "react";
-import Clipboard from "clipboard";
-
+import { Component, PropTypes, cloneElement } from "react";
 import { copyCommandSupportChecker } from "../../helpers/QueryCommandSupportChecker";
 
+let Clipboard = (props) => cloneElement(props.children);
 const copyToClipboardAvailableCheck = copyCommandSupportChecker();
+
+copyToClipboardAvailableCheck.then(() => require.ensure([], function(require) {
+    try {
+        Clipboard = require("clipboard");
+    } catch(e) {}
+}));
 
 class ClipboardWrapper extends Component {
     _clipboardTarget = null;
