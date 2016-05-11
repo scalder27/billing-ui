@@ -19,7 +19,7 @@ class Button extends Component {
             });
 
         if (href) {
-            return <Link href={href} className={classNames} target={target}>{children}</Link>;
+            return <Link onClick={onClick} href={href} className={classNames} target={target}>{children}</Link>;
         }
 
         if (type) {
