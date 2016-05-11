@@ -1,9 +1,2 @@
-import axios from "axios";
-
-const axiosInstance = axios.create({
-    headers: {
-        "X-Requested-With": "XMLHttpRequest"
-    }
-});
-
+import axiosInstance from "./../libs/axios";
 export default axiosInstance;
