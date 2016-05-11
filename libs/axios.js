@@ -5,5 +5,5 @@ const axiosInstance = axios.create({
     params: { _: +new Date() }
 });
 
-return axiosInstance;
+export default axiosInstance;
 
