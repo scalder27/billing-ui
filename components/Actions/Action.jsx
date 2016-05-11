@@ -18,11 +18,11 @@ class Action extends Component {
     }
 
     getActionAsLink() {
-        const { className, iconType, description, href, target } = this.props;
+        const { className, iconType, description, href, target, onClick } = this.props;
         const actionClassNames = classnames(styles.action, className);
 
         return (
-            <Link className={actionClassNames} href={href} target={target}>
+            <Link className={actionClassNames} href={href} target={target} onClick={() => onClick()}>
                 <Icon className={styles.icon} type={iconType} />
                 <span className={styles.description}>{description}</span>
             </Link>
