@@ -1,0 +1,44 @@
+@import "../mixins/popup.scss";
+
+%popup {
+    @include popup-wrapper;
+}
+
+%popup-arrow-top {
+    @extend %popup;
+    @include popup-arrow();
+}
+
+%popup-arrow-top-left {
+    @extend %popup;
+    @include popup-arrow();
+}
+
+%popup-arrow-top-center {
+    @extend %popup;
+    @include popup-arrow(top-center);
+}
+
+%popup-arrow-top-right {
+    @extend %popup;
+    @include popup-arrow(top-right);
+}
+
+%popup-arrow-left {
+    @extend %popup;
+    @include popup-arrow(left-top);
+}
+
+%popup-arrow-left-top {
+    @extend %popup;
+    @include popup-arrow(left-top);
+}
+
+%popup-arrow-left-center {
+    @extend %popup;
+    @include popup-arrow(left-center);
+}
+
+%popup__close {
+    @include popup-close();
+}

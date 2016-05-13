@@ -1,0 +1,94 @@
+@import "../variables";
+
+// arrow
+$arrow-border-width: 7px;
+$arrow-edge-position: 12px;
+
+// popup padding
+$popup-top-padding: 15px;
+$popup-bottom-padding: 15px;
+$popup-left-padding: 22px;
+$popup-rigt-padding: 10px;
+
+// popup close
+$popup-close-top: 5px;
+$popup-close-right: 15px;
+
+@mixin popup-wrapper {
+    padding: $popup-top-padding $popup-rigt-padding $popup-bottom-padding $popup-left-padding;
+
+    border: 1px solid $borderDarkColor;
+    border-radius: 3px;
+    background: $bgBaseColor;
+    box-shadow: 0 0 8px 4px $shadowBaseColor;
+}
+
+@mixin popup-arrow($arrow: top-left) {
+    &:before,
+    &:after {
+        @if $arrow == top-left {
+            left: $arrow-edge-position;
+        }
+        @else if $arrow == top-center {
+            left: 50%;
+
+            margin-left: -$arrow-border-width;
+        }
+        @else if $arrow == top-right {
+            right: $arrow-edge-position;
+        }
+        @else if $arrow == left-top {
+            top: $arrow-edge-position;
+        }
+        @else if $arrow == left-center {
+            top: 50%;
+
+            margin-top: -$arrow-border-width;
+        }
+
+        content: "";
+
+        position: absolute;
+
+        border: $arrow-border-width solid transparent;
+    }
+
+    &:before {
+        @if $arrow == top-left or $arrow == top-center or $arrow == top-right {
+            top: -($arrow-border-width * 2);
+
+            border-bottom-color: $borderDarkColor;
+        }
+        @else if $arrow == left-top or $arrow == left-center {
+            left: -($arrow-border-width * 2);
+
+            border-right-color: $borderDarkColor;
+        }
+    }
+
+    &:after {
+        @if $arrow == top-left or $arrow == top-center or $arrow == top-right {
+            top: -($arrow-border-width * 2 - 1);
+
+            border-bottom-color: $borderWhiteColor;
+        }
+        @else if $arrow == left-top or $arrow == left-center {
+            left: -($arrow-border-width * 2 - 1);
+
+            border-right-color: $borderWhiteColor;
+        }
+    }
+}
+
+@mixin popup-close {
+    position: absolute;
+    top: $popup-close-top;
+    right: $popup-close-right;
+
+    font-size: $fontSizeRegularTitle;
+    color: $textSecondaryColor;
+
+    &:hover {
+        color: $textDarkColor;
+    }
+}
