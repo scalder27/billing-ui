@@ -44,12 +44,12 @@
 
     &:hover,
     &:active,
-    &.as-active,
-    &:focus {
+    &:focus,
+    &.as-active {
         color: $color;
     }
 
-    &:disabled,
+    &.disabled,
     &.button-disabled,
     &.button-disabled:hover {
         top: 0;
@@ -88,7 +88,9 @@
         width: 0;
         height: 4px;
 
-        animation: showLoader .8s linear infinite;
+        :global {
+            animation: showLoader .8s linear infinite;
+        }
 
         border-bottom-right-radius: 2px;
         border-bottom-left-radius: 2px;
@@ -96,12 +98,14 @@
     }
 }
 
-@keyframes showLoader {
-    0% {
-        width: 0;
-    }
+:global {
+    @keyframes showLoader {
+        0% {
+            width: 0;
+        }
 
-    100% {
-        width: 100%;
+        100% {
+            width: 100%;
+        }
     }
 }

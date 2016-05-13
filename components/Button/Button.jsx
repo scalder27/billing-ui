@@ -14,8 +14,8 @@ class Button extends Component {
             className,
             styles[AppearanceType[appearance]],
             styles["size-" + ButtonSize[size]], {
-                "disabled": disabled,
-                "as-active": !disabled && active
+                [styles.disabled]: disabled,
+                [styles["as-active"]]: !disabled && active
             });
 
         if (href) {
