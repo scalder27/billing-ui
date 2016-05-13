@@ -67,7 +67,7 @@
         "react-dom": ">= 0.14.6 < 0.15",
         "classnames": "~2.2.3",
         "add-event-listener": "^0.0.1",
-        "react-input-mask": "^0.6.4"
+        "react-input-mask": "^0.6.4",
         "react-router-redux": "^4.0.4",
         "axios": "^0.8.1",
         "moment": "^2.12.0",
