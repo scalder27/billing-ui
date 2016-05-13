@@ -27,13 +27,12 @@ class Popup extends Component {
         const { shouldUpdate, updateWithoutClosing, isActive } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
-
-            if (isActive) {
-                this.popupControl.show();
-            }
-
         } else if (updateWithoutClosing) {
             this.updatePopup();
+        }
+        
+        if (isActive) {
+            this.popupControl.show();
         }
     }
 
