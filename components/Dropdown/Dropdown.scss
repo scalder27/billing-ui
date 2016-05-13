@@ -1,0 +1,81 @@
+@import "../../scss_settings/variables";
+@import "../../scss_settings/placeholders";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+
+        margin: 30px;
+        position: relative;
+    }
+
+    .select {
+        @extend %as-inline-block;
+
+        padding: 5px 3px 0px;
+        border-bottom: 1px solid $borderBaseColor;
+
+        overflow: hidden;
+        cursor: pointer;
+        line-height: $lineHeightRegular;
+
+        &.disabled {
+            color: $textInactiveColor;
+            border-bottom: 1px dashed $borderBaseColor;
+
+            cursor: default;
+        }
+
+        &.inactive {
+            color: $textInactiveColor;
+        }
+    }
+
+    .select-input {
+        @extend %as-inline-block;
+        margin-right: 10px;
+    }
+
+    .caption {
+        @extend %as-inline-block;
+        max-width: 100%;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .additional-text {
+        @extend %as-inline-block;
+
+        float: right;
+        margin: 0 -5px 0 10px;
+        color: $textSecondaryColor;
+    }
+
+    .icon {
+        @extend %as-inline-block;
+        float: right;
+
+        color: $textSecondaryColor;
+    }
+
+    .options {
+        position: absolute;
+        min-width: 50px;
+        max-height: 300px;
+        top: -6px;
+        left: -13px;
+        right: -5px;
+
+        overflow: hidden;
+        overflow-y: auto;
+
+        background: $bgWhiteColor;
+        border: 1px solid #cfccc6;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .3);
+
+        z-index: $popupZIndex;
+    }
+}
