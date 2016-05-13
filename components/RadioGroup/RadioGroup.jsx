@@ -1,5 +1,5 @@
 import { Component, PropTypes, Children, cloneElement } from "react";
-import { customChildrenPropTypes } from "../../common_scripts/ComponentPropTypesHelper";
+import { customChildrenPropTypes } from "./../../helpers/ComponentPropTypesHelper";
 import RadioButton from "../RadioButton";
 import radioGroupStyles from "./RadioGroup.scss";
 import classnames from "classnames";
