@@ -9,9 +9,13 @@ class Popup extends Component {
     _popupItemHtml = null;
 
     componentDidMount() {
-        const { shouldUpdate } = this.props;
+        const { shouldUpdate, isActive } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+
+            if (isActive) {
+                this.popupControl.show();
+            }
         }
     }
 
