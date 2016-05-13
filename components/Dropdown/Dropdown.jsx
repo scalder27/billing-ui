@@ -1,7 +1,7 @@
 import { Component, PropTypes, Children, cloneElement } from "react";
 import events from "add-event-listener";
-import KeyCodes from "../../common_scripts/KeyCodes";
-import Icon, { IconTypes } from "../Icon";
+import KeyCodes from "./../../helpers/KeyCodes";
+import Icon, { IconTypes } from "./../Icon";
 import Option from "./Option.jsx";
 import dropdownStyles from "./Dropdown.scss";
 import classnames from "classnames";
@@ -15,9 +15,15 @@ class Dropdown extends Component {
     _ignoreMouseOver = false;
     _optionsListNode = null;
     _ignoreTimeout = null;
-    _caption = "Выберите";
     _handleDocumentClick = this.handleDocumentClick.bind(this);
     _handleKeyDown = this.handleKeyDown.bind(this);
+
+    constructor(props) {
+        const { defaultCaption } = props;
+
+        super(props);
+        this._caption = defaultCaption;
+    }
 
     componentWillMount() {
         events.addEventListener(document, "click", this._handleDocumentClick);
@@ -146,8 +152,8 @@ class Dropdown extends Component {
         }
     }
 
-    _initOptions({ value, children }) {
-        const options = children.filter(option => option.type === Option);
+    _initOptions({ value, children, defaultCaption }) {
+        const options = Children.toArray(children).filter(option => option.type === Option);
 
         const availableOptions = options.filter(option => !option.props.disabled && value !== option.props.value);
         this.optionValues = availableOptions.map(option => option.props.value);
@@ -156,7 +162,8 @@ class Dropdown extends Component {
             result[option.props.value] = option.props.caption;
             return result;
         }, {});
-        this._caption = value ? optionCaptions[value] : "Выберите";
+
+        this._caption = value ? optionCaptions[value] : defaultCaption;
     }
 
     getOptionsList() {
@@ -165,7 +172,7 @@ class Dropdown extends Component {
         const options = Children.map(children, option => {
             if (option.type === Option) {
                 return cloneElement(option, {
-                        key: option.props.value,
+                        key: option.props.key || option.props.value,
                         isSelected: value === option.props.value,
                         isActive: this.state.activeOption === option.props.value,
                         ref: option.props.value,
@@ -177,11 +184,15 @@ class Dropdown extends Component {
             return option;
         });
 
-        return (
-            <div className={styles.options} ref={node => this._optionsListNode = node}>
-                {options}
-            </div>
-        )
+        if(options) {
+            return (
+                <div className={styles.options} ref={node => this._optionsListNode = node}>
+                    {options}
+                </div>
+            )
+        }
+
+        return null;
     }
 
     render() {
@@ -211,15 +222,18 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.string,
+    defaultCaption: PropTypes.string,
     additionalData: PropTypes.string,
     onSelect: PropTypes.func,
     disabled: PropTypes.bool,
     className: PropTypes.string,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    children: PropTypes.node.isRequired
 };
 
 Dropdown.defaultProps = {
-    styles: dropdownStyles
+    styles: dropdownStyles,
+    defaultCaption: "Выберите"
 };
 
 export default Dropdown;
