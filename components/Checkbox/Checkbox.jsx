@@ -18,7 +18,7 @@ class Checkbox extends Component {
                 <input {...checkboxProps}
                     checked={checked}
                     disabled={disabled}
-                    readonly={readonly}
+                    readOnly={readonly}
                     className={checkboxClassNames}
                     type="checkbox"
                     onChange={onChange}/>
@@ -34,7 +34,7 @@ Checkbox.propTypes = {
     onChange: PropTypes.func,
     checked: PropTypes.bool.isRequired,
     disabled: PropTypes.bool.isRequired,
-    readonly: PropTypes.bool,
+    readonly: PropTypes.bool.isRequired,
     labelClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     checkboxClassName: PropTypes.string,
@@ -48,6 +48,7 @@ Checkbox.defaultProps = {
     checkboxClassName: "",
     checked: false,
     disabled: false,
+    readonly: false,
     styles: checkboxStyles
 };
 
