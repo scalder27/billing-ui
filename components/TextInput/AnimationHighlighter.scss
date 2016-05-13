@@ -1,0 +1,19 @@
+@keyframes inputHighlighter {
+    from {
+        background: #5264ae;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputErrorHighlighter {
+    from {
+        background: #d92b2b;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}

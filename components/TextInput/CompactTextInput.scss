@@ -1,0 +1,113 @@
+@import "../../styles/variables";
+@import "../../styles/placeholders";
+@import "../../styles/materialdesign";
+@import "./AnimationHighlighter";
+
+:local {
+    %filled-text {
+        top: -12px;
+        font-size: $fontSizeRegular;
+    }
+
+    %no-filled-text {
+        top: 9px;
+        font-size: $fontSizeBig;
+    }
+
+    .wrapper {
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    input[type="text"].input,
+    .input {
+        @extend %material-input;
+
+        display: block;
+        width: 100%;
+        padding: 5px 3px 3px;
+        font-size: $fontSizeBig;
+        box-sizing: border-box;
+
+        &:focus {
+            & ~ .label {
+                @extend %filled-text;
+            }
+
+            & ~ .highlight {
+                :global {
+                    animation: inputHighlighter 0.3s ease;
+                }
+            }
+
+            &.input-validation-error ~ .highlight {
+                :global {
+                    animation-name: inputErrorHighlighter;
+                }
+            }
+        }
+
+        &[readonly],
+        &[readonly]:focus,
+        &[disabled],
+        &[disabled]:focus {
+            & ~ .label {
+                @extend %no-filled-text;
+
+                &.filled {
+                    @extend %filled-text;
+                }
+            }
+
+            & ~ .highlight {
+                :global {
+                    animation: none;
+                }
+            }
+        }
+    }
+
+    .label {
+        @extend %no-filled-text;
+
+        position: absolute;
+        left: 3px;
+        transition: 0.2s ease all;
+        color: $textSecondaryColor;
+        font-weight: normal;
+        cursor: text;
+        pointer-events: none;
+        box-sizing: border-box;
+
+        &.filled {
+            @extend %filled-text;
+        }
+    }
+
+    .highlight {
+        position: absolute;
+        top: 25%;
+        left: 0;
+        width: 100px;
+        height: 50%;
+        opacity: 0.5;
+        pointer-events: none;
+        box-sizing: border-box;
+    }
+
+    .clear {
+        position: absolute;
+        top: 50%;
+        right: 1px;
+        margin-top: -6px;
+        font-size: $fontSizeBig;
+        color: $textSecondaryColor;
+        cursor: pointer;
+        z-index: 21;
+
+        &:hover {
+            color: $textErrorColor;
+        }
+    }
+}
+

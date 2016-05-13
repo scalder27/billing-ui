@@ -1,0 +1,53 @@
+@import "../../styles/variables";
+@import "../../styles/placeholders";
+@import "../../styles/materialdesign";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+
+        position: relative;
+        font-size: $fontSizeBig;
+    }
+
+    .input {
+        @extend %as-inline-block;
+        @extend %material-input;
+
+        height: 30px;
+        box-sizing: border-box;
+        padding: 4px 3px;
+        z-index: 20;
+    }
+
+    .placeholder-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 30px;
+        padding: 0 4px;
+
+        &.as-hidden {
+            display: none;
+        }
+    }
+
+    .placeholder {
+        color: $textSecondaryColor;
+    }
+
+    .clear {
+        position: absolute;
+        top: 50%;
+        right: 6px;
+        margin-top: -6px;
+        font-size: $fontSizeBig;
+        color: $textSecondaryColor;
+        cursor: pointer;
+        z-index: 21;
+
+        &:hover {
+            color: $textErrorColor;
+        }
+    }
+}
