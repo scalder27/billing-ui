@@ -1,0 +1,8 @@
+@import "../../scss_settings/_placeholders.scss";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+        position: relative;
+    }
+}
