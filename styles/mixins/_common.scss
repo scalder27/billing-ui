@@ -3,6 +3,10 @@
 @mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
     position: relative;
 
+    overflow: hidden;
+
+    white-space: nowrap;
+
     &:after {
         content: "";
 
