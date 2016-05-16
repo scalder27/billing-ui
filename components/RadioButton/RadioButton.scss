@@ -1,9 +1,10 @@
-@import "./../../styles/_materialdesign.scss";
+﻿@import "./../../styles/_materialdesign.scss";
 @import "./../../styles/_placeholders.scss";
 
 :local {
     .wrapper {
         @extend %as-inline-block;
+
         position: relative;
     }
 

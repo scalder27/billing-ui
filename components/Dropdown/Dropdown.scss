@@ -1,27 +1,32 @@
-@import "./../../styles/variables";
+﻿@import "./../../styles/variables";
 @import "./../../styles/placeholders";
 
 :local {
     .wrapper {
         @extend %as-inline-block;
 
-        margin: 30px;
         position: relative;
+
+        margin: 30px;
     }
 
     .select {
         @extend %as-inline-block;
 
         padding: 5px 3px 0px;
-        border-bottom: 1px solid $borderBaseColor;
 
         overflow: hidden;
-        cursor: pointer;
+
+        border-bottom: 1px solid $borderBaseColor;
+
         line-height: $lineHeightRegular;
 
+        cursor: pointer;
+
         &.disabled {
-            color: $textInactiveColor;
             border-bottom: 1px dashed $borderBaseColor;
+
+            color: $textInactiveColor;
 
             cursor: default;
         }
@@ -33,11 +38,13 @@
 
     .select-input {
         @extend %as-inline-block;
+
         margin-right: 10px;
     }
 
     .caption {
         @extend %as-inline-block;
+
         max-width: 100%;
 
         overflow: hidden;
@@ -51,11 +58,13 @@
 
         float: right;
         margin: 0 -5px 0 10px;
+
         color: $textSecondaryColor;
     }
 
     .icon {
         @extend %as-inline-block;
+
         float: right;
 
         color: $textSecondaryColor;
@@ -63,19 +72,19 @@
 
     .options {
         position: absolute;
+        z-index: $popupZIndex;
+        top: -6px;
+        right: -5px;
+        left: -13px;
+
         min-width: 50px;
         max-height: 300px;
-        top: -6px;
-        left: -13px;
-        right: -5px;
 
         overflow: hidden;
         overflow-y: auto;
 
-        background: $bgWhiteColor;
         border: 1px solid #cfccc6;
+        background: $bgWhiteColor;
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .3);
-
-        z-index: $popupZIndex;
     }
 }

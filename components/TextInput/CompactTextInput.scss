@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 @import "../../styles/placeholders";
 @import "../../styles/materialdesign";
 @import "./AnimationHighlighter";
@@ -6,16 +6,19 @@
 :local {
     %filled-text {
         top: -12px;
+
         font-size: $fontSizeRegular;
     }
 
     %no-filled-text {
         top: 9px;
+
         font-size: $fontSizeBig;
     }
 
     .wrapper {
         position: relative;
+
         box-sizing: border-box;
     }
 
@@ -26,8 +29,9 @@
         display: block;
         width: 100%;
         padding: 5px 3px 3px;
-        font-size: $fontSizeBig;
         box-sizing: border-box;
+
+        font-size: $fontSizeBig;
 
         &:focus {
             & ~ .label {
@@ -72,12 +76,16 @@
 
         position: absolute;
         left: 3px;
+
+        box-sizing: border-box;
+
         transition: 0.2s ease all;
+
         color: $textSecondaryColor;
         font-weight: normal;
+
         cursor: text;
         pointer-events: none;
-        box-sizing: border-box;
 
         &.filled {
             @extend %filled-text;
@@ -88,26 +96,31 @@
         position: absolute;
         top: 25%;
         left: 0;
+
         width: 100px;
         height: 50%;
-        opacity: 0.5;
-        pointer-events: none;
         box-sizing: border-box;
+
+        opacity: 0.5;
+
+        pointer-events: none;
     }
 
     .clear {
         position: absolute;
+        z-index: 21;
         top: 50%;
         right: 1px;
+
         margin-top: -6px;
-        font-size: $fontSizeBig;
+
         color: $textSecondaryColor;
+        font-size: $fontSizeBig;
+
         cursor: pointer;
-        z-index: 21;
 
         &:hover {
             color: $textErrorColor;
         }
     }
 }
-

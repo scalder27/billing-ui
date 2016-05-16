@@ -1,4 +1,4 @@
-@import "../variables";
+﻿@import "../variables";
 
 // arrow
 $arrow-border-width: 7px;
@@ -85,8 +85,9 @@ $popup-close-right: 5px;
     top: $popup-close-top;
     right: $popup-close-right;
 
-    font-size: $fontSizeGreat;
     color: $textSecondaryColor;
+    font-size: $fontSizeGreat;
+
     cursor: pointer;
 
     &:hover {

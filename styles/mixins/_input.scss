@@ -17,10 +17,11 @@
 }
 
 %input-readonly-focused {
-    box-shadow: none;
-    background: none;
     border: none;
     border-bottom: 1px dashed $borderInputColor;
+    background: none;
+    box-shadow: none;
+
     color: #e4e4e4;
 }
 
@@ -78,6 +79,7 @@
         }
     }
 }
+
 @mixin material-textarea($width: auto) {
     @extend %input-base;
 

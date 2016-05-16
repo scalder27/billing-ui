@@ -30,7 +30,8 @@
         }
     }
 
-    &:disabled, &:disabled ~ %stylized-radio-label {
+    &:disabled,
+    &:disabled ~ %stylized-radio-label {
         opacity: 0.5;
 
         color: $textBaseColor;

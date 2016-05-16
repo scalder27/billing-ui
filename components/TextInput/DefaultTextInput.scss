@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 @import "../../styles/placeholders";
 @import "../../styles/materialdesign";
 
@@ -7,6 +7,7 @@
         @extend %as-inline-block;
 
         position: relative;
+
         font-size: $fontSizeBig;
     }
 
@@ -14,18 +15,21 @@
         @extend %as-inline-block;
         @extend %material-input;
 
-        height: 30px;
-        box-sizing: border-box;
-        padding: 4px 3px;
         z-index: 20;
+
+        height: 30px;
+        padding: 4px 3px;
+        box-sizing: border-box;
     }
 
     .placeholder-wrapper {
         position: absolute;
         top: 0;
         left: 0;
-        line-height: 30px;
+
         padding: 0 4px;
+
+        line-height: 30px;
 
         &.as-hidden {
             display: none;
@@ -38,13 +42,16 @@
 
     .clear {
         position: absolute;
+        z-index: 21;
         top: 50%;
         right: 6px;
+
         margin-top: -6px;
-        font-size: $fontSizeBig;
+
         color: $textSecondaryColor;
+        font-size: $fontSizeBig;
+
         cursor: pointer;
-        z-index: 21;
 
         &:hover {
             color: $textErrorColor;

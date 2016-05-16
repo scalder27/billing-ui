@@ -88,13 +88,13 @@
         width: 0;
         height: 4px;
 
-        :global {
-            animation: showLoader .8s linear infinite;
-        }
-
         border-bottom-right-radius: 2px;
         border-bottom-left-radius: 2px;
         background: #b0b0b0;
+
+        :global {
+            animation: showLoader .8s linear infinite;
+        }
     }
 }
 

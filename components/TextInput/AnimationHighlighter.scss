@@ -1,9 +1,11 @@
-@keyframes inputHighlighter {
+﻿@keyframes inputHighlighter {
     from {
         background: #5264ae;
     }
+
     to {
         width: 0;
+
         background: transparent;
     }
 }
@@ -12,8 +14,10 @@
     from {
         background: #d92b2b;
     }
+
     to {
         width: 0;
+
         background: transparent;
     }
 }
