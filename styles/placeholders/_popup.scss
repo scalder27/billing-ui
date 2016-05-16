@@ -1,4 +1,4 @@
-@import "../mixins/popup.scss";
+@import "../mixins/_popup.scss";
 
 %popup {
     @include popup-wrapper;

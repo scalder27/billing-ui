@@ -12,14 +12,14 @@ $popup-rigt-padding: 10px;
 
 // popup close
 $popup-close-top: 5px;
-$popup-close-right: 15px;
+$popup-close-right: 5px;
 
 @mixin popup-wrapper {
     padding: $popup-top-padding $popup-rigt-padding $popup-bottom-padding $popup-left-padding;
 
     border: 1px solid $borderDarkColor;
     border-radius: 3px;
-    background: $bgBaseColor;
+    background: $bgWhiteColor;
     box-shadow: 0 0 8px 4px $shadowBaseColor;
 }
 
@@ -85,8 +85,9 @@ $popup-close-right: 15px;
     top: $popup-close-top;
     right: $popup-close-right;
 
-    font-size: $fontSizeRegularTitle;
+    font-size: $fontSizeGreat;
     color: $textSecondaryColor;
+    cursor: pointer;
 
     &:hover {
         color: $textDarkColor;
