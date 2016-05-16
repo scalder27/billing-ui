@@ -16,6 +16,7 @@ module.exports = function (config) {
         files: [
             "./node_modules/jasmine-sinon/lib/jasmine-sinon.js",
             "helpers/**/*.test.js",
+            "libs/**/*.test.js",
             "components/**/*.test.js"
         ],
 
@@ -28,6 +29,7 @@ module.exports = function (config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             "helpers/**/*.test.js": ["webpack", "sourcemap"],
+            "libs/**/*.test.js": ["webpack", "sourcemap"],
             "components/**/*.test.js": ["webpack", "sourcemap"]
         },
 
@@ -38,6 +40,7 @@ module.exports = function (config) {
                     { test: /\.jsx?$/,
                         include: [
                             path.join(__dirname, "helpers"),
+                            path.join(__dirname, "libs"),
                             path.join(__dirname, "components")
                         ],
                         loader: "babel"
