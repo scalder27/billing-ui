@@ -1,6 +1,8 @@
 ﻿@import "../variables";
 
 @mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
+    position: relative;
+
     &:after {
         content: "";
 
