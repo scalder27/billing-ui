@@ -6,3 +6,11 @@ export const innKppResolver = (inn, kpp) => {
 
     return resolvedString;
 };
+
+export const datesRangeResolver = (beginDate, endDate) => {
+    if (beginDate) {
+        return `${beginDate} — ${endDate}`;
+    }
+
+    return `до ${endDate}`;
+};
