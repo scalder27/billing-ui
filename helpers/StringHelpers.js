@@ -8,9 +8,17 @@ export const innKppResolver = (inn, kpp) => {
 };
 
 export const datesRangeResolver = (beginDate, endDate) => {
-    if (beginDate) {
-        return `${beginDate} — ${endDate}`;
+    if (!beginDate && !endDate) {
+        return null;
     }
 
-    return `до ${endDate}`;
+    if (!beginDate) {
+        return `до ${endDate}`;
+    }
+
+    if (!endDate) {
+        return beginDate;
+    }
+
+    return `${beginDate} — ${endDate}`;
 };

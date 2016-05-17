@@ -33,14 +33,36 @@ describe("dates range resolver", () => {
     it("should return only end date if begin date is undefined", () => {
         const actual = datesRangeResolver(undefined, "17.05.2016");
         expect(actual).toBe("до 17.05.2016");
-
-        const resolvedWithEmptyString = datesRangeResolver("", "17.05.2016");
-        expect(resolvedWithEmptyString).toBe("до 17.05.2016");
     });
 
     it("should return only end date if begin date is empty string", () => {
         const actual = datesRangeResolver("", "17.05.2016");
         expect(actual).toBe("до 17.05.2016");
+    });
+
+    it("should return only begin date if end date is not passed", () => {
+        const actual = datesRangeResolver("17.05.2016");
+        expect(actual).toBe("17.05.2016");
+    });
+
+    it("should return only begin date if end date is null", () => {
+        const actual = datesRangeResolver("17.05.2016", null);
+        expect(actual).toBe("17.05.2016");
+    });
+
+    it("should return only begin date if end date is undefined", () => {
+        const actual = datesRangeResolver("17.05.2016", undefined);
+        expect(actual).toBe("17.05.2016");
+    });
+
+    it("should return only begin date if end date is empty string", () => {
+        const actual = datesRangeResolver("17.05.2016", "");
+        expect(actual).toBe("17.05.2016");
+    });
+
+    it("should return null if both dates are empty", () => {
+        const actual = datesRangeResolver();
+        expect(actual).toBeNull();
     });
 
     it("should return both dates if two dates passed", () => {
