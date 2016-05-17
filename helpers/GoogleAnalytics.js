@@ -5,3 +5,5 @@ class GoogleAnalytics {
         GaEventHelper && GaEventHelper.publishEventAsync(category, action, label);
     }
 }
+
+export default GoogleAnalytics;
