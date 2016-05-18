@@ -9,9 +9,13 @@ class Popup extends Component {
     _popupItemHtml = null;
 
     componentDidMount() {
-        const { shouldUpdate } = this.props;
+        const { shouldUpdate, shouldOpenOnDidMount } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+        }
+
+        if(shouldOpenOnDidMount) {
+            this.popupControl.show();
         }
     }
 
@@ -24,8 +28,11 @@ class Popup extends Component {
     }
 
     componentDidUpdate() {
-        const { shouldUpdate, updateWithoutClosing, isActive } = this.props;
+        const { shouldUpdate, updateWithoutClosing, isActive, shouldUpdateChildren } = this.props;
         if (!this.popupControl && shouldUpdate) {
+            this.initPopup();
+        } else if(shouldUpdateChildren) {
+            this.removePopup();
             this.initPopup();
         } else if (updateWithoutClosing) {
             this.updatePopup();
@@ -140,13 +147,18 @@ Popup.propTypes = {
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
     width: PropTypes.number,
-    isActive: PropTypes.bool.isRequired
+    isActive: PropTypes.bool.isRequired,
+
+    shouldUpdateChildren: PropTypes.bool.isRequired,
+    shouldOpenOnDidMount: PropTypes.bool.isRequired
 };
 
 Popup.defaultProps = {
     shouldUpdate: true,
     updateWithoutClosing: false,
-    isActive: false
+    isActive: false,
+    shouldUpdateChildren: false,
+    shouldOpenOnDidMount: false
 };
 
 export default Popup;
