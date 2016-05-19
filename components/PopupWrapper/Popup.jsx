@@ -9,9 +9,13 @@ class Popup extends Component {
     _popupItemHtml = null;
 
     componentDidMount() {
-        const { shouldUpdate } = this.props;
+        const { shouldUpdate, shouldOpenOnDidMount } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
+        }
+
+        if(shouldOpenOnDidMount) {
+            this.popupControl.show();
         }
     }
 
@@ -24,8 +28,11 @@ class Popup extends Component {
     }
 
     componentDidUpdate() {
-        const { shouldUpdate, updateWithoutClosing, isActive } = this.props;
+        const { shouldUpdate, updateWithoutClosing, isActive, shouldUpdateChildren } = this.props;
         if (!this.popupControl && shouldUpdate) {
+            this.initPopup();
+        } else if(shouldUpdateChildren) {
+            this.removePopup();
             this.initPopup();
         } else if (updateWithoutClosing) {
             this.updatePopup();
@@ -79,7 +86,7 @@ class Popup extends Component {
     }
 
     initPopup() {
-        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose, onOpen } = this.props;
+        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose, onOpen, fixed } = this.props;
 
         const classNames = classnames(styles.popup, className);
         this._popupItemHtml = this.createAndInsertPopupToDOM(classNames);
@@ -93,7 +100,8 @@ class Popup extends Component {
             bindItem: getBindItem(),
             closeLink: closeLink,
             openLink: openLink,
-            position: position
+            position: position,
+            fixed: fixed
         });
 
         if (onClose) {
@@ -140,13 +148,20 @@ Popup.propTypes = {
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
     width: PropTypes.number,
-    isActive: PropTypes.bool.isRequired
+    isActive: PropTypes.bool.isRequired,
+    fixed: PropTypes.bool.isRequired,
+
+    shouldUpdateChildren: PropTypes.bool.isRequired,
+    shouldOpenOnDidMount: PropTypes.bool.isRequired
 };
 
 Popup.defaultProps = {
     shouldUpdate: true,
     updateWithoutClosing: false,
-    isActive: false
+    isActive: false,
+    shouldUpdateChildren: false,
+    shouldOpenOnDidMount: false,
+    fixed: false
 };
 
 export default Popup;
