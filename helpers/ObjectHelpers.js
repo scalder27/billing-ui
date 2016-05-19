@@ -9,3 +9,12 @@ export const justConstants = (obj = {}) =>
     Object.keys(obj)
         .filter(isUpperCase)
         .reduce((result, key) => addValueByKey(key, obj[key], result), {});
+
+export const descriptionCreator = (descriptions = {}) => type => {
+    const description = descriptions[type];
+    if (description !== undefined) {
+        return description;
+    }
+
+    return type;
+};
