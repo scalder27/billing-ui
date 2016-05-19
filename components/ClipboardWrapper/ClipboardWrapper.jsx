@@ -4,11 +4,11 @@ import { copyCommandSupportChecker } from "../../helpers/QueryCommandSupportChec
 let Clipboard = (props) => cloneElement(props.children);
 const copyToClipboardAvailableCheck = copyCommandSupportChecker();
 
-copyToClipboardAvailableCheck.then(() => require.ensure([], function(require) {
+require.ensure([], require => {
     try {
         Clipboard = require("clipboard");
     } catch(e) {}
-}));
+});
 
 class ClipboardWrapper extends Component {
     _clipboardTarget = null;
