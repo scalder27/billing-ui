@@ -86,7 +86,7 @@ class Popup extends Component {
     }
 
     initPopup() {
-        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose, onOpen } = this.props;
+        const { getBindItem, position, getCloseLink, getOpenLink, className, onClose, onOpen, fixed } = this.props;
 
         const classNames = classnames(styles.popup, className);
         this._popupItemHtml = this.createAndInsertPopupToDOM(classNames);
@@ -100,7 +100,8 @@ class Popup extends Component {
             bindItem: getBindItem(),
             closeLink: closeLink,
             openLink: openLink,
-            position: position
+            position: position,
+            fixed: fixed
         });
 
         if (onClose) {
@@ -148,6 +149,7 @@ Popup.propTypes = {
     className: PropTypes.string,
     width: PropTypes.number,
     isActive: PropTypes.bool.isRequired,
+    fixed: PropTypes.bool.isRequired,
 
     shouldUpdateChildren: PropTypes.bool.isRequired,
     shouldOpenOnDidMount: PropTypes.bool.isRequired
@@ -158,7 +160,8 @@ Popup.defaultProps = {
     updateWithoutClosing: false,
     isActive: false,
     shouldUpdateChildren: false,
-    shouldOpenOnDidMount: false
+    shouldOpenOnDidMount: false,
+    fixed: false
 };
 
 export default Popup;
