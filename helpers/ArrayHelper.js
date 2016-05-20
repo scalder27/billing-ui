@@ -6,6 +6,11 @@ export const replaceByIndex = (element: any, elementIndex: int, arr: array) => {
     ];
 };
 
+export const omitEntityByIndex = (elementIndex, arr) => [
+    ...arr.slice(0, elementIndex),
+    ...arr.slice(elementIndex + 1)
+];
+
 export const findIndex = (predicate, arr = []) => {
     if (Array.prototype.findIndex) {
         return Array.prototype.findIndex.call(arr, predicate);
