@@ -1,5 +1,5 @@
 import freeze from "deep-freeze";
-import { replaceByIndex, findIndex, findIndexAndEntity, arrayReduceHelper } from "../ArrayHelper";
+import { replaceByIndex, findIndex, findIndexAndEntity, arrayReduceHelper, omitEntityByIndex } from "../ArrayHelper";
 
 describe("replace element by index", () => {
     it("should replace element", () => {
@@ -17,6 +17,16 @@ describe("replace element by index", () => {
         const actual = replaceByIndex({b: "b"}, 2, initArr);
 
         expect(actual).toEqual(expectedArr);
+    });
+});
+
+describe("Array helper ", () => {
+    it("it should omit array element by index", () => {
+        const initialArray = freeze([ 1, 2, 3, 4, 5]);
+        const expectedArray = [1, 2, 4, 5];
+
+        const actual = omitEntityByIndex(2, initialArray);
+        expect(actual).toEqual(expectedArray);
     });
 });
 
