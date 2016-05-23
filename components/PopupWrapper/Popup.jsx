@@ -32,12 +32,11 @@ class Popup extends Component {
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
         } else if(shouldUpdateChildren) {
-            this.removePopup();
-            this.initPopup();
+            ReactDOM.render(this.generateMarkUp(), this._popupItemHtml);
         } else if (updateWithoutClosing) {
             this.updatePopup();
         }
-        
+
         if (isActive) {
             this.popupControl.show();
         }
@@ -122,6 +121,7 @@ class Popup extends Component {
 
     removePopup() {
         if (this.popupControl) {
+            ReactDOM.unmountComponentAtNode(this._popupItemHtml);
             this.popupControl.remove();
             this.popupControl = null;
         }
