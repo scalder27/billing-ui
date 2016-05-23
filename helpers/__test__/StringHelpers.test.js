@@ -1,4 +1,4 @@
-import { isUpperCase, innKppResolver, datesRangeResolver } from "../StringHelpers";
+import { isUpperCase, innKppResolver, datesRangeResolver, toLowerFirstLetter } from "../StringHelpers";
 
 describe("isUpperCase helper ", () => {
     it("should return true for string with uppercase letters", () => {
@@ -68,5 +68,27 @@ describe("dates range resolver", () => {
     it("should return both dates if two dates passed", () => {
         const actual = datesRangeResolver("15.05.2016", "17.05.2016");
         expect(actual).toBe("15.05.2016 — 17.05.2016");
+    });
+});
+
+describe("to lower first letter helper", () => {
+    it("should lower first letter if passed string length === 1", () => {
+        const actual = toLowerFirstLetter("H");
+        expect(actual).toBe("h");
+    });
+
+    it("should lower first letter if passed string length >= 2", () => {
+        const actual = toLowerFirstLetter("Hi");
+        expect(actual).toBe("hi");
+    });
+
+    it("should not die on first non-letter symbol", () => {
+        const actual = toLowerFirstLetter("#");
+        expect(actual).toBe("#");
+    });
+
+    it("should return empty string if passed string is empty", () => {
+        const actual = toLowerFirstLetter("");
+        expect(actual).toBe("");
     });
 });

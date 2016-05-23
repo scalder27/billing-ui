@@ -22,3 +22,15 @@ export const datesRangeResolver = (beginDate, endDate) => {
 
     return `${beginDate} — ${endDate}`;
 };
+
+export const toLowerFirstLetter = str => {
+    if (!str) {
+        return "";
+    }
+
+    if (str.length === 1) {
+        return str.toLowerCase();
+    }
+
+    return str.substr(0, 1).toLowerCase() + str.substr(1);
+};
