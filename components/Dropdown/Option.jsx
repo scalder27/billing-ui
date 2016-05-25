@@ -6,9 +6,9 @@ class Option extends Component {
     _optionNode = null;
 
     handleClick() {
-        const { disabled, isSelected, onClick, value, caption } = this.props;
+        const { disabled, onClick, value, caption } = this.props;
 
-        if (!disabled && !isSelected && onClick) {
+        if (!disabled && onClick) {
             onClick(value, caption);
         }
     }
@@ -45,7 +45,7 @@ Option.propTypes = {
     isActive: PropTypes.bool,
     isSelected: PropTypes.bool,
     disabled: PropTypes.bool,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     caption: PropTypes.string.isRequired,
     additionalData: PropTypes.string,
     className: PropTypes.string,
