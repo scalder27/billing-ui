@@ -1,5 +1,5 @@
 import freeze from "deep-freeze";
-import { addValueByKey, justConstants, descriptionCreator } from "../ObjectHelpers";
+import { addValueByKey, justConstants, enumInfoMapper } from "../ObjectHelpers";
 
 describe("object helper addValueByKey ", () => {
     it("should add key and value to passed object", () => {
@@ -32,7 +32,7 @@ describe("object description creator", () => {
         };
         const testDescription = "testDescription";
         const mockDescription = "mockDescription";
-        initialObject.getDescription = descriptionCreator({
+        initialObject.getDescription = enumInfoMapper({
             [initialObject.Test]: testDescription,
             [initialObject.Mock]: mockDescription
         });

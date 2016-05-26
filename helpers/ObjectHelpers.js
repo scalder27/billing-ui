@@ -10,7 +10,7 @@ export const justConstants = (obj = {}) =>
         .filter(isUpperCase)
         .reduce((result, key) => addValueByKey(key, obj[key], result), {});
 
-export const descriptionCreator = (descriptions = {}) => type => {
+export const enumInfoMapper = (descriptions = {}) => type => {
     const description = descriptions[type];
     if (description !== undefined) {
         return description;
