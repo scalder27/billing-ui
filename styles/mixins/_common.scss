@@ -1,8 +1,6 @@
 ﻿@import "../variables";
 
-@mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $transition: null null, $width: 30px, $rightSide: true) {
-    $transitionTime: nth($transition, 1);
-    $transitionFunction: nth($transition, 2);
+@mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
 
     position: relative;
 
@@ -32,18 +30,10 @@
     }
 
     &:hover:before {
-        @if type-of($transitionTime) != "null" {
-            transition: opacity (1 - $transitionTime) ease;
-        }
-
         opacity: 0;
     }
 
     &:hover:after {
-        @if type-of($transitionTime) != "null" {
-            transition: opacity $transitionTime $transitionFunction;
-        }
-
         opacity: 1;
     }
 }
