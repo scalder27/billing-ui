@@ -1,27 +1,50 @@
 ﻿@import "../variables";
 
-@mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
+@mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $transition: null null, $width: 30px, $rightSide: true) {
+    $transitionTime: nth($transition, 1);
+    $transitionFunction: nth($transition, 2);
+
     position: relative;
 
     overflow: hidden;
 
     white-space: nowrap;
 
+    &:before,
     &:after {
         content: "";
 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
+        @include position(absolute, 0 0 0 null);
 
         width: $width;
+    }
 
+    &:before {
         background-image: linear-gradient(to right, rgba($baseColor, 0), rgba($baseColor, 1));
+
+        opacity: 1;
+    }
+
+    &:after {
+        background-image: linear-gradient(to right, rgba($hoverColor, 0), rgba($hoverColor, 1));
+
+        opacity: 0;
+    }
+
+    &:hover:before {
+        @if type-of($transitionTime) != "null" {
+            transition: opacity (1 - $transitionTime) ease;
+        }
+
+        opacity: 0;
     }
 
     &:hover:after {
-        background-image: linear-gradient(to right, rgba($hoverColor, 0), rgba($hoverColor, 1));
+        @if type-of($transitionTime) != "null" {
+            transition: opacity $transitionTime $transitionFunction;
+        }
+
+        opacity: 1;
     }
 }
 
