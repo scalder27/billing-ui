@@ -34,3 +34,7 @@ export const toLowerFirstLetter = str => {
 
     return str.substr(0, 1).toLowerCase() + str.substr(1);
 };
+
+export const toShortProductName = string => {
+    return string.replace("Контур.", "").replace("Контур-", "");
+};

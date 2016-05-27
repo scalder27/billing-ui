@@ -1,4 +1,4 @@
-import { isUpperCase, innKppResolver, datesRangeResolver, toLowerFirstLetter } from "../StringHelpers";
+import { isUpperCase, innKppResolver, datesRangeResolver, toLowerFirstLetter, toShortProductName } from "../StringHelpers";
 
 describe("isUpperCase helper ", () => {
     it("should return true for string with uppercase letters", () => {
@@ -90,5 +90,17 @@ describe("to lower first letter helper", () => {
     it("should return empty string if passed string is empty", () => {
         const actual = toLowerFirstLetter("");
         expect(actual).toBe("");
+    });
+});
+
+describe("to short product name helper", () => {
+    it("should trim full name with dot", () => {
+        const actual = toShortProductName("Контур.Биллинг");
+        expect(actual).toBe("Биллинг");
+    });
+
+    it("should trim full name with hyphen", () => {
+        const actual = toShortProductName("Контур-Биллинг");
+        expect(actual).toBe("Биллинг");
     });
 });
