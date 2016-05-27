@@ -1,4 +1,5 @@
 ﻿@import "../variables";
+@import "../bourbon";
 
 @mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
 
@@ -35,27 +36,5 @@
 
     &:hover:after {
         opacity: 1;
-    }
-}
-
-@mixin position($position: relative, $coordinates: null) {
-    @if type-of($position) == list {
-        $coordinates: $position;
-        $position: relative;
-    }
-
-    $offsets: (
-        top:    nth($coordinates, 1),
-        right:  nth($coordinates, 2),
-        bottom: nth($coordinates, 3),
-        left:   nth($coordinates, 4),
-    );
-
-    position: $position;
-
-    @each $offset, $value in $offsets {
-        @if type-of($value) != "null" {
-            #{$offset}: $value;
-        }
     }
 }
