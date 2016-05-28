@@ -1,5 +1,4 @@
 ﻿@import "../variables";
-@import "../bourbon";
 
 @mixin baseFade($baseColor: $bgWhiteColor, $hoverColor: $bgBaseColor, $width: 30px, $rightSide: true) {
 
@@ -13,7 +12,10 @@
     &:after {
         content: "";
 
-        @include position(absolute, 0 0 0 null);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
 
         width: $width;
     }
