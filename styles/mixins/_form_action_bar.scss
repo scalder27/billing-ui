@@ -12,6 +12,7 @@
 
     .actionSubmit {
         @extend %stylized-button;
+        @extend %as-inline-block;
     }
 
     .actionCancel {
