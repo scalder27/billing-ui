@@ -1,4 +1,4 @@
-export const GuidFactory = {
+export default GuidFactory = {
     create: function () {
         return [this._gen(2), this._gen(1), this._gen(1), this._gen(1), this._gen(3)].join("-");
     },
