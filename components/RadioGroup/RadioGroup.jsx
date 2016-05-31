@@ -10,13 +10,12 @@ class RadioGroup extends Component {
 
         return Children.map(children, radio => {
             return cloneElement(radio || {}, {
-                    key: radio.props.value,
-                    checked: value === radio.props.value,
-                    onChange: (evt) => {
+                key: radio.props.value,
+                checked: value === radio.props.value,
+                onChange: (evt) => {
                         onChange(evt.target.value);
                     }
-                }
-            )
+            })
         });
     }
 
@@ -37,7 +36,7 @@ RadioGroup.propTypes = {
     value: PropTypes.string.isRequired,
     className: PropTypes.string,
     styles: PropTypes.object,
-    children: (props, propName, componentName) => {customChildrenPropTypes(props, propName, componentName, RadioButton)}
+    children: (props, propName, componentName) => { customChildrenPropTypes(props, propName, componentName, RadioButton) }
 };
 
 RadioGroup.defaultProps = {

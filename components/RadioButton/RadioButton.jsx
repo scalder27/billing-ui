@@ -18,7 +18,7 @@ class RadioButton extends Component {
                 <input {...radioProps}
                     checked={checked}
                     disabled={disabled}
-                    readonly={readonly}
+                    readOnly={readonly}
                     className={radioClassNames}
                     type="radio"
                     value={value}
@@ -41,7 +41,7 @@ RadioButton.propTypes = {
     wrapperClassName: PropTypes.string,
     checkboxClassName: PropTypes.string,
     styles: PropTypes.object
-    //Так же можно передать остальные стандартные атрибуты радиобатона, но визуально они ни как не обрабатываются
+    // Так же можно передать остальные стандартные атрибуты радиобатона, но визуально они ни как не обрабатываются
 };
 
 RadioButton.defaultProps = {

@@ -7,7 +7,7 @@ const copyToClipboardAvailableCheck = copyCommandSupportChecker();
 require.ensure([], require => {
     try {
         Clipboard = require("clipboard");
-    } catch(e) {}
+    } catch (e) {}
 });
 
 class ClipboardWrapper extends Component {

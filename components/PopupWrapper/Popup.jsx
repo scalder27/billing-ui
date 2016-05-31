@@ -14,7 +14,7 @@ class Popup extends Component {
             this.initPopup();
         }
 
-        if(shouldOpenOnDidMount) {
+        if (shouldOpenOnDidMount) {
             this.popupControl.show();
         }
     }
@@ -31,7 +31,7 @@ class Popup extends Component {
         const { shouldUpdate, updateWithoutClosing, isActive, shouldUpdateChildren } = this.props;
         if (!this.popupControl && shouldUpdate) {
             this.initPopup();
-        } else if(shouldUpdateChildren) {
+        } else if (shouldUpdateChildren) {
             ReactDOM.render(this.generateMarkUp(), this._popupItemHtml);
         } else if (updateWithoutClosing) {
             this.updatePopup();

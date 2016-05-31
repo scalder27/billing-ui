@@ -172,19 +172,18 @@ class Dropdown extends Component {
         const options = Children.map(children, option => {
             if (option.type === Option) {
                 return cloneElement(option, {
-                        key: option.props.key || option.props.value,
-                        isSelected: value === option.props.value,
-                        isActive: this.state.activeOption === option.props.value,
-                        ref: option.props.value,
-                        onClick: this.setValue.bind(this),
-                        onMouseOver: this.handleMouseOver.bind(this)
-                    }
-                );
+                    key: option.props.key || option.props.value,
+                    isSelected: value === option.props.value,
+                    isActive: this.state.activeOption === option.props.value,
+                    ref: option.props.value,
+                    onClick: this.setValue.bind(this),
+                    onMouseOver: this.handleMouseOver.bind(this)
+                });
             }
             return option;
         });
 
-        if(options) {
+        if (options) {
             return (
                 <div className={styles.options} ref={node => this._optionsListNode = node}>
                     {options}

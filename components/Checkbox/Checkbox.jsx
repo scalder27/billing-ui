@@ -39,7 +39,7 @@ Checkbox.propTypes = {
     wrapperClassName: PropTypes.string,
     checkboxClassName: PropTypes.string,
     styles: PropTypes.object
-    //Так же можно передать остальные стандартные атрибуты чекбокса, но визуально они ни как не обрабатываются
+    // Так же можно передать остальные стандартные атрибуты чекбокса, но визуально они ни как не обрабатываются
 };
 
 Checkbox.defaultProps = {

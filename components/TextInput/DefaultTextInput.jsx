@@ -30,7 +30,7 @@ class DefaultTextInput extends Component {
 
         return (
             <span className={wrapperClassNames}>
-                <span className={placeholderWrapperClassNames} onClick={() => {this.input.focus();}}>
+                <span className={placeholderWrapperClassNames} onClick={() => { this.input.focus() }}>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
                 <Input {...inputProps}

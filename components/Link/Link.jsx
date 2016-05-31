@@ -5,7 +5,7 @@ import styles from "./Link.scss";
 
 const Link = (props) => {
     const {href, children, className} = props;
-    const  classNames = classnames(className, styles.link);
+    const classNames = classnames(className, styles.link);
 
     if (href) {
         return (

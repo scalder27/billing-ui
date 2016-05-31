@@ -22,7 +22,7 @@ class TextInput extends Component {
         if (mask) {
             return (<MaskedInput {...inputProps}
                 mask={mask}
-                maskChar={maskChar || '_'}
+                maskChar={maskChar || "_"}
                 alwaysShowMask={alwaysShowMask} />)
         } else {
             return (<input {...inputProps} />)
