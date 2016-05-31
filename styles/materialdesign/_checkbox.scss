@@ -35,6 +35,8 @@
         opacity: 0.5;
 
         color: $textBaseColor;
+
+        cursor: default;
     }
 
     &:disabled ~ %stylized-checkBox-label:hover:after,
