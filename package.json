@@ -63,6 +63,7 @@
         "postcss-scss": "^0.1.6",
         "postcss-sorting": "^1.2.1",
         "susy": ">= 2.2.12",
+        "underscore": "^1.8.3",
         "webpack": "^1.12.14"
     },
     "peerDependencies": {
