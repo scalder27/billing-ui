@@ -6,9 +6,9 @@ class Option extends Component {
     _optionNode = null;
 
     handleClick() {
-        const { disabled, isSelected, onClick, value, caption } = this.props;
+        const { disabled, onClick, value, caption } = this.props;
 
-        if (!disabled && !isSelected && onClick) {
+        if (!disabled && onClick) {
             onClick(value, caption);
         }
     }
@@ -22,7 +22,7 @@ class Option extends Component {
     }
 
     render() {
-        const { styles, caption, additionalData, className, isActive, isSelected, disabled } = this.props;
+        const { styles, caption, children, additionalData, className, isActive, isSelected, disabled } = this.props;
         const classNames = classnames(styles.option, className, {
             [styles.disabled]: disabled,
             [styles["as-active"]]: isActive,
@@ -32,7 +32,7 @@ class Option extends Component {
         return (
             <div className={classNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}
                 ref={ node => this._optionNode = node }>
-                <span className={styles.caption}>{caption}</span>
+                <div className={styles.caption}>{children || caption}</div>
                 <span className={styles["additional-text"]}>{additionalData}</span>
             </div>
         );
@@ -45,8 +45,9 @@ Option.propTypes = {
     isActive: PropTypes.bool,
     isSelected: PropTypes.bool,
     disabled: PropTypes.bool,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     caption: PropTypes.string.isRequired,
+    children: PropTypes.node,
     additionalData: PropTypes.string,
     className: PropTypes.string,
     styles: PropTypes.object

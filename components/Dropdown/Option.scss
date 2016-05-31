@@ -16,13 +16,7 @@
         }
 
         &.as-selected {
-            background: #5199DB;
-
-            color: $textWhiteColor;
-
-            .additional-text {
-                color: $textWhiteColor;
-            }
+            background: $bgButtonColor;
         }
 
         &.disabled {
@@ -38,9 +32,9 @@
     }
 
     .caption {
-        float: left;
-
+        text-overflow: ellipsis;
         overflow: hidden;
+        white-space: nowrap;
     }
 
     .additional-text {
