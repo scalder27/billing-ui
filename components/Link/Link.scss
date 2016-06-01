@@ -1,7 +1,14 @@
-﻿@import "../../styles/placeholders";
+﻿@import "../../styles/variables";
+@import "../../styles/placeholders";
 
 :local {
     .link {
         @extend %as-link;
+    }
+
+    .disabled {
+        color: $textDisabledColor;
+
+        cursor: default;
     }
 }
