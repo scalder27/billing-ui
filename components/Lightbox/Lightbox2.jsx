@@ -15,7 +15,7 @@ class Lightbox2 extends Component {
         const { isOpen } = this.props;
         ReactDOM.render(this.renderLightboxHtml(), this._containerNode);
 
-        if (!prevProps.isOpen !== isOpen) {
+        if (prevProps.isOpen !== isOpen) {
             this.toggleVisibility(isOpen);
         }
     }
