@@ -4,10 +4,15 @@ import { replaceByIndex, findIndex, findIndexAndEntity, arrayReduceHelper, omitE
 describe("replace element by index", () => {
     it("should replace element", () => {
         const initArr = freeze([1, 2, "a", 4, 5]);
-        const expectedArr = [1, 2, "b", 4, 5];
 
-        const actual = replaceByIndex("b", 2, initArr);
-        expect(actual).toEqual(expectedArr);
+        const actual1 = replaceByIndex("b", 2, initArr);
+        expect(actual1).toEqual([1, 2, "b", 4, 5]);
+
+        const actual2 = replaceByIndex("b", 0, initArr);
+        expect(actual2).toEqual(["b", 2, "a", 4, 5]);
+
+        const actual3 = replaceByIndex("b", initArr.length - 1, initArr);
+        expect(actual3).toEqual([1, 2, "a", 4, "b"]);
     });
 
     it("should replace object element", () => {
@@ -17,6 +22,20 @@ describe("replace element by index", () => {
         const actual = replaceByIndex({b: "b"}, 2, initArr);
 
         expect(actual).toEqual(expectedArr);
+    });
+
+    it("should not modify array if element index inconsistent", () => {
+        const initArr = freeze([1, 2, "a", 4, 5]);
+
+        const actual1 = replaceByIndex("b", 23, initArr);
+        expect(actual1).toBe(initArr);
+
+        const actual2 = replaceByIndex("b", -1, initArr);
+        expect(actual2).toBe(initArr);
+
+        const actual3 = replaceByIndex("b", initArr.length, initArr);
+        expect(actual3).toBe(initArr);
+
     });
 });
 
