@@ -29,11 +29,13 @@ class CompactTextInput extends Component {
 
         return (
             <div className={wrapperClassNames} style={{"width": width}}>
-                <Input {...inputProps} value={value} styles={styles} width={width}
-                    onChange={(evt) => this.change(evt.target.value, evt)}
-                    ref={(el) => {
-                        this.input = ReactDOM.findDOMNode(el);
-                    }} />
+                <Input {...inputProps} value={value}
+                                       styles={styles}
+                                       width={width}
+                                       onChange={(evt) => this.change(evt.target.value, evt)}
+                                       ref={(el) => { this.input = ReactDOM.findDOMNode(el); }}
+                />
+
                 <span className={styles.highlight}></span>
                 <span className={labelClassNames}>{placeholder}</span>
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
