@@ -7,7 +7,7 @@ import classnames from "classnames";
 class TextInput extends Component {
     state = {
         wasTouched: false,
-        inFocus: false
+        isFocused: false
     };
 
     _handleOnChange(evt) {
@@ -25,10 +25,10 @@ class TextInput extends Component {
 
     _handleOnFocus(evt) {
         const { onFocus } = this.props;
-        const { inFocus } = this.state;
+        const { isFocused } = this.state;
 
-        if(!inFocus) {
-            this.setState({ inFocus: true });
+        if(!isFocused) {
+            this.setState({ isFocused: true });
         }
 
         if(typeof onFocus === "function") {
@@ -38,10 +38,10 @@ class TextInput extends Component {
 
     _handleOnBlur(evt) {
         const { onBlur } = this.props;
-        const { inFocus } = this.state;
+        const { isFocused } = this.state;
 
-        if(inFocus) {
-            this.setState({ inFocus: false });
+        if(isFocused) {
+            this.setState({ isFocused: false });
         }
 
         if(typeof onBlur === "function") {
@@ -51,11 +51,11 @@ class TextInput extends Component {
 
     render() {
         const { width, mask, maskChar, alwaysShowMask, styles, isValid, inputClassName, tooltipCaption, tooltipPosition, ...others } = this.props;
-        const { wasTouched,  inFocus } = this.state;
-        const isInputValid = !wasTouched || !inFocus || isValid;
+        const { wasTouched,  isFocused } = this.state;
+        const isInputValid = !wasTouched || !isFocused || isValid;
 
         const inputClassNames = classnames(styles.input, inputClassName, {
-            [styles["input-validation-error"]]: !isInputValid,
+            [styles["input-validation-error"]]: !isValid && wasTouched,
             [styles.readonly]: others.readonly,
             [styles.disabled]: others.disabled
         });
