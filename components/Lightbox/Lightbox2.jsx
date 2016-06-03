@@ -91,7 +91,7 @@ class Lightbox2 extends Component {
     }
 }
 
-Lightbox.propTypes = {
+Lightbox2.propTypes = {
     isOpen: PropTypes.bool,
     getOpenLink: PropTypes.func,
     onClose: PropTypes.func,
@@ -99,7 +99,7 @@ Lightbox.propTypes = {
     width: PropTypes.number
 };
 
-Lightbox.defaultProps = {
+Lightbox2.defaultProps = {
     width: 452
 };
 
