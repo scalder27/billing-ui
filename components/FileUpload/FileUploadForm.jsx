@@ -4,7 +4,7 @@ import cx from "classnames";
 
 import FileUploadControl from "./FileUploadControl";
 import FileUploadInput from "./FileUploadInput.jsx";
-import GuidFactory from "../../helpers/GuidFactory";
+import { createGuid } from "../../helpers/GuidFactory";
 
 import styles from "./FileUpload.scss";
 
@@ -21,7 +21,7 @@ const filterPropEvents = (propTypes, props) => {
 };
 
 class FileUploadForm extends Component {
-    _fileId = GuidFactory.create();
+    _fileId = createGuid();
 
     componentDidMount() {
         const { fileUploadParams } = this.props;
@@ -70,8 +70,8 @@ class FileUploadForm extends Component {
                 }}>
 
                 {children}
-                <input type="hidden" value={this._fileId} name="fileId"/>
-                <FileUploadInput accept={accept}/>
+                <input type="hidden" value={this._fileId} name="fileId" />
+                <FileUploadInput accept={accept} />
             </form>
         );
     }
