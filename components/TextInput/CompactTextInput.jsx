@@ -29,7 +29,7 @@ class CompactTextInput extends Component {
 
         return (
             <div className={wrapperClassNames} style={{"width": width}}>
-                <Input {...inputProps} value={value} styles={styles} width={width}
+                <Input {...inputProps} value={value} styles={styles} width={width} clearable={clearable}
                     onChange={(evt) => this.change(evt.target.value, evt)}
                     ref={(el) => {
                         this.input = ReactDOM.findDOMNode(el);
