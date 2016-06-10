@@ -42,7 +42,7 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
-    maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     mask: PropTypes.string,
     maskChar: PropTypes.string,
