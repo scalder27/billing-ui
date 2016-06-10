@@ -86,7 +86,7 @@ FileUploadForm.propTypes = {
     onClick: PropTypes.func,
 
     onFileUploadProcessStart: PropTypes.func,
-    onFileUploadAdd: PropTypes.func,
+    onFileUploadAdd: PropTypes.func.isRequired,
     onFileUploadSubmit: PropTypes.func,
     onFileUploadDone: PropTypes.func,
     onFileUploadProgressAll: PropTypes.func,
