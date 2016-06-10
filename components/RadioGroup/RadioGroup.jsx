@@ -33,7 +33,7 @@ class RadioGroup extends Component {
 
 RadioGroup.propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     className: PropTypes.string,
     styles: PropTypes.object,
     children: (props, propName, componentName) => { customChildrenPropTypes(props, propName, componentName, RadioButton) }
