@@ -5,7 +5,7 @@
 :local {
     .tooltip {
         position: absolute;
-        z-index: 50;
+        z-index: $tooltipZIndex;
 
         padding: 10px 20px;
 
