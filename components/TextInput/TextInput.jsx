@@ -57,11 +57,13 @@ class TextInput extends Component {
         const inputClassNames = classnames(styles.input, inputClassName, {
             [styles["input-validation-error"]]: !isValid && wasTouched,
             [styles.readonly]: others.readonly,
-            [styles.disabled]: others.disabled
+            [styles.disabled]: others.disabled,
+            [styles.clearable]: others.clearable
         });
 
         const inputProps = {
             ...others,
+            title: others.value,
             style: { "width": width },
             type: "text",
             className: inputClassNames,
@@ -98,10 +100,11 @@ TextInput.propTypes = {
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
     value: PropTypes.string,
+    clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
-    maxLength: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     mask: PropTypes.string,
     maskChar: PropTypes.string,

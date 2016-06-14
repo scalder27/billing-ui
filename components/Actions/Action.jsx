@@ -47,6 +47,7 @@ Action.propRypes = {
 
 Action.defaultProps = {
     className: "",
+    onClick: () => {},
     asLink: false
 };
 

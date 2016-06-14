@@ -35,6 +35,7 @@ class DefaultTextInput extends Component {
                 </span>
                 <Input {...inputProps}
                     value={value}
+                    clearable={clearable}
                     styles={styles}
                     onChange={(evt) => this.change(evt.target.value, evt)}
                     ref={(el) => {

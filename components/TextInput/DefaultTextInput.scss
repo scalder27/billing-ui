@@ -20,6 +20,10 @@
         height: 30px;
         padding: 4px 3px;
         box-sizing: border-box;
+
+        &.clearable {
+            padding-right: 30px;
+        }
     }
 
     .placeholder-wrapper {
