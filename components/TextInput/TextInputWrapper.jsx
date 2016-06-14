@@ -2,6 +2,7 @@ import { Component, PropTypes } from "react";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
+import TooltipType from "./TooltipType";
 
 class TextInputWrapper extends Component {
     render() {
@@ -25,6 +26,8 @@ TextInputWrapper.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
+    tooltipCaption: PropTypes.node,
+    tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
@@ -47,7 +50,8 @@ TextInputWrapper.defaultProps = {
     placeholderClassName: "",
     width: 180,
     isValid: true,
-    type: TextInputType.default
+    type: TextInputType.default,
+    tooltipPosition: TooltipType.right
 };
 
 export default TextInputWrapper;

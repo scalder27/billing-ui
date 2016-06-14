@@ -1,13 +1,61 @@
 import { Component, PropTypes } from "react";
 import MaskedInput from "react-input-mask";
+
+import Tooltip from "./Tooltip";
 import classnames from "classnames";
 
 class TextInput extends Component {
+    state = {
+        wasTouched: false,
+        isFocused: false
+    };
+
+    _handleOnChange(evt) {
+        const { onChange } = this.props;
+        const { wasTouched } = this.state;
+
+        if(!wasTouched) {
+            this.setState({ wasTouched: true });
+        }
+
+        if(typeof onChange === "function") {
+            onChange(evt);
+        }
+    }
+
+    _handleOnFocus(evt) {
+        const { onFocus } = this.props;
+        const { isFocused } = this.state;
+
+        if(!isFocused) {
+            this.setState({ isFocused: true });
+        }
+
+        if(typeof onFocus === "function") {
+            onFocus(evt);
+        }
+    }
+
+    _handleOnBlur(evt) {
+        const { onBlur } = this.props;
+        const { isFocused } = this.state;
+
+        if(isFocused) {
+            this.setState({ isFocused: false });
+        }
+
+        if(typeof onBlur === "function") {
+            onBlur(evt);
+        }
+    }
+
     render() {
-        const { width, mask, maskChar, alwaysShowMask, styles, isValid, inputClassName, ...others } = this.props;
+        const { width, mask, maskChar, alwaysShowMask, styles, isValid, inputClassName, tooltipCaption, tooltipPosition, ...others } = this.props;
+        const { wasTouched,  isFocused } = this.state;
+        const isInputValid = !wasTouched || !isFocused || isValid;
 
         const inputClassNames = classnames(styles.input, inputClassName, {
-            [styles["input-validation-error"]]: !isValid,
+            [styles["input-validation-error"]]: !isValid && wasTouched,
             [styles.readonly]: others.readonly,
             [styles.disabled]: others.disabled,
             [styles.clearable]: others.clearable
@@ -18,17 +66,31 @@ class TextInput extends Component {
             title: others.value,
             style: { "width": width },
             type: "text",
-            className: inputClassNames
+            className: inputClassNames,
+            onChange: (evt) => this._handleOnChange(evt),
+            onFocus: (evt) => this._handleOnFocus(evt),
+            onBlur: (evt) => this._handleOnBlur(evt)
         };
 
-        if (mask) {
-            return (<MaskedInput {...inputProps}
-                mask={mask}
-                maskChar={maskChar || "_"}
-                alwaysShowMask={alwaysShowMask} />)
-        } else {
-            return (<input {...inputProps} />)
-        }
+        return (
+            <div>
+                {mask && (
+                    <MaskedInput {...inputProps} mask={mask}
+                                                 maskChar={maskChar || "_"}
+                                                 alwaysShowMask={alwaysShowMask} />
+                )}
+
+                {!mask && (
+                    <input {...inputProps} />
+                )}
+
+                {!isInputValid && tooltipCaption != null && (
+                    <Tooltip isValid={isInputValid} tooltipPosition={tooltipPosition}>
+                        {tooltipCaption}
+                    </Tooltip>
+                )}
+            </div>
+        );
     }
 }
 
