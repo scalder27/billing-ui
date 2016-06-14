@@ -46,13 +46,18 @@ class Lightbox2 extends Component {
         return containerEl;
     }
 
-    createLightbox(lightboxHtml, getOpenLink, onClose) {
+    createLightbox(lightboxHtml) {
+        const { getOpenLink, onClose, onOpen } = this.props;
         // eslint-disable-next-line no-undef
         const lightbox = LightboxTop.create(lightboxHtml, {
             openLink: getOpenLink && getOpenLink()
         });
 
-        if(onClose){
+        if (onOpen) {
+            lightbox.onOpenComplete(() => onOpen());
+        }
+
+        if (onClose){
             lightbox.onCloseComplete(() => onClose());
         }
 
@@ -60,13 +65,13 @@ class Lightbox2 extends Component {
     }
 
     initLightbox() {
-        const { getOpenLink, onClose, width } = this.props;
+        const { width } = this.props;
 
         this._containerNode = this.renderLightboxContainer(width);
         ReactDOM.render(this.renderLightboxHtml(), this._containerNode);
 
         // eslint-disable-next-line no-undef
-        this._lightboxControl = this.createLightbox(this._containerNode, getOpenLink, onClose);
+        this._lightboxControl = this.createLightbox(this._containerNode);
     }
 
     toggleVisibility(isOpen) {
@@ -95,6 +100,7 @@ Lightbox2.propTypes = {
     isOpen: PropTypes.bool,
     getOpenLink: PropTypes.func,
     onClose: PropTypes.func,
+    onOpen: PropTypes.func,
     title: PropTypes.string,
     width: PropTypes.number
 };
