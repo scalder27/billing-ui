@@ -1,15 +1,18 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 
 :local {
     .wrapper {
         position: absolute;
-        min-width: 140px;
-        border: 1px solid $borderDarkColor;
-        font-size: 14px;
-        padding: 10px 10px 10px 20px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(0, 0, 0, 0.15);
         z-index: $popupZIndex;
+
+        min-width: 140px;
+        padding: 10px 10px 10px 20px;
+
+        border: 1px solid $borderDarkColor;
         background: $borderWhiteColor;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(0, 0, 0, 0.15);
+
+        font-size: 14px;
 
         &:before,
         &:after {
@@ -19,14 +22,15 @@
 
             width: 0;
             height: 0;
-            border-style: solid;
 
+            border-style: solid;
             border-color: transparent;
         }
 
         &.right {
-            left: 100%;
             top: 14px;
+            left: 100%;
+
             border-left: 2px solid $borderErrorColor;
 
             &:before,
@@ -52,15 +56,16 @@
         }
 
         &.bottom {
-            left: 0;
             top: 98%;
+            left: 0;
+
             border-top: 2px solid $borderErrorColor;
 
             &:before,
             &:after {
-                border-width: 0 5px;
-
                 left: 20px;
+
+                border-width: 0 5px;
             }
 
             &:before {
@@ -95,4 +100,3 @@
         }
     }
 }
-

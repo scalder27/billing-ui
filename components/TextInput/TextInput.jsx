@@ -14,11 +14,11 @@ class TextInput extends Component {
         const { onChange } = this.props;
         const { wasTouched } = this.state;
 
-        if(!wasTouched) {
+        if (!wasTouched) {
             this.setState({ wasTouched: true });
         }
 
-        if(typeof onChange === "function") {
+        if (typeof onChange === "function") {
             onChange(evt);
         }
     }
@@ -27,11 +27,11 @@ class TextInput extends Component {
         const { onFocus } = this.props;
         const { isFocused } = this.state;
 
-        if(!isFocused) {
+        if (!isFocused) {
             this.setState({ isFocused: true });
         }
 
-        if(typeof onFocus === "function") {
+        if (typeof onFocus === "function") {
             onFocus(evt);
         }
     }
@@ -40,18 +40,18 @@ class TextInput extends Component {
         const { onBlur } = this.props;
         const { isFocused } = this.state;
 
-        if(isFocused) {
+        if (isFocused) {
             this.setState({ isFocused: false });
         }
 
-        if(typeof onBlur === "function") {
+        if (typeof onBlur === "function") {
             onBlur(evt);
         }
     }
 
     render() {
         const { width, mask, maskChar, alwaysShowMask, styles, isValid, inputClassName, tooltipCaption, tooltipPosition, ...others } = this.props;
-        const { wasTouched,  isFocused } = this.state;
+        const { wasTouched, isFocused } = this.state;
         const isInputValid = !wasTouched || !isFocused || isValid;
 
         const inputClassNames = classnames(styles.input, inputClassName, {
@@ -110,7 +110,9 @@ TextInput.propTypes = {
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
     inputClassName: PropTypes.string,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    tooltipCaption: PropTypes.string,
+    tooltipPosition: PropTypes.string
 };
 
 export default TextInput;

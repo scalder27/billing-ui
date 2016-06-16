@@ -23,7 +23,7 @@ class Actions extends Component {
                    onClose={onClose}
                    isActive={isActive}
             >
-                <span className={ellipsisClassNames} ref={node => this._closeLink = node}>
+                <span className={ellipsisClassNames} ref={node => { this._closeLink = node }}>
                     {SpecialCharacters.Ellipsis}
                 </span>
                 {children}
@@ -32,14 +32,15 @@ class Actions extends Component {
     }
 }
 
-Actions.propRypes = {
+Actions.propTypes = {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     isActive: PropTypes.bool.isRequired,
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
-    ellipsisClassName: PropTypes.string
+    ellipsisClassName: PropTypes.string,
+    children: PropTypes.node
 };
 
 Actions.defaultProps = {

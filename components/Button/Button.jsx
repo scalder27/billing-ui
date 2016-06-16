@@ -42,7 +42,8 @@ Button.propTypes = {
     }).isRequired,
     type: PropTypes.oneOf(Object.keys(ButtonType).map((key) => ButtonType[key])),
     size: PropTypes.oneOf(Object.keys(ButtonSize).map((key) => ButtonSize[key])),
-    appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key]))
+    appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key])),
+    children: PropTypes.node
 };
 
 Button.defaultProps = {

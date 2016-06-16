@@ -66,7 +66,7 @@ class ClipboardWrapper extends Component {
 
         if (copyToClipboardAvailable) {
             return (
-                <div ref={node => this._clipboardTarget = node} className={className}>
+                <div ref={node => { this._clipboardTarget = node }} className={className}>
                     {children}
                 </div>
             );
@@ -80,7 +80,8 @@ ClipboardWrapper.propTypes = {
     value: PropTypes.string.isRequired,
     className: PropTypes.string,
     onSuccess: PropTypes.func,
-    onError: PropTypes.func
+    onError: PropTypes.func,
+    children: PropTypes.node
 };
 
 export default ClipboardWrapper;

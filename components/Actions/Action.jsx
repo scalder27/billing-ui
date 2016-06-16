@@ -35,7 +35,7 @@ class Action extends Component {
     }
 }
 
-Action.propRypes = {
+Action.propTypes = {
     onClick: PropTypes.func,
     asLink: PropTypes.bool,
     href: PropTypes.string,

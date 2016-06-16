@@ -17,11 +17,12 @@ class Tooltip extends Component {
 
 Tooltip.propTypes = {
     children: PropTypes.node,
-    isValid: PropTypes.bool
+    isValid: PropTypes.bool,
+    tooltipPosition: PropTypes.string
 };
 
 Tooltip.defaultProps = {
     tooltipPosition: TooltipType.right
-}
+};
 
 export default Tooltip;

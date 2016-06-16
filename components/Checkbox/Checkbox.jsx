@@ -38,7 +38,8 @@ Checkbox.propTypes = {
     labelClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     checkboxClassName: PropTypes.string,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    children: PropTypes.node
     // Так же можно передать остальные стандартные атрибуты чекбокса, но визуально они ни как не обрабатываются
 };
 

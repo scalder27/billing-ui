@@ -1,4 +1,5 @@
 import { Component, PropTypes } from "react";
+import ReactDOM from "react-dom";
 import Input from "./TextInput";
 import Clear from "./Clear";
 

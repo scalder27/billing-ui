@@ -1,4 +1,4 @@
-export const replaceByIndex = (element:any, elementIndex:int, arr:Array) => {
+export const replaceByIndex = (element, elementIndex, arr) => {
     if (elementIndex < 0 || elementIndex > arr.length - 1) {
         return arr;
     }
@@ -38,8 +38,7 @@ export const findIndexAndEntity = (predicate, arr) => {
     return [entityIndex, arr[entityIndex]];
 };
 
-type Action = {type: string; payload: any};
-export const arrayReduceHelper:Array<any> = (elementPredicate:Func, elementReducer:Func, state:Array, action:Action) => {
+export const arrayReduceHelper = (elementPredicate, elementReducer, state, action) => {
     const [index, entityState] = findIndexAndEntity(elementPredicate, state);
 
     if (index === -1) {

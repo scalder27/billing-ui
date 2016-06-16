@@ -1,7 +1,7 @@
+import ReactDOM from "react-dom";
 import events from "add-event-listener";
 import {getPosition, getPositionType} from "./PositionHandler";
 import classnames from "classnames";
-import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
 
 import styles from "./Tooltip.scss";
@@ -14,7 +14,6 @@ class TooltipControl {
 
     reinit(options) {
         this._options = options;
-        const { positionType, className, isOpen } = this._options;
 
         this._tooltip.remove();
         this._tooltip = this._createAndInsertTooltipToDOM();
@@ -135,7 +134,7 @@ class TooltipControl {
 
     _setPosition() {
         const position = getPosition(this._positionType, this._target, this._tooltip);
-        Object.keys(position).map(property => this._tooltip.style[property] = position[property]);
+        Object.keys(position).map(property => { this._tooltip.style[property] = position[property] });
     }
 
     _setSize() {
