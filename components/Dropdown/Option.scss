@@ -53,7 +53,8 @@
         min-width: 20px;
         line-height: $lineHeightRegular;
         word-wrap: break-word;
-        max-height: 55px;
+        max-height: 65px;
+        overflow: hidden;
     }
 
     .additional-text {
