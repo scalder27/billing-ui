@@ -170,7 +170,7 @@ class Dropdown extends Component {
         const { value, styles, children } = this.props;
 
         const options = Children.map(children, option => {
-            if (option.type === Option) {
+            if (option && option.type === Option) {
                 return cloneElement(option, {
                     key: option.props.key || option.props.value,
                     isSelected: value === option.props.value,
