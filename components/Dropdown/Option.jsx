@@ -31,7 +31,7 @@ class Option extends Component {
 
         return (
             <div className={classNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}
-                ref={ node => this._optionNode = node }>
+                ref={ node => { this._optionNode = node } }>
                 <div className={styles.caption}>{children || caption}</div>
                 <span className={styles["additional-text"]}>{additionalData}</span>
             </div>

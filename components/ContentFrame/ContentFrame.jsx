@@ -3,7 +3,6 @@ import styles from "./ContentFrame.scss";
 
 class ContentFrame extends Component {
     render() {
-
         const { closeUrl } = this.props;
 
         return (
@@ -16,7 +15,8 @@ class ContentFrame extends Component {
 }
 
 ContentFrame.propTypes = {
-    closeUrl: PropTypes.string
+    closeUrl: PropTypes.string,
+    children: PropTypes.node
 };
 
 export default ContentFrame;

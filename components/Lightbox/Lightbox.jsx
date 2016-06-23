@@ -91,7 +91,8 @@ Lightbox.propTypes = {
     onClose: PropTypes.func,
     identifier: PropTypes.string.isRequired,
     title: PropTypes.string,
-    width: PropTypes.number
+    width: PropTypes.number,
+    children: PropTypes.node
 };
 
 Lightbox.defaultProps = {

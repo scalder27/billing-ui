@@ -39,15 +39,16 @@ RadioButton.propTypes = {
     readonly: PropTypes.bool,
     labelClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
-    checkboxClassName: PropTypes.string,
-    styles: PropTypes.object
+    radioClassName: PropTypes.string,
+    styles: PropTypes.object,
+    children: PropTypes.node
     // Так же можно передать остальные стандартные атрибуты радиобатона, но визуально они ни как не обрабатываются
 };
 
 RadioButton.defaultProps = {
     labelClassName: "",
     wrapperClassName: "",
-    checkboxClassName: "",
+    radioClassName: "",
     checked: false,
     disabled: false,
     styles: radioStyles

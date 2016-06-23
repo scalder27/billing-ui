@@ -3,14 +3,13 @@ const defaultPriceFormatOptions = {
     alwaysWithFraction: false
 };
 
-export const priceFormatter = (amount, options = defaultPriceFormatOptions) =>
-{
+export const priceFormatter = (amount, options = defaultPriceFormatOptions) => {
     const settings = options !== defaultPriceFormatOptions ? { ...defaultPriceFormatOptions, ...options } : options;
 
     let isNegative = amount < 0;
-    amount = Math.abs(amount);
-    const integralPart = Math.floor(amount);
-    let fractionalPart = Math.floor((amount * 100) - (integralPart * 100));
+    const absoluteAmount = Math.abs(amount);
+    const integralPart = Math.floor(absoluteAmount);
+    let fractionalPart = Math.floor((absoluteAmount * 100) - (integralPart * 100));
 
     let integralNumberString = integralPart.toString();
     const integralFormat = [];

@@ -1,4 +1,4 @@
-import { Component, PropTypes } from "react";
+import { PropTypes } from "react";
 import classnames from "classnames";
 
 import styles from "./Link.scss";

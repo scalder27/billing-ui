@@ -35,7 +35,6 @@ describe("replace element by index", () => {
 
         const actual3 = replaceByIndex("b", initArr.length, initArr);
         expect(actual3).toBe(initArr);
-
     });
 });
 

@@ -1,4 +1,5 @@
 import { Component, PropTypes, Children, cloneElement } from "react";
+import ReactDOM from "react-dom";
 import events from "add-event-listener";
 import KeyCodes from "./../../helpers/KeyCodes";
 import Icon, { IconTypes } from "./../Icon";
@@ -185,7 +186,7 @@ class Dropdown extends Component {
 
         if (options) {
             return (
-                <div className={styles.options} ref={node => this._optionsListNode = node}>
+                <div className={styles.options} ref={node => { this._optionsListNode = node }}>
                     {options}
                 </div>
             )

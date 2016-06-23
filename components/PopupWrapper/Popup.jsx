@@ -152,7 +152,8 @@ Popup.propTypes = {
     fixed: PropTypes.bool.isRequired,
 
     shouldUpdateChildren: PropTypes.bool.isRequired,
-    shouldOpenOnDidMount: PropTypes.bool.isRequired
+    shouldOpenOnDidMount: PropTypes.bool.isRequired,
+    children: PropTypes.node
 };
 
 Popup.defaultProps = {
