@@ -74,6 +74,7 @@ class TooltipControl {
         if (trigger === TriggerType.hover) {
             events.addEventListener(this._target, "mouseover", this._toggleTooltip.bind(this, true));
             events.addEventListener(this._target, "mouseleave", this._toggleTooltip.bind(this, false));
+            events.addEventListener(this._target, "click", this._toggleTooltip.bind(this, false));
         }
 
         if (trigger === TriggerType.click) {
