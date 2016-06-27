@@ -4,7 +4,7 @@
     "description": "KonturBilling ui components",
     "private": true,
     "scripts": {
-        "prepush": "npm run comb && npm run eslint -- --fix && npm run karma -- --single-run",
+        "precommit": "npm run comb && npm run eslint -- --fix && npm run karma -- --single-run",
 
         "karma": "karma start ./karma.conf.js",
         "test": "karma start ./karma.conf.js --reporters teamcity --single-run --browsers PhantomJS --colors false",
