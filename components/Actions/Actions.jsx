@@ -35,7 +35,7 @@ class Actions extends Component {
 Actions.propTypes = {
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
-    isActive: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool,
     position: PropTypes.object,
     getBindItem: PropTypes.func.isRequired,
     className: PropTypes.string,
