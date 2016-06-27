@@ -57,7 +57,7 @@ class Lightbox2 extends Component {
             lightbox.onOpenComplete(() => onOpen());
         }
 
-        if (onClose){
+        if (onClose) {
             lightbox.onCloseComplete(() => onClose());
         }
 
@@ -102,7 +102,8 @@ Lightbox2.propTypes = {
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
     title: PropTypes.string,
-    width: PropTypes.number
+    width: PropTypes.number,
+    children: PropTypes.node
 };
 
 Lightbox2.defaultProps = {

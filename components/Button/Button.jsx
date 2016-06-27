@@ -7,8 +7,16 @@ import classnames from "classnames";
 import buttonStyles from "./Button.scss";
 
 class Button extends Component {
+    _resolveOnClick() {
+        const { disabled, onClick } = this.props;
+
+        if (!disabled) {
+            onClick(arguments);
+        }
+    }
+
     render() {
-        const { href, target, className, onClick, children, appearance, type, size, disabled, active, styles } = this.props;
+        const { href, target, className, children, appearance, type, size, disabled, active, styles } = this.props;
         const classNames = classnames(
             styles.button,
             className,
@@ -19,14 +27,14 @@ class Button extends Component {
             });
 
         if (href) {
-            return <Link onClick={onClick} href={href} className={classNames} target={target}>{children}</Link>;
+            return <Link onClick={this._resolveOnClick.bind(this)} href={href} className={classNames} target={target}>{children}</Link>;
         }
 
         if (type) {
-            return <button onClick={onClick} className={classNames} type={type}>{children}</button>;
+            return <button onClick={this._resolveOnClick.bind(this)} className={classNames} type={type}>{children}</button>;
         }
 
-        return <span onClick={onClick} className={classNames}>{children}</span>;
+        return <span onClick={this._resolveOnClick.bind(this)} className={classNames}>{children}</span>;
     }
 }
 
@@ -42,7 +50,8 @@ Button.propTypes = {
     }).isRequired,
     type: PropTypes.oneOf(Object.keys(ButtonType).map((key) => ButtonType[key])),
     size: PropTypes.oneOf(Object.keys(ButtonSize).map((key) => ButtonSize[key])),
-    appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key]))
+    appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key])),
+    children: PropTypes.node
 };
 
 Button.defaultProps = {

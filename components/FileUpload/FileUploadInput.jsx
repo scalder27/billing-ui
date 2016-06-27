@@ -11,6 +11,7 @@ class FileUploadInput extends Component {
         return (
             <input
                 type="file"
+                title=" "
                 accept={accept}
                 name={`fileUploadInput_${this._uid}`}
                 className={styles.fileInput} />

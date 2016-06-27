@@ -6,7 +6,7 @@ instance.interceptors.request.use(config => {
     const { method, params } = config;
 
     if (method.toLowerCase() === "get") {
-        config.params = { ...params, _:+new Date() };
+        config.params = { ...params, _: +new Date() };
     }
 
     return config;

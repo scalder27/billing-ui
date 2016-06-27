@@ -1,5 +1,4 @@
 import {Component, PropTypes} from "react";
-import ReactDOM from "react-dom";
 import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
 import TooltipControl from "./Tooltip";
