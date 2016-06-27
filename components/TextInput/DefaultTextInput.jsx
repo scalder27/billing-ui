@@ -40,8 +40,10 @@ class DefaultTextInput extends Component {
                     styles={styles}
                     onChange={(evt) => this.change(evt.target.value, evt)}
                     ref={(el) => {
-                        this.input = ReactDOM.findDOMNode(el);
-                    }} />
+                        var inputNode = ReactDOM.findDOMNode(el);
+                        this.input = inputNode && inputNode.getElementsByTagName("input")[0];
+                    }}
+                />
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
             </span>
         );
