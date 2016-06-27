@@ -15,7 +15,9 @@ class TooltipControl {
     reinit(options) {
         this._options = options;
 
-        this._tooltip.remove();
+        if (this._tooltip && this._tooltip.remove) {
+            this._tooltip.remove();
+        }
         this._tooltip = this._createAndInsertTooltipToDOM();
         ReactDOM.render(this._generateMarkUp(), this._tooltip);
 
@@ -49,8 +51,11 @@ class TooltipControl {
         events.removeEventListener(window, "resize", this.redraw.bind(this));
         events.removeEventListener(this._mainWrapper, "scroll", this.redraw.bind(this));
 
-        this._tooltip.remove();
-        this._tooltip = null;
+        if (this._tooltip && this._tooltip.remove) {
+            this._tooltip.remove();
+            this._tooltip = null;
+        }
+
         this._target = null;
     }
 
