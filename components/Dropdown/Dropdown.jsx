@@ -205,7 +205,7 @@ class Dropdown extends Component {
 
         return (
             <div className={wrapperClassNames}>
-                <span className={selectClassNames} onClick={this.handleClick.bind(this)}>
+                <span className={selectClassNames} onClick={this.handleClick.bind(this)} title={this._caption}>
                     <span className={styles["select-input"]} style={{"width": width}}>
                         <span className={styles.caption}>{this._caption}</span>
                         <span className={styles["additional-text"]}>{additionalData}</span>
