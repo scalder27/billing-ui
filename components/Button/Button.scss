@@ -45,8 +45,8 @@
     }
 
     .button {
-        .size-small {
-            padding: 7px 0;
+        &.size-small {
+            padding: 7px 20px;
         }
     }
 }
