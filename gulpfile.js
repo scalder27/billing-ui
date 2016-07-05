@@ -21,7 +21,7 @@ gulp.task("sass:comb", function() {
                 format: "expanded",
                 indentSize: 4,
                 maxAtRuleLength: 80,
-                maxSelectorLength: 5,
+                maxSelectorLength: 4,
                 maxValueLength: 80,
                 sourcemap: false,
                 syntax: "scss"

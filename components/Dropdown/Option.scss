@@ -4,17 +4,21 @@
 :local {
     .option {
         position: relative;
+
         padding: 15px 35px 15px 15px;
+
+        overflow: hidden;
 
         line-height: $lineHeightRegular;
 
-        overflow: hidden;
         cursor: pointer;
 
         &:after {
             content: "";
+
             position: absolute;
             top: 65px;
+
             width: 100%;
             height: 15px;
 
@@ -51,10 +55,12 @@
 
     .caption {
         min-width: 20px;
+        max-height: 65px;
+
+        overflow: hidden;
+
         line-height: $lineHeightRegular;
         word-wrap: break-word;
-        max-height: 65px;
-        overflow: hidden;
     }
 
     .additional-text {
