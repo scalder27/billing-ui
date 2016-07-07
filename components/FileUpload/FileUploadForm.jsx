@@ -55,7 +55,7 @@ class FileUploadForm extends Component {
     }
 
     render() {
-        const { url, children, className, onClick, accept } = this.props;
+        const { url, children, className, onClick, accept, title } = this.props;
         return (
             <form
                 action={url}
@@ -71,7 +71,7 @@ class FileUploadForm extends Component {
 
                 {children}
                 <input type="hidden" value={this._fileId} name="fileId" />
-                <FileUploadInput accept={accept} />
+                <FileUploadInput accept={accept} title={title} />
             </form>
         );
     }
@@ -79,6 +79,7 @@ class FileUploadForm extends Component {
 
 FileUploadForm.propTypes = {
     accept: PropTypes.string,
+    title: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     url: PropTypes.string.isRequired,

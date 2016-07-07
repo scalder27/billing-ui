@@ -6,12 +6,12 @@ class FileUploadInput extends Component {
     _uid = FileUploadInput.uid++;
 
     render() {
-        const { accept } = this.props;
+        const { accept, title } = this.props;
 
         return (
             <input
                 type="file"
-                title=" "
+                title="title"
                 accept={accept}
                 name={`fileUploadInput_${this._uid}`}
                 className={styles.fileInput} />
@@ -20,11 +20,13 @@ class FileUploadInput extends Component {
 }
 
 FileUploadInput.propTypes = {
-    accept: PropTypes.string
+    accept: PropTypes.string,
+    title: PropTypes.string
 };
 
 FileUploadInput.defaultProps = {
-    accept: ""
+    accept: "",
+    title: " "
 };
 
 
