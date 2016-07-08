@@ -13,19 +13,25 @@
     .actionSubmit {
         @extend %stylized-button;
         @extend %as-inline-block;
+
+        &:focus {
+            box-shadow: 0 0 0 2px #db3052;
+        }
     }
 
     .actionCancel {
         @extend %as-inline-block;
         @extend %as-link;
 
-        margin: 11px 0 0 10px;
+        margin: 8px 0 0 10px;
+        padding: 2px;
 
         font-size: 16px;
 
-        &:focus,
-        &:active {
-            outline: none;
+        &:focus {
+            border: none;
+            outline: 2px solid #DB3052;
+            box-shadow: none;
 
             color: $linkBaseColor;
         }
