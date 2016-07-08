@@ -1,5 +1,6 @@
+import { expect } from "chai";
 import freeze from "deep-freeze";
-import { getUrlWithQuery } from "../UrlHelper";
+import { getUrlWithQuery } from "../../helpers/UrlHelper";
 
 describe("generate url with query parameters", () => {
     it("should generate query with all parameters", () => {
@@ -11,7 +12,7 @@ describe("generate url with query parameters", () => {
         const expectedUrl = "/controller/action?documentId=documentId1&billId=billId2";
 
         const actual = getUrlWithQuery(initUrl, initParams);
-        expect(actual).toEqual(expectedUrl);
+        expect(actual).to.deep.equal(expectedUrl);
     });
 
     it("should return raw url if no parameters sent", () => {
@@ -20,6 +21,6 @@ describe("generate url with query parameters", () => {
         const expectedUrl = "/controller/action";
 
         const actual = getUrlWithQuery(initUrl, initParams);
-        expect(actual).toEqual(expectedUrl);
+        expect(actual).to.deep.equal(expectedUrl);
     });
 });

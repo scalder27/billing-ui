@@ -1,4 +1,4 @@
-﻿export const priceFormat = amount => {
+﻿export const priceFormatHelper = amount => {
     let isNegative = amount < 0;
     const _amount = Math.abs(amount);
 
@@ -22,5 +22,5 @@
 };
 
 export default {
-    priceFormat
+    priceFormatHelper
 };
