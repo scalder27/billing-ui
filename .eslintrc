@@ -8,7 +8,7 @@
         "node": true,
         "es6": true,
         "commonjs": true,
-        "jasmine": true,
+        "mocha": true,
         "jquery": true
     },
     "rules": {
@@ -122,6 +122,11 @@
         "react/no-is-mounted": 2,
         "react/no-unknown-property": 2,
 
+        // tests
+        "mocha/no-exclusive-tests": 2,
+        "chai-expect/missing-assertion": 2,
+        "chai-expect/terminating-properties": 1,
+
         "promise/param-names": 2
     },
     "globals": {
@@ -131,6 +136,8 @@
     "plugins": [
         "react",
         "babel",
-        "promise"
+        "promise",
+        "mocha",
+        "chai-expect"
     ]
 }
