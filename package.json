@@ -7,7 +7,9 @@
     "precommit": "npm run comb && npm run eslint -- --fix && npm test -- --reporter min",
     "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
-    "comb": "gulp sass:comb"
+    "comb": "gulp sass:comb",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

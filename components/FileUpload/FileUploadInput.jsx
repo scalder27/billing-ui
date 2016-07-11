@@ -6,7 +6,7 @@ class FileUploadInput extends Component {
     _uid = FileUploadInput.uid++;
 
     render() {
-        const { accept } = this.props;
+        const { accept, title } = this.props;
 
         return (
             <input
