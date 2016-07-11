@@ -1,7 +1,7 @@
 import { PropTypes } from "react";
 import iconType from "../Icon";
 import specialCharacters from "../SpecialCharacters";
-import { priceFormatter } from "./PriceFormatter";
+import { priceFormatHelper } from "../../helpers/PriceHelper";
 
 const CurrencySymbol = () => (
     <span className="currency-ruble">
@@ -11,7 +11,7 @@ const CurrencySymbol = () => (
 
 const PriceFormat = ({amount, hasCurrencySymbol, fractionSeparator, alwaysWithFraction}) => (
     <span className="base-priceFormat">
-        { priceFormatter(amount, {fractionSeparator, alwaysWithFraction}).replace(/ /g, "\u00a0") }
+        { priceFormatHelper(amount, {fractionSeparator, alwaysWithFraction}).replace(/ /g, "\u00a0") }
         { hasCurrencySymbol && <CurrencySymbol /> }
     </span>
 );
