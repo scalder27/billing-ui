@@ -57,6 +57,7 @@
     "webpack": "^1.12.14"
   },
   "peerDependencies": {
+    "react-pure-render": ">= 1.0.2 < 2",
     "react": ">= 0.14.6 < 0.15",
     "react-dom": ">= 0.14.6 < 0.15",
     "classnames": "~2.2.3",
