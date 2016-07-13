@@ -3,3 +3,9 @@
         @content;
     }
 }
+
+@mixin windowMoreOrEqual($width: 1248px) {
+    @media only screen and (min-width: $width) {
+        @content;
+    }
+}
