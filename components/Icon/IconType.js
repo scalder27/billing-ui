@@ -3,6 +3,7 @@ const IconType = {
     ArchivePack: "\ue076",
     ArchiveUnpack: "\ue077",
     Attach: "\ue045",
+    BaseLine: "\ue003",
     Clear: "\ue030",
     Copy: "\ue097",
     Delete: "\ue00e",
