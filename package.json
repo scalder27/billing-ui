@@ -70,6 +70,10 @@
     "moment": "^2.12.0",
     "clipboard": "^1.5.9",
     "react-redux": "^4.0.6",
-    "redux": "^3.0.5"
+    "redux": ">= 3.1.0 < 4",
+    "redux-saga": ">= 0.10.4 < 1",
+    "redux-thunk": "2.x",
+    "react-addons-perf": ">= 0.14.8 < 1",
+    "why-did-you-update": ">= 0.0.8 < 1"
   }
 }
