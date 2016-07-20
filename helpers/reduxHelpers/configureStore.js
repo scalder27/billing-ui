@@ -9,7 +9,7 @@ import analyticsMiddleware from "./analyticsMiddleware";
 const __DEV__ = process.env.NODE_ENV !== "production";
 
 if (__DEV__) {
-    whyDidYouUpdate(react);
+    whyDidYouUpdate(react, { exclude: [/^Connect\(.*\)$/, "ReactTransitionGroup", "ReactCSSTransitionGroup", "ReactCSSTransitionGroupChild" ] });
     window.ReactPerf = reactPerf;
 }
 
