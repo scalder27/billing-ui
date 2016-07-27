@@ -5,8 +5,16 @@ import ButtonType from "./ButtonType";
 import Link from "../Link";
 import classnames from "classnames";
 import buttonStyles from "./Button.scss";
+import shouldComponentUpdate from "react-pure-render/function";
 
 class Button extends Component {
+    shouldComponentUpdate = shouldComponentUpdate;
+
+    constructor(props) {
+        super(props);
+        this._resolveOnClick = this._resolveOnClick.bind(this);
+    }
+
     _resolveOnClick() {
         const { disabled, onClick } = this.props;
 
@@ -27,14 +35,14 @@ class Button extends Component {
             });
 
         if (href) {
-            return <Link onClick={this._resolveOnClick.bind(this)} href={href} className={classNames} target={target}>{children}</Link>;
+            return <Link onClick={this._resolveOnClick} href={href} className={classNames} target={target}>{children}</Link>;
         }
 
         if (type) {
-            return <button onClick={this._resolveOnClick.bind(this)} className={classNames} type={type}>{children}</button>;
+            return <button onClick={this._resolveOnClick} className={classNames} type={type}>{children}</button>;
         }
 
-        return <span onClick={this._resolveOnClick.bind(this)} className={classNames}>{children}</span>;
+        return <span onClick={this._resolveOnClick} className={classNames}>{children}</span>;
     }
 }
 
