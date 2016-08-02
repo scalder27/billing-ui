@@ -1,79 +1,91 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
-import LightboxTop from "exports?LightboxTop!ContentBase/scripts/Lightbox/LightboxTop";
 
 class Lightbox extends Component {
     componentDidMount() {
-        const { shouldUpdate, isOpen} = this.props;
-        if (!this._lightboxControl && shouldUpdate) {
-            this.initLightbox();
-        }
+        const { isOpen } = this.props;
+        this.initLightbox();
 
-        this.open(isOpen);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.shouldUpdate) {
-            this.removeLightbox();
-        } else {
-            this.open(nextProps.isOpen);
+        if (isOpen) {
+            this.toggleVisibility(isOpen);
         }
     }
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.shouldUpdate;
-    }
+    componentDidUpdate(prevProps) {
+        const { isOpen } = this.props;
+        ReactDOM.render(this.renderLightboxHtml(), this._containerNode);
 
-    componentDidUpdate() {
-        const { shouldUpdate, isOpen } = this.props;
-        if (!this._lightboxControl && shouldUpdate) {
-            this.initLightbox();
+        if (prevProps.isOpen !== isOpen) {
+            this.toggleVisibility(isOpen);
         }
-
-        this.open(isOpen);
     }
 
     componentWillUnmount() {
         this.removeLightbox();
     }
 
-    generateLightboxHtml() {
-        const {title, width, children} = this.props;
-        const lbStyle = {width: `${width}px`};
+    renderLightboxHtml() {
+        const { title, children } = this.props;
 
         return (
-            <div className="lb-lightbox inlineBlock" style={lbStyle}>
-                <div className="lb-lightboxWrapper">
-                    <div className="lb-closeButton"></div>
-                    <div>
-                        <h2 className="lb-title">{title}</h2>
-                        {children}
-                    </div>
+            <div className="lb-lightboxWrapper">
+                <div className="lb-closeButton"></div>
+                <div>
+                    <h2 className="lb-title">{title}</h2>
+                    {children}
                 </div>
             </div>
         );
     }
 
-    initLightbox() {
-        const {getOpenLink, onClose} = this.props;
+    renderLightboxContainer(width) {
+        const containerEl = document.createElement("div");
+        containerEl.className = "lb-lightbox inlineBlock";
+        containerEl.style.width = `${width}px`;
 
-        const lightboxItemHtml = document.createElement("div");
-        const lightboxHtml = ReactDOM.render(this.generateLightboxHtml(), lightboxItemHtml);
-        const openLink = getOpenLink && getOpenLink();
-
-        this._lightboxControl = LightboxTop.create(lightboxHtml, {
-            openLink: openLink
-        });
-
-        onClose && this._lightboxControl.onCloseComplete(() => onClose());
+        return containerEl;
     }
 
-    open(isOpen) {
-        isOpen && this._lightboxControl.open();
+    createLightbox(lightboxHtml) {
+        const { getOpenLink, onClose, onOpen } = this.props;
+        // eslint-disable-next-line no-undef
+        const lightbox = LightboxTop.create(lightboxHtml, {
+            openLink: getOpenLink && getOpenLink()
+        });
+
+        if (onOpen) {
+            lightbox.onOpenComplete(() => onOpen());
+        }
+
+        if (onClose) {
+            lightbox.onCloseComplete(() => onClose());
+        }
+
+        return lightbox;
+    }
+
+    initLightbox() {
+        const { width } = this.props;
+
+        this._containerNode = this.renderLightboxContainer(width);
+        ReactDOM.render(this.renderLightboxHtml(), this._containerNode);
+
+        // eslint-disable-next-line no-undef
+        this._lightboxControl = this.createLightbox(this._containerNode);
+    }
+
+    toggleVisibility(isOpen) {
+        if (isOpen) {
+            this._lightboxControl.open();
+        } else {
+            this._lightboxControl.close();
+        }
     }
 
     removeLightbox() {
         if (this._lightboxControl) {
+            ReactDOM.unmountComponentAtNode(this._containerNode);
+
             this._lightboxControl.remove();
             this._lightboxControl = null;
         }
@@ -86,18 +98,16 @@ class Lightbox extends Component {
 
 Lightbox.propTypes = {
     isOpen: PropTypes.bool,
-    shouldUpdate: PropTypes.bool,
     getOpenLink: PropTypes.func,
     onClose: PropTypes.func,
-    identifier: PropTypes.string.isRequired,
+    onOpen: PropTypes.func,
     title: PropTypes.string,
     width: PropTypes.number,
     children: PropTypes.node
 };
 
 Lightbox.defaultProps = {
-    width: 452,
-    shouldUpdate: true
+    width: 452
 };
 
 export default Lightbox;
