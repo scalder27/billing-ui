@@ -11,7 +11,7 @@ const KeyCodes = {
 
     home: 36,
     end: 35,
-
+    space: 32,
     pageUp: 33,
     pageDown: 34,
 
