@@ -11,9 +11,10 @@
 
     .header {
         padding: 5px;
-        text-align: right;
 
         border-bottom: 1px solid $borderDarkestColor;
         background: $bgWhiteColor;
+
+        text-align: right;
     }
 }

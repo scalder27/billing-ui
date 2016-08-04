@@ -6,16 +6,16 @@ import cx from "classnames";
 import styles from "./Calendar.scss";
 
 const MONTH_NAMES = [
-    "янв", "фев", "мар", "апр",
-    "май", "июн", "июл", "авг",
-    "сен", "окт", "ноя", "дек"
+    "Январь", "Февраль", "Март", "Апрель",
+    "Май", "Июнь", "Июль", "Август",
+    "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
 ];
 
 const DAY = 24 * 60 * 60 * 1000;
 const WEEK = 7 * DAY;
 const FIRST_WEEK_SHIFT = (new Date(0).getDay() - 1) * DAY;
-const DAY_HEIGHT = 25;
-const CALENDAR_HEIGHT = 220;
+const DAY_HEIGHT = 30;
+const CALENDAR_HEIGHT = 210;
 
 const getWeek = (time) => {
     return Math.floor((FIRST_WEEK_SHIFT + time) / WEEK);
@@ -134,11 +134,13 @@ class Calendar extends Component {
                 top: Math.max(0, -y)
             };
 
+            const isJanuary = monthStart.month() === 0;
+
             months.push(
                 <div key={+monthStart} className={monthClassNames} style={monthWrapperStyle}>
                     <div style={monthStyle}>
                         {MONTH_NAMES[monthStart.month()]}
-                        <div className={styles.year}>{monthStart.year()}</div>
+                        {isJanuary && <div className={styles.year}>{monthStart.year()}</div>}
                     </div>
                 </div>
             );

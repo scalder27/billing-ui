@@ -2,19 +2,21 @@
 
 :local {
     .root {
-        cursor: pointer;
         position: relative;
 
         display: inline-block;
+
         outline: 0;
 
         color: $textBaseColor;
         line-height: 28px;
         text-align: left;
+
+        cursor: pointer;
     }
 
     .caption {
-        padding: 5px 18px 8px 10px;
+        padding: 6px 18px 7px 10px;
 
         :local(.root):hover & {
             color: $linkBaseColor;
@@ -23,7 +25,7 @@
 
     .arrow {
         position: absolute;
-        top: 10px;
+        top: 9px;
         right: 6px;
 
         &:before,
@@ -106,7 +108,7 @@
         }
 
         &.active {
-            background: $bgElementActiveLightColor;
+            background: $bgActiveActionsColor;
 
             color: $textWhiteColor;
         }
@@ -116,8 +118,6 @@
     .down {
         height: 14px;
         box-sizing: border-box;
-
-        background: linear-gradient(#fdfdfd, #ededed);
 
         text-align: center;
 
@@ -131,23 +131,31 @@
 
             vertical-align: top;
         }
+
+        &:hover {
+            background-color: $bgActiveActionsColor;
+        }
     }
 
     .up {
-        border-bottom: 1px solid $borderBaseColor;
-
         &:before {
             border-top: 0;
-            border-bottom-color: #a0a0a0;
+            border-bottom-color: $textBaseColor;
+        }
+
+        &:hover:before {
+            border-bottom-color: $borderWhiteColor;
         }
     }
 
     .down {
-        border-top: 1px solid $borderBaseColor;
-
         &:before {
-            border-top-color: #a0a0a0;
+            border-top-color: $textBaseColor;
             border-bottom: 0;
+        }
+
+        &:hover:before {
+            border-top-color: $borderWhiteColor;
         }
     }
 }
