@@ -152,6 +152,7 @@ CalendarWrapper.propTypes = {
     minYear: PropTypes.number,
     value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    className: PropTypes.string,
 
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
