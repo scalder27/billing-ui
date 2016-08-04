@@ -215,7 +215,7 @@ class DateSelect extends Component {
 
 
         const style = {
-            top: top - 2
+            top: top - 3
         };
 
         const shiftStyle = {
