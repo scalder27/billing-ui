@@ -47,19 +47,17 @@ class Picker extends Component {
     }
 
     handleMonthChange(evt) {
-        this.setState({
-            date: moment(this.state.date).month(evt.target.value)
-        });
+        var newDate = moment(this.state.date).month(evt.target.value);
+        this.setState({ date: newDate });
 
-        this.refs.calendar.moveToDate(this.state.date);
+        this.refs.calendar.moveToDate(newDate);
     }
 
     handleYearChange(evt) {
-        this.setState({
-            date: moment(this.state.date).year(evt.target.value)
-        });
+        var newDate = moment(this.state.date).year(evt.target.value);
+        this.setState({ date: newDate });
 
-        this.refs.calendar.moveToDate(this.state.date);
+        this.refs.calendar.moveToDate(newDate);
     }
 
     handleDocClick(evt) {
