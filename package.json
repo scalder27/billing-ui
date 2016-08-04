@@ -1,6 +1,6 @@
 {
   "name": "billing-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "KonturBilling ui components",
   "private": true,
   "scripts": {
@@ -64,7 +64,6 @@
     "add-event-listener": "^0.0.1",
     "eventemitter3": "^1.2.0",
     "jquery": "^1.11.3",
-    "react-router-redux": "^4.0.4",
     "react-input-mask": ">= 0.6.4 < 1",
     "axios": ">= 0.8 < 1",
     "moment": "^2.12.0",
