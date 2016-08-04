@@ -1,6 +1,6 @@
 import { Component, PropTypes } from "react";
 import dateSelectType from "./DateSelectType";
-import keyCodes from "./KeyCodes";
+import keyCodes from "../../helpers/KeyCodes";
 
 import cx from "classnames";
 import styles from "./DateSelect.scss";
@@ -181,9 +181,9 @@ class DateSelect extends Component {
     }
 
     getItem(index) {
-        const value = this.state.value + index;
+        const value = this.props.value + index;
 
-        if (this.state.type === dateSelectType.month) {
+        if (this.props.type === dateSelectType.month) {
             return MONTHS[value];
         }
 
@@ -228,21 +228,21 @@ class DateSelect extends Component {
         });
 
         return (
-            <div className={holderClassNames} style={style} onKeyDown={this.handleKey}>
+            <div className={holderClassNames} style={style} onKeyDown={(evt) => this.handleKey(evt)}>
                 {!topCapped && (
-                    <div className={styles.up} onClick={this.handleUp} />
+                    <div className={styles.up} onClick={() => this.handleUp()} />
                 )}
                 <div className={styles.items} style={{height}}>
                     <div style={shiftStyle}>{items}</div>
                     <div className={styles.overlay}
-                        onMouseDown={this.handleItemClick}
-                        onMouseMove={this.handleMouseMove}
-                        onMouseLeave={this.handleMouseLeave}
-                        onWheel={this.handleWheel}
+                        onMouseDown={(evt) => this.handleItemClick(evt)}
+                        onMouseMove={(evt) => this.handleMouseMove(evt)}
+                        onMouseLeave={() => this.handleMouseLeave()}
+                        onWheel={(evt) => this.handleWheel(evt)}
                     />
                 </div>
                 {!botCapped && (
-                    <div className={styles.down} onClick={this.handleDown} />
+                    <div className={styles.down} onClick={() => this.handleDown()} />
                 )}
             </div>
         );
@@ -254,13 +254,13 @@ class DateSelect extends Component {
             className: styles.root,
             style: { width },
             tabIndex: "0",
-            onBlur: this.close,
-            onKeyDown: this.handleKey
+            onBlur: this.close.bind(this),
+            onKeyDown: this.handleKey.bind(this)
         };
 
         return (
             <div {...rootProps}>
-                <div className={styles.caption} onClick={this.open}>
+                <div className={styles.caption} onClick={() => this.open()}>
                     {this.getItem(0)}
                     <div className={styles.arrow} />
                 </div>
@@ -274,7 +274,7 @@ DateSelect.propTypes = {
     maxYear: PropTypes.number,
     minYear: PropTypes.number,
     type: PropTypes.oneOf(Object.keys(dateSelectType).map(key => dateSelectType[key])).isRequired,
-    value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+    value: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func
 };

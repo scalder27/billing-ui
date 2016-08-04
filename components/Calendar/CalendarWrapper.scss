@@ -1,2 +1,36 @@
-﻿:loacl {
+﻿@import "./../../styles/variables";
+
+:local {
+    .root {
+        position: relative;
+
+        display: inline-block;
+
+        vertical-align: bottom;
+    }
+
+    .open-button {
+        position: absolute;
+        z-index: 2;
+        top: 1px;
+        right: 1px;
+
+        padding: 0 9px;
+
+        color: $textSecondaryColor;
+        line-height: 32px;
+
+        cursor: pointer;
+
+        & .disabled {
+            color: $textDisabledColor;
+
+            cursor: default;
+        }
+    }
+
+    .picker {
+        position: relative;
+        top: -1px;
+    }
 }

@@ -1,9 +1,11 @@
 import { Component, PropTypes } from "react";
-import cx from "classNames";
 import moment, { formatDate } from "../../libs/moment";
+
 import TextInput from "../TextInput";
 import Picker from "./Picker";
 import Icon, { IconTypes } from "../Icon";
+
+import cx from "classnames";
 import styles from "./CalendarWrapper.scss";
 
 class CalendarWrapper extends Component {
@@ -20,7 +22,7 @@ class CalendarWrapper extends Component {
 
     componentWillReceiveProps(newProps) {
         if (!this._focused) {
-            this.setState({textValue: formatDate(newProps.value)});
+            this.setState({ textValue: formatDate(newProps.value) });
         }
     }
 
@@ -83,11 +85,7 @@ class CalendarWrapper extends Component {
     }
 
     close(focus) {
-        this.setState({opened: false});
-
-        if (focus) {
-            setTimeout(() => this.refs.input.focus(), 0);
-        }
+        this.setState({ opened: false });
     }
 
     renderPicker() {
@@ -95,15 +93,15 @@ class CalendarWrapper extends Component {
             return;
         }
 
-        const {value, minYear, maxYear} = this.props;
+        const { value, minYear, maxYear } = this.props;
 
         return (
-            <div className={styles.picker} onKeyDown={this.handlePickerKey}>
+            <div className={styles.picker} onKeyDown={(evt) => this.handlePickerKey(evt)}>
                 <Picker value={value}
                     minYear={minYear}
                     maxYear={maxYear}
-                    onPick={this.handlePick}
-                    onClose={this.handlePickerClose}
+                    onPick={(date) => this.handlePick(date)}
+                    onClose={() => this.handlePickerClose()}
                 />
             </div>
         );
@@ -122,15 +120,17 @@ class CalendarWrapper extends Component {
             value: this.state.textValue,
             maxLength: "10",
             width: "100%",
-            onChange: this.handleChange,
-            onBlur: this.handleBlur,
-            onFocus: this.handleFocus
+            onChange: this.handleChange.bind(this),
+            onBlur: this.handleBlur.bind(this),
+            onFocus: this.handleFocus.bind(this)
         };
 
         return (
             <span className={wrapperClassNames} style={{width: width}}>
                 <TextInput ref="input" {...this.props} {...inputProps} />
-                <Icon type={IconTypes.Calendar} className={openButtonClassNames} onClick={this.open} />
+                <span className={openButtonClassNames} onClick={() => this.open()}>
+                    <Icon type={IconTypes.Calendar} />
+                </span>
                 {picker}
             </span>
         );
@@ -149,7 +149,7 @@ CalendarWrapper.propTypes = {
     disabled: PropTypes.bool,
     maxYear: PropTypes.number,
     minYear: PropTypes.number,
-    value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
     onBlur: PropTypes.func,

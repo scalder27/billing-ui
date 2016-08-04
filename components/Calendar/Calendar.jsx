@@ -108,6 +108,10 @@ class Calendar extends Component {
         });
     }
 
+    handleMouseLeave() {
+        this.setState({mouseX: -10});
+    }
+
     renderMonth(offset, from, week) {
         const months = [];
         let monthStart = moment(from);
@@ -194,13 +198,13 @@ class Calendar extends Component {
         const cells = this.renderCells(offset, from, week);
 
         return (
-            <div className={styles.root} tabIndex="0" onWheel={this.handleWheel}>
+            <div className={styles.root} tabIndex="0" onWheel={(evt) => this.handleWheel(evt)}>
                 {cells}
                 {months}
                 <div className={styles.mask}
-                    onMouseMove={this.handleMouseMove}
-                    onMouseLeave={this.handleMouseLeave}
-                    onMouseDown={this.handleMouseDown}
+                    onMouseMove={(evt) => this.handleMouseMove(evt)}
+                    onMouseLeave={() => this.handleMouseLeave()}
+                    onMouseDown={(evt) => this.handleMouseDown(evt)}
                 />
             </div>
         );
@@ -208,9 +212,9 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-    initialDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
-    value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
-    onNav: PropTypes.number,
+    initialDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
+    onNav: PropTypes.func,
     onPick: PropTypes.func
 };
 

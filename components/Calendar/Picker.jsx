@@ -4,11 +4,28 @@ import events from "add-event-listener";
 import moment from "../../libs/moment";
 
 import Calendar from "./Calendar";
-import DateSelect from "../DateSelect";
+import DateSelect from "./DateSelect";
 
 import styles from "./Picker.scss";
 
+const isDetached = element => {
+    let newElement = element;
+    const body = document.body;
+
+    do {
+        if (newElement === body) {
+            return false;
+        }
+        newElement = newElement.parentNode;
+    } while (newElement);
+
+    return true;
+};
+
+
 class Picker extends Component {
+    _handleDocClick = this.handleDocClick.bind(this);
+
     constructor(props, context) {
         super(props, context);
 
@@ -20,58 +37,60 @@ class Picker extends Component {
     componentDidMount() {
         this._mounted = true;
 
-        events.addEventListener(document, "mousedown", this.handleDocClick);
+        events.addEventListener(document, "mousedown", this._handleDocClick);
     }
 
     componentWillUnmount() {
         this._mounted = false;
 
-        events.removeEventListener(document, "mousedown", this.handleDocClick);
+        events.removeEventListener(document, "mousedown", this._handleDocClick);
     }
 
-    handleMonthChange = evt => {
+    handleMonthChange(evt) {
         this.setState({
             date: moment(this.state.date).month(evt.target.value)
         });
-    };
 
-    handleYearChange = evt => {
+        this.refs.calendar.moveToDate(this.state.date);
+    }
+
+    handleYearChange(evt) {
         this.setState({
             date: moment(this.state.date).year(evt.target.value)
         });
-    };
 
-    handleDocClick = evt => {
-        // For some reason mousedown handler is still being called after
-        // `componentWillUnmount` was called in IE11.
+        this.refs.calendar.moveToDate(this.state.date);
+    }
+
+    handleDocClick(evt) {
         if (!this._mounted) {
             return;
         }
 
         const target = evt.target || evt.srcElement;
-        if (!ReactDOM.findDOMNode(this).contains(target)) {
+        if (!ReactDOM.findDOMNode(this).contains(target) && !isDetached(target)) {
             this.props.onClose();
         }
-    };
+    }
 
     render() {
         const { date } = this.state;
         const { minYear, maxYear } = this.props;
         return (
             <div className={styles.root}>
-                <div className={styles.monthYear}>
+                <div className={styles.header}>
                     <div>
                         <DateSelect type="month"
                             value={date.month()}
                             width={100}
-                            onChange={this.handleMonthChange}
+                            onChange={(evt) => this.handleMonthChange(evt)}
                         />
                         <DateSelect type="year"
                             value={date.year()}
                             minYear={minYear}
                             maxYear={maxYear}
                             width={70}
-                            onChange={this.handleYearChange}
+                            onChange={(evt) => this.handleYearChange(evt)}
                         />
                     </div>
                 </div>
@@ -86,7 +105,7 @@ class Picker extends Component {
 }
 
 Picker.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
     minYear: PropTypes.number,
     maxYear: PropTypes.number,
     onPick: PropTypes.func,

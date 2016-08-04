@@ -1,2 +1,90 @@
-﻿:loacl {
+﻿@import "./../../styles/variables";
+
+:local {
+    $daySide: 25px;
+
+    .root {
+        position: relative;
+        z-index: 900;
+
+        width: 220px;
+        height: 220px;
+
+        overflow: hidden;
+
+        border-radius: 0 0 2px 2px;
+        outline: none;
+        background: $bgWhiteColor;
+    }
+
+    .mask {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        opacity: 0;
+
+        background: $bgWhiteColor;
+        box-shadow: inset 0 5px 6px -5px rgba(0, 0, 0, .2);
+    }
+
+    .grey {
+        background: $bgBaseColor;
+    }
+
+    .month {
+        position: absolute;
+        left: $daySide * 7;
+
+        width: 45px;
+        padding: 6px 0 0 0;
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .year {
+        color: #888;
+    }
+
+    .cell {
+        position: absolute;
+
+        .holy {
+            color: #c22;
+        }
+
+        &.active .cell-inner {
+            background: #ddd;
+        }
+
+        &.today .cell-inner {
+            background: $bgElementActiveColor;
+
+            color: $textWhiteColor;
+        }
+
+        &.current .cell-inner {
+            background: #808080;
+
+            color: $textWhiteColor;
+        }
+    }
+
+    .cell-inner {
+        display: block;
+        width: $daySide;
+        height: $daySide;
+
+        border-radius: 2px;
+
+        font-size: 11px;
+        line-height: $daySide;
+        text-align: center;
+    }
 }
