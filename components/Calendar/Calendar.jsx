@@ -68,6 +68,8 @@ class Calendar extends Component {
             deltaY *= DAY_HEIGHT;
         } else if (evt.deltaMode === 2) {
             deltaY *= DAY_HEIGHT * 4;
+        } else if (evt.deltaMode === 0) {
+            deltaY = deltaY / Math.abs(deltaY) * DAY_HEIGHT * 5;
         }
 
         const pos = this.state.pos + deltaY;
