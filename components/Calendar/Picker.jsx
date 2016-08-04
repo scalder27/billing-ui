@@ -30,7 +30,7 @@ class Picker extends Component {
         super(props, context);
 
         this.state = {
-            date: props.value ? moment(props.value, "DD.MM.YYYY") : moment()
+            date: props.value ? props.value : moment()
         };
     }
 

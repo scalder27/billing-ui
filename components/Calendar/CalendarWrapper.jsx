@@ -97,7 +97,7 @@ class CalendarWrapper extends Component {
 
         return (
             <div className={styles.picker} onKeyDown={(evt) => this.handlePickerKey(evt)}>
-                <Picker value={value}
+                <Picker value={moment(value, "DD.MM.YYYY")}
                     minYear={minYear}
                     maxYear={maxYear}
                     onPick={(date) => this.handlePick(date)}
@@ -138,6 +138,7 @@ class CalendarWrapper extends Component {
 }
 
 CalendarWrapper.defaultProps = {
+    value: moment(),
     width: 120,
     minYear: 1900,
     maxYear: 2100,

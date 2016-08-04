@@ -212,8 +212,8 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-    initialDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
-    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
+    initialDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
     onNav: PropTypes.func,
     onPick: PropTypes.func
 };
