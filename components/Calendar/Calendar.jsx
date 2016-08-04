@@ -171,7 +171,7 @@ class Calendar extends Component {
 
             const cellClassNames = cx(styles.cell, {
                 [styles.active]: active,
-                [styles.today]: date.isSame(moment(), "day"),
+                [styles.today]: date.isSame(this._today, "day"),
                 [styles.current]: date.isSame(moment(this.props.value, "DD.MM.YYYY"), "day"),
                 [styles.grey]: date.month() % 2,
                 [styles.holy]: date.day() === 0 || date.day() === 6
