@@ -12,7 +12,6 @@
 
         overflow: hidden;
 
-        border-radius: 0 0 2px 2px;
         outline: none;
         background: $bgWhiteColor;
     }
@@ -54,9 +53,10 @@
 
     .cell {
         position: absolute;
+        cursor: pointer;
 
-        .holy {
-            color: #c22;
+        &.holy {
+            color: $textDisabledColor;
         }
 
         &.active .cell-inner {
@@ -64,24 +64,21 @@
         }
 
         &.today .cell-inner {
-            background: $bgElementActiveColor;
-
-            color: $textWhiteColor;
+            font-weight: bold;
         }
 
         &.current .cell-inner {
-            background: #808080;
+            background: $linkBaseColor;
 
             color: $textWhiteColor;
         }
     }
 
     .cell-inner {
+        cursor: pointer;
         display: block;
         width: $daySide;
         height: $daySide;
-
-        border-radius: 2px;
 
         font-size: 11px;
         line-height: $daySide;

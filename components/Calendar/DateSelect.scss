@@ -2,34 +2,29 @@
 
 :local {
     .root {
+        cursor: pointer;
         position: relative;
 
         display: inline-block;
-
-        border: 1px solid $borderBaseColor;
-        border-bottom-color: $borderDarkColor;
-        border-radius: 3px;
         outline: 0;
-        background: linear-gradient(#fefefe, #ececec);
 
         color: $textBaseColor;
         line-height: 28px;
-
-        cursor: default;
-
-        &:focus {
-            position: relative;
-        }
+        text-align: left;
     }
 
     .caption {
-        padding: 0 18px 0 10px;
+        padding: 5px 18px 8px 10px;
+
+        :local(.root):hover & {
+            color: $linkBaseColor;
+        }
     }
 
     .arrow {
         position: absolute;
         top: 10px;
-        right: 8px;
+        right: 6px;
 
         &:before,
         &:after {
@@ -44,12 +39,20 @@
             margin-bottom: 2px;
 
             border-top: 0;
-            border-bottom-color: #a6a6a6;
+            border-bottom-color: $textBaseColor;
         }
 
         &:after {
-            border-top-color: #a6a6a6;
+            border-top-color: $textBaseColor;
             border-bottom: 0;
+        }
+
+        :local(.root):hover &:before {
+            border-bottom-color: $linkBaseColor;
+        }
+
+        :local(.root):hover &:after {
+            border-top-color: $linkBaseColor;
         }
     }
 

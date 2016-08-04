@@ -78,17 +78,17 @@ class Picker extends Component {
             <div className={styles.root}>
                 <div className={styles.header}>
                     <div>
+                        <DateSelect type="year"
+                                    value={date.year()}
+                                    minYear={minYear}
+                                    maxYear={maxYear}
+                                    width={60}
+                                    onChange={(evt) => this.handleYearChange(evt)}
+                        />
                         <DateSelect type="month"
                             value={date.month()}
-                            width={100}
+                            width={90}
                             onChange={(evt) => this.handleMonthChange(evt)}
-                        />
-                        <DateSelect type="year"
-                            value={date.year()}
-                            minYear={minYear}
-                            maxYear={maxYear}
-                            width={70}
-                            onChange={(evt) => this.handleYearChange(evt)}
                         />
                     </div>
                 </div>
