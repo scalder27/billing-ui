@@ -18,7 +18,8 @@
     .caption {
         padding: 6px 18px 7px 10px;
 
-        :local(.root):hover & {
+        :local(.root):hover &,
+        :local(.root):focus &{
             color: $linkBaseColor;
         }
     }
@@ -49,11 +50,13 @@
             border-bottom: 0;
         }
 
-        :local(.root):hover &:before {
+        :local(.root):hover &:before,
+        :local(.root):focus &:before {
             border-bottom-color: $linkBaseColor;
         }
 
-        :local(.root):hover &:after {
+        :local(.root):hover &:after,
+        :local(.root):focus &:after {
             border-top-color: $linkBaseColor;
         }
     }

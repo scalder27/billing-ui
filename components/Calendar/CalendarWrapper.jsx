@@ -1,9 +1,10 @@
-import { Component, PropTypes } from "react";
-import moment, { formatDate } from "../../libs/moment";
+import {Component, PropTypes} from "react";
+import ReactDOM from "react-dom";
+import moment, {formatDate} from "../../libs/moment";
 
 import TextInput from "../TextInput";
 import Picker from "./Picker";
-import Icon, { IconTypes } from "../Icon";
+import Icon, {IconTypes} from "../Icon";
 
 import cx from "classnames";
 import styles from "./CalendarWrapper.scss";
@@ -13,6 +14,7 @@ class CalendarWrapper extends Component {
         super(props, context);
 
         this.state = {
+            height: null,
             textValue: formatDate(props.value),
             opened: false
         };
@@ -22,7 +24,15 @@ class CalendarWrapper extends Component {
 
     componentWillReceiveProps(newProps) {
         if (!this._focused) {
-            this.setState({ textValue: formatDate(newProps.value) });
+            this.setState({textValue: formatDate(newProps.value)});
+        }
+    }
+
+    componentDidUpdate() {
+        const height = ReactDOM.findDOMNode(this).getBoundingClientRect().height;
+
+        if (this.state.height !== height) {
+            this.setState({height})
         }
     }
 
@@ -42,8 +52,8 @@ class CalendarWrapper extends Component {
     }
 
     handleBlur() {
-        const { onChange, onBlur, value } = this.props;
-        const { textValue } = this.state;
+        const {onChange, onBlur, value} = this.props;
+        const {textValue} = this.state;
         this._focused = false;
 
         const date = moment(textValue, "DD.MM.YYYY");
@@ -80,12 +90,12 @@ class CalendarWrapper extends Component {
 
     open() {
         if (!this.props.disabled) {
-            this.setState({ opened: true });
+            this.setState({opened: true});
         }
     }
 
     close(focus) {
-        this.setState({ opened: false });
+        this.setState({opened: false});
     }
 
     renderPicker() {
@@ -93,22 +103,23 @@ class CalendarWrapper extends Component {
             return;
         }
 
-        const { value, minYear, maxYear } = this.props;
+        const {value, minYear, maxYear} = this.props;
 
         return (
             <div className={styles.picker} onKeyDown={(evt) => this.handlePickerKey(evt)}>
                 <Picker value={moment(value, "DD.MM.YYYY")}
-                    minYear={minYear}
-                    maxYear={maxYear}
-                    onPick={(date) => this.handlePick(date)}
-                    onClose={() => this.handlePickerClose()}
+                        verticalShift={this.state.height}
+                        minYear={minYear}
+                        maxYear={maxYear}
+                        onPick={(date) => this.handlePick(date)}
+                        onClose={() => this.handlePickerClose()}
                 />
             </div>
         );
     }
 
     render() {
-        const { className, width, disabled } = this.props;
+        const {className, width, disabled} = this.props;
 
         const picker = this.renderPicker();
         const wrapperClassNames = cx(styles.root, className);
@@ -129,7 +140,7 @@ class CalendarWrapper extends Component {
             <span className={wrapperClassNames} style={{width: width}}>
                 <TextInput ref="input" {...this.props} {...inputProps} />
                 <span className={openButtonClassNames} onClick={() => this.open()}>
-                    <Icon className={styles.icon} type={IconTypes.Calendar} />
+                    <Icon className={styles.icon} type={IconTypes.Calendar}/>
                 </span>
                 {picker}
             </span>

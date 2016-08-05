@@ -1,7 +1,7 @@
 import { Component, PropTypes } from "react";
 import dateSelectType from "./DateSelectType";
 import keyCodes from "../../helpers/KeyCodes";
-import { fixYPopupPosition } from "../../helpers/PopupPositionHelper";
+import { fixYPopupPosition } from "./PopupPositionHelper";
 
 import cx from "classnames";
 import styles from "./DateSelect.scss";
@@ -24,7 +24,7 @@ class DateSelect extends Component {
 
     componentDidUpdate() {
         if (this._holder) {
-            fixYPopupPosition(this._holder);
+            this._holder.style.top = fixYPopupPosition(this._holder);
         }
     }
 

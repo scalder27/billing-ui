@@ -2,7 +2,7 @@ import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import events from "add-event-listener";
 import moment from "../../libs/moment";
-import { fixYPopupPosition } from "../../helpers/PopupPositionHelper";
+import { fixYPopupPosition } from "./PopupPositionHelper";
 
 import Calendar from "./Calendar";
 import DateSelect from "./DateSelect";
@@ -40,7 +40,13 @@ class Picker extends Component {
 
         events.addEventListener(document, "mousedown", this._handleDocClick);
 
-        fixYPopupPosition(ReactDOM.findDOMNode(this));
+        const picker = ReactDOM.findDOMNode(this);
+
+        const pickerInWindowBottomPosY = picker.getBoundingClientRect().bottom;
+
+        if (pickerInWindowBottomPosY > window.innerHeight) {
+            picker.style.bottom =`${this.props.verticalShift}px`;
+        }
     }
 
     componentWillUnmount() {
@@ -108,6 +114,7 @@ class Picker extends Component {
 
 Picker.propTypes = {
     value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
+    verticalShift: PropTypes.number,
     minYear: PropTypes.number,
     maxYear: PropTypes.number,
     onPick: PropTypes.func,
