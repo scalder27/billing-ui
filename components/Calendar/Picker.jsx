@@ -2,7 +2,6 @@ import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import events from "add-event-listener";
 import moment from "../../libs/moment";
-import { fixYPopupPosition } from "./PopupPositionHelper";
 
 import Calendar from "./Calendar";
 import DateSelect from "./DateSelect";
@@ -45,7 +44,7 @@ class Picker extends Component {
         const pickerInWindowBottomPosY = picker.getBoundingClientRect().bottom;
 
         if (pickerInWindowBottomPosY > window.innerHeight) {
-            picker.style.bottom =`${this.props.verticalShift}px`;
+            picker.style.bottom = `${this.props.verticalShift}px`;
         }
     }
 

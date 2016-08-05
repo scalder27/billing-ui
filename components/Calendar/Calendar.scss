@@ -1,14 +1,15 @@
 ﻿@import "./../../styles/variables";
 
 :local {
-    $daySide: 30px;
-
+    $dayHeight: 31px;
+    $dayWidth: 28px;
+    $monthInfoWidth: 90px;
     .root {
         position: relative;
         z-index: 900;
 
-        width: 300px;
-        height: 210px;
+        width: $dayWidth * 7 + $monthInfoWidth;
+        height: $dayHeight * 7;
 
         overflow: hidden;
 
@@ -37,9 +38,9 @@
 
     .month {
         position: absolute;
-        left: $daySide * 7;
+        left: $dayWidth * 7;
 
-        width: 90px;
+        width: $monthInfoWidth;
         padding: 8px 0 0 5px;
         box-sizing: border-box;
 
@@ -62,7 +63,7 @@
         }
 
         &.active .cell-inner {
-            background: #ddd;
+            background: #549AD9;
         }
 
         &.today .cell-inner {
@@ -70,18 +71,16 @@
         }
 
         &.current .cell-inner {
-            background: $bgActiveActionsColor;
-
-            color: $textWhiteColor;
+            background: #ddd;
         }
     }
 
     .cell-inner {
         display: block;
-        width: $daySide;
-        height: $daySide;
+        width: $dayWidth;
+        height: $dayHeight;
 
-        line-height: $daySide;
+        line-height: $dayHeight;
         text-align: center;
     }
 }

@@ -13,7 +13,8 @@ const MONTH_NAMES = [
 const DAY = 24 * 60 * 60 * 1000;
 const WEEK = 7 * DAY;
 const FIRST_WEEK_SHIFT = (new Date(0).getDay() - 1) * DAY;
-const DAY_HEIGHT = 30;
+const DAY_HEIGHT = 31;
+const DAY_WIDTH = 28;
 const CALENDAR_HEIGHT = 210;
 
 const getWeek = (time) => {
@@ -86,7 +87,7 @@ class Calendar extends Component {
 
         const time = Math.floor((this.state.pos + y) / DAY_HEIGHT) * WEEK - FIRST_WEEK_SHIFT;
         const date = moment(time);
-        const weekDay = Math.floor(x / DAY_HEIGHT);
+        const weekDay = Math.floor(x / DAY_WIDTH);
         if (weekDay < 7) {
             date.date(date.date() + weekDay);
 
@@ -156,7 +157,7 @@ class Calendar extends Component {
             const cur = from + i * DAY;
             const curWeek = getWeek(cur);
             const date = moment(cur);
-            const x = getDay(date) * DAY_HEIGHT;
+            const x = getDay(date) * DAY_WIDTH;
             const y = (curWeek - week) * DAY_HEIGHT - offset;
             const style = {
                 left: x,
@@ -165,7 +166,7 @@ class Calendar extends Component {
 
             const mouseX = this.state.mouseX;
             const mouseY = this.state.mouseY;
-            const active = x < mouseX && x + DAY_HEIGHT > mouseX && y < mouseY && y +
+            const active = x < mouseX && x + DAY_WIDTH > mouseX && y < mouseY && y +
                 DAY_HEIGHT > mouseY;
 
             const cellClassNames = cx(styles.cell, {

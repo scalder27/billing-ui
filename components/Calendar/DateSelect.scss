@@ -19,7 +19,7 @@
         padding: 6px 18px 7px 10px;
 
         :local(.root):hover &,
-        :local(.root):focus &{
+        :local(.root):focus & {
             color: $linkBaseColor;
         }
     }
