@@ -1,5 +1,4 @@
 import { Component, PropTypes } from "react";
-import ReactDOM from "react-dom";
 import moment from "../../libs/moment";
 
 import cx from "classnames";
@@ -47,10 +46,6 @@ class Calendar extends Component {
         };
 
         this._today = moment();
-    }
-
-    componentDidMount() {
-        ReactDOM.findDOMNode(this).focus();
     }
 
     moveToDate(date) {

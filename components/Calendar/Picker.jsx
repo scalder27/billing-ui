@@ -2,6 +2,7 @@ import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import events from "add-event-listener";
 import moment from "../../libs/moment";
+import { fixYPopupPosition } from "../../helpers/PopupPositionHelper";
 
 import Calendar from "./Calendar";
 import DateSelect from "./DateSelect";
@@ -38,6 +39,8 @@ class Picker extends Component {
         this._mounted = true;
 
         events.addEventListener(document, "mousedown", this._handleDocClick);
+
+        fixYPopupPosition(ReactDOM.findDOMNode(this));
     }
 
     componentWillUnmount() {
@@ -76,6 +79,7 @@ class Picker extends Component {
         const { minYear, maxYear } = this.props;
         return (
             <div className={styles.root}>
+
                 <div className={styles.header}>
                     <div>
                         <DateSelect type="year"
@@ -86,9 +90,9 @@ class Picker extends Component {
                                     onChange={(evt) => this.handleYearChange(evt)}
                         />
                         <DateSelect type="month"
-                            value={date.month()}
-                            width={90}
-                            onChange={(evt) => this.handleMonthChange(evt)}
+                                    value={date.month()}
+                                    width={90}
+                                    onChange={(evt) => this.handleMonthChange(evt)}
                         />
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import { Component, PropTypes } from "react";
 import dateSelectType from "./DateSelectType";
 import keyCodes from "../../helpers/KeyCodes";
+import { fixYPopupPosition } from "../../helpers/PopupPositionHelper";
 
 import cx from "classnames";
 import styles from "./DateSelect.scss";
@@ -19,6 +20,12 @@ class DateSelect extends Component {
             botCapped: false,
             current: 0
         };
+    }
+
+    componentDidUpdate() {
+        if (this._holder) {
+            fixYPopupPosition(this._holder);
+        }
     }
 
     handleKey(evt) {
@@ -228,7 +235,7 @@ class DateSelect extends Component {
         });
 
         return (
-            <div className={holderClassNames} style={style} onKeyDown={(evt) => this.handleKey(evt)}>
+            <div className={holderClassNames} style={style} onKeyDown={(evt) => this.handleKey(evt)} ref={(c) => { this._holder = c }}>
                 {!topCapped && (
                     <div className={styles.up} onClick={() => this.handleUp()} />
                 )}
