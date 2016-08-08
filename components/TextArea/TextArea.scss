@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+@import "../../styles/materialdesign";
+@import "../../styles/placeholders";
+
+:local {
+    .wrapper {
+        @extend %as-inline-block;
+
+        position: relative;
+
+        font-size: $fontSizeBig;
+    }
+
+    .textArea {
+        @extend %material-input;
+        resize: none;
+        box-sizing: border-box;
+
+        padding: 4px 3px;
+
+        &:focus {
+            @extend %input-base-focused;
+        }
+    }
+
+    .placeholder-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        padding: 0 4px;
+
+        line-height: 30px;
+
+        &.as-hidden {
+            display: none;
+        }
+    }
+
+    .placeholder {
+        color: $textSecondaryColor;
+    }
+}
