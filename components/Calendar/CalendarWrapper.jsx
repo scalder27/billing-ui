@@ -133,7 +133,8 @@ class CalendarWrapper extends Component {
             width: "100%",
             onChange: this.handleChange.bind(this),
             onBlur: this.handleBlur.bind(this),
-            onFocus: this.handleFocus.bind(this)
+            onFocus: this.handleFocus.bind(this),
+            mask: "99.99.9999"
         };
 
         return (
