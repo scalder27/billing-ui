@@ -63,8 +63,9 @@
             color: $textDisabledColor;
         }
 
-        &.active .cell-inner {
+        &.active:not(.current) .cell-inner {
             background: #549AD9;
+            color: $textWhiteColor;
         }
 
         &.today .cell-inner {
