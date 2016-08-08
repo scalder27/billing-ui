@@ -3,6 +3,8 @@ const KeyCodes = {
     enter: 13,
     esc: 27,
     backspace: 8,
+    delete: 46,
+    del: 110,
 
     left: 37,
     top: 38,
