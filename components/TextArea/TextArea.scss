@@ -2,6 +2,10 @@
     .textArea {
         padding: 7px 3px 4px 3px;
 
+        overflow: hidden;
+
+        white-space: pre-wrap;
+
         resize: none;
     }
 }

@@ -36,7 +36,7 @@ class TextArea extends Component {
 
     changeHeight(textArea) {
         const { height } = this.state;
-        const { minHeight, maxHeight } = this.props;
+        const { minHeight } = this.props;
 
         const currentHeight = textArea.style.height;
 
@@ -44,10 +44,6 @@ class TextArea extends Component {
         textArea.style.height = 0;
         let newHeight = textArea.scrollHeight + textAreaBordersVerticalWidth;
         textArea.style.height = currentHeight;
-
-        if (newHeight > maxHeight) {
-            newHeight = maxHeight;
-        }
 
         if (newHeight < minHeight) {
             newHeight = minHeight;
@@ -106,8 +102,7 @@ TextArea.propTypes = {
 };
 
 TextArea.defaultProps = {
-    minHeight: 30,
-    maxHeight: Infinity
+    minHeight: 30
 };
 
 export default TextArea
