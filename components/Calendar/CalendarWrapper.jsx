@@ -223,7 +223,7 @@ class CalendarWrapper extends Component {
 
         return (
             <span className={wrapperClassNames} style={{width: width}}>
-                <TextInput {...this.props} {...inputProps} ref={(input) => {this._textInput = input}} />
+                <TextInput {...this.props} {...inputProps} ref={(input) => { this._textInput = input }} />
                 <span className={openButtonClassNames} onClick={() => this.open()}>
                     <Icon className={styles.icon} type={IconTypes.Calendar} />
                 </span>
