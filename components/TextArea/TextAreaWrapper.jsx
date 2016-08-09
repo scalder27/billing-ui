@@ -15,14 +15,15 @@ class TextAreaWrapper extends Component {
 
         return (
             <div className={wrapperClassNames}>
-                <span className={placeholderWrapperClassNames}>
+                <span className={placeholderWrapperClassNames} onClick={() => { this.textArea.focus() } }>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
                 <TextArea
                     {...inputProps}
                     styles={styles}
                     placeholder={null}
-                    value={value}/>
+                    value={value}
+                    ref={(el) => { this.textArea = el }}/>
             </div>
         );
     }
@@ -47,7 +48,7 @@ TextAreaWrapper.propTypes = {
 };
 
 TextAreaWrapper.defaultProps = {
-    minHeight: 21,
+    minHeight: 30,
     maxHeight: Infinity,
     value: "",
     styles

@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+﻿@import "../../styles/variables";
 @import "../../styles/materialdesign";
 @import "../../styles/placeholders";
 
@@ -13,10 +13,11 @@
 
     .textArea {
         @extend %material-input;
-        resize: none;
+
+        padding: 7px 3px 4px 3px;
         box-sizing: border-box;
 
-        padding: 4px 3px;
+        resize: none;
 
         &:focus {
             @extend %input-base-focused;

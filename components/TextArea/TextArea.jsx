@@ -2,8 +2,10 @@ import { Component, PropTypes } from "react";
 
 import styles from "./TextArea.scss";
 
+const BORDER = 1;
+
 class TextArea extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         const { minHeight } = this.props;
 
@@ -21,7 +23,7 @@ class TextArea extends Component {
 
         this.changeHeight(textArea);
 
-        if ( onChange ){
+        if (onChange) {
             onChange(textArea.value, evt);
         }
     }
@@ -31,8 +33,8 @@ class TextArea extends Component {
         const { minHeight, maxHeight } = this.props;
 
         const currentHeight = textArea.style.height;
-        textArea.style.height=0;
-        let newHeight = textArea.scrollHeight;
+        textArea.style.height = 0;
+        let newHeight = textArea.scrollHeight + BORDER;
         textArea.style.height = currentHeight;
 
         if (newHeight > maxHeight) {
@@ -43,11 +45,15 @@ class TextArea extends Component {
             newHeight = minHeight;
         }
 
-        if (newHeight !== height){
+        if (newHeight !== height) {
             this.setState({
                 height: newHeight
             });
         }
+    }
+
+    focus() {
+        this.textArea.focus();
     }
 
     render() {
@@ -65,6 +71,7 @@ class TextArea extends Component {
                 onChange={this.handleChange}
                 className={styles.textArea}
                 style={style}
+                ref={ (el) => { this.textArea = el }}
             />
         );
     }
