@@ -72,7 +72,7 @@
     "redux": ">= 3.1.0 < 4",
     "redux-saga": ">= 0.10.4 < 1",
     "redux-thunk": "2.x",
-    "react-addons-perf": ">= 0.14.8 < 1",
+    "react-addons-perf": ">= 0.14.8",
     "why-did-you-update": ">= 0.0.8 < 1"
   }
 }
