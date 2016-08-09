@@ -1,10 +1,19 @@
 import { Component, PropTypes } from "react";
+import ReactDOM from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
 
 class TextInputWrapper extends Component {
+    getDomNode() {
+        return ReactDOM.findDOMNode(this).getElementsByTagName("input")[0];
+    }
+
+    focus() {
+        this.getDomNode().focus();
+    }
+
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 

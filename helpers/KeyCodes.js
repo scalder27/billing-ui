@@ -16,7 +16,8 @@ const KeyCodes = {
     pageDown: 34,
 
     g: 71,
-    j: 74
+    j: 74,
+    dot: 190
 };
 
 export default KeyCodes;
