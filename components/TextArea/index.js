@@ -1,2 +1,2 @@
-import TextAreaWrapper from "./TextAreaWrapper";
-export default TextAreaWrapper;
+import TextArea from "./TextArea";
+export default TextArea;

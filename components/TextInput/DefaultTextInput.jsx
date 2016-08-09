@@ -41,7 +41,7 @@ class DefaultTextInput extends Component {
                     onChange={(evt) => this.change(evt.target.value, evt)}
                     ref={(el) => {
                         var inputNode = ReactDOM.findDOMNode(el);
-                        this.input = inputNode && inputNode.getElementsByTagName("input")[0];
+                        this.input = inputNode && (inputNode.getElementsByTagName("input")[0] || inputNode.getElementsByTagName("textarea")[0]);
                     }}
                 />
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
@@ -55,6 +55,7 @@ DefaultTextInput.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -62,6 +63,7 @@ DefaultTextInput.propTypes = {
     isValid: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,

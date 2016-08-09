@@ -1,5 +1,8 @@
 import { Component, PropTypes } from "react";
 
+import TextInput from "../TextInput";
+import TextInputType from "../TextInput/TextInputType";
+import TooltipType from "../TextInput/TooltipType";
 import styles from "./TextArea.scss";
 
 class TextArea extends Component {
@@ -14,7 +17,7 @@ class TextArea extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(evt) {
+    handleChange(value, evt) {
         const { onChange } = this.props;
 
         const textArea = evt.target;
@@ -22,12 +25,13 @@ class TextArea extends Component {
         this.changeHeight(textArea);
 
         if (onChange) {
-            onChange(textArea.value, evt);
+            onChange(value, evt);
         }
     }
 
     componentDidMount() {
-        this.changeHeight(this.textArea);
+        const textAreaDom = this.textArea.getDomNode();
+        this.changeHeight(textAreaDom);
     }
 
     changeHeight(textArea) {
@@ -56,27 +60,16 @@ class TextArea extends Component {
         }
     }
 
-    focus() {
-        this.textArea.focus();
-    }
-
     render() {
         const { height } = this.state;
-        const { styles } = this.props;
-
-
-        const style = {
-            height
-        };
 
         return (
-            <textarea
-                {...this.props}
-                onChange={this.handleChange}
-                className={styles.textArea}
-                style={style}
-                ref={ (el) => { this.textArea = el }}
-            />
+            <TextInput isTextArea={true}
+                       inputClassName={styles.textArea}
+                       height={height}
+                       {...this.props}
+                       onChange={this.handleChange}
+                       ref={ (el) => { this.textArea = el }} />
         );
     }
 }
@@ -85,21 +78,36 @@ TextArea.propTypes = {
     minHeight: PropTypes.number,
     maxHeight: PropTypes.number,
 
-    value: PropTypes.string,
-    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    isTextArea: PropTypes.bool,
+    clearable: PropTypes.bool,
+    readonly: PropTypes.bool,
     disabled: PropTypes.bool,
+    value: PropTypes.string,
+    isValid: PropTypes.bool,
+    tooltipCaption: PropTypes.node,
+    tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
+    maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
-    className: PropTypes.string,
-    styles: PropTypes.object
+    mask: PropTypes.string,
+    maskChar: PropTypes.string,
+    alwaysShowMask: PropTypes.bool,
+    wrapperClassName: PropTypes.string,
+    inputClassName: PropTypes.string,
+    labelClassName: PropTypes.string,
+    placeholderClassName: PropTypes.string,
+    styles: PropTypes.object,
+    type: PropTypes.oneOf(Object.keys(TextInputType).map((key) => TextInputType[key]))
 };
 
 TextArea.defaultProps = {
-    value: "",
-    styles
+    minHeight: 30,
+    maxHeight: Infinity
 };
 
 export default TextArea

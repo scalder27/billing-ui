@@ -1,10 +1,16 @@
 import { Component, PropTypes } from "react";
+import ReactDom from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
 
 class TextInputWrapper extends Component {
+    getDomNode() {
+        const tagName = this.props.isTextArea ? "textarea" : "input";
+        return ReactDom.findDOMNode(this).getElementsByTagName(tagName)[0];
+    }
+
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 
@@ -21,6 +27,7 @@ TextInputWrapper.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -30,6 +37,7 @@ TextInputWrapper.propTypes = {
     tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
@@ -50,6 +58,7 @@ TextInputWrapper.defaultProps = {
     placeholderClassName: "",
     width: 180,
     isValid: true,
+    isTextArea: false,
     type: TextInputType.default,
     tooltipPosition: TooltipType.right
 };
