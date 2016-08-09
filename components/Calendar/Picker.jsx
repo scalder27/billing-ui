@@ -30,7 +30,7 @@ class Picker extends Component {
         super(props, context);
 
         this.state = {
-            date: props.value ? props.value : moment()
+            date: props.value && props.value.isValid() ? props.value : moment()
         };
     }
 
@@ -112,7 +112,7 @@ class Picker extends Component {
 }
 
 Picker.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
+    value: PropTypes.instanceOf(moment),
     verticalShift: PropTypes.number,
     minYear: PropTypes.number,
     maxYear: PropTypes.number,

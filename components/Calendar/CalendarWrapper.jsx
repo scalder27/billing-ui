@@ -21,14 +21,17 @@ class CalendarWrapper extends Component {
 
         this.state = {
             height: null,
-            textValue: formatDate(props.value),
             opened: false
         };
     }
 
+    componentWillMount() {
+        this.handleChange(this.props.value);
+    }
+
     componentWillReceiveProps(newProps) {
         if (!this._focused) {
-            this.setState({ textValue: formatDate(newProps.value) });
+            this.handleChange(newProps.value);
         }
     }
 
@@ -41,9 +44,13 @@ class CalendarWrapper extends Component {
     }
 
     handleChange(value) {
-        const textValue = value.replace(/[^\d\.]/g, "");
+        const newDate = moment(value, "DD.MM.YYYY");
+        const isValid = newDate.isValid();
+        const textValue = newDate.isValid() ? formatDate(newDate) : value;
+
         this.setState({
-            textValue: textValue
+            textValue,
+            isValid
         });
     }
 
@@ -67,12 +74,10 @@ class CalendarWrapper extends Component {
 
         const date = moment(textValue, "DD.MM.YYYY");
 
-        this.setState({
-            textValue: formatDate(value)
-        });
+        this.handleChange(value);
 
-        if (onChange && date.isSame(moment(value, "DD.MM.YYYY"))) {
-            onChange(textValue, value);
+        if (onChange && !date.isSame(moment(value, "DD.MM.YYYY"))) {
+            onChange(textValue, date);
         }
     }
 
@@ -201,7 +206,7 @@ class CalendarWrapper extends Component {
     }
 
     render() {
-        const { className, width, disabled } = this.props;
+        const { className, width, disabled, isValid } = this.props;
 
         const picker = this.renderPicker();
         const wrapperClassNames = cx(styles.root, className);
@@ -211,6 +216,7 @@ class CalendarWrapper extends Component {
 
         const inputProps = {
             value: this.state.textValue,
+            isValid: isValid && this.state.isValid,
             maxLength: "10",
             width: "100%",
             onClick: this.handleClick.bind(this),
@@ -235,14 +241,16 @@ class CalendarWrapper extends Component {
 
 CalendarWrapper.defaultProps = {
     value: moment(),
-    width: 120,
+    width: 115,
     minYear: 1900,
     maxYear: 2100,
     className: "",
-    disabled: false
+    disabled: false,
+    isValid: true
 };
 
 CalendarWrapper.propTypes = {
+    isValid: PropTypes.bool,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
     maxYear: PropTypes.number,
