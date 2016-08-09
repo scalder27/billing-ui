@@ -2,8 +2,6 @@ import { Component, PropTypes } from "react";
 
 import styles from "./TextArea.scss";
 
-const BORDER = 1;
-
 class TextArea extends Component {
     constructor(props) {
         super(props);
@@ -28,13 +26,19 @@ class TextArea extends Component {
         }
     }
 
+    componentDidMount() {
+        this.changeHeight(this.textArea);
+    }
+
     changeHeight(textArea) {
         const { height } = this.state;
         const { minHeight, maxHeight } = this.props;
 
         const currentHeight = textArea.style.height;
+
+        const textAreaBordersVerticalWidth = parseInt(getComputedStyle(textArea).borderTopWidth) + parseInt(getComputedStyle(textArea).borderBottomWidth);
         textArea.style.height = 0;
-        let newHeight = textArea.scrollHeight + BORDER;
+        let newHeight = textArea.scrollHeight + textAreaBordersVerticalWidth;
         textArea.style.height = currentHeight;
 
         if (newHeight > maxHeight) {
@@ -82,6 +86,7 @@ TextArea.propTypes = {
     maxHeight: PropTypes.number,
 
     value: PropTypes.string,
+    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,

@@ -37,6 +37,7 @@ TextAreaWrapper.propTypes = {
     maxHeight: PropTypes.number,
 
     value: PropTypes.string,
+    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
