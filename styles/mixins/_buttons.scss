@@ -50,10 +50,14 @@
     }
 
     &.disabled,
+    &.disabled:hover,
+    &.disabled:focus,
     &.button-disabled,
-    &.button-disabled:hover {
+    &.button-disabled:hover,
+    &.button-disabled:focus {
         top: 0;
 
+        outline: none;
         background-color: #f1f1f1;
         box-shadow: none;
 
