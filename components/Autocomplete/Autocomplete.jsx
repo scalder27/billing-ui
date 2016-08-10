@@ -1,5 +1,5 @@
 ﻿import { Component, PropTypes } from "react";
-import $ from "jquery";
+import axios from "axios";
 import TextInput from "billing-ui/components/TextInput";
 
 import styles from "./Autocomplete.scss";
@@ -31,9 +31,13 @@ class Autocomplete extends Component {
         const { requestData, url } = this.props;
         const _this = this;
 
-        return $.get(url, { ...requestData, ...({ value }) })
-            .then(response => {
-                _this.lastSearchResult = (response.Options || []).reduce((result, optionData) => {
+        return axios.get(url, {
+            params:{
+                ...requestData,
+                ...({ value }) }
+            })
+            .then(({data}) => {
+                _this.lastSearchResult = (data.Options || []).reduce((result, optionData) => {
                     result[optionData.Text] = optionData;
                     return result;
                 }, {});
@@ -51,9 +55,8 @@ class Autocomplete extends Component {
         this.choose(index);
     }
 
-    handleChange(evt) {
+    handleChange(value) {
         this._opened = true;
-        const value = evt.target.value || "";
 
         if (!this.props.value) {
             this.setState({ value });
@@ -177,7 +180,7 @@ class Autocomplete extends Component {
         }
 
         if (this.props.onChange) {
-            this.props.onChange({ target: { value } }, value);
+            this.props.onChange(value);
         }
     }
 
@@ -192,7 +195,7 @@ class Autocomplete extends Component {
 
         return (
             <div key={index} className={rootClass}
-                 onMouseDown={(e) => this.handleItemClick(e, index)}
+                 onMouseClick={(e) => this.handleItemClick(e, index)}
                  onMouseEnter={(e) => this.setState({ selected: index })}
                  onMouseLeave={(e) => this.setState({ selected: -1 })}>
                 {renderItem
@@ -243,7 +246,7 @@ class Autocomplete extends Component {
                 <TextInput
                     {...this.props}
                     {...inputProps}
-                    onChange={(text, evt) => this.handleChange(evt, text)} />
+                    onChange={(text) => this.handleChange(text)} />
                 {this.renderMenu()}
             </span>
         )
