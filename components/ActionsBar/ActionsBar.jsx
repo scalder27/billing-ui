@@ -1,6 +1,8 @@
 import { PropTypes } from "react";
 import cx from "classnames";
 
+import Button, { ButtonType } from "../Button";
+
 import styles from "./ActionsBar.scss";
 
 const ActionsBar = ({
@@ -10,10 +12,15 @@ const ActionsBar = ({
     onSubmitClick, onCancelClick
 }) => (
     <div className={cx(styles.actionsBar, barClassName)}>
-        <button type="button" onClick={onSubmitClick} className={cx(styles.actionSubmit, submitClassName, { [styles.disabled]: submitDisabled })}>
+        <Button type={ButtonType.button}
+                onClick={onSubmitClick}
+                disabled={submitDisabled}
+                className={cx(styles.actionSubmit, submitClassName, {[styles.disabled]: submitDisabled})}>
             {submitText}
-        </button>
-        <button type="button" onClick={onCancelClick} className={cx(styles.actionCancel, cancelClassName, { [styles.disabled]: cancelDisabled })}>
+        </Button>
+        <button type="button"
+                onClick={() => { if (!cancelDisabled) onCancelClick() }}
+                className={cx(styles.actionCancel, cancelClassName, { [styles.disabled]: cancelDisabled })}>
             {cancelText}
         </button>
     </div>
