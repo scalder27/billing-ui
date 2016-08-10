@@ -7,13 +7,13 @@ import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
 class DefaultTextInput extends Component {
-    handleChange(evt) {
+    handleChange = (evt) => {
         const { onChange } = this.props;
 
         if (onChange) {
             onChange(evt.target.value || "", evt);
         }
-    }
+    };
 
     clear(evt) {
         this.input.focus();
