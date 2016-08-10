@@ -53,7 +53,7 @@ class Calendar extends Component {
         const newDate = moment(0);
         newDate.year(date.year());
         newDate.month(date.month());
-        this.setState({pos: dateToPos(newDate)});
+        this.setState({ pos: dateToPos(newDate) });
     }
 
     handleWheel(evt) {
@@ -107,7 +107,7 @@ class Calendar extends Component {
     }
 
     handleMouseLeave() {
-        this.setState({mouseX: -10});
+        this.setState({ mouseX: -10 });
     }
 
     renderMonth(offset, from, week) {
@@ -172,7 +172,7 @@ class Calendar extends Component {
             const cellClassNames = cx(styles.cell, {
                 [styles.active]: active,
                 [styles.today]: date.isSame(this._today, "day"),
-                [styles.current]: date.isSame(moment(this.props.value, "DD.MM.YYYY"), "day"),
+                [styles.current]: date.isSame(this.props.value, "day"),
                 [styles.grey]: date.month() % 2,
                 [styles.holy]: date.day() === 0 || date.day() === 6
             });
@@ -213,7 +213,7 @@ class Calendar extends Component {
 
 Calendar.propTypes = {
     initialDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
-    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.string]),
+    value: PropTypes.instanceOf(moment),
     onNav: PropTypes.func,
     onPick: PropTypes.func
 };

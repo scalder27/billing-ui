@@ -1,12 +1,13 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
-import moment, { formatDate } from "../../libs/moment";
+import moment, { formatDate, convertString } from "../../libs/moment";
 
 import TextInput from "../TextInput";
 import Picker from "./Picker";
 import Icon, { IconTypes } from "../Icon";
 import rangeSelector from "./StartInputSelection";
 import keyCodes from "../../helpers/KeyCodes";
+import validationErrorType from "./ValidationErrorType";
 
 import cx from "classnames";
 import styles from "./CalendarWrapper.scss";
@@ -43,14 +44,53 @@ class CalendarWrapper extends Component {
         }
     }
 
+    validate(value) {
+        const { minDate, maxDate } = this.props;
+        const newDate = convertString(value);
+
+        if (value.indexOf("_") !== -1) {
+            return {
+                isValid: false,
+                errorType: validationErrorType.unfilledDate
+            }
+        }
+
+        if (!newDate.isValid()) {
+            return {
+                isValid: false,
+                errorType: validationErrorType.invalidDate
+            }
+        }
+
+        if (minDate && newDate.isBefore(convertString(minDate))) {
+            return {
+                isValid: false,
+                errorType: validationErrorType.minDateExceed
+            }
+        }
+
+        if (maxDate && newDate.isAfter(convertString(maxDate))) {
+            return {
+                isValid: false,
+                errorType: validationErrorType.maxDateExceed
+            }
+        }
+
+        return {
+            isValid: true,
+            errorType: null
+        }
+    }
+
     handleChange(value) {
-        const newDate = moment(value, "DD.MM.YYYY");
-        const isValid = newDate.isValid();
-        const textValue = newDate.isValid() ? formatDate(newDate) : value;
+        const newDate = convertString(value);
+        const { isValid, errorType } = this.validate(value);
+        const textValue = isValid ? formatDate(newDate) : value;
 
         this.setState({
             textValue,
-            isValid
+            isValid,
+            errorType
         });
     }
 
@@ -68,16 +108,20 @@ class CalendarWrapper extends Component {
 
     handleBlur() {
         const { onChange, value } = this.props;
-        const { textValue } = this.state;
+        const { textValue, isValid, errorType } = this.state;
         this._focused = false;
         this._selectedBlock = null;
 
-        const date = moment(textValue, "DD.MM.YYYY");
+        const date = convertString(textValue);
 
         this.handleChange(value);
 
-        if (onChange && !date.isSame(moment(value, "DD.MM.YYYY"))) {
-            onChange(textValue, date);
+        if (onChange && !date.isSame(convertString(value))) {
+            onChange(textValue, {
+                date,
+                isValid,
+                errorType
+            });
         }
     }
 
@@ -155,14 +199,14 @@ class CalendarWrapper extends Component {
     }
 
     _increase() {
-        const date = moment(this.state.textValue, "DD.MM.YYYY");
+        const date = convertString(this.state.textValue);
 
         this.handleChange(formatDate(date.add(1, this._selectionRanges[this._selectedBlock].type)));
         this._selectBlock(this._selectedBlock);
     }
 
     _decrease() {
-        const date = moment(this.state.textValue, "DD.MM.YYYY");
+        const date = convertString(this.state.textValue);
 
         this.handleChange(formatDate(date.subtract(1, this._selectionRanges[this._selectedBlock].type)));
         this._selectBlock(this._selectedBlock);
@@ -194,7 +238,7 @@ class CalendarWrapper extends Component {
 
         return (
             <div className={styles.picker} onKeyDown={(evt) => this.handlePickerKey(evt)}>
-                <Picker value={moment(value, "DD.MM.YYYY")}
+                <Picker value={convertString(value)}
                     verticalShift={this.state.height}
                     minYear={minYear}
                     maxYear={maxYear}
@@ -255,6 +299,8 @@ CalendarWrapper.propTypes = {
     disabled: PropTypes.bool,
     maxYear: PropTypes.number,
     minYear: PropTypes.number,
+    maxDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
+    minDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
     value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     className: PropTypes.string
