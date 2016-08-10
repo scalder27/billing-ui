@@ -7,11 +7,11 @@ import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
 class DefaultTextInput extends Component {
-    change(value, evt) {
+    handleChange(evt) {
         const { onChange } = this.props;
 
         if (onChange) {
-            onChange(value || "", evt);
+            onChange(evt.target.value || "", evt);
         }
     }
 
@@ -38,7 +38,7 @@ class DefaultTextInput extends Component {
                     value={value}
                     clearable={clearable}
                     styles={styles}
-                    onChange={(evt) => this.change(evt.target.value, evt)}
+                    onChange={this.handleChange}
                     ref={(el) => {
                         var inputNode = ReactDOM.findDOMNode(el);
                         this.input = inputNode && inputNode.getElementsByTagName("input")[0];
