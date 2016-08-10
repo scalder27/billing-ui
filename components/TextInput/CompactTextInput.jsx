@@ -7,17 +7,19 @@ import textInputStyles from "./CompactTextInput.scss";
 import classnames from "classnames";
 
 class CompactTextInput extends Component {
-    change(value, evt) {
+    handleChange = (evt) => {
         const { onChange } = this.props;
 
         if (onChange) {
-            onChange(value || "", evt);
+            onChange(evt.target.value || "", evt);
         }
-    }
+    };
 
     clear(evt) {
         this.input.focus();
-        this.change("", evt);
+        const clearEvt = {...evt};
+        clearEvt.target.value = "";
+        this.handleChange(clearEvt);
     }
 
     render() {
@@ -33,13 +35,13 @@ class CompactTextInput extends Component {
                 <Input {...inputProps} value={value}
                     styles={styles}
                     width={width}
-                    onChange={(evt) => this.change(evt.target.value, evt)}
+                    onChange={this.handleChange}
                     ref={(el) => {
                         var inputNode = ReactDOM.findDOMNode(el);
                         this.input = inputNode && inputNode.getElementsByTagName("input")[0];
                     }}
                 />
-                <span className={styles.highlight}></span>
+                <span className={styles.highlight}/>
                 <span className={labelClassNames}>{placeholder}</span>
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
             </div>
