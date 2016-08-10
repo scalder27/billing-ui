@@ -5,10 +5,6 @@ import cx from "classnames";
 import styles from "./WarningMessage.scss";
 
 class WarningMessage extends Component {
-    componentWillMount() {
-
-    }
-
     render() {
         const { children, type, className, hidden, animated } = this.props;
 
@@ -24,7 +20,7 @@ class WarningMessage extends Component {
 
 WarningMessage.propTypes = {
     children: PropTypes.node,
-    type: PropTypes.oneOf(Object.keys(MessageType).map((key) => MessageType[key])),
+    type: PropTypes.oneOf(Object.keys(MessageType)),
     className: PropTypes.string,
     hidden: PropTypes.bool,
     animated: PropTypes.bool
