@@ -1,11 +1,14 @@
 ﻿import { Component, PropTypes } from "react";
 import axios from "axios";
 import TextInput from "billing-ui/components/TextInput";
+import shouldPureComponentUpdate from "react-pure-render/function";
 
 import styles from "./Autocomplete.scss";
 import cx from "classnames";
 
 class Autocomplete extends Component {
+    shouldComponentUpdate = shouldPureComponentUpdate;
+
     lastSearchResult = {};
 
     constructor(props, context) {
@@ -23,7 +26,6 @@ class Autocomplete extends Component {
     componentWillReceiveProps(props) {
         if (props.value !== undefined) {
             this.setState({ value: props.value });
-            this.updateItems(props.value);
         }
     }
 
@@ -32,10 +34,10 @@ class Autocomplete extends Component {
         const _this = this;
 
         return axios.get(url, {
-            params:{
+            params: {
                 ...requestData,
                 ...({ value }) }
-            })
+        })
             .then(({data}) => {
                 _this.lastSearchResult = (data.Options || []).reduce((result, optionData) => {
                     result[optionData.Text] = optionData;
@@ -46,16 +48,16 @@ class Autocomplete extends Component {
             });
     }
 
-    handleItemClick(evt, index) {
+    handleItemClick = (evt, index) => {
         if (evt.button !== 0) {
             return;
         }
 
         evt.preventDefault();
         this.choose(index);
-    }
+    };
 
-    handleChange(value) {
+    handleChange = (value) => {
         this._opened = true;
 
         if (!this.props.value) {
@@ -64,37 +66,33 @@ class Autocomplete extends Component {
 
         this.updateItems(value);
         this.fireChange(value);
-    }
+    };
 
-    handleFocus(evt) {
+    handleFocus = (evt) => {
         this._opened = true;
         const value = evt.target.value || "";
-
-        if (!this.props.value) {
-            this.setState({ value });
-        }
 
         this.updateItems(value);
 
         if (this.props.onFocus) {
             this.props.onFocus(evt);
         }
-    }
+    };
 
-    handleBlur(evt) {
+    handleBlur = (evt) => {
         this._opened = false;
         this.setState({ items: null });
 
         if (this.props.onBlur) {
             this.props.onBlur(evt);
         }
-    }
+    };
 
-    handleSelect(evt) {
+    handleSelect = (evt) => {
         evt.preventDefault();
-    }
+    };
 
-    handleKey(evt) {
+    handleKey = (evt) => {
         var items = this.state.items;
         var stop = false;
 
@@ -131,7 +129,7 @@ class Autocomplete extends Component {
         if (!stop && this.props.onKeyDown) {
             this.props.onKeyDown(evt);
         }
-    }
+    };
 
     updateItems(text) {
         if (!this._opened) {
@@ -172,15 +170,15 @@ class Autocomplete extends Component {
     }
 
     fireChange(value) {
-        const { onSelect } = this.props;
+        const { onSelect, onChange } = this.props;
         const optionData = this.lastSearchResult[value];
 
-        if (optionData) {
+        if (optionData && onSelect) {
             return onSelect(optionData.Value, value);
         }
 
-        if (this.props.onChange) {
-            this.props.onChange(value);
+        if (onChange) {
+            onChange(value);
         }
     }
 
@@ -195,7 +193,7 @@ class Autocomplete extends Component {
 
         return (
             <div key={index} className={rootClass}
-                 onMouseClick={(e) => this.handleItemClick(e, index)}
+                 onMouseDown={(e) => this.handleItemClick(e, index)}
                  onMouseEnter={(e) => this.setState({ selected: index })}
                  onMouseLeave={(e) => this.setState({ selected: -1 })}>
                 {renderItem
@@ -235,10 +233,10 @@ class Autocomplete extends Component {
     render() {
         const inputProps = {
             value: this.state.value,
-            onSelect: this.handleSelect.bind(this),
-            onBlur: this.handleBlur.bind(this),
-            onFocus: this.handleFocus.bind(this),
-            onKeyDown: this.handleKey.bind(this)
+            onSelect: this.handleSelect,
+            onBlur: this.handleBlur,
+            onFocus: this.handleFocus,
+            onKeyDown: this.handleKey
         };
 
         return (
@@ -246,7 +244,7 @@ class Autocomplete extends Component {
                 <TextInput
                     {...this.props}
                     {...inputProps}
-                    onChange={(text) => this.handleChange(text)} />
+                    onChange={this.handleChange} />
                 {this.renderMenu()}
             </span>
         )
@@ -255,6 +253,7 @@ class Autocomplete extends Component {
 
 Autocomplete.propTypes = {
     value: PropTypes.string,
+    defaultValue: PropTypes.string,
     source: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.func
