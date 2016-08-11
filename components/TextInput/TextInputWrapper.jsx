@@ -3,8 +3,10 @@ import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
+import shouldPureComponentUpdate from "react-pure-render/function";
 
 class TextInputWrapper extends Component {
+    shouldComponentUpdate = shouldPureComponentUpdate;
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 
