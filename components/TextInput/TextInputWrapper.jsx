@@ -1,17 +1,29 @@
 import { Component, PropTypes } from "react";
+import ReactDom from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
 
 class TextInputWrapper extends Component {
+    _inputDom = null;
+
+    _setInputDom = (el) => {
+        const tagName = this.props.isTextArea ? "textarea" : "input";
+        this._inputDom = ReactDom.findDOMNode(el).getElementsByTagName(tagName)[0];
+    };
+
+    getInputDom() {
+        return this._inputDom;
+    }
+
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...others} labelClassName={labelClassName} />
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} />
+                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setInputDom}/>
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setInputDom}/>
         );
     }
 }
@@ -21,6 +33,7 @@ TextInputWrapper.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -30,6 +43,7 @@ TextInputWrapper.propTypes = {
     tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
@@ -50,6 +64,7 @@ TextInputWrapper.defaultProps = {
     placeholderClassName: "",
     width: 180,
     isValid: true,
+    isTextArea: false,
     type: TextInputType.default,
     tooltipPosition: TooltipType.right
 };
