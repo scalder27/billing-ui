@@ -28,7 +28,7 @@ class DateSelect extends Component {
         }
     }
 
-    handleKey(evt) {
+    handleKey = (evt) => {
         if (this.state.opened) {
             switch (evt.keyCode) {
                 case keyCodes.enter:
@@ -65,17 +65,17 @@ class DateSelect extends Component {
                     break;
             }
         }
-    }
+    };
 
-    handleUp() {
+    handleUp = () => {
         this.resetSize(this.state.pos - HEIGHT);
-    }
+    };
 
-    handleDown() {
+    handleDown = () => {
         this.resetSize(this.state.pos + HEIGHT);
-    }
+    };
 
-    handleItemClick(evt) {
+    handleItemClick = (evt) => {
         if (evt.button !== 0) {
             return;
         }
@@ -89,20 +89,20 @@ class DateSelect extends Component {
         if (this.props.onChange) {
             this.props.onChange({target: {value}}, value);
         }
-    }
+    };
 
-    handleMouseMove(evt) {
+    handleMouseMove = (evt) => {
         const rect = evt.currentTarget.getBoundingClientRect();
         const y = evt.clientY - rect.top + this.state.top + this.state.pos;
         const current = Math.floor(y / HEIGHT);
         this.setState({current});
-    }
+    };
 
-    handleMouseLeave() {
+    handleMouseLeave = () => {
         this.setState({current: null});
-    }
+    };
 
-    handleWheel(evt) {
+    handleWheel = (evt) => {
         evt.preventDefault();
 
         let deltaY = evt.deltaY;
@@ -113,9 +113,9 @@ class DateSelect extends Component {
         }
         const pos = this.state.pos + deltaY;
         this.resetSize(pos);
-    }
+    };
 
-    open() {
+    open = () => {
         if (this.state.opened) {
             return;
         }
@@ -125,15 +125,15 @@ class DateSelect extends Component {
             opened: true,
             current: 0
         });
-    }
+    };
 
-    close() {
+    close = ()  => {
         if (!this.state.opened) {
             return;
         }
 
         this.setState({ opened: false });
-    }
+    };
 
     resetSize(pos) {
         let newPos = pos;
@@ -235,21 +235,21 @@ class DateSelect extends Component {
         });
 
         return (
-            <div className={holderClassNames} style={style} onKeyDown={(evt) => this.handleKey(evt)} ref={(c) => { this._holder = c }}>
+            <div className={holderClassNames} style={style} onKeyDown={this.handleKey} ref={(c) => { this._holder = c }}>
                 {!topCapped && (
-                    <div className={styles.up} onClick={() => this.handleUp()} />
+                    <div className={styles.up} onClick={this.handleUp} />
                 )}
                 <div className={styles.items} style={{height}}>
                     <div style={shiftStyle}>{items}</div>
                     <div className={styles.overlay}
-                        onMouseDown={(evt) => this.handleItemClick(evt)}
-                        onMouseMove={(evt) => this.handleMouseMove(evt)}
-                        onMouseLeave={() => this.handleMouseLeave()}
-                        onWheel={(evt) => this.handleWheel(evt)}
+                        onMouseDown={this.handleItemClick}
+                        onMouseMove={this.handleMouseMove}
+                        onMouseLeave={this.handleMouseLeave}
+                        onWheel={this.handleWheel}
                     />
                 </div>
                 {!botCapped && (
-                    <div className={styles.down} onClick={() => this.handleDown()} />
+                    <div className={styles.down} onClick={this.handleDown} />
                 )}
             </div>
         );
@@ -261,13 +261,13 @@ class DateSelect extends Component {
             className: styles.root,
             style: { width },
             tabIndex: "0",
-            onBlur: this.close.bind(this),
-            onKeyDown: this.handleKey.bind(this)
+            onBlur: this.close,
+            onKeyDown: this.handleKey
         };
 
         return (
             <div {...rootProps}>
-                <div className={styles.caption} onClick={() => this.open()}>
+                <div className={styles.caption} onClick={this.open}>
                     {this.getItem(0)}
                     <div className={styles.arrow} />
                 </div>

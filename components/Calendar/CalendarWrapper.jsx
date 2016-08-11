@@ -82,7 +82,7 @@ class CalendarWrapper extends Component {
         }
     }
 
-    handleChange(value) {
+    handleChange = (value) => {
         const newDate = convertString(value);
         const { isValid, errorType } = this.validate(value);
         const textValue = isValid ? formatDate(newDate) : value;
@@ -92,21 +92,23 @@ class CalendarWrapper extends Component {
             isValid,
             errorType
         });
-    }
+    };
 
-    handleClick() {
+    handleClick = () => {
         if (this._focused) {
             this.handleSelectBlock();
         }
-    }
+    };
 
-    handleFocus() {
+    handleFocus = () => {
         this._focused = true;
 
-        this.handleSelectBlock();
-    }
+        setTimeout(() => {
+            this.handleSelectBlock();
+        }, 0);
+    };
 
-    handleBlur() {
+    handleBlur = () => {
         const { onChange, value } = this.props;
         const { textValue, isValid, errorType } = this.state;
         this._focused = false;
@@ -123,26 +125,26 @@ class CalendarWrapper extends Component {
                 errorType
             });
         }
-    }
+    };
 
-    handlePickerKey(evt) {
+    handlePickerKey = (evt) => {
         if (evt.key === "Escape") {
             this.close(true);
         }
-    }
+    };
 
-    handlePick(date) {
+    handlePick = (date) => {
         if (this.props.onChange) {
             this.props.onChange(formatDate(date), date);
         }
         this.close(true);
-    }
+    };
 
-    handlePickerClose() {
+    handlePickerClose = () => {
         this.close(false);
-    }
+    };
 
-    handleKey(evt) {
+    handleKey = (evt) => {
         switch (evt.keyCode) {
             case keyCodes.top:
                 this._increase();
@@ -162,7 +164,7 @@ class CalendarWrapper extends Component {
                 this._selectNextBlock();
                 break;
         }
-    }
+    };
 
     handleSelectBlock() {
         var selection = rangeSelector.getSelection(this._textInput.getDomNode()).start;
@@ -183,18 +185,18 @@ class CalendarWrapper extends Component {
         }
     }
 
-    open() {
+    open = () => {
         if (!this.props.disabled) {
             this.setState({ opened: true });
         }
-    }
+    };
 
     close(focus) {
         this.setState({ opened: false });
 
         if (focus) {
-            setTimeout(() => this._textInput.focus(), 0);
             this._selectBlock(0);
+            setTimeout(() => this._textInput.focus(), 0);
         }
     }
 
@@ -237,13 +239,13 @@ class CalendarWrapper extends Component {
         const { value, minYear, maxYear } = this.props;
 
         return (
-            <div className={styles.picker} onKeyDown={(evt) => this.handlePickerKey(evt)}>
+            <div className={styles.picker} onKeyDown={this.handlePickerKey}>
                 <Picker value={convertString(value)}
                     verticalShift={this.state.height}
                     minYear={minYear}
                     maxYear={maxYear}
-                    onPick={(date) => this.handlePick(date)}
-                    onClose={() => this.handlePickerClose()}
+                    onPick={this.handlePick}
+                    onClose={this.handlePickerClose}
                 />
             </div>
         );
@@ -263,18 +265,18 @@ class CalendarWrapper extends Component {
             isValid: isValid && this.state.isValid,
             maxLength: "10",
             width: "100%",
-            onClick: this.handleClick.bind(this),
-            onKeyDown: this.handleKey.bind(this),
-            onChange: this.handleChange.bind(this),
-            onBlur: this.handleBlur.bind(this),
-            onFocus: (evt) => setTimeout(() => this.handleFocus(evt), 0),
+            onClick: this.handleClick,
+            onKeyDown: this.handleKey,
+            onChange: this.handleChange,
+            onBlur: this.handleBlur,
+            onFocus: this.handleFocus,
             mask: "99.99.9999"
         };
 
         return (
             <span className={wrapperClassNames} style={{width: width}}>
-                <TextInput {...this.props} {...inputProps} ref={(input) => { this._textInput = input }} />
-                <span className={openButtonClassNames} onClick={() => this.open()}>
+                <TextInput {...this.props} {...inputProps} ref={(el) => { this._textInput = el }} />
+                <span className={openButtonClassNames} onClick={this.open}>
                     <Icon className={styles.icon} type={IconTypes.Calendar} />
                 </span>
                 {picker}

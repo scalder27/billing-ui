@@ -54,19 +54,19 @@ class Picker extends Component {
         events.removeEventListener(document, "mousedown", this._handleDocClick);
     }
 
-    handleMonthChange(evt) {
+    handleMonthChange = (evt) => {
         var newDate = moment(this.state.date).month(evt.target.value);
         this.setState({ date: newDate });
 
         this.refs.calendar.moveToDate(newDate);
-    }
+    };
 
-    handleYearChange(evt) {
+    handleYearChange = (evt) => {
         var newDate = moment(this.state.date).year(evt.target.value);
         this.setState({ date: newDate });
 
         this.refs.calendar.moveToDate(newDate);
-    }
+    };
 
     handleDocClick(evt) {
         if (!this._mounted) {
@@ -92,12 +92,12 @@ class Picker extends Component {
                                     minYear={minYear}
                                     maxYear={maxYear}
                                     width={60}
-                                    onChange={(evt) => this.handleYearChange(evt)}
+                                    onChange={this.handleYearChange}
                         />
                         <DateSelect type="month"
                                     value={date.month()}
                                     width={90}
-                                    onChange={(evt) => this.handleMonthChange(evt)}
+                                    onChange={this.handleMonthChange}
                         />
                     </div>
                 </div>

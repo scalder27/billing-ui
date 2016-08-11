@@ -56,7 +56,7 @@ class Calendar extends Component {
         this.setState({ pos: dateToPos(newDate) });
     }
 
-    handleWheel(evt) {
+    handleWheel = (evt) => {
         evt.preventDefault();
 
         let deltaY = evt.deltaY;
@@ -74,9 +74,9 @@ class Calendar extends Component {
         const date = posToDate(pos);
         date.date(date.date() + 6);
         this.props.onNav(date);
-    }
+    };
 
-    handleMouseDown(evt) {
+    handleMouseDown = (evt) => {
         if (evt.button !== 0) {
             return;
         }
@@ -95,20 +95,20 @@ class Calendar extends Component {
                 this.props.onPick(date);
             }
         }
-    }
+    };
 
-    handleMouseMove(evt) {
+    handleMouseMove = (evt) => {
         const rect = evt.currentTarget.getBoundingClientRect();
 
         this.setState({
             mouseX: evt.clientX - rect.left,
             mouseY: evt.clientY - rect.top
         });
-    }
+    };
 
-    handleMouseLeave() {
+    handleMouseLeave = () => {
         this.setState({ mouseX: -10 });
-    }
+    };
 
     renderMonth(offset, from, week) {
         const months = [];
@@ -198,13 +198,13 @@ class Calendar extends Component {
         const cells = this.renderCells(offset, from, week);
 
         return (
-            <div className={styles.root} tabIndex="0" onWheel={(evt) => this.handleWheel(evt)}>
+            <div className={styles.root} tabIndex="0" onWheel={this.handleWheel}>
                 {cells}
                 {months}
                 <div className={styles.mask}
-                    onMouseMove={(evt) => this.handleMouseMove(evt)}
-                    onMouseLeave={() => this.handleMouseLeave()}
-                    onMouseDown={(evt) => this.handleMouseDown(evt)}
+                    onMouseMove={this.handleMouseMove}
+                    onMouseLeave={this.handleMouseLeave}
+                    onMouseDown={this.handleMouseDown}
                 />
             </div>
         );
