@@ -6,18 +6,20 @@ import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
 
 class TextInputWrapper extends Component {
-    getDomNode() {
+    inputDom = null;
+
+    setInputDom = (el) => {
         const tagName = this.props.isTextArea ? "textarea" : "input";
-        return ReactDom.findDOMNode(this).getElementsByTagName(tagName)[0];
-    }
+        this.inputDom = ReactDom.findDOMNode(el).getElementsByTagName(tagName)[0];
+    };
 
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...others} labelClassName={labelClassName} />
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} />
+                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this.setInputDom}/>
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this.setInputDom}/>
         );
     }
 }

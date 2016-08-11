@@ -30,7 +30,7 @@ class TextArea extends Component {
     }
 
     componentDidMount() {
-        const textAreaDom = this.textArea.getDomNode();
+        const textAreaDom = this.textArea.inputDom;
         this.changeHeight(textAreaDom);
     }
 
