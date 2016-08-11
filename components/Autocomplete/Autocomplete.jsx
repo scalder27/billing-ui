@@ -33,12 +33,14 @@ class Autocomplete extends Component {
         const { requestData, url } = this.props;
         const _this = this;
 
-        return axios.get(url, {
-            params: {
-                ...requestData,
-                ...({ value }) }
-        })
-            .then(({data}) => {
+        return axios
+            .get(url, {
+                params: {
+                    ...requestData,
+                    ...({ value })
+                }
+            })
+            .then(({ data }) => {
                 _this.lastSearchResult = (data.Options || []).reduce((result, optionData) => {
                     result[optionData.Text] = optionData;
                     return result;
@@ -193,9 +195,9 @@ class Autocomplete extends Component {
 
         return (
             <div key={index} className={rootClass}
-                 onMouseDown={(e) => this.handleItemClick(e, index)}
-                 onMouseEnter={(e) => this.setState({ selected: index })}
-                 onMouseLeave={(e) => this.setState({ selected: -1 })}>
+                onMouseDown={(e) => this.handleItemClick(e, index)}
+                onMouseEnter={(e) => this.setState({ selected: index })}
+                onMouseLeave={(e) => this.setState({ selected: -1 })}>
                 {renderItem
                     ? renderItem(optionData)
                     : (<div>
