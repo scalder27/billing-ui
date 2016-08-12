@@ -13,6 +13,17 @@ class StickyPanel extends Component {
         stickyPanelBodyInitialOffsetTop: ""
     };
 
+    componentDidMount() {
+        this._mainWrapper = document.getElementById("MainWrapper");
+
+        this.calculateInitialParameters();
+        events.addEventListener(this._mainWrapper, "resize", throttle(this.calculateInitialParameters.bind(this), 50));
+    }
+
+    componentWillUnmount() {
+        events.removeEventListener(this._mainWrapper, "resize", throttle(this.calculateInitialParameters.bind(this), 50));
+    }
+
     calculateInitialParameters() {
         setTimeout(() => {
             this.setState({
@@ -20,13 +31,6 @@ class StickyPanel extends Component {
                 stickyPanelBodyInitialOffsetTop: this._stickyWrapper.getBoundingClientRect().top
             });
         }, 0)
-    }
-
-    componentDidMount() {
-        this._mainWrapper = document.getElementById("MainWrapper");
-
-        this.calculateInitialParameters();
-        events.addEventListener(this._mainWrapper, "resize", throttle(this.calculateInitialParameters.bind(this), 50));
     }
 
     _extractStickyPanelChildren() {

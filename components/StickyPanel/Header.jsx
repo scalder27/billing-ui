@@ -1,6 +1,7 @@
 import { Component, PropTypes } from "react";
 import events from "add-event-listener";
 import shouldPureComponentUpdate from "react-pure-render/function";
+import DisplayType from "./DisplayType";
 import cx from "classnames";
 
 import styles from "./Header.scss";
@@ -9,22 +10,28 @@ class StickyHeader extends Component {
     shouldComponentUpdate = shouldPureComponentUpdate;
 
     state = {
-        displayType: "default",
+        displayType: DisplayType.default,
         stickyPanelHeaderHeight: "",
         stickyPanelHeaderWidth: "",
         stickyPanelHeaderStyles: {},
         stickyHeaderSubstrateStyles: {}
     };
 
+    constructor(props) {
+        super(props);
+
+        this._handlePanelPosition = this.handlePanelPosition.bind(this);
+    }
+
     componentDidMount() {
         this._mainWrapper = document.getElementById("MainWrapper");
 
         this.calculateInitialParameters();
-        events.addEventListener(this._mainWrapper, "scroll", this.handlePanelPosition.bind(this));
+        events.addEventListener(this._mainWrapper, "scroll", this._handlePanelPosition);
     }
 
     componentWillUnmount() {
-        events.removeEventListener(this._mainWrapper, "scroll", this.handlePanelPosition.bind(this));
+        events.removeEventListener(this._mainWrapper, "scroll", this._handlePanelPosition);
     }
 
     calculateInitialParameters() {
@@ -42,9 +49,9 @@ class StickyHeader extends Component {
         const isSticky = scrollTop > stickyPanelBodyInitialOffsetTop;
         const isShifting = scrollTop + stickyPanelHeaderHeight >= stopLine;
 
-        if (isSticky && !isShifting && displayType !== "fixed") {
+        if (isSticky && !isShifting && displayType !== DisplayType.fixed) {
             this.setState({
-                displayType: "fixed",
+                displayType: DisplayType.fixed,
                 stickyPanelHeaderStyles: {
                     position: "fixed",
                     width: stickyPanelHeaderWidth,
@@ -59,9 +66,9 @@ class StickyHeader extends Component {
             });
         }
 
-        if (isSticky && isShifting && displayType !== "outgoing") {
+        if (isSticky && isShifting && displayType !== DisplayType.outgoing) {
             this.setState({
-                displayType: "outgoing",
+                displayType: DisplayType.outgoing,
                 stickyPanelHeaderStyles: {
                     position: "absolute",
                     width: stickyPanelHeaderWidth,
@@ -76,9 +83,9 @@ class StickyHeader extends Component {
             });
         }
 
-        if (!isSticky && displayType !== "default") {
+        if (!isSticky && displayType !== DisplayType.default) {
             this.setState({
-                displayType: "default",
+                displayType: DisplayType.default,
                 stickyPanelHeaderStyles: {
                     position: "",
                     width: "",
@@ -101,7 +108,7 @@ class StickyHeader extends Component {
         return (
             <div>
                 <div style={stickyHeaderSubstrateStyles} className={styles.header}></div>
-                <div style={stickyPanelHeaderStyles} className={cx(styles.header, className)} ref={ref => (this.node = ref)}>
+                <div style={stickyPanelHeaderStyles} className={cx(styles.header, className)} ref={el => (this.node = el)}>
                     {this.props.children}
                 </div>
             </div>
