@@ -17,6 +17,11 @@
         &:focus {
             box-shadow: 0 0 0 2px #db3052;
         }
+
+        &.disabled:focus {
+            outline: none;
+            box-shadow: none;
+        }
     }
 
     .actionCancel {
@@ -34,6 +39,17 @@
             box-shadow: none;
 
             color: $linkBaseColor;
+        }
+
+        &.disabled {
+            color: $textInactiveColor;
+
+            cursor: default;
+
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
         }
     }
 }

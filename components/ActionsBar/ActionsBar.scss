@@ -1,0 +1,5 @@
+﻿@import "../../styles/mixins/form_action_bar";
+
+:local {
+    @include action-bar();
+}

@@ -1,6 +1,6 @@
 {
   "name": "billing-ui",
-  "version": "1.0.1",
+  "version": "1.4.0",
   "description": "KonturBilling ui components",
   "private": true,
   "scripts": {
@@ -58,8 +58,8 @@
   },
   "peerDependencies": {
     "react-pure-render": ">= 1.0.2 < 2",
-    "react": ">= 0.14.6 < 0.15",
-    "react-dom": ">= 0.14.6 < 0.15",
+    "react": ">= 0.14.6",
+    "react-dom": ">= 0.14.6",
     "classnames": "~2.2.3",
     "add-event-listener": "^0.0.1",
     "eventemitter3": "^1.2.0",
@@ -72,7 +72,7 @@
     "redux": ">= 3.1.0 < 4",
     "redux-saga": ">= 0.10.4 < 1",
     "redux-thunk": "2.x",
-    "react-addons-perf": ">= 0.14.8 < 1",
+    "react-addons-perf": ">= 0.14.8",
     "why-did-you-update": ">= 0.0.8 < 1"
   }
 }
