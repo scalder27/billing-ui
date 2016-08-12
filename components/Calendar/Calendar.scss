@@ -64,17 +64,20 @@
         }
 
         &.active:not(.current) .cell-inner {
-            background: #549AD9;
+            background: $linkBaseColor;
 
             color: $textWhiteColor;
         }
 
         &.today .cell-inner {
+            color: $themeMainTextColor;
             font-weight: bold;
         }
 
         &.current .cell-inner {
-            background: #ddd;
+            background: #b7b7b7;
+
+            color: $textWhiteColor;
         }
     }
 

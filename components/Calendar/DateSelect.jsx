@@ -127,7 +127,7 @@ class DateSelect extends Component {
         });
     };
 
-    close = ()  => {
+    close = () => {
         if (!this.state.opened) {
             return;
         }
