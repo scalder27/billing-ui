@@ -1,5 +1,6 @@
 import { Component, PropTypes } from "react";
 import moment from "../../libs/moment";
+import TimeConstants from "../../helpers/TimeConstants";
 
 import cx from "classnames";
 import styles from "./Calendar.scss";
@@ -10,7 +11,7 @@ const MONTH_NAMES = [
     "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
 ];
 
-const DAY = 24 * 60 * 60 * 1000;
+const DAY = TimeConstants.day;
 const WEEK = 7 * DAY;
 const FIRST_WEEK_SHIFT = (new Date(0).getDay() - 1) * DAY;
 const DAY_HEIGHT = 31;
