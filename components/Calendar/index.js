@@ -1,2 +1,1 @@
-import Calendar from "./CalendarWrapper.jsx";
-export default Calendar;
+export default from "./CalendarWrapper.jsx";
