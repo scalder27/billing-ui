@@ -285,16 +285,6 @@ class CalendarWrapper extends Component {
     }
 }
 
-CalendarWrapper.defaultProps = {
-    value: moment(),
-    width: 115,
-    minYear: 1900,
-    maxYear: 2100,
-    className: "",
-    disabled: false,
-    isValid: true
-};
-
 CalendarWrapper.propTypes = {
     isValid: PropTypes.bool,
     onChange: PropTypes.func,
@@ -306,6 +296,16 @@ CalendarWrapper.propTypes = {
     value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     className: PropTypes.string
+};
+
+CalendarWrapper.defaultProps = {
+    value: moment(),
+    width: 115,
+    minYear: 1900,
+    maxYear: 2100,
+    className: "",
+    disabled: false,
+    isValid: true
 };
 
 export default CalendarWrapper;
