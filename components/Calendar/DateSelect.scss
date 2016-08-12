@@ -63,7 +63,7 @@
 
     .holder {
         position: absolute;
-        z-index: 1000;
+        z-index: $calendarZIndex + 1;
 
         min-width: 100%;
         margin: -14px -1px 0;
