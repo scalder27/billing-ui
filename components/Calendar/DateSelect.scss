@@ -1,4 +1,5 @@
 ﻿@import "./../../styles/variables";
+@import "./../../styles/bourbon";
 
 :local {
     .root {
@@ -25,13 +26,11 @@
     }
 
     .arrow {
-        position: absolute;
-        top: 9px;
-        right: 6px;
+        @include position(absolute, 9px 6px null null);
 
         &:before,
         &:after {
-            content: '';
+            content: "";
 
             display: block;
 
@@ -73,7 +72,7 @@
 
         border: 1px solid #ccc;
         border-radius: 3px;
-        background: #fff;
+        background: $bgWhiteColor;
         box-shadow: 0 0 8px rgba(0, 0, 0, .25);
 
         &.is-top-capped {
@@ -88,15 +87,10 @@
     }
 
     .overlay {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-
+        @include position(absolute, 0 0 0 0);
         opacity: 0;
 
-        background: #fff;
+        background: $bgWhiteColor;
     }
 
     .item {
@@ -125,7 +119,7 @@
         text-align: center;
 
         &:before {
-            content: '';
+            content: "";
 
             display: inline-block;
             margin: 4px 0;
