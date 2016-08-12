@@ -58,12 +58,14 @@ class TextArea extends Component {
 
     render() {
         const { height } = this.state;
+        const textInputProps = { ...this.props };
+        delete textInputProps.minHeight;
 
         return (
             <TextInput isTextArea={true}
                        inputClassName={styles.textArea}
                        height={height}
-                       {...this.props}
+                       {...textInputProps}
                        onChange={this.handleChange}
                        ref={ (el) => { this.textArea = el }} />
         );
@@ -72,7 +74,6 @@ class TextArea extends Component {
 
 TextArea.propTypes = {
     minHeight: PropTypes.number,
-    maxHeight: PropTypes.number,
 
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
