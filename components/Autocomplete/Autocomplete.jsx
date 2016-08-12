@@ -1,21 +1,20 @@
-﻿import { Component, PropTypes } from "react";
-import axios from "axios";
-import TextInput from "billing-ui/components/TextInput";
-import shouldPureComponentUpdate from "react-pure-render/function";
+﻿import { PureComponent, PropTypes } from "react";
+import axios from "../../libs/axios";
 
+import keyCodes from "../../helpers/KeyCodes";
+
+import TextInput from "../TextInput";
 import styles from "./Autocomplete.scss";
 import cx from "classnames";
 
-class Autocomplete extends Component {
-    shouldComponentUpdate = shouldPureComponentUpdate;
-
-    lastSearchResult = {};
-
+class Autocomplete extends PureComponent {
     constructor(props, context) {
         super(props, context);
         const { value, defaultValue } = props;
 
         this.state = {
+            items: [],
+            searchResult: {},
             selected: -1,
             value: value ? value : defaultValue
         };
@@ -31,7 +30,6 @@ class Autocomplete extends Component {
 
     search(value) {
         const { requestData, url } = this.props;
-        const _this = this;
 
         return axios
             .get(url, {
@@ -41,12 +39,10 @@ class Autocomplete extends Component {
                 }
             })
             .then(({ data }) => {
-                _this.lastSearchResult = (data.Options || []).reduce((result, optionData) => {
+                return (data.Options || []).reduce((result, optionData) => {
                     result[optionData.Text] = optionData;
                     return result;
                 }, {});
-
-                return Object.keys(_this.lastSearchResult);
             });
     }
 
@@ -83,7 +79,7 @@ class Autocomplete extends Component {
 
     handleBlur = (evt) => {
         this._opened = false;
-        this.setState({ items: null });
+        this.resetSearchResult();
 
         if (this.props.onBlur) {
             this.props.onBlur(evt);
@@ -98,11 +94,11 @@ class Autocomplete extends Component {
         var items = this.state.items;
         var stop = false;
 
-        if ((evt.key === "ArrowUp" || evt.key === "ArrowDown") && items) {
+        if ((evt.keyCode === keyCodes.top || evt.keyCode === keyCodes.bottom) && items.length) {
             evt.preventDefault();
             stop = true;
 
-            const step = evt.key === "ArrowUp" ? -1 : 1;
+            const step = evt.keyCode === keyCodes.top ? -1 : 1;
             let selected = this.state.selected + step;
             if (selected >= items.length) {
                 selected = -1;
@@ -110,22 +106,22 @@ class Autocomplete extends Component {
                 selected = items.length - 1;
             }
             this.setState({ selected });
-        } else if (evt.key === "Enter") {
-            if (items && items[this.state.selected]) {
+        } else if (evt.keyCode === keyCodes.enter) {
+            if (items.length && items[this.state.selected]) {
                 evt.preventDefault();
                 stop = true;
 
                 this.choose(this.state.selected);
             } else {
                 this._opened = false;
-                this.setState({ items: null });
+                this.resetSearchResult();
             }
-        } else if (evt.key === "Escape" && items && items.length) {
+        } else if (evt.keyCode === keyCodes.esc && items.length) {
             evt.preventDefault(); // Escape clears the input on IE.
             stop = true;
 
             this._opened = false;
-            this.setState({ items: null });
+            this.resetSearchResult();
         }
 
         if (!stop && this.props.onKeyDown) {
@@ -140,11 +136,18 @@ class Autocomplete extends Component {
 
         const value = text || "";
         const pattern = value.trim();
+
+        if (pattern === "") {
+            this.resetSearchResult();
+            return;
+        }
+
         const promise = this.search(pattern);
-        promise.then((items) => {
+        promise.then((searchResult) => {
             if (this.state.value === value && this._opened) {
                 this.setState({
-                    items,
+                    searchResult,
+                    items: Object.keys(searchResult),
                     selected: -1
                 });
             }
@@ -159,13 +162,11 @@ class Autocomplete extends Component {
             this.setState({
                 value: value,
                 selected: -1,
-                items: null
+                items: [],
+                searchResult: {}
             });
         } else {
-            this.setState({
-                selected: -1,
-                items: null
-            });
+            this.resetSearchResult();
         }
 
         this.fireChange(value);
@@ -173,7 +174,8 @@ class Autocomplete extends Component {
 
     fireChange(value) {
         const { onSelect, onChange } = this.props;
-        const optionData = this.lastSearchResult[value];
+
+        const optionData = this.state.searchResult[value];
 
         if (optionData && onSelect) {
             return onSelect(optionData.Value, value);
@@ -184,9 +186,20 @@ class Autocomplete extends Component {
         }
     }
 
+    resetSearchResult() {
+        if (this.state.items.length === 0) {
+            return;
+        }
+        this.setState({
+            searchResult: {},
+            items: [],
+            selected: -1
+        });
+    }
+
     renderItem(text, index) {
         const { renderItem } = this.props;
-        const optionData = this.lastSearchResult[text];
+        const optionData = this.state.searchResult[text];
         const { Text, Description } = optionData;
         const rootClass = cx({
             [styles.item]: true,
@@ -218,12 +231,12 @@ class Autocomplete extends Component {
             return null;
         }
 
-        const items = (this.state.items || []).map((item, index) => this.renderItem(item, index));
+        const items = this.state.items.map((item, index) => this.renderItem(item, index));
 
         return (
             <div className={styles.menuHolder}>
                 <div className={styles.menu}>
-                    {!items || items.length === 0
+                    {items.length === 0
                         ? <div className={styles.empty}>ничего не найдено</div>
                         : items
                     }
