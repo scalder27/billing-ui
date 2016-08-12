@@ -247,19 +247,20 @@ class Autocomplete extends PureComponent {
 
     render() {
         const inputProps = {
+            ...this.props,
             value: this.state.value,
             onSelect: this.handleSelect,
             onBlur: this.handleBlur,
             onFocus: this.handleFocus,
-            onKeyDown: this.handleKey
+            onKeyDown: this.handleKey,
+            onChange: this.handleChange
         };
+        delete inputProps.url;
+        delete inputProps.requestData;
 
         return (
             <span className={styles.root}>
-                <TextInput
-                    {...this.props}
-                    {...inputProps}
-                    onChange={this.handleChange} />
+                <TextInput {...inputProps}/>
                 {this.renderMenu()}
             </span>
         )

@@ -46,6 +46,7 @@ TextInputWrapper.propTypes = {
 };
 
 TextInputWrapper.defaultProps = {
+    value: "",
     wrapperClassName: "",
     inputClassName: "",
     labelClassName: "",
