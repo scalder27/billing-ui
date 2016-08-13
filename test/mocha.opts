@@ -1,0 +1,6 @@
+--compilers js:babel-register
+--require jsdom-global/register
+--reporter nyan
+--ui bdd
+--colors
+--inline-diffs
