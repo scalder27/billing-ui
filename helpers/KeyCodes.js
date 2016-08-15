@@ -13,12 +13,13 @@ const KeyCodes = {
 
     home: 36,
     end: 35,
-
+    space: 32,
     pageUp: 33,
     pageDown: 34,
 
     g: 71,
-    j: 74
+    j: 74,
+    dot: 190
 };
 
 export default KeyCodes;

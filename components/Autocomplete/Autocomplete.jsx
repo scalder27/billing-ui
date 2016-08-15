@@ -250,6 +250,7 @@ class Autocomplete extends PureComponent {
         delete inputProps.url;
         delete inputProps.requestData;
         delete inputProps.onSelect;
+        delete inputProps.defaultValue;
 
         return (
             <span className={styles.root}>
@@ -278,7 +279,8 @@ Autocomplete.propTypes = {
 };
 
 Autocomplete.defaultProps = {
-    requestData: {}
+    requestData: {},
+    defaultValue: ""
 };
 
 export default Autocomplete;

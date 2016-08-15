@@ -1,19 +1,36 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
+import ReactDOM from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
-import shouldPureComponentUpdate from "react-pure-render/function";
 
-class TextInputWrapper extends Component {
-    shouldComponentUpdate = shouldPureComponentUpdate;
+class TextInputWrapper extends PureComponent {
+
+    _inputDom = null;
+
+    _setDomNode = (el) => {
+        if (el) {
+            const tagName = this.props.isTextArea ? "textarea" : "input";
+            this._inputDom = ReactDOM.findDOMNode(el).getElementsByTagName(tagName)[0];
+        }
+    };
+
+    getDomNode() {
+        return this._inputDom;
+    }
+
+    focus() {
+        this._inputDom.focus();
+    }
+
     render() {
         const { type, placeholderClassName, labelClassName, ...others } = this.props;
 
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...others} labelClassName={labelClassName} />
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} />
+                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setDomNode}/>
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setDomNode}/>
         );
     }
 }
@@ -23,6 +40,7 @@ TextInputWrapper.propTypes = {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -32,6 +50,7 @@ TextInputWrapper.propTypes = {
     tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     mask: PropTypes.string,
     maskChar: PropTypes.string,
@@ -46,13 +65,13 @@ TextInputWrapper.propTypes = {
 };
 
 TextInputWrapper.defaultProps = {
-    value: "",
     wrapperClassName: "",
     inputClassName: "",
     labelClassName: "",
     placeholderClassName: "",
     width: 180,
     isValid: true,
+    isTextArea: false,
     type: TextInputType.default,
     tooltipPosition: TooltipType.right
 };

@@ -50,7 +50,21 @@ class TextInput extends Component {
     }
 
     render() {
-        const { width, mask, maskChar, alwaysShowMask, styles, isValid, inputClassName, tooltipCaption, tooltipPosition, clearable, ...others } = this.props;
+        const {
+            width,
+            height,
+            mask,
+            maskChar,
+            alwaysShowMask,
+            styles,
+            isValid,
+            isTextArea,
+            inputClassName,
+            tooltipCaption,
+            tooltipPosition,
+            clearable,
+            ...others
+        } = this.props;
         const { wasTouched, isFocused } = this.state;
         const isInputValid = !wasTouched || !isFocused || isValid;
 
@@ -64,7 +78,10 @@ class TextInput extends Component {
         const inputProps = {
             ...others,
             title: others.value,
-            style: { "width": width },
+            style: {
+                "width": width,
+                "height": height
+            },
             type: "text",
             className: inputClassNames,
             onChange: (evt) => this._handleOnChange(evt),
@@ -74,13 +91,17 @@ class TextInput extends Component {
 
         return (
             <div>
-                {mask && (
+                {isTextArea && (
+                    <textarea {...inputProps}/>
+                )}
+
+                {!isTextArea && mask && (
                     <MaskedInput {...inputProps} mask={mask}
                                                  maskChar={maskChar || "_"}
                                                  alwaysShowMask={alwaysShowMask} />
                 )}
 
-                {!mask && (
+                {!isTextArea && !mask && (
                     <input {...inputProps} />
                 )}
 
@@ -104,8 +125,10 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
+    isTextArea: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     mask: PropTypes.string,
     maskChar: PropTypes.string,
     alwaysShowMask: PropTypes.bool,
