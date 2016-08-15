@@ -1,9 +1,13 @@
 ﻿%segoe-font {
     font-family: "Segoe UI", "Helvetica Neue", "Arial", "Tahoma", sans-serif;
     -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
 }
 
 %palatino-font {
     font-family: "Palatino Linotype", "Times", serif;
     -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
 }
