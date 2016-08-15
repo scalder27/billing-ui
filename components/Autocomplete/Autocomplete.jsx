@@ -28,24 +28,6 @@ class Autocomplete extends PureComponent {
         }
     }
 
-    search(value) {
-        const { requestData, url } = this.props;
-
-        return axios
-            .get(url, {
-                params: {
-                    ...requestData,
-                    ...({ value })
-                }
-            })
-            .then(({ data }) => {
-                return (data.Options || []).reduce((result, optionData) => {
-                    result[optionData.Text] = optionData;
-                    return result;
-                }, {});
-            });
-    }
-
     handleItemClick = (evt, index) => {
         if (evt.button !== 0) {
             return;
@@ -146,12 +128,38 @@ class Autocomplete extends PureComponent {
         promise.then((searchResult) => {
             if (this.state.value === value && this._opened) {
                 this.setState({
-                    searchResult,
+                    searchResult: Object.keys(searchResult).reduce((result, searchKey) => {
+                        var oldSearchResult = this.state.searchResult[searchKey];
+                        if (oldSearchResult !== undefined) {
+                            result[searchKey] = oldSearchResult;
+                        } else {
+                            result[searchKey] = searchResult[searchKey];
+                        }
+                        return result;
+                    }, {}),
                     items: Object.keys(searchResult),
                     selected: -1
                 });
             }
         });
+    }
+
+    search(value) {
+        const { requestData, url } = this.props;
+
+        return axios
+            .get(url, {
+                params: {
+                    ...requestData,
+                    ...({ value })
+                }
+            })
+            .then(({ data }) => {
+                return (data.Options || []).reduce((result, optionData) => {
+                    result[optionData.Text] = optionData;
+                    return result;
+                }, {});
+            });
     }
 
     choose(index) {
