@@ -8,9 +8,11 @@ import TooltipType from "./TooltipType";
 class TextInputWrapper extends Component {
     _inputDom = null;
 
-    _setInputDom = (el) => {
-        const tagName = this.props.isTextArea ? "textarea" : "input";
-        this._inputDom = ReactDOM.findDOMNode(el).getElementsByTagName(tagName)[0];
+    _setDomNode = (el) => {
+        if (el) {
+            const tagName = this.props.isTextArea ? "textarea" : "input";
+            this._inputDom = ReactDOM.findDOMNode(el).getElementsByTagName(tagName)[0];
+        }
     };
 
     getDomNode() {
@@ -26,8 +28,8 @@ class TextInputWrapper extends Component {
 
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setInputDom}/>
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setInputDom}/>
+                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setDomNode}/>
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setDomNode}/>
         );
     }
 }

@@ -74,12 +74,10 @@ class TextArea extends Component {
 
 TextArea.propTypes = {
     minHeight: PropTypes.number,
-
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
-    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
