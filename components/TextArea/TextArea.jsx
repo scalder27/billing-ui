@@ -8,9 +8,13 @@ import styles from "./TextArea.scss";
 class TextArea extends Component {
     _textArea = null;
 
+    state = {
+        height: null
+    };
+
     constructor(props) {
         super(props);
-        const { minHeight } = this.props;
+        const { minHeight } = props;
 
         this.state = {
             height: minHeight
