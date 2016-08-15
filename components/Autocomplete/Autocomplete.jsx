@@ -69,10 +69,6 @@ class Autocomplete extends PureComponent {
         }
     };
 
-    handleSelect = (evt) => {
-        evt.preventDefault();
-    };
-
     handleKey = (evt) => {
         var items = this.state.items;
         var stop = false;
@@ -161,15 +157,11 @@ class Autocomplete extends PureComponent {
 
         if (!this.props.value) {
             this.setState({
-                value: value,
-                selected: -1,
-                items: [],
-                searchResult: {}
+                value: value
             });
-        } else {
-            this.resetSearchResult();
         }
 
+        this.resetSearchResult();
         this.fireChange(value);
     }
 
@@ -250,7 +242,6 @@ class Autocomplete extends PureComponent {
         const inputProps = {
             ...this.props,
             value: this.state.value,
-            onSelect: this.handleSelect,
             onBlur: this.handleBlur,
             onFocus: this.handleFocus,
             onKeyDown: this.handleKey,
@@ -258,6 +249,7 @@ class Autocomplete extends PureComponent {
         };
         delete inputProps.url;
         delete inputProps.requestData;
+        delete inputProps.onSelect;
 
         return (
             <span className={styles.root}>
