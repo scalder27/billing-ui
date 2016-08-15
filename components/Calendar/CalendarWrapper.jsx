@@ -46,9 +46,10 @@ class CalendarWrapper extends Component {
 
     validate(value) {
         const { minDate, maxDate } = this.props;
+        const textValue = formatDate(value);
         const newDate = convertString(value);
 
-        if (value.indexOf("_") !== -1) {
+        if (textValue.indexOf("_") !== -1) {
             return {
                 isValid: false,
                 errorType: validationErrorType.unfilledDate
