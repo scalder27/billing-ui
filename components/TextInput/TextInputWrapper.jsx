@@ -1,5 +1,5 @@
 import { Component, PropTypes } from "react";
-import ReactDom from "react-dom";
+import ReactDOM from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
@@ -10,11 +10,15 @@ class TextInputWrapper extends Component {
 
     _setInputDom = (el) => {
         const tagName = this.props.isTextArea ? "textarea" : "input";
-        this._inputDom = ReactDom.findDOMNode(el).getElementsByTagName(tagName)[0];
+        this._inputDom = ReactDOM.findDOMNode(el).getElementsByTagName(tagName)[0];
     };
 
-    getInputDom() {
+    getDomNode() {
         return this._inputDom;
+    }
+
+    focus() {
+        this._inputDom.focus();
     }
 
     render() {

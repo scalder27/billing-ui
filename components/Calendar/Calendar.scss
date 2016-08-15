@@ -1,0 +1,91 @@
+﻿@import "./../../styles/variables";
+
+:local {
+    $dayHeight: 31px;
+    $dayWidth: 28px;
+    $monthInfoWidth: 90px;
+
+    .root {
+        position: relative;
+
+        width: $dayWidth * 7 + $monthInfoWidth;
+        height: $dayHeight * 7;
+
+        overflow: hidden;
+
+        outline: none;
+        background: $bgWhiteColor;
+    }
+
+    .mask {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        opacity: 0;
+
+        background: $bgWhiteColor;
+        box-shadow: inset 0 5px 6px -5px rgba(0, 0, 0, .2);
+
+        cursor: pointer;
+    }
+
+    .grey {
+        background: $bgBaseColor;
+    }
+
+    .month {
+        position: absolute;
+        left: $dayWidth * 7;
+
+        width: $monthInfoWidth;
+        padding: 8px 0 0 5px;
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+        text-align: left;
+    }
+
+    .year {
+        margin-top: 5px;
+
+        color: #888;
+    }
+
+    .cell {
+        position: absolute;
+
+        &.holy {
+            color: $textDisabledColor;
+        }
+
+        &.active:not(.current) .cell-inner {
+            background: $linkBaseColor;
+
+            color: $textWhiteColor;
+        }
+
+        &.today .cell-inner {
+            color: $themeMainTextColor;
+            font-weight: bold;
+        }
+
+        &.current .cell-inner {
+            background: #b7b7b7;
+
+            color: $textWhiteColor;
+        }
+    }
+
+    .cell-inner {
+        display: block;
+        width: $dayWidth;
+        height: $dayHeight;
+
+        line-height: $dayHeight;
+        text-align: center;
+    }
+}

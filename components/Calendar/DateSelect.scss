@@ -1,0 +1,159 @@
+﻿@import "./../../styles/variables";
+@import "./../../styles/bourbon";
+
+:local {
+    .root {
+        position: relative;
+
+        display: inline-block;
+
+        outline: 0;
+
+        color: $textBaseColor;
+        line-height: 28px;
+        text-align: left;
+
+        cursor: pointer;
+    }
+
+    .caption {
+        padding: 6px 18px 7px 10px;
+
+        :local(.root):hover &,
+        :local(.root):focus & {
+            color: $linkBaseColor;
+        }
+    }
+
+    .arrow {
+        @include position(absolute, 9px 6px null null);
+
+        &:before,
+        &:after {
+            content: "";
+
+            display: block;
+
+            border: 3px solid transparent;
+        }
+
+        &:before {
+            margin-bottom: 2px;
+
+            border-top: 0;
+            border-bottom-color: $textBaseColor;
+        }
+
+        &:after {
+            border-top-color: $textBaseColor;
+            border-bottom: 0;
+        }
+
+        :local(.root):hover &:before,
+        :local(.root):focus &:before {
+            border-bottom-color: $linkBaseColor;
+        }
+
+        :local(.root):hover &:after,
+        :local(.root):focus &:after {
+            border-top-color: $linkBaseColor;
+        }
+    }
+
+    .holder {
+        position: absolute;
+        z-index: $calendarZIndex + 1;
+
+        min-width: 100%;
+        margin: -14px -1px 0;
+        box-sizing: content-box;
+
+        overflow: hidden;
+
+        border: 1px solid $borderDarkestColor;
+        border-radius: 3px;
+        background: $bgWhiteColor;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+
+        &.is-top-capped {
+            margin-top: 0;
+        }
+    }
+
+    .items {
+        position: relative;
+
+        overflow: hidden;
+    }
+
+    .overlay {
+        @include position(absolute, 0 0 0 0);
+
+        opacity: 0;
+
+        background: $bgWhiteColor;
+    }
+
+    .item {
+        height: 30px;
+        padding: 0 10px;
+
+        line-height: 30px;
+        white-space: nowrap;
+
+        &.selected {
+            background: $bgButtonColor;
+        }
+
+        &.active {
+            background: $bgActiveActionsColor;
+
+            color: $textWhiteColor;
+        }
+    }
+
+    .up,
+    .down {
+        height: 14px;
+        box-sizing: border-box;
+
+        text-align: center;
+
+        &:before {
+            content: "";
+
+            display: inline-block;
+            margin: 4px 0;
+
+            border: 4px solid transparent;
+
+            vertical-align: top;
+        }
+
+        &:hover {
+            background-color: $bgActiveActionsColor;
+        }
+    }
+
+    .up {
+        &:before {
+            border-top: 0;
+            border-bottom-color: $textBaseColor;
+        }
+
+        &:hover:before {
+            border-bottom-color: $borderWhiteColor;
+        }
+    }
+
+    .down {
+        &:before {
+            border-top-color: $textBaseColor;
+            border-bottom: 0;
+        }
+
+        &:hover:before {
+            border-top-color: $borderWhiteColor;
+        }
+    }
+}
