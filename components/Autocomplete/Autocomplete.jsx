@@ -2,6 +2,7 @@
 import axios from "../../libs/axios";
 
 import keyCodes from "../../helpers/KeyCodes";
+import { updateImmutableHashmap } from "../../helpers/ObjectHelpers";
 
 import TextInput from "../TextInput";
 import styles from "./Autocomplete.scss";
@@ -128,15 +129,7 @@ class Autocomplete extends PureComponent {
         promise.then((searchResult) => {
             if (this.state.value === value && this._opened) {
                 this.setState({
-                    searchResult: Object.keys(searchResult).reduce((result, searchKey) => {
-                        var oldSearchResult = this.state.searchResult[searchKey];
-                        if (oldSearchResult !== undefined) {
-                            result[searchKey] = oldSearchResult;
-                        } else {
-                            result[searchKey] = searchResult[searchKey];
-                        }
-                        return result;
-                    }, {}),
+                    searchResult: updateImmutableHashmap(this.state.searchResult, searchResult),
                     items: Object.keys(searchResult),
                     selected: -1
                 });

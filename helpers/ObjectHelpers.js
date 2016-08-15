@@ -18,3 +18,10 @@ export const enumInfoMapper = (descriptions = {}) => type => {
 
     return type;
 };
+
+export const updateImmutableHashmap = (oldObj, newObj) => {
+    return Object.keys(newObj).reduce((result, key) => {
+        result[key] = oldObj[key] || newObj[key];
+        return result;
+    }, {})
+}
