@@ -16,10 +16,9 @@ class Autocomplete extends PureComponent {
         this.state = {
             searchResult: [],
             selected: -1,
-            value: value ? value : defaultValue
+            value: value ? value : defaultValue,
+            opened: false
         };
-
-        this._opened = false;
     }
 
     componentWillReceiveProps(props) {
@@ -39,13 +38,12 @@ class Autocomplete extends PureComponent {
 
     handleChange = (value) => {
         const { onChange } = this.props;
-        this._opened = true;
 
         if (!this.props.value) {
             this.setState({ value });
         }
 
-        this.updateItems(value);
+        this.showNewOptions(value);
 
         if (onChange) {
             onChange(value);
@@ -53,10 +51,9 @@ class Autocomplete extends PureComponent {
     };
 
     handleFocus = (evt) => {
-        this._opened = true;
         const value = evt.target.value || "";
 
-        this.updateItems(value);
+        this.showNewOptions(value);
 
         if (this.props.onFocus) {
             this.props.onFocus(evt);
@@ -64,8 +61,7 @@ class Autocomplete extends PureComponent {
     };
 
     handleBlur = (evt) => {
-        this._opened = false;
-        this.resetSearchResult();
+        this.closeOptions();
 
         if (this.props.onBlur) {
             this.props.onBlur(evt);
@@ -99,15 +95,13 @@ class Autocomplete extends PureComponent {
 
                 this.choose(currentSelected);
             } else {
-                this._opened = false;
-                this.resetSearchResult();
+                this.closeOptions();
             }
         } else if (evt.keyCode === keyCodes.esc && optionsCount) {
             evt.preventDefault(); // Escape clears the input on IE.
             handled = true;
 
-            this._opened = false;
-            this.resetSearchResult();
+            this.closeOptions();
         }
 
         if (!handled && this.props.onKeyDown) {
@@ -115,24 +109,21 @@ class Autocomplete extends PureComponent {
         }
     };
 
-    updateItems(text) {
-        if (!this._opened) {
-            return;
-        }
-
+    showNewOptions(text) {
         const value = text || "";
         const pattern = value.trim();
 
         if (pattern === "") {
-            this.resetSearchResult();
+            this.closeOptions();
             return;
         }
 
         this.search(pattern)
             .then((newSearchResult) => {
-                if (this.state.value === value && this._opened) {
+                if (this.state.value === value) {
                     this.setState({
                         searchResult: updateImmutableArrayByKey(this.state.searchResult, newSearchResult, "Value"),
+                        opened: true,
                         selected: -1
                     });
                 }
@@ -155,7 +146,6 @@ class Autocomplete extends PureComponent {
     choose(index) {
         const { onChange } = this.props;
         var value = this.state.searchResult[index].Text;
-        this._opened = false;
 
         if (!this.props.value) {
             this.setState({
@@ -163,7 +153,7 @@ class Autocomplete extends PureComponent {
             });
         }
 
-        this.resetSearchResult();
+        this.closeOptions();
 
         if (onChange) {
             onChange(value);
@@ -180,13 +170,19 @@ class Autocomplete extends PureComponent {
         }
     }
 
-    resetSearchResult() {
-        if (this.state.searchResult.length === 0) {
-            return;
+    closeOptions() {
+        if (this.state.searchResult.length !== 0) {
+            this.setState({
+                searchResult: [],
+                selected: -1
+            });
         }
-        this.setState({
-            searchResult: []
-        });
+
+        if (this.state.opened) {
+            this.setState({
+                opened: false
+            })
+        }
     }
 
     renderOption(optionData, index) {
@@ -218,7 +214,7 @@ class Autocomplete extends PureComponent {
     }
 
     renderOptionsList() {
-        if (!this._opened || !this.state.value) {
+        if (!this.state.opened || !this.state.value) {
             return null;
         }
 
