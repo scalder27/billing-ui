@@ -1,2 +1,2 @@
-import ContentFrame from "./ContentFrame.jsx";
-export default ContentFrame;
+export default from "./ContentFrame.jsx";
+export FrameType from "./FrameType.js";

@@ -1,22 +1,27 @@
 import { Component, PropTypes } from "react";
-import styles from "./ContentFrame.scss";
+import FrameType from "./FrameType.js";
+import ArrowFrame from "./ArrowFrame/ArrowFrame.jsx";
+import CrossFrame from "./CrossFrame/CrossFrame.jsx";
 
 class ContentFrame extends Component {
     render() {
-        const { closeUrl } = this.props;
+        const { type } = this.props;
 
         return (
-            <div className={styles.frame}>
-                {closeUrl && <a href={closeUrl} className={styles.close} />}
-                {this.props.children}
+            <div>
+                {type === FrameType.cross && <CrossFrame { ...this.props } />}
+                {type === FrameType.arrow && <ArrowFrame { ...this.props } />}
             </div>
         );
     }
 }
 
 ContentFrame.propTypes = {
-    closeUrl: PropTypes.string,
-    children: PropTypes.node
+    type: PropTypes.oneOf(Object.keys(FrameType).map(key => FrameType[key])).isRequired
+};
+
+ContentFrame.defaultProps = {
+    type: FrameType.cross
 };
 
 export default ContentFrame;

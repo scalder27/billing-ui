@@ -1,11 +1,13 @@
-﻿:local {
+﻿@import "../../../styles/variables";
+
+:local {
     .frame {
         position: relative;
 
         min-height: 200px;
         margin: 20px 0;
 
-        box-shadow: 0 1px 2px #cfccc6, 0 1px 5px rgba(0, 0, 0, .15);
+        box-shadow: 0 1px 2px $shadowElementBaseColor, 0 1px 5px rgba(0, 0, 0, .15);
     }
 
     .close {
@@ -17,7 +19,7 @@
         width: 21px;
         height: 21px;
 
-        background: transparent url('/ContentBase/img/window/close_small.png') 0 0 no-repeat;
+        background: transparent url("/ContentBase/img/window/close_small.png") 0 0 no-repeat;
 
         cursor: pointer;
     }
