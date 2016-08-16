@@ -1,2 +1,78 @@
-﻿:local {
+﻿@import "../../../styles/variables";
+@import "../../../styles/placeholders";
+
+:local {
+    $sidePadding: 40px;
+
+    .frame {
+        position: relative;
+
+        min-height: 200px;
+        padding: 10px $sidePadding;
+
+        box-shadow: $shadowBlock;
+    }
+
+    .header {
+        @extend %as-clearfix;
+
+        position: relative;
+
+        height: 19px;
+        padding: 15px 30px 10px 15px;
+
+        overflow: hidden;
+
+        border-bottom: 1px solid $borderDarkColor;
+
+        font-size: 20px;
+        white-space: nowrap;
+    }
+
+    .back {
+        position: relative;
+
+        float: left;
+        max-width: 40px;
+        height: 46px;
+        margin: -15px 0 -10px -15px;
+        padding-top: 15px;
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+        transition: all .3s ease-in-out;
+
+        border-right: 1px solid transparent;
+
+        color: $textBaseColor;
+
+        &:hover {
+            max-width: 40%;
+            margin-right: 15px;
+            padding-right: 15px;
+
+            border-right-color: $borderDarkColor;
+
+            color: $textBaseColor;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        top: 14px;
+        left: 13px;
+    }
+
+    .back-text {
+        margin-left: $sidePadding;
+    }
+
+    .title {
+        float: left;
+    }
+
+    .content {
+        padding: 20px $sidePadding;
+    }
 }
