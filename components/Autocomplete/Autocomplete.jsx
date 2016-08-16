@@ -2,7 +2,7 @@
 import axios from "../../libs/axios";
 
 import keyCodes from "../../helpers/KeyCodes";
-import { updateImmutableHashmap } from "../../helpers/ObjectHelpers";
+import { updateImmutableArrayByKey } from "../../helpers/ArrayHelper";
 
 import TextInput from "../TextInput";
 import styles from "./Autocomplete.scss";
@@ -14,8 +14,7 @@ class Autocomplete extends PureComponent {
         const { value, defaultValue } = props;
 
         this.state = {
-            items: [],
-            searchResult: {},
+            searchResult: [],
             selected: -1,
             value: value ? value : defaultValue
         };
@@ -39,6 +38,7 @@ class Autocomplete extends PureComponent {
     };
 
     handleChange = (value) => {
+        const { onChange } = this.props;
         this._opened = true;
 
         if (!this.props.value) {
@@ -46,7 +46,10 @@ class Autocomplete extends PureComponent {
         }
 
         this.updateItems(value);
-        this.fireChange(value);
+
+        if (onChange) {
+            onChange(value);
+        }
     };
 
     handleFocus = (evt) => {
@@ -70,40 +73,44 @@ class Autocomplete extends PureComponent {
     };
 
     handleKey = (evt) => {
-        var items = this.state.items;
-        var stop = false;
+        const { searchResult } = this.state;
+        const currentSelected = this.state.selected;
+        const optionsCount = searchResult.length;
+        let handled = false;
 
-        if ((evt.keyCode === keyCodes.top || evt.keyCode === keyCodes.bottom) && items.length) {
+        if ((evt.keyCode === keyCodes.top || evt.keyCode === keyCodes.bottom) && optionsCount) {
             evt.preventDefault();
-            stop = true;
+            handled = true;
 
             const step = evt.keyCode === keyCodes.top ? -1 : 1;
-            let selected = this.state.selected + step;
-            if (selected >= items.length) {
-                selected = -1;
-            } else if (selected < -1) {
-                selected = items.length - 1;
+            let nextSelected = currentSelected + step;
+            if (nextSelected >= optionsCount) {
+                nextSelected = -1;
+            } else if (nextSelected < -1) {
+                nextSelected = optionsCount - 1;
             }
-            this.setState({ selected });
+            this.setState({
+                selected: nextSelected
+            });
         } else if (evt.keyCode === keyCodes.enter) {
-            if (items.length && items[this.state.selected]) {
+            if (optionsCount && searchResult[currentSelected]) {
                 evt.preventDefault();
-                stop = true;
+                handled = true;
 
-                this.choose(this.state.selected);
+                this.choose(currentSelected);
             } else {
                 this._opened = false;
                 this.resetSearchResult();
             }
-        } else if (evt.keyCode === keyCodes.esc && items.length) {
+        } else if (evt.keyCode === keyCodes.esc && optionsCount) {
             evt.preventDefault(); // Escape clears the input on IE.
-            stop = true;
+            handled = true;
 
             this._opened = false;
             this.resetSearchResult();
         }
 
-        if (!stop && this.props.onKeyDown) {
+        if (!handled && this.props.onKeyDown) {
             this.props.onKeyDown(evt);
         }
     };
@@ -121,16 +128,15 @@ class Autocomplete extends PureComponent {
             return;
         }
 
-        const promise = this.search(pattern);
-        promise.then((searchResult) => {
-            if (this.state.value === value && this._opened) {
-                this.setState({
-                    searchResult: updateImmutableHashmap(this.state.searchResult, searchResult),
-                    items: Object.keys(searchResult),
-                    selected: -1
-                });
-            }
-        });
+        this.search(pattern)
+            .then((newSearchResult) => {
+                if (this.state.value === value && this._opened) {
+                    this.setState({
+                        searchResult: updateImmutableArrayByKey(this.state.searchResult, newSearchResult, "Value"),
+                        selected: -1
+                    });
+                }
+            });
     }
 
     search(value) {
@@ -140,19 +146,15 @@ class Autocomplete extends PureComponent {
             .get(url, {
                 params: {
                     ...requestData,
-                    ...({ value })
+                    value
                 }
             })
-            .then(({ data }) => {
-                return (data.Options || []).reduce((result, optionData) => {
-                    result[optionData.Text] = optionData;
-                    return result;
-                }, {});
-            });
+            .then(({ data }) => data.Options);
     }
 
     choose(index) {
-        var value = this.state.items[index];
+        const { onChange } = this.props;
+        var value = this.state.searchResult[index].Text;
         this._opened = false;
 
         if (!this.props.value) {
@@ -162,37 +164,33 @@ class Autocomplete extends PureComponent {
         }
 
         this.resetSearchResult();
-        this.fireChange(value);
-    }
-
-    fireChange(value) {
-        const { onSelect, onChange } = this.props;
-
-        const optionData = this.state.searchResult[value];
-
-        if (optionData && onSelect) {
-            return onSelect(optionData.Value, value);
-        }
 
         if (onChange) {
             onChange(value);
         }
+        this.fireSelect(index);
+    }
+
+    fireSelect(index) {
+        const { onSelect } = this.props;
+        const optionData = this.state.searchResult[index];
+
+        if (optionData && onSelect) {
+            return onSelect(optionData.Value, optionData.Text);
+        }
     }
 
     resetSearchResult() {
-        if (this.state.items.length === 0) {
+        if (this.state.searchResult.length === 0) {
             return;
         }
         this.setState({
-            searchResult: {},
-            items: [],
-            selected: -1
+            searchResult: []
         });
     }
 
-    renderItem(text, index) {
+    renderOption(optionData, index) {
         const { renderItem } = this.props;
-        const optionData = this.state.searchResult[text];
         const { Text, Description } = optionData;
         const rootClass = cx({
             [styles.item]: true,
@@ -219,19 +217,19 @@ class Autocomplete extends PureComponent {
         );
     }
 
-    renderMenu() {
+    renderOptionsList() {
         if (!this._opened || !this.state.value) {
             return null;
         }
 
-        const items = this.state.items.map((item, index) => this.renderItem(item, index));
+        const options = this.state.searchResult.map((data, index) => this.renderOption(data, index));
 
         return (
             <div className={styles.menuHolder}>
                 <div className={styles.menu}>
-                    {items.length === 0
+                    {options.length === 0
                         ? <div className={styles.empty}>ничего не найдено</div>
-                        : items
+                        : options
                     }
                 </div>
             </div>
@@ -255,7 +253,7 @@ class Autocomplete extends PureComponent {
         return (
             <span className={styles.root}>
                 <TextInput {...inputProps}/>
-                {this.renderMenu()}
+                {this.renderOptionsList()}
             </span>
         )
     }
