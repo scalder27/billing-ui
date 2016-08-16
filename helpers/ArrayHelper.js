@@ -55,5 +55,9 @@ export const updateImmutableArrayByKey = (oldArray, newArray, key) => {
         return result;
     }, {});
 
+    if (oldArray.length === newArray.length && newArray.every((item) => oldArrayHashmap[item[key]])) {
+        return oldArray;
+    }
+
     return newArray.map((item) => oldArrayHashmap[item[key]] || item);
 };
