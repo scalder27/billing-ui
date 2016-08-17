@@ -48,3 +48,16 @@ export const arrayReduceHelper = (elementPredicate, elementReducer, state, actio
     const newEntityState = elementReducer(entityState, action);
     return replaceByIndex(newEntityState, index, state);
 };
+
+export const updateImmutableArrayByKey = (oldArray, newArray, key) => {
+    const oldArrayHashmap = oldArray.reduce((result, item) => {
+        result[item[key]] = item;
+        return result;
+    }, {});
+
+    if (oldArray.length === newArray.length && newArray.every((item) => oldArrayHashmap[item[key]])) {
+        return oldArray;
+    }
+
+    return newArray.map((item) => oldArrayHashmap[item[key]] || item);
+};

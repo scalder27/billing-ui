@@ -1,11 +1,12 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import TooltipType from "./TooltipType";
 
-class TextInputWrapper extends Component {
+class TextInputWrapper extends PureComponent {
+
     _inputDom = null;
 
     _setDomNode = (el) => {

@@ -62,6 +62,7 @@ class TextInput extends Component {
             inputClassName,
             tooltipCaption,
             tooltipPosition,
+            clearable,
             ...others
         } = this.props;
         const { wasTouched, isFocused } = this.state;
@@ -71,7 +72,7 @@ class TextInput extends Component {
             [styles["input-validation-error"]]: !isValid && wasTouched,
             [styles.readonly]: others.readonly,
             [styles.disabled]: others.disabled,
-            [styles.clearable]: others.clearable
+            [styles.clearable]: clearable
         });
 
         const inputProps = {
