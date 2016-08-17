@@ -20,90 +20,83 @@ describe("Position handler", () => {
             offsetHeight: 150
         };
 
-        const mainWrapper = {
-            scrollTop: 0,
-            scrollLeft: 0
-        };
-
         it("getPosition снизу", () => {
-            let position = getPosition(PositionType.bottomLeft, target, tooltip, mainWrapper);
+            let position = getPosition(PositionType.bottomLeft, target, tooltip);
             expect(position).to.deep.equal({
-                top: "345px",
-                left: "675px"
+                left: "-25px",
+                top: "45px"
             });
 
-            position = getPosition(PositionType.bottomCenter, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.bottomCenter, target, tooltip);
             expect(position).to.deep.equal({
-                top: "345px",
-                left: "610px"
+                top: "45px",
+                left: "-90px"
             });
 
-            position = getPosition(PositionType.bottomRight, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.bottomRight, target, tooltip);
             expect(position).to.deep.equal({
-                top: "345px",
-                left: "540px"
+                top: "45px",
+                left: "-160px"
             });
         });
 
         it("getPosition сверху", () => {
-            let position = getPosition(PositionType.topLeft, target, tooltip, mainWrapper);
+            let position = getPosition(PositionType.topLeft, target, tooltip);
             expect(position).to.deep.equal({
-                top: "135px",
-                left: "675px"
+                top: "-165px",
+                left: "-25px"
             });
 
-
-            position = getPosition(PositionType.topCenter, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.topCenter, target, tooltip);
             expect(position).to.deep.equal({
-                top: "135px",
-                left: "610px"
+                top: "-165px",
+                left: "-90px"
             });
 
-            position = getPosition(PositionType.topRight, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.topRight, target, tooltip);
             expect(position).to.deep.equal({
-                top: "135px",
-                left: "540px"
+                top: "-165px",
+                left: "-160px"
             });
         });
 
         it("getPosition справа", () => {
-            let position = getPosition(PositionType.rightTop, target, tooltip, mainWrapper);
+            let position = getPosition(PositionType.rightTop, target, tooltip);
             expect(position).to.deep.equal({
-                top: "285px",
-                left: "735px"
+                top: "-15px",
+                left: "35px"
             });
 
-            position = getPosition(PositionType.rightMiddle, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.rightMiddle, target, tooltip);
             expect(position).to.deep.equal({
-                top: "240px",
-                left: "735px"
+                top: "-60px",
+                left: "35px"
             });
 
-            position = getPosition(PositionType.rightBottom, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.rightBottom, target, tooltip);
             expect(position).to.deep.equal({
-                top: "195px",
-                left: "735px"
+                top: "-105px",
+                left: "35px"
             });
         });
 
         it("getPosition слева", () => {
-            let position = getPosition(PositionType.leftTop, target, tooltip, mainWrapper);
+            let position = getPosition(PositionType.leftTop, target, tooltip);
             expect(position).to.deep.equal({
-                top: "285px",
-                left: "485px"
+                top: "-15px",
+                left: "185px"
             });
 
-
-            position = getPosition(PositionType.leftMiddle, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.leftMiddle, target, tooltip);
             expect(position).to.deep.equal({
-                top: "240px",
-                left: "485px"
+                top: "-60px",
+                left: "185px"
             });
 
-            position = getPosition(PositionType.leftBottom, target, tooltip, mainWrapper);
+            position = getPosition(PositionType.leftBottom, target, tooltip);
             expect(position).to.deep.equal({
-                top: "195px",
-                left: "485px"
+                top: "-105px",
+                left: "185px"
             });
         });
     });

@@ -3,11 +3,8 @@ const ARROW_RIGHT_MARGIN = 20;
 const ARROW_LEFT_MARGIN = 25;
 const ARROW_VERTICAL_MARGIN = 15;
 
-export const getPosition = (positionType, target, tooltip, wrapper) => {
+export const getPosition = (positionType, target, tooltip) => {
     const positionTarget = target.getBoundingClientRect();
-    const mainWrapper = wrapper || document.getElementById("MainWrapper");
-    const scrollTop = mainWrapper.scrollTop;
-    const scrollLeft = mainWrapper.scrollLeft;
     const [tooltipPos, arrowPos] = positionType.split(" ");
 
     let top = 0;
@@ -15,38 +12,38 @@ export const getPosition = (positionType, target, tooltip, wrapper) => {
 
     switch (tooltipPos) {
         case "bottom":
-            top = scrollTop + positionTarget.top + positionTarget.height + MARGIN;
+            top = positionTarget.height + MARGIN;
             break;
         case "top":
-            top = scrollTop + positionTarget.top - tooltip.offsetHeight - MARGIN;
+            top = -tooltip.offsetHeight - MARGIN;
             break;
         case "right":
-            left = scrollLeft + positionTarget.left + positionTarget.width + MARGIN;
+            left = positionTarget.width + MARGIN;
             break;
         case "left":
-            left = scrollLeft + positionTarget.left - tooltip.offsetWidth - MARGIN;
+            left = tooltip.offsetWidth - MARGIN;
             break;
     }
 
     switch (arrowPos) {
         case "center":
-            left = scrollLeft + positionTarget.left + positionTarget.width / 2 - tooltip.offsetWidth / 2;
+            left = positionTarget.width / 2 - tooltip.offsetWidth / 2;
             break;
         case "left":
-            left = scrollLeft + positionTarget.left - ARROW_LEFT_MARGIN;
+            left = -ARROW_LEFT_MARGIN;
             break;
         case "right":
-            left = scrollLeft + positionTarget.left + positionTarget.width - tooltip.offsetWidth + ARROW_RIGHT_MARGIN;
+            left = positionTarget.width - tooltip.offsetWidth + ARROW_RIGHT_MARGIN;
             break;
 
         case "middle":
-            top = scrollTop + positionTarget.top + positionTarget.height / 2 - tooltip.offsetHeight / 2;
+            top = positionTarget.height / 2 - tooltip.offsetHeight / 2;
             break;
         case "top":
-            top = scrollTop + positionTarget.top - ARROW_VERTICAL_MARGIN;
+            top = -ARROW_VERTICAL_MARGIN;
             break;
         case "bottom":
-            top = top = scrollTop + positionTarget.top + positionTarget.height - tooltip.offsetHeight + ARROW_VERTICAL_MARGIN;
+            top = positionTarget.height - tooltip.offsetHeight + ARROW_VERTICAL_MARGIN;
             break;
     }
 
@@ -89,13 +86,13 @@ export const getPositionType = (positionType, target, tooltip, wrapper) => {
             break;
         case "left":
             arrowPos =
-                (positionTarget.left + positionTarget.width / 2 + tooltip.offsetWidth / 2) < mainWrapper.clientWidth
+                (positionTarget.left - ARROW_LEFT_MARGIN + tooltip.offsetWidth) < mainWrapper.clientWidth
                     ? arrowPos
                     : "right";
             break;
         case "right":
             arrowPos =
-                (positionTarget.left + positionTarget.width / 2 - tooltip.offsetWidth / 2) >= 0
+                (positionTarget.left + positionTarget.width - tooltip.offsetWidth + ARROW_RIGHT_MARGIN) >= 0
                     ? arrowPos
                     : "left";
             break;
