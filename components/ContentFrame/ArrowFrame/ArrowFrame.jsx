@@ -1,8 +1,8 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import Icon, { IconTypes } from "../../Icon";
 import arrowFrameStyles from "./ArrowFrame.scss";
 
-class ArrowFrame extends Component {
+class ArrowFrame extends PureComponent {
     render() {
         const { closeUrl, backText, title, children } = this.props;
 

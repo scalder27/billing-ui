@@ -1,5 +1,6 @@
 ﻿@import "../../../styles/variables";
 @import "../../../styles/placeholders";
+@import "../../../styles/bourbon";
 
 :local {
     $sidePadding: 40px;
@@ -19,7 +20,7 @@
 
         position: relative;
 
-        height: 19px;
+        height: 20px;
         padding: 15px 30px 10px 15px;
 
         overflow: hidden;
@@ -60,9 +61,7 @@
     }
 
     .icon {
-        position: absolute;
-        top: 14px;
-        left: 13px;
+        @include position(absolute, 14px null null 13px);
     }
 
     .back-text {

@@ -1,8 +1,7 @@
-import { Component, PropTypes } from "react";
-
+import { PureComponent, PropTypes } from "react";
 import styles from "./CrossFrame.scss";
 
-class CrossFrame extends Component {
+class CrossFrame extends PureComponent {
     render() {
         const { closeUrl, children } = this.props;
 
