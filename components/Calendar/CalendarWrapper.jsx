@@ -1,6 +1,7 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
-import moment, { formatDate, convertString } from "../../libs/moment";
+import moment, { formatDate, convertString, convertISOString } from "../../libs/moment";
+import CustomPropTypes from "../../helpers/CustomPropTypes";
 
 import TextInput from "../TextInput";
 import Picker from "./Picker";
@@ -27,12 +28,12 @@ class CalendarWrapper extends Component {
     }
 
     componentWillMount() {
-        this.handleChange(this.props.value);
+        this.changeDate(this.props.value);
     }
 
     componentWillReceiveProps(newProps) {
         if (!this._focused) {
-            this.handleChange(newProps.value);
+            this.changeDate(newProps.value);
         }
     }
 
@@ -44,33 +45,31 @@ class CalendarWrapper extends Component {
         }
     }
 
-    validate(value) {
+    validate(date) {
         const { minDate, maxDate } = this.props;
-        const textValue = formatDate(value);
-        const newDate = convertString(value);
 
-        if (textValue.indexOf("_") !== -1) {
-            return {
-                isValid: false,
-                errorType: validationErrorType.unfilledDate
+        if (!date.isValid()) {
+            if (date.creationData().input.indexOf("_") !== -1) {
+                return {
+                    isValid: false,
+                    errorType: validationErrorType.unfilledDate
+                }
             }
-        }
 
-        if (!newDate.isValid()) {
             return {
                 isValid: false,
                 errorType: validationErrorType.invalidDate
             }
         }
 
-        if (minDate && newDate.isBefore(convertString(minDate))) {
+        if (minDate && date.isBefore(convertISOString(minDate), "day")) {
             return {
                 isValid: false,
                 errorType: validationErrorType.minDateExceed
             }
         }
 
-        if (maxDate && newDate.isAfter(convertString(maxDate))) {
+        if (maxDate && date.isAfter(convertISOString(maxDate), "day")) {
             return {
                 isValid: false,
                 errorType: validationErrorType.maxDateExceed
@@ -83,16 +82,9 @@ class CalendarWrapper extends Component {
         }
     }
 
-    handleChange = (value) => {
-        const newDate = convertString(value);
-        const { isValid, errorType } = this.validate(value);
-        const textValue = isValid ? formatDate(newDate) : value;
-
-        this.setState({
-            textValue,
-            isValid,
-            errorType
-        });
+    handleChange = (textValue) => {
+        const date = convertString(textValue);
+        this.changeDate(date);
     };
 
     handleClick = () => {
@@ -111,16 +103,14 @@ class CalendarWrapper extends Component {
 
     handleBlur = () => {
         const { onChange, value } = this.props;
-        const { textValue, isValid, errorType } = this.state;
+        const { date, isValid, errorType } = this.state;
         this._focused = false;
         this._selectedBlock = null;
 
-        const date = convertString(textValue);
+        this.changeDate(value);
 
-        this.handleChange(value);
-
-        if (onChange && !date.isSame(convertString(value))) {
-            onChange(textValue, {
+        if (onChange && !date.isSame(convertISOString(value), "day")) {
+            onChange(date.toISOString(), {
                 date,
                 isValid,
                 errorType
@@ -135,9 +125,23 @@ class CalendarWrapper extends Component {
     };
 
     handlePick = (date) => {
-        if (this.props.onChange) {
-            this.props.onChange(formatDate(date), date);
+        const { onChange, value } = this.props;
+        const { isValid, errorType } = this.validate(date);
+
+        this.setState({
+            date,
+            isValid,
+            errorType
+        });
+
+        if (onChange && !date.isSame(convertISOString(value), "day")) {
+            onChange(date.toISOString(), {
+                date,
+                isValid,
+                errorType
+            });
         }
+
         this.close(true);
     };
 
@@ -201,17 +205,26 @@ class CalendarWrapper extends Component {
         }
     }
 
-    _increase() {
-        const date = convertString(this.state.textValue);
+    changeDate(date) {
+        const momentDate = convertISOString(date);
+        const { isValid, errorType } = this.validate(momentDate);
 
-        this.handleChange(formatDate(date.add(1, this._selectionRanges[this._selectedBlock].type)));
+        this.setState({
+            date: momentDate,
+            isValid,
+            errorType
+        });
+    }
+
+    _increase() {
+        const nextDate = moment(this.state.date).add(1, this._selectionRanges[this._selectedBlock].type);
+        this.changeDate(nextDate);
         this._selectBlock(this._selectedBlock);
     }
 
     _decrease() {
-        const date = convertString(this.state.textValue);
-
-        this.handleChange(formatDate(date.subtract(1, this._selectionRanges[this._selectedBlock].type)));
+        const prevDate = moment(this.state.date).subtract(1, this._selectionRanges[this._selectedBlock].type);
+        this.changeDate(prevDate);
         this._selectBlock(this._selectedBlock);
     }
 
@@ -241,7 +254,7 @@ class CalendarWrapper extends Component {
 
         return (
             <div className={styles.picker} onKeyDown={this.handlePickerKey}>
-                <Picker value={convertString(value)}
+                <Picker value={convertISOString(value)}
                     verticalShift={this.state.height}
                     minYear={minYear}
                     maxYear={maxYear}
@@ -253,7 +266,8 @@ class CalendarWrapper extends Component {
     }
 
     render() {
-        const { className, width, disabled, isValid } = this.props;
+        const { className, width, disabled } = this.props;
+        const { isValid, errorType, date } = this.state;
 
         const picker = this.renderPicker();
         const wrapperClassNames = cx(styles.root, className);
@@ -262,8 +276,8 @@ class CalendarWrapper extends Component {
         });
 
         const inputProps = {
-            value: this.state.textValue,
-            isValid: isValid && this.state.isValid,
+            value: errorType === validationErrorType.unfilledDate ? date.creationData().input : formatDate(date),
+            isValid: this.props.isValid && isValid,
             maxLength: "10",
             width: "100%",
             onClick: this.handleClick,
@@ -275,8 +289,10 @@ class CalendarWrapper extends Component {
         };
 
         return (
-            <span className={wrapperClassNames} style={{width: width}}>
-                <TextInput {...this.props} {...inputProps} ref={(el) => { this._textInput = el }} />
+            <span className={wrapperClassNames} style={{ width: width }}>
+                <TextInput {...this.props} {...inputProps} ref={(el) => {
+                    this._textInput = el
+                }} />
                 <span className={openButtonClassNames} onClick={this.open}>
                     <Icon className={styles.icon} type={IconTypes.Calendar} />
                 </span>
@@ -292,9 +308,9 @@ CalendarWrapper.propTypes = {
     disabled: PropTypes.bool,
     maxYear: PropTypes.number,
     minYear: PropTypes.number,
-    maxDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
-    minDate: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
-    value: PropTypes.oneOfType([PropTypes.instanceOf(moment), PropTypes.object, PropTypes.string]),
+    maxDate: CustomPropTypes.date,
+    minDate: CustomPropTypes.date,
+    value: CustomPropTypes.date,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     className: PropTypes.string
 };

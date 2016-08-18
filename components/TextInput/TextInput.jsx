@@ -10,13 +10,16 @@ class TextInput extends Component {
         isFocused: false
     };
 
+    componentWillReceiveProps(newProps) {
+        if (!this.state.wasTouched) {
+            this.setState({
+                wasTouched: newProps.value !== this.props.value
+            });
+        }
+    }
+
     _handleOnChange(evt) {
         const { onChange } = this.props;
-        const { wasTouched } = this.state;
-
-        if (!wasTouched) {
-            this.setState({ wasTouched: true });
-        }
 
         if (typeof onChange === "function") {
             onChange(evt);
@@ -92,13 +95,13 @@ class TextInput extends Component {
         return (
             <div>
                 {isTextArea && (
-                    <textarea {...inputProps}/>
+                    <textarea {...inputProps} />
                 )}
 
                 {!isTextArea && mask && (
                     <MaskedInput {...inputProps} mask={mask}
-                                                 maskChar={maskChar || "_"}
-                                                 alwaysShowMask={alwaysShowMask} />
+                        maskChar={maskChar || "_"}
+                        alwaysShowMask={alwaysShowMask} />
                 )}
 
                 {!isTextArea && !mask && (
