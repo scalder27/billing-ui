@@ -69,8 +69,7 @@ TextInputWrapper.defaultProps = {
     width: 180,
     isValid: true,
     isTextArea: false,
-    type: TextInputType.default,
-    tooltipPosition: TooltipType.right
+    type: TextInputType.default
 };
 
 export default TextInputWrapper;

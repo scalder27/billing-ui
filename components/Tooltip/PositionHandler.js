@@ -3,7 +3,7 @@ const ARROW_RIGHT_MARGIN = 20;
 const ARROW_LEFT_MARGIN = 25;
 const ARROW_VERTICAL_MARGIN = 15;
 
-export const getPosition = (positionType, target, tooltip) => {
+export const getPosition = (positionType, target, tooltip, margin = MARGIN) => {
     const positionTarget = target.getBoundingClientRect();
     const [tooltipPos, arrowPos] = positionType.split(" ");
 
@@ -12,16 +12,16 @@ export const getPosition = (positionType, target, tooltip) => {
 
     switch (tooltipPos) {
         case "bottom":
-            top = positionTarget.height + MARGIN;
+            top = positionTarget.height + margin;
             break;
         case "top":
-            top = -tooltip.offsetHeight - MARGIN;
+            top = -tooltip.offsetHeight - margin;
             break;
         case "right":
-            left = positionTarget.width + MARGIN;
+            left = positionTarget.width + margin;
             break;
         case "left":
-            left = tooltip.offsetWidth - MARGIN;
+            left = -tooltip.offsetWidth - margin;
             break;
     }
 
@@ -53,23 +53,22 @@ export const getPosition = (positionType, target, tooltip) => {
     }
 };
 
-export const getPositionType = (positionType, target, tooltip, wrapper) => {
+export const getPositionType = (positionType, target, tooltip, margin = MARGIN, mainWrapper = document.getElementById("MainWrapper")) => {
     const positionTarget = target.getBoundingClientRect();
-    const mainWrapper = wrapper || document.getElementById("MainWrapper");
     let [tooltipPos, arrowPos] = positionType.split(" ");
 
     switch (tooltipPos) {
         case "bottom":
-            tooltipPos = (positionTarget.top + positionTarget.height + tooltip.offsetHeight + MARGIN) < mainWrapper.clientHeight ? tooltipPos : "top";
+            tooltipPos = (positionTarget.top + positionTarget.height + tooltip.offsetHeight + margin) < mainWrapper.clientHeight ? tooltipPos : "top";
             break;
         case "top":
-            tooltipPos = (tooltip.offsetHeight + MARGIN) < positionTarget.top ? tooltipPos : "bottom";
+            tooltipPos = (tooltip.offsetHeight + margin) < positionTarget.top ? tooltipPos : "bottom";
             break;
         case "right":
-            tooltipPos = (positionTarget.left + positionTarget.width + tooltip.offsetWidth + MARGIN) < mainWrapper.clientWidth ? tooltipPos : "left";
+            tooltipPos = (positionTarget.left + positionTarget.width + tooltip.offsetWidth + margin) < mainWrapper.clientWidth ? tooltipPos : "left";
             break;
         case "left":
-            tooltipPos = (tooltip.offsetWidth + MARGIN) < positionTarget.left ? tooltipPos : "right";
+            tooltipPos = (tooltip.offsetWidth + margin) < positionTarget.left ? tooltipPos : "right";
             break;
     }
 

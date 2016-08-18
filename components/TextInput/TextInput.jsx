@@ -1,13 +1,12 @@
 import { Component, PropTypes } from "react";
 import MaskedInput from "react-input-mask";
 
-import Tooltip from "./Tooltip";
+import Tooltip, { TriggerTypes, PositionTypes, TooltipTypes } from "../Tooltip";
 import classnames from "classnames";
 
 class TextInput extends Component {
     state = {
-        wasTouched: false,
-        isFocused: false
+        wasTouched: false
     };
 
     _handleOnChange(evt) {
@@ -25,11 +24,6 @@ class TextInput extends Component {
 
     _handleOnFocus(evt) {
         const { onFocus } = this.props;
-        const { isFocused } = this.state;
-
-        if (!isFocused) {
-            this.setState({ isFocused: true });
-        }
 
         if (typeof onFocus === "function") {
             onFocus(evt);
@@ -38,11 +32,6 @@ class TextInput extends Component {
 
     _handleOnBlur(evt) {
         const { onBlur } = this.props;
-        const { isFocused } = this.state;
-
-        if (isFocused) {
-            this.setState({ isFocused: false });
-        }
 
         if (typeof onBlur === "function") {
             onBlur(evt);
@@ -61,21 +50,26 @@ class TextInput extends Component {
             isTextArea,
             inputClassName,
             tooltipCaption,
+            tooltipType,
             tooltipPosition,
             ...others
         } = this.props;
-        const { wasTouched, isFocused } = this.state;
-        const isInputValid = !wasTouched || !isFocused || isValid;
+        const { wasTouched } = this.state;
 
+        const isInvalid = !isValid && wasTouched;
         const inputClassNames = classnames(styles.input, inputClassName, {
-            [styles["input-validation-error"]]: !isValid && wasTouched,
+            [styles["input-validation-error"]]: isInvalid,
             [styles.readonly]: others.readonly,
             [styles.disabled]: others.disabled,
             [styles.clearable]: others.clearable
         });
 
+
         const inputProps = {
             ...others,
+            ref: el => {
+                this._input = el
+            },
             title: others.value,
             style: {
                 "width": width,
@@ -88,24 +82,26 @@ class TextInput extends Component {
             onBlur: (evt) => this._handleOnBlur(evt)
         };
 
+        const hasTooltip = ((tooltipType !== TooltipTypes.validation || isInvalid)) && tooltipCaption != null;
+
         return (
             <div>
                 {isTextArea && (
-                    <textarea {...inputProps}/>
+                    <textarea {...inputProps} />
                 )}
 
                 {!isTextArea && mask && (
                     <MaskedInput {...inputProps} mask={mask}
-                                                 maskChar={maskChar || "_"}
-                                                 alwaysShowMask={alwaysShowMask} />
+                        maskChar={maskChar || "_"}
+                        alwaysShowMask={alwaysShowMask} />
                 )}
 
                 {!isTextArea && !mask && (
                     <input {...inputProps} />
                 )}
 
-                {!isInputValid && tooltipCaption != null && (
-                    <Tooltip isValid={isInputValid} tooltipPosition={tooltipPosition}>
+                {hasTooltip && (
+                    <Tooltip getTarget={() => this._input} trigger={TriggerTypes.focus} positionType={tooltipPosition} type={tooltipType}>
                         {tooltipCaption}
                     </Tooltip>
                 )}
@@ -134,7 +130,13 @@ TextInput.propTypes = {
     inputClassName: PropTypes.string,
     styles: PropTypes.object,
     tooltipCaption: PropTypes.string,
-    tooltipPosition: PropTypes.string
+    tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),
+    tooltipPosition: PropTypes.oneOf(Object.keys(PositionTypes).map((key) => PositionTypes[key]))
+};
+
+TextInput.defaultProps = {
+    tooltipType: TooltipTypes.validation,
+    tooltipPosition: PositionTypes.rightMiddle
 };
 
 export default TextInput;

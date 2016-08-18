@@ -4,6 +4,7 @@ import events from "add-event-listener";
 
 import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
+import TooltipType from "./TooltipType";
 import { getPosition, getPositionType } from "./PositionHandler";
 
 import cx from "classnames";
@@ -18,6 +19,7 @@ class Tooltip extends PureComponent {
             positionType: props.positionType
         };
 
+        this._margin = props.type === TooltipType.validation ? -1 : 15;
         this._mainWrapper = document.getElementById("MainWrapper");
     }
 
@@ -53,6 +55,8 @@ class Tooltip extends PureComponent {
 
         if (trigger === TriggerType.focus) {
             events.addEventListener(this._target, "focus", this._toggleTooltip);
+            events.addEventListener(this._target, "blur", this._toggleTooltip);
+            events.addEventListener(this._target, "keyup", this._toggleTooltip);
         }
 
         events.addEventListener(window, "resize", this._redraw);
@@ -64,13 +68,15 @@ class Tooltip extends PureComponent {
         events.removeEventListener(this._target, "mouseleave", this._toggleTooltip);
         events.removeEventListener(this._target, "click", this._toggleTooltip);
         events.removeEventListener(this._target, "focus", this._toggleTooltip);
+        events.removeEventListener(this._target, "blur", this._toggleTooltip);
+        events.removeEventListener(this._target, "keyup", this._toggleTooltip);
 
         events.removeEventListener(window, "resize", this._redraw);
         events.removeEventListener(this._mainWrapper, "scroll", this._redraw);
     }
 
     _tryUpdatePositionType() {
-        const positionType = getPositionType(this.props.positionType, this._target, this._tooltip);
+        const positionType = getPositionType(this.props.positionType, this._target, this._tooltip, this._margin);
 
         if (this.state.positionType !== positionType) {
             this.setState({
@@ -80,7 +86,7 @@ class Tooltip extends PureComponent {
     }
 
     _setPosition() {
-        const position = getPosition(this.state.positionType, this._target, this._tooltip);
+        const position = getPosition(this.state.positionType, this._target, this._tooltip, this.props.margin);
         Object.keys(position).map(property => {
             this._tooltip.style[property] = position[property]
         });
@@ -104,13 +110,12 @@ class Tooltip extends PureComponent {
         if (evt) {
             switch (evt.type) {
                 case "mouseover":
+                case "focus":
+                case "keyup":
                     show = true;
                     break;
                 case "mouseleave":
-                    show = false;
-                    break;
-                case "focus":
-                    show = !isOpen;
+                case "blur":show = false;
                     break;
                 case "click":
                     show = this.props.trigger === TriggerType.hover ? false : !isOpen;
@@ -122,11 +127,11 @@ class Tooltip extends PureComponent {
     };
 
     render() {
-        const { className, children } = this.props;
+        const { className, children, type } = this.props;
         const { isOpen, positionType } = this.state;
 
         const [tooltipPos, arrowPos] = positionType.split(" ");
-        const tooltipClassNames = cx(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`], {
+        const tooltipClassNames = cx(className, styles.tooltip, styles[tooltipPos], styles[`arrow-${arrowPos}`], styles[type], {
             [styles["as-open"]]: isOpen
         });
 
@@ -143,13 +148,15 @@ Tooltip.propTypes = {
     getTarget: PropTypes.func.isRequired,
     trigger: PropTypes.oneOf(Object.keys(TriggerType).map((key) => TriggerType[key])),
     positionType: PropTypes.oneOf(Object.keys(PositionType).map((key) => PositionType[key])),
-    className: PropTypes.string
+    className: PropTypes.string,
+    type: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType))
 };
 
 Tooltip.defaultProps = {
     isOpen: false,
     trigger: TriggerType.hover,
-    positionType: PositionType.leftMiddle,
+    positionType: PositionType.bottomCenter,
+    type: TooltipType.tip,
     className: ""
 };
 

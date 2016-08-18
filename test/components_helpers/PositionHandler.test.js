@@ -84,19 +84,19 @@ describe("Position handler", () => {
             let position = getPosition(PositionType.leftTop, target, tooltip);
             expect(position).to.deep.equal({
                 top: "-15px",
-                left: "185px"
+                left: "-215px"
             });
 
             position = getPosition(PositionType.leftMiddle, target, tooltip);
             expect(position).to.deep.equal({
                 top: "-60px",
-                left: "185px"
+                left: "-215px"
             });
 
             position = getPosition(PositionType.leftBottom, target, tooltip);
             expect(position).to.deep.equal({
                 top: "-105px",
-                left: "185px"
+                left: "-215px"
             });
         });
     });
@@ -129,19 +129,19 @@ describe("Position handler", () => {
             positionTarget.top = 700;
             positionTarget.left = 700;
 
-            let positionType = getPositionType(PositionType.bottomLeft, target, tooltip, mainWrapper);
+            let positionType = getPositionType(PositionType.bottomLeft, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.topLeft);
 
-            positionType = getPositionType(PositionType.leftTop, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.leftTop, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.leftBottom);
 
-            positionType = getPositionType(PositionType.leftMiddle, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.leftMiddle, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.leftBottom);
 
-            positionType = getPositionType(PositionType.rightTop, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.rightTop, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.rightBottom);
 
-            positionType = getPositionType(PositionType.rightMiddle, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.rightMiddle, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.rightBottom);
         });
 
@@ -149,19 +149,19 @@ describe("Position handler", () => {
             positionTarget.top = 0;
             positionTarget.left = 700;
 
-            let positionType = getPositionType(PositionType.topLeft, target, tooltip, mainWrapper);
+            let positionType = getPositionType(PositionType.topLeft, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.bottomLeft);
 
-            positionType = getPositionType(PositionType.leftBottom, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.leftBottom, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.leftTop);
 
-            positionType = getPositionType(PositionType.leftMiddle, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.leftMiddle, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.leftTop);
 
-            positionType = getPositionType(PositionType.rightBottom, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.rightBottom, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.rightTop);
 
-            positionType = getPositionType(PositionType.rightMiddle, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.rightMiddle, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.rightTop);
         });
 
@@ -169,19 +169,19 @@ describe("Position handler", () => {
             positionTarget.top = 300;
             positionTarget.left = 0;
 
-            let positionType = getPositionType(PositionType.leftTop, target, tooltip, mainWrapper);
+            let positionType = getPositionType(PositionType.leftTop, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.rightTop);
 
-            positionType = getPositionType(PositionType.topRight, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.topRight, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.topLeft);
 
-            positionType = getPositionType(PositionType.topCenter, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.topCenter, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.topLeft);
 
-            positionType = getPositionType(PositionType.bottomRight, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.bottomRight, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.bottomLeft);
 
-            positionType = getPositionType(PositionType.bottomCenter, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.bottomCenter, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.bottomLeft);
         });
 
@@ -189,19 +189,19 @@ describe("Position handler", () => {
             positionTarget.top = 300;
             positionTarget.left = 1200;
 
-            let positionType = getPositionType(PositionType.rightTop, target, tooltip, mainWrapper);
+            let positionType = getPositionType(PositionType.rightTop, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.leftTop);
 
-            positionType = getPositionType(PositionType.topLeft, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.topLeft, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.topRight);
 
-            positionType = getPositionType(PositionType.topCenter, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.topCenter, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.topRight);
 
-            positionType = getPositionType(PositionType.bottomLeft, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.bottomLeft, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.bottomRight);
 
-            positionType = getPositionType(PositionType.bottomCenter, target, tooltip, mainWrapper);
+            positionType = getPositionType(PositionType.bottomCenter, target, tooltip, 15, mainWrapper);
             expect(positionType).to.equal(PositionType.bottomRight);
         });
     });
