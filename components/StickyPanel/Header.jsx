@@ -1,5 +1,6 @@
 import { PropTypes, PureComponent } from "react";
 import events from "add-event-listener";
+import { throttle } from "underscore";
 
 import DisplayType from "./DisplayType";
 import cx from "classnames";
@@ -30,21 +31,19 @@ class StickyHeader extends PureComponent {
         events.removeEventListener(this._mainWrapper, "scroll", this._handleScroll);
     }
 
-    calculateInitialParameters() {
-        setTimeout(() => {
-            const stickyPanelHeaderHeight = this.node.clientHeight;
-            const stickyPanelHeaderWidth = this.node.clientWidth;
-            const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
+    calculateInitialParameters = throttle(() => {
+        const stickyPanelHeaderHeight = this.node.clientHeight;
+        const stickyPanelHeaderWidth = this.node.clientWidth;
+        const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
 
-            this.setState({ ...nextState, stickyPanelHeaderHeight, stickyPanelHeaderWidth });
-        }, 0);
-    }
+        this.setState({ ...nextState, stickyPanelHeaderHeight, stickyPanelHeaderWidth });
+    }, 0);
 
-    _handleScroll = () => {
+    _handleScroll = throttle(() => {
         const {stickyPanelHeaderHeight, stickyPanelHeaderWidth} = this.state;
         const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
-        this.setState({ ...nextState });
-    };
+        this.setState(nextState);
+    }, 0);
 
     _createHeaderState = (stickyPanelHeaderHeight, stickyPanelHeaderWidth) => {
         const { displayType } = this.state;
