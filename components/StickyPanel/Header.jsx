@@ -42,7 +42,7 @@ class StickyHeader extends PureComponent {
     _handleScroll = throttle(() => {
         const {stickyPanelHeaderHeight, stickyPanelHeaderWidth} = this.state;
         const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
-        this.setState(nextState);
+        this.setState({ ...nextState });
     }, 0);
 
     _createHeaderState = (stickyPanelHeaderHeight, stickyPanelHeaderWidth) => {
