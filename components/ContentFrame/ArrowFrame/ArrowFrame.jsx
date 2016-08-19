@@ -23,7 +23,7 @@ class ArrowFrame extends PureComponent {
 
 ArrowFrame.propTypes = {
     closeUrl: PropTypes.string.isRequired,
-    title: PropTypes.oneOf([PropTypes.string, PropTypes.node]).isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.element]).isRequired,
     backText: PropTypes.string,
     styles: PropTypes.object,
     children: PropTypes.node
