@@ -9,7 +9,7 @@
         position: relative;
 
         min-height: 200px;
-        padding: 10px $sidePadding;
+        padding: 0 $sidePadding 10px;
 
         background-color: $bgWhiteColor;
         box-shadow: $shadowBlock;
@@ -21,6 +21,7 @@
         position: relative;
 
         height: 20px;
+        margin: 0 (-$sidePadding);
         padding: 15px 30px 10px 15px;
 
         overflow: hidden;
@@ -73,6 +74,6 @@
     }
 
     .content {
-        padding: 20px $sidePadding;
+        padding: 20px 0;
     }
 }
