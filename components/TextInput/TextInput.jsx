@@ -9,13 +9,16 @@ class TextInput extends Component {
         wasTouched: false
     };
 
+    componentWillReceiveProps(newProps) {
+        if (!this.state.wasTouched) {
+            this.setState({
+                wasTouched: newProps.value !== this.props.value
+            });
+        }
+    }
+
     _handleOnChange(evt) {
         const { onChange } = this.props;
-        const { wasTouched } = this.state;
-
-        if (!wasTouched) {
-            this.setState({ wasTouched: true });
-        }
 
         if (typeof onChange === "function") {
             onChange(evt);
@@ -52,6 +55,7 @@ class TextInput extends Component {
             tooltipCaption,
             tooltipType,
             tooltipPosition,
+            clearable,
             ...others
         } = this.props;
         const { wasTouched } = this.state;
@@ -61,7 +65,7 @@ class TextInput extends Component {
             [styles["input-validation-error"]]: isInvalid,
             [styles.readonly]: others.readonly,
             [styles.disabled]: others.disabled,
-            [styles.clearable]: others.clearable
+            [styles.clearable]: clearable
         });
 
 

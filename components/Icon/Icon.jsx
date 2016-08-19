@@ -1,11 +1,8 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import IconType from "./IconType";
 import classnames from "classnames";
-import shouldComponentUpdate from "react-pure-render/function";
 
-class Icon extends Component {
-    shouldComponentUpdate = shouldComponentUpdate;
-
+class Icon extends PureComponent {
     render() {
         const {type, className} = this.props;
         const iconClass = classnames("iconic base-unselectable", className);

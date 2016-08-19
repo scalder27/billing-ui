@@ -7,18 +7,18 @@ import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
 class DefaultTextInput extends Component {
-    change(value, evt) {
+    handleChange = (evt, value) => {
         const { onChange } = this.props;
 
         if (onChange) {
-            onChange(value || "", evt);
+            onChange(value || evt.target.value || "", evt);
         }
-    }
+    };
 
-    clear(evt) {
+    handleClearClick = (evt) => {
         this.input.focus();
-        this.change("", evt);
-    }
+        this.handleChange(evt, "");
+    };
 
     render() {
         const { styles, wrapperClassName, placeholderClassName, placeholder, value, clearable, ...inputProps } = this.props;
@@ -38,13 +38,13 @@ class DefaultTextInput extends Component {
                     value={value}
                     clearable={clearable}
                     styles={styles}
-                    onChange={(evt) => this.change(evt.target.value, evt)}
+                    onChange={this.handleChange}
                     ref={(el) => {
                         var inputNode = ReactDOM.findDOMNode(el);
                         this.input = inputNode && (inputNode.getElementsByTagName("input")[0] || inputNode.getElementsByTagName("textarea")[0]);
                     }}
                 />
-                {(clearable && value) && <Clear className={styles.clear} onClick={this.clear.bind(this)} />}
+                {(clearable && value) && <Clear className={styles.clear} onClick={this.handleClearClick} />}
             </span>
         );
     }

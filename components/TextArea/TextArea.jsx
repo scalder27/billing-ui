@@ -6,15 +6,29 @@ import TooltipType from "../TextInput/TooltipType";
 import styles from "./TextArea.scss";
 
 class TextArea extends Component {
+    _textArea = null;
+
+    state = {
+        height: null
+    };
+
     constructor(props) {
         super(props);
-        const { minHeight } = this.props;
+        const { minHeight } = props;
 
         this.state = {
             height: minHeight
         };
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    focus() {
+        this._textArea.focus();
+    }
+
+    getDomNode() {
+        return this._textArea.getDomNode();
     }
 
     handleChange(value, evt) {
@@ -30,7 +44,7 @@ class TextArea extends Component {
     }
 
     componentDidMount() {
-        const textAreaDom = this.textArea.getDomNode();
+        const textAreaDom = this._textArea.getDomNode();
         this.changeHeight(textAreaDom);
     }
 
@@ -67,19 +81,17 @@ class TextArea extends Component {
                        height={height}
                        {...textInputProps}
                        onChange={this.handleChange}
-                       ref={ (el) => { this.textArea = el }} />
+                       ref={ (el) => { this._textArea = el }} />
         );
     }
 }
 
 TextArea.propTypes = {
     minHeight: PropTypes.number,
-
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
-    isTextArea: PropTypes.bool,
     clearable: PropTypes.bool,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,

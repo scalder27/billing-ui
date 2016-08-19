@@ -9,29 +9,36 @@ import styles from "./StickyPanel.scss";
 
 class StickyPanel extends Component {
     state = {
-        stickyPanelBodyHeight: "",
-        stickyPanelBodyInitialOffsetTop: ""
+        stickyPanelHeight: ""
     };
 
     componentDidMount() {
         this._mainWrapper = document.getElementById("MainWrapper");
 
         this.calculateInitialParameters();
-        events.addEventListener(this._mainWrapper, "resize", throttle(this.calculateInitialParameters.bind(this), 50));
+        events.addEventListener(this._mainWrapper, "resize", this.calculateInitialParameters);
+    }
+
+    componentWillReceiveProps() {
+        this.setState({ stickyPanelHeight: "" });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { stickyPanelHeight } = this.state;
+
+        if (stickyPanelHeight !== prevState.stickyPanelHeight) {
+            this.calculateInitialParameters();
+        }
     }
 
     componentWillUnmount() {
-        events.removeEventListener(this._mainWrapper, "resize", throttle(this.calculateInitialParameters.bind(this), 50));
+        events.removeEventListener(this._mainWrapper, "resize", this.calculateInitialParameters);
     }
 
-    calculateInitialParameters() {
-        setTimeout(() => {
-            this.setState({
-                stickyPanelBodyHeight: this._stickyWrapper.clientHeight,
-                stickyPanelBodyInitialOffsetTop: this._stickyWrapper.getBoundingClientRect().top
-            });
-        }, 0)
-    }
+    calculateInitialParameters = throttle(() => {
+        const clientHeight = this._stickyWrapper.clientHeight;
+        this.setState({ stickyPanelHeight: clientHeight });
+    }, 0);
 
     _extractStickyPanelChildren() {
         return Children.toArray(this.props.children).reduce((result, child) => {
@@ -47,12 +54,11 @@ class StickyPanel extends Component {
 
     _extendHeaderChild(HeaderComponent) {
         const { props } = HeaderComponent;
-        const { stickyPanelBodyHeight, stickyPanelBodyInitialOffsetTop } = this.state;
+        const { stickyPanelHeight } = this.state;
 
         return cloneElement(HeaderComponent, {
             ...props,
-            stickyPanelBodyInitialOffsetTop: stickyPanelBodyInitialOffsetTop,
-            stopLine: stickyPanelBodyHeight + stickyPanelBodyInitialOffsetTop
+            stickyPanelHeight: stickyPanelHeight
         });
     }
 
@@ -60,10 +66,8 @@ class StickyPanel extends Component {
         const { StickyPanelHeader, StickyPanelBody } = this._extractStickyPanelChildren();
 
         return (
-            <div className={styles.wrapper} style={{ height: this.state.stickyPanelBodyHeight }} ref={el => (this._stickyWrapper = el)}>
-                <div>
-                    {this._extendHeaderChild(StickyPanelHeader)}
-                </div>
+            <div className={styles.wrapper} style={{ height: this.state.stickyPanelHeight }} ref={el => (this._stickyWrapper = el)}>
+                {this._extendHeaderChild(StickyPanelHeader)}
                 {StickyPanelBody}
             </div>
         );

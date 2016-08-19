@@ -288,6 +288,7 @@
             "font-emphasize-style",
             "font-smooth",
             "-webkit-font-smoothing",
+            "-moz-osx-font-smoothing",
             "line-height",
             "text-align",
             "text-shadow",

@@ -1,14 +1,12 @@
-import { Component, PropTypes } from "react";
+import { PropTypes, PureComponent } from "react";
 import events from "add-event-listener";
-import shouldPureComponentUpdate from "react-pure-render/function";
+
 import DisplayType from "./DisplayType";
 import cx from "classnames";
 
 import styles from "./Header.scss";
 
-class StickyHeader extends Component {
-    shouldComponentUpdate = shouldPureComponentUpdate;
-
+class StickyHeader extends PureComponent {
     state = {
         displayType: DisplayType.default,
         stickyPanelHeaderHeight: "",
@@ -17,40 +15,47 @@ class StickyHeader extends Component {
         stickyHeaderSubstrateStyles: {}
     };
 
-    constructor(props) {
-        super(props);
-
-        this._handlePanelPosition = this.handlePanelPosition.bind(this);
-    }
-
     componentDidMount() {
         this._mainWrapper = document.getElementById("MainWrapper");
 
         this.calculateInitialParameters();
-        events.addEventListener(this._mainWrapper, "scroll", this._handlePanelPosition);
+        events.addEventListener(this._mainWrapper, "scroll", this._handleScroll);
+    }
+
+    componentDidUpdate() {
+        this.calculateInitialParameters();
     }
 
     componentWillUnmount() {
-        events.removeEventListener(this._mainWrapper, "scroll", this._handlePanelPosition);
+        events.removeEventListener(this._mainWrapper, "scroll", this._handleScroll);
     }
 
     calculateInitialParameters() {
         setTimeout(() => {
-            this.setState({ stickyPanelHeaderHeight: this.node.clientHeight, stickyPanelHeaderWidth: this.node.clientWidth });
+            const stickyPanelHeaderHeight = this.node.clientHeight;
+            const stickyPanelHeaderWidth = this.node.clientWidth;
+            const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
+
+            this.setState({ ...nextState, stickyPanelHeaderHeight, stickyPanelHeaderWidth });
         }, 0);
     }
 
-    handlePanelPosition() {
-        const { displayType, stickyPanelHeaderHeight, stickyPanelHeaderWidth } = this.state;
-        const { stopLine, stickyPanelBodyInitialOffsetTop } = this.props;
+    _handleScroll = () => {
+        const {stickyPanelHeaderHeight, stickyPanelHeaderWidth} = this.state;
+        const nextState = this._createHeaderState(stickyPanelHeaderHeight, stickyPanelHeaderWidth);
+        this.setState({ ...nextState });
+    };
 
-        const scrollTop = this._mainWrapper.scrollTop;
+    _createHeaderState = (stickyPanelHeaderHeight, stickyPanelHeaderWidth) => {
+        const { displayType } = this.state;
+        const { stickyPanelHeight } = this.props;
 
-        const isSticky = scrollTop > stickyPanelBodyInitialOffsetTop;
-        const isShifting = scrollTop + stickyPanelHeaderHeight >= stopLine;
+        const offsetTop = this._wrapper.getBoundingClientRect().top;
+        const isSticky = offsetTop < 0;
+        const isShifting = offsetTop + stickyPanelHeight - stickyPanelHeaderHeight < 0;
 
         if (isSticky && !isShifting && displayType !== DisplayType.fixed) {
-            this.setState({
+            return {
                 displayType: DisplayType.fixed,
                 stickyPanelHeaderStyles: {
                     position: "fixed",
@@ -63,11 +68,11 @@ class StickyHeader extends Component {
                     height: stickyPanelHeaderHeight,
                     width: stickyPanelHeaderWidth
                 }
-            });
+            };
         }
 
         if (isSticky && isShifting && displayType !== DisplayType.outgoing) {
-            this.setState({
+            return {
                 displayType: DisplayType.outgoing,
                 stickyPanelHeaderStyles: {
                     position: "absolute",
@@ -77,14 +82,14 @@ class StickyHeader extends Component {
                     zIndex: 1
                 },
                 stickyHeaderSubstrateStyles: {
-                    height: "",
-                    width: ""
+                    height: stickyPanelHeaderHeight,
+                    width: stickyPanelHeaderWidth
                 }
-            });
+            };
         }
 
         if (!isSticky && displayType !== DisplayType.default) {
-            this.setState({
+            return {
                 displayType: DisplayType.default,
                 stickyPanelHeaderStyles: {
                     position: "",
@@ -97,16 +102,16 @@ class StickyHeader extends Component {
                     height: "",
                     width: ""
                 }
-            });
+            };
         }
-    }
+    };
 
     render() {
         const { className } = this.props;
         const { stickyHeaderSubstrateStyles, stickyPanelHeaderStyles } = this.state;
 
         return (
-            <div>
+            <div ref={el => { this._wrapper = el; }}>
                 <div style={stickyHeaderSubstrateStyles} className={styles.header}></div>
                 <div style={stickyPanelHeaderStyles} className={cx(styles.header, className)} ref={el => (this.node = el)}>
                     {this.props.children}
@@ -118,8 +123,7 @@ class StickyHeader extends Component {
 
 StickyHeader.propTypes = {
     className: PropTypes.string,
-    stopLine: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    stickyPanelBodyInitialOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    stickyPanelHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     children: PropTypes.node
 };
 

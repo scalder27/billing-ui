@@ -1,0 +1,46 @@
+﻿@import "../../styles/placeholders";
+@import "../../styles/variables";
+@import "../../styles/bourbon";
+
+:local {
+    .root {
+        @extend %as-inline-block;
+    }
+
+    .menuHolder {
+        position: relative;
+    }
+
+    .menu {
+        @include position(absolute, -2px 0 null -3px);
+
+        position: absolute;
+        z-index: 1000;
+
+        padding: 0;
+
+        border: 1px solid $borderBaseColor;
+        border-radius: 0;
+        background: $bgWhiteColor;
+        box-shadow: $shadowActionsPopup;
+    }
+
+    .item {
+        padding: 10px 3px 10px;
+
+        cursor: pointer;
+
+        &.active {
+            background: $bgElementActiveLightColor;
+        }
+    }
+
+    .description {
+        color: $textDarkColor;
+        font-size: 12px;
+    }
+
+    .empty {
+        padding: 10px 20px;
+    }
+}
