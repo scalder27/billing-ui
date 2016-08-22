@@ -10,6 +10,15 @@ import { getPosition, getPositionType } from "./PositionHandler";
 import cx from "classnames";
 import styles from "./Tooltip.scss";
 
+const findContainer = (node) => {
+    let container = node;
+    while (container.parentElement.tagName !== document.body.tagName) {
+        container = container.parentElement;
+    }
+
+    return container;
+};
+
 class Tooltip extends PureComponent {
     constructor(props) {
         super();
@@ -20,8 +29,8 @@ class Tooltip extends PureComponent {
         };
 
         this._margin = props.type === TooltipType.validation ? -1 : 15;
-        this._mainWrapper = document.getElementById("MainWrapper");
     }
+
 
     componentDidMount() {
         this._init();
@@ -41,6 +50,7 @@ class Tooltip extends PureComponent {
 
     _init() {
         this._target = ReactDOM.findDOMNode(this.props.getTarget());
+        this._wrapper = this.props.wrapper || findContainer(this._target);
         this._tryUpdatePositionType();
 
         this._setPosition();
@@ -67,7 +77,7 @@ class Tooltip extends PureComponent {
         }
 
         events.addEventListener(window, "resize", this._redraw);
-        events.addEventListener(this._mainWrapper, "scroll", this._redraw);
+        events.addEventListener(this._wrapper, "scroll", this._redraw);
     }
 
     _detachEventListener() {
@@ -79,7 +89,7 @@ class Tooltip extends PureComponent {
         events.removeEventListener(this._target, "keyup", this._toggleTooltip);
 
         events.removeEventListener(window, "resize", this._redraw);
-        events.removeEventListener(this._mainWrapper, "scroll", this._redraw);
+        events.removeEventListener(this._wrapper, "scroll", this._redraw);
     }
 
     _tryUpdatePositionType() {
@@ -94,6 +104,7 @@ class Tooltip extends PureComponent {
 
     _setPosition() {
         const position = getPosition(this.state.positionType, this._target, this._tooltip, this.props.type);
+
         Object.keys(position).map(property => {
             this._tooltip.style[property] = position[property]
         });
@@ -144,7 +155,7 @@ class Tooltip extends PureComponent {
         });
 
         return (
-            <div className={tooltipClassNames} ref={(el) => el && (this._tooltip = el)} style={{ width: "100px" }}>
+            <div className={tooltipClassNames} ref={(el) => el && (this._tooltip = el)}>
                 {children}
             </div>
         )
@@ -157,6 +168,7 @@ Tooltip.propTypes = {
     trigger: PropTypes.oneOf(Object.keys(TriggerType).map((key) => TriggerType[key])),
     positionType: PropTypes.oneOf(Object.keys(PositionType).map((key) => PositionType[key])),
     className: PropTypes.string,
+    wrapper: PropTypes.node,
     type: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key]))
 };
 

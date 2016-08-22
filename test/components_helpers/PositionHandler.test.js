@@ -7,7 +7,7 @@ import {
     ARROW_LEFT_MARGIN,
     ARROW_VERTICAL_MARGIN,
     ARROW_HEIGHT
-} from "../../components/Tooltip/PositionHandler.js";
+} from "../../components/Tooltip/PositionHandler";
 import PositionType from "../../components/Tooltip/PositionType";
 import TooltipType from "../../components/Tooltip/TooltipType";
 
