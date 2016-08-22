@@ -27,8 +27,16 @@ class Tooltip extends PureComponent {
         this._init();
     }
 
+    componentWillUpdate() {
+        this._detachEventListener();
+    }
+
     componentDidUpdate() {
         this._init();
+    }
+
+    componentWillUnmount() {
+        this._detachEventListener();
     }
 
     _init() {
@@ -40,7 +48,6 @@ class Tooltip extends PureComponent {
     }
 
     _attachEventListener() {
-        this._detachEventListener();
         const { trigger } = this.props;
 
         if (trigger === TriggerType.hover) {
@@ -76,7 +83,7 @@ class Tooltip extends PureComponent {
     }
 
     _tryUpdatePositionType() {
-        const positionType = getPositionType(this.props.positionType, this._target, this._tooltip, this._margin);
+        const positionType = getPositionType(this.props.positionType, this._target, this._tooltip, this.props.type);
 
         if (this.state.positionType !== positionType) {
             this.setState({
@@ -86,7 +93,7 @@ class Tooltip extends PureComponent {
     }
 
     _setPosition() {
-        const position = getPosition(this.state.positionType, this._target, this._tooltip, this.props.margin);
+        const position = getPosition(this.state.positionType, this._target, this._tooltip, this.props.type);
         Object.keys(position).map(property => {
             this._tooltip.style[property] = position[property]
         });
@@ -115,7 +122,8 @@ class Tooltip extends PureComponent {
                     show = true;
                     break;
                 case "mouseleave":
-                case "blur":show = false;
+                case "blur":
+                    show = false;
                     break;
                 case "click":
                     show = this.props.trigger === TriggerType.hover ? false : !isOpen;
@@ -123,7 +131,7 @@ class Tooltip extends PureComponent {
             }
         }
 
-        this.setState({isOpen: show});
+        this.setState({ isOpen: show });
     };
 
     render() {
@@ -136,7 +144,7 @@ class Tooltip extends PureComponent {
         });
 
         return (
-            <div className={tooltipClassNames} ref={(el) => el && (this._tooltip = el)}>
+            <div className={tooltipClassNames} ref={(el) => el && (this._tooltip = el)} style={{ width: "100px" }}>
                 {children}
             </div>
         )
@@ -149,7 +157,7 @@ Tooltip.propTypes = {
     trigger: PropTypes.oneOf(Object.keys(TriggerType).map((key) => TriggerType[key])),
     positionType: PropTypes.oneOf(Object.keys(PositionType).map((key) => PositionType[key])),
     className: PropTypes.string,
-    type: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType))
+    type: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key]))
 };
 
 Tooltip.defaultProps = {

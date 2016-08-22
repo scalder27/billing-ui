@@ -55,6 +55,7 @@ class TextInput extends Component {
             tooltipCaption,
             tooltipType,
             tooltipPosition,
+            tooltipClassName,
             clearable,
             ...others
         } = this.props;
@@ -67,7 +68,6 @@ class TextInput extends Component {
             [styles.disabled]: others.disabled,
             [styles.clearable]: clearable
         });
-
 
         const inputProps = {
             ...others,
@@ -105,7 +105,12 @@ class TextInput extends Component {
                 )}
 
                 {hasTooltip && (
-                    <Tooltip getTarget={() => this._input} trigger={TriggerTypes.focus} positionType={tooltipPosition} type={tooltipType}>
+                    <Tooltip
+                        getTarget={() => this._input}
+                        trigger={TriggerTypes.focus}
+                        positionType={tooltipPosition}
+                        type={tooltipType}
+                        className={tooltipClassName}>
                         {tooltipCaption}
                     </Tooltip>
                 )}
@@ -134,13 +139,15 @@ TextInput.propTypes = {
     inputClassName: PropTypes.string,
     styles: PropTypes.object,
     tooltipCaption: PropTypes.string,
+    tooltipClassName: PropTypes.string,
     tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),
     tooltipPosition: PropTypes.oneOf(Object.keys(PositionTypes).map((key) => PositionTypes[key]))
 };
 
 TextInput.defaultProps = {
     tooltipType: TooltipTypes.validation,
-    tooltipPosition: PositionTypes.rightMiddle
+    tooltipPosition: PositionTypes.bottomLeft,
+    tooltipClassName: ""
 };
 
 export default TextInput;

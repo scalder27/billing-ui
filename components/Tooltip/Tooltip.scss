@@ -169,6 +169,16 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
             }
         }
 
+        &.validation {
+            animation-duration: 0.2s;
+
+            &.as-open {
+                :global {
+                    animation-name: fadeIn;
+                }
+            }
+        }
+
         &.arrow-center {
             &:before,
             &:after {
