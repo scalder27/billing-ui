@@ -18,6 +18,8 @@ gulp.task("sass:comb", function() {
             autoprefixer({ add: false, browsers: [] }),
             perfectionist({
                 cascade: true,
+                colorCase: "lower",
+                colorShorthand: true,
                 format: "expanded",
                 indentSize: 4,
                 maxAtRuleLength: 80,
