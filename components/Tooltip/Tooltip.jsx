@@ -5,7 +5,7 @@ import events from "add-event-listener";
 import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
 import TooltipType from "./TooltipType";
-import { getPosition, getPositionType } from "./PositionHandler";
+import { calcPosition, adjustPositionType } from "./PositionHandler";
 
 import cx from "classnames";
 import styles from "./Tooltip.scss";
@@ -93,7 +93,7 @@ class Tooltip extends PureComponent {
     }
 
     _tryUpdatePositionType() {
-        const positionType = getPositionType(this.props.positionType, this._target, this._tooltip, this.props.type);
+        const positionType = adjustPositionType(this.props.positionType, this._target, this._tooltip, this.props.type);
 
         if (this.state.positionType !== positionType) {
             this.setState({
@@ -103,7 +103,7 @@ class Tooltip extends PureComponent {
     }
 
     _setPosition() {
-        const position = getPosition(this.state.positionType, this._target, this._tooltip, this.props.type);
+        const position = calcPosition(this.state.positionType, this._target, this._tooltip, this.props.type);
 
         Object.keys(position).map(property => {
             this._tooltip.style[property] = position[property]
