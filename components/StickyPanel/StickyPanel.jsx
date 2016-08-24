@@ -1,4 +1,4 @@
-import { Component, PropTypes, Children, cloneElement } from "react";
+import { PureComponent, PropTypes, Children, cloneElement } from "react";
 import events from "add-event-listener";
 import { throttle } from "underscore";
 
@@ -7,7 +7,7 @@ import Body from "./Body";
 
 import styles from "./StickyPanel.scss";
 
-class StickyPanel extends Component {
+class StickyPanel extends PureComponent {
     state = {
         stickyPanelHeight: ""
     };
@@ -17,6 +17,10 @@ class StickyPanel extends Component {
 
         this.calculateInitialParameters();
         events.addEventListener(this._mainWrapper, "resize", this.calculateInitialParameters);
+    }
+
+    componentWillUnmount() {
+        events.removeEventListener(this._mainWrapper, "resize", this.calculateInitialParameters);
     }
 
     componentWillReceiveProps() {
@@ -29,10 +33,6 @@ class StickyPanel extends Component {
         if (stickyPanelHeight !== prevState.stickyPanelHeight) {
             this.calculateInitialParameters();
         }
-    }
-
-    componentWillUnmount() {
-        events.removeEventListener(this._mainWrapper, "resize", this.calculateInitialParameters);
     }
 
     calculateInitialParameters = throttle(() => {

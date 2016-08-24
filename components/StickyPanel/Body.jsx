@@ -1,10 +1,6 @@
-import { Component, PropTypes } from "react";
-import shouldPureComponentUpdate from "react-pure-render/function";
-import pure from "recompose/pure";
+import { PureComponent, PropTypes } from "react";
 
-class StickyBody extends Component {
-    shouldComponentUpdate = shouldPureComponentUpdate;
-
+class StickyBody extends PureComponent {
     render() {
         const { children, className } = this.props;
 
@@ -21,4 +17,4 @@ StickyBody.propTypes = {
     children: PropTypes.node
 };
 
-export default pure(StickyBody);
+export default StickyBody;

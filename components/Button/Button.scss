@@ -31,7 +31,7 @@
     }
 
     .delete {
-        $backgroundShadow: #9E4643;
+        $backgroundShadow: #9e4643;
 
         @include stylized-button-base($bgDeleteColor, $textWhiteColor, $backgroundShadow);
 
