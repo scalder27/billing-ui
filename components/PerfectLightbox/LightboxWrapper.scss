@@ -1,0 +1,48 @@
+﻿@import "../../styles/variables";
+
+:local {
+    .overlay {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow-y: scroll;
+
+        transition: background-color $transitionBaseTime $transitionBaseTimingFunction;
+
+        background-color: rgba($bgWhiteColor, .7);
+
+        text-align: center;
+
+        :global {
+            animation: lightboxFadeIn $transitionBaseTime $transitionBaseTimingFunction;
+        }
+
+        &:before,
+        &:after {
+            content: '';
+
+            display: inline-block;
+            height: 100%;
+
+            vertical-align: middle;
+        }
+
+        &.closing {
+        }
+    }
+}
+
+@keyframes lightboxFadeIn {
+    from {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+}

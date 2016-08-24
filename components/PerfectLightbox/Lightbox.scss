@@ -1,0 +1,62 @@
+﻿@import "../../styles/variables";
+
+:local {
+    .lightbox {
+        position: relative;
+        top: 0;
+
+        display: inline-block;
+        margin: auto;
+        padding: 20px 30px;
+
+        transition: transform .45s cubic-bezier(0.23, 1, 0.32, 1);
+
+        border: $borderDarkerColor;
+        background-color: $bgWhiteColor;
+        box-shadow: $elementBaseShadow;
+
+        text-align: left;
+
+        :global {
+            animation: lightboxSlideIn .45s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        &.top {
+            vertical-align: top;
+        }
+
+        &.middle {
+            vertical-align: middle;
+        }
+
+        &.bottom {
+            vertical-align: bottom;
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        padding: 10px;
+
+        background-color: transparent;
+
+        cursor: pointer;
+    }
+
+    .closing {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes lightboxSlideIn {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
