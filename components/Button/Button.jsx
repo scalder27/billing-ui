@@ -19,7 +19,7 @@ class Button extends Component {
         const { disabled, onClick } = this.props;
 
         if (!disabled) {
-            onClick(arguments);
+            onClick(...arguments);
         }
     }
 
