@@ -1,6 +1,12 @@
 ﻿@import "../../styles/variables";
 @import "../../styles/placeholders";
 @import "./AnimationFadeIn";
+@import "../../styles/bourbon";
+$triangleHeight: 8px;
+$triangleWidth: 2 * $triangleHeight;
+$borderWidth: 1px;
+$validationBorderWidth: 2px;
+$validationBorder: $validationBorderWidth solid $borderErrorColor;
 
 :local {
     .tooltip {
@@ -42,6 +48,7 @@
             width: 0;
             height: 0;
 
+            border: 0;
             border-style: solid;
             border-color: transparent;
         }
@@ -53,23 +60,28 @@
                 }
             }
 
-            &:before,
-            &:after {
-                border-width: 0 7px;
-            }
-
             &:before {
-                top: -8px;
+                @include triangle($triangleWidth, #dcdada, up);
 
-                border-bottom-width: 8px;
-                border-bottom-color: #dcdada;
+                top: -$triangleHeight;
             }
 
             &:after {
-                top: -7px;
+                @include triangle($triangleWidth, $bgWhiteColor, up);
 
-                border-bottom-width: 7px;
-                border-bottom-color: #fff;
+                top: -$triangleHeight + $borderWidth;
+            }
+
+            &.validation {
+                border-top: $validationBorder;
+
+                &:before {
+                    @include triangle($triangleWidth, $borderErrorColor, up);
+                }
+
+                &:after {
+                    top: -$triangleHeight + $validationBorderWidth + 1;
+                }
             }
         }
 
@@ -80,23 +92,16 @@
                 }
             }
 
-            &:before,
-            &:after {
-                border-width: 0 7px;
-            }
-
             &:before {
-                bottom: -8px;
+                @include triangle($triangleWidth, #dcdada, down);
 
-                border-top-width: 8px;
-                border-top-color: #dcdada;
+                bottom: -$triangleHeight;
             }
 
             &:after {
-                bottom: -7px;
+                @include triangle($triangleWidth, $bgWhiteColor, down);
 
-                border-top-width: 7px;
-                border-top-color: #fff;
+                bottom: -$triangleHeight + $borderWidth;
             }
         }
 
@@ -107,23 +112,28 @@
                 }
             }
 
-            &:before,
-            &:after {
-                border-width: 7px 0;
-            }
-
             &:before {
-                right: -8px;
+                @include triangle($triangleWidth, #dcdada, right);
 
-                border-left-width: 8px;
-                border-left-color: #dcdada;
+                right: -$triangleHeight;
             }
 
             &:after {
-                right: -7px;
+                @include triangle($triangleWidth, $bgWhiteColor, right);
 
-                border-left-width: 7px;
-                border-left-color: #fff;
+                right: -$triangleHeight + $borderWidth;
+            }
+
+            &.validation {
+                border-right: $validationBorder;
+
+                &:before {
+                    @include triangle($triangleWidth, $borderErrorColor, right);
+                }
+
+                &:after {
+                    right: -$triangleHeight + $validationBorderWidth + 1;
+                }
             }
         }
 
@@ -134,23 +144,38 @@
                 }
             }
 
-            &:before,
-            &:after {
-                border-width: 7px 0;
-            }
-
             &:before {
-                left: -8px;
+                @include triangle($triangleWidth, #dcdada, left);
 
-                border-right-width: 8px;
-                border-right-color: #dcdada;
+                left: -$triangleHeight;
             }
 
             &:after {
-                left: -7px;
+                @include triangle($triangleWidth, $bgWhiteColor, left);
 
-                border-right-width: 7px;
-                border-right-color: #fff;
+                left: -$triangleHeight + $borderWidth;
+            }
+
+            &.validation {
+                border-left: $validationBorder;
+
+                &:before {
+                    @include triangle($triangleWidth, $borderErrorColor, left);
+                }
+
+                &:after {
+                    left: -$triangleHeight + $validationBorderWidth + 1;
+                }
+            }
+        }
+
+        &.validation {
+            animation-duration: 0.2s;
+
+            &.as-open {
+                :global {
+                    animation-name: fadeIn;
+                }
             }
         }
 
@@ -159,7 +184,7 @@
             &:after {
                 left: 50%;
 
-                margin-left: -7px;
+                margin-left: - $triangleWidth/2;
             }
         }
 
@@ -168,7 +193,7 @@
             &:after {
                 top: 50%;
 
-                margin-top: -7px;
+                margin-top: - $triangleWidth/2;
             }
         }
 

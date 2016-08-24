@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
-import TooltipType from "./TooltipType";
+import { TooltipTypes, PositionTypes } from "../Tooltip";
 
 class TextInputWrapper extends PureComponent {
 
@@ -29,8 +29,8 @@ class TextInputWrapper extends PureComponent {
 
         return (
             type === TextInputType.compact
-                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setDomNode}/>
-                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setDomNode}/>
+                ? <CompactTextInput {...others} labelClassName={labelClassName} ref={this._setDomNode} />
+                : <DefaultTextInput {...others} placeholderClassName={placeholderClassName} ref={this._setDomNode} />
         );
     }
 }
@@ -47,7 +47,9 @@ TextInputWrapper.propTypes = {
     value: PropTypes.string,
     isValid: PropTypes.bool,
     tooltipCaption: PropTypes.node,
-    tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
+    tooltipClassName: PropTypes.string,
+    tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),
+    tooltipPosition: PropTypes.oneOf(Object.keys(PositionTypes).map((key) => PositionTypes[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -72,8 +74,7 @@ TextInputWrapper.defaultProps = {
     width: 180,
     isValid: true,
     isTextArea: false,
-    type: TextInputType.default,
-    tooltipPosition: TooltipType.right
+    type: TextInputType.default
 };
 
 export default TextInputWrapper;
