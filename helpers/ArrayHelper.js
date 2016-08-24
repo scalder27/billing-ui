@@ -61,3 +61,18 @@ export const updateImmutableArrayByKey = (oldArray, newArray, key) => {
 
     return newArray.map((item) => oldArrayHashmap[item[key]] || item);
 };
+
+export const filterObjectKeys = (obj, filterKeys) => {
+    if (filterKeys.some(filterKey => obj[filterKey] !== undefined)) {
+        const objCopy = { ...obj };
+        filterKeys.forEach(filterKey => {
+            if (objCopy.hasOwnProperty(filterKey)) {
+                delete objCopy[filterKey];
+            }
+        });
+
+        return objCopy;
+    }
+
+    return obj;
+};

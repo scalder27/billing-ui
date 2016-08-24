@@ -1,17 +1,21 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
+import cx from "classnames";
 import moment, { formatDate, convertString, convertISOString } from "../../libs/moment";
-import CustomPropTypes from "../../helpers/CustomPropTypes";
 
 import TextInput from "../TextInput";
 import Picker from "./Picker";
 import Icon, { IconTypes } from "../Icon";
 import rangeSelector from "./StartInputSelection";
-import keyCodes from "../../helpers/KeyCodes";
 import validationErrorType from "./ValidationErrorType";
 
-import cx from "classnames";
+import keyCodes from "../../helpers/KeyCodes";
+import CustomPropTypes from "../../helpers/CustomPropTypes";
+import { filterObjectKeys } from "./../../helpers/ArrayHelper";
+
 import styles from "./CalendarWrapper.scss";
+
+const excludedInputProps = ["minYear", "maxYear", "minDate", "maxDate"];
 
 class CalendarWrapper extends Component {
     _selectionRanges = [{ start: 0, end: 2, type: "days" }, { start: 3, end: 5, type: "months" }, { start: 6, end: 10, type: "years" }];
@@ -275,7 +279,8 @@ class CalendarWrapper extends Component {
             [styles.disabled]: disabled
         });
 
-        const inputProps = {
+        const inputProps = filterObjectKeys({
+            ...this.props,
             value: errorType === validationErrorType.unfilledDate ? date.creationData().input : formatDate(date),
             isValid: this.props.isValid && isValid,
             maxLength: "10",
@@ -286,11 +291,11 @@ class CalendarWrapper extends Component {
             onBlur: this.handleBlur,
             onFocus: this.handleFocus,
             mask: "99.99.9999"
-        };
+        }, excludedInputProps);
 
         return (
             <span className={wrapperClassNames} style={{ width: width }}>
-                <TextInput {...this.props} {...inputProps} ref={(el) => {
+                <TextInput {...inputProps} ref={(el) => {
                     this._textInput = el
                 }} />
                 <span className={openButtonClassNames} onClick={this.open}>
