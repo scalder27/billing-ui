@@ -1,5 +1,6 @@
 ﻿@import "../../styles/variables";
-$shadowOffset: 5px;
+@import "./LightboxAnimations";
+@import "../../styles/animations/fade";
 
 :local {
     .lightbox {
@@ -32,12 +33,12 @@ $shadowOffset: 5px;
             vertical-align: middle;
 
             :global {
-                animation: lightboxFadeIn $transitionSmoothOut;
+                animation: fadeIn $transitionSmoothOut;
             }
 
             &.closing {
                 :global {
-                    animation: lightboxFadeOut $transitionSmoothOut;
+                    animation: fadeOut $transitionSmoothOut;
                 }
             }
         }
@@ -72,73 +73,5 @@ $shadowOffset: 5px;
             border: none;
             box-shadow: none;
         }
-    }
-}
-
-@keyframes lightboxSlideInDown {
-    from {
-        margin-top: -$shadowOffset;
-
-        transform: translateY(-100%);
-    }
-
-    to {
-        margin-top: 0;
-
-        transform: translateY(0);
-    }
-}
-
-@keyframes lightboxSlideOutDown {
-    from {
-        margin-top: -$shadowOffset;
-
-        transform: translateY(0);
-    }
-
-    to {
-        margin-top: -$shadowOffset;
-
-        transform: translateY(-100%);
-    }
-}
-
-@keyframes lightboxFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes lightboxFadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes lightboxSlideInUp {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes lightboxSlideOutUp {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(100%);
     }
 }

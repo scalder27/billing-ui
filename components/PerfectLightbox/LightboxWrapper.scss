@@ -1,4 +1,5 @@
 ﻿@import "../../styles/variables";
+@import "./LightboxAnimations";
 
 :local {
     .overlay {
@@ -33,25 +34,5 @@
                 animation: lightboxOverlayFadeOut $transitionSmoothOut;
             }
         }
-    }
-}
-
-@keyframes lightboxOverlayFadeIn {
-    from {
-        background-color: rgba($bgWhiteColor, 0);
-    }
-
-    to {
-        background-color: rgba($bgWhiteColor, .7);
-    }
-}
-
-@keyframes lightboxOverlayFadeOut {
-    from {
-        background-color: rgba($bgWhiteColor, .7);
-    }
-
-    to {
-        background-color: rgba($bgWhiteColor, 0);
     }
 }

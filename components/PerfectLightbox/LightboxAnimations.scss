@@ -1,0 +1,69 @@
+﻿$shadowOffset: 5px;
+
+@keyframes lightboxSlideInDown {
+    from {
+        margin-top: -$shadowOffset;
+
+        transform: translateY(-100%);
+    }
+
+    to {
+        margin-top: 0;
+
+        transform: translateY(0);
+    }
+}
+
+@keyframes lightboxSlideOutDown {
+    from {
+        margin-top: -$shadowOffset;
+
+        transform: translateY(0);
+    }
+
+    to {
+        margin-top: -$shadowOffset;
+
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes lightboxSlideInUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes lightboxSlideOutUp {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes lightboxOverlayFadeIn {
+    from {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+}
+
+@keyframes lightboxOverlayFadeOut {
+    from {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+}
