@@ -1,6 +1,7 @@
 ﻿@import "../../styles/variables";
 @import "./LightboxAnimations";
 @import "../../styles/animations/fade";
+@import "../../styles/bourbon";
 
 :local {
     .lightbox {
@@ -59,13 +60,10 @@
     }
 
     .close-button {
-        position: absolute;
-        top: 0;
-        right: 0;
+        @include position(absolute, 0 0 null null);
+        @include size(35px);
 
-        padding: 10px;
-
-        background-color: transparent;
+        background: transparent url("billing-ui/img/Cross.svg") no-repeat center center;
 
         cursor: pointer;
 

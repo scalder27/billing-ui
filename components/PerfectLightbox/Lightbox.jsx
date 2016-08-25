@@ -3,7 +3,6 @@ import cx from "classnames";
 
 import positionTypes from "./LightboxPositionType";
 import styles from "./Lightbox.scss";
-import CrossIcon from "../../img/Cross.svg";
 
 class Lightbox extends PureComponent {
     _handleCloseClick = () => {
@@ -27,7 +26,6 @@ class Lightbox extends PureComponent {
             <div className={ lightboxClassNames } style={lightboxStyle}>
                 <button
                     className={styles["close-button"]} onClick={this._handleCloseClick}>
-                    <img src={CrossIcon} />
                 </button>
                 {children}
             </div>
