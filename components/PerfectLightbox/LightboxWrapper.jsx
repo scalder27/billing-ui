@@ -1,4 +1,4 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import Portal from "react-portal";
 import cx from "classnames";
@@ -10,7 +10,7 @@ import lightboxStyles from "./Lightbox.scss";
 
 const CSS_ANIMATION_TIME = 400;
 
-class LightboxWrapper extends Component {
+class LightboxWrapper extends PureComponent {
     _beforeClose = (portalDOMNode, removePortalFromDOM) => {
         portalDOMNode.className += " " + styles.closing;
         this._lightbox.className += " " + lightboxStyles.closing;
@@ -19,7 +19,7 @@ class LightboxWrapper extends Component {
     };
 
     render() {
-        const { children, overlayClassName, lightboxClassName, positionType } = this.props;
+        const { children, overlayClassName, lightboxClassName, positionType, width } = this.props;
 
         const portalClassNames = cx(
             styles.overlay,
@@ -35,12 +35,14 @@ class LightboxWrapper extends Component {
         delete portalProps.overlayClassName;
         delete portalProps.lightboxClassName;
         delete portalProps.positionType;
+        delete portalProps.width;
 
         return (
             <Portal { ...portalProps } className={ portalClassNames }>
                 <Lightbox
                     className={lightboxClassName}
                     positionType={positionType}
+                    width={width}
                     ref={(elm) => { this._lightbox = ReactDOM.findDOMNode(elm) }}>
                     {children}
                 </Lightbox>
@@ -61,7 +63,8 @@ LightboxWrapper.propTypes = {
 
     overlayClassName: PropTypes.string,
     lightboxClassName: PropTypes.string,
-    positionType: PropTypes.oneOf(Object.keys(positionTypes))
+    positionType: PropTypes.oneOf(Object.keys(positionTypes)),
+    width: PropTypes.number
 };
 
 LightboxWrapper.defaultProps = {

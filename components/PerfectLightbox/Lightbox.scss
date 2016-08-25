@@ -67,6 +67,11 @@ $shadowOffset: 5px;
         background-color: transparent;
 
         cursor: pointer;
+
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
     }
 }
 
