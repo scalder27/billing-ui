@@ -10,7 +10,8 @@ const ActionsBar = ({
     barClassName, submitClassName, cancelClassName,
     submitText, cancelText,
     submitDisabled, cancelDisabled,
-    onSubmitClick, onCancelClick
+    onSubmitClick, onCancelClick,
+    children
 }) => (
     <div className={cx(styles.actionsBar, barClassName)}>
         <Button type={ButtonType.button}
@@ -26,6 +27,7 @@ const ActionsBar = ({
                 {cancelText}
             </button>
         )}
+        {children}
     </div>
 );
 
@@ -43,7 +45,9 @@ ActionsBar.propTypes = {
     cancelDisabled: PropTypes.bool,
 
     onSubmitClick: PropTypes.func.isRequired,
-    onCancelClick: PropTypes.func
+    onCancelClick: PropTypes.func,
+
+    children: PropTypes.node
 };
 
 ActionsBar.defaultProps = {
