@@ -5,20 +5,10 @@ import positionTypes from "./LightboxPositionType";
 import styles from "./Lightbox.scss";
 import CrossIcon from "../../img/Cross.svg";
 
-const ANIMATION_TIME = 450;
-
 class Lightbox extends Component {
-
     _handleCloseClick = () => {
-        this._lightbox.className = `${this._lightbox.className} ${styles.closing}`;
-
-        if (this.props.beforeClose) {
-            this.props.beforeClose();
-        }
-
-        if (this.props.closePortal) {
-            setTimeout(this.props.closePortal, ANIMATION_TIME);
-        }
+        this.props.closeClick && this.props.closeClick();
+        this.props.closePortal && this.props.closePortal();
     };
 
     render() {
@@ -30,9 +20,7 @@ class Lightbox extends Component {
             className
         );
         return (
-            <div className={ lightboxClassNames } ref={(elm) => {
-                this._lightbox = elm
-            }}>
+            <div className={ lightboxClassNames }>
                 <button className={styles["close-button"]} onClick={this._handleCloseClick}>
                     <img src={CrossIcon} />
                 </button>
@@ -47,6 +35,7 @@ Lightbox.propTypes = {
     className: PropTypes.string,
     positionType: PropTypes.oneOf(Object.keys(positionTypes)),
     beforeClose: PropTypes.func,
+    closeClick: PropTypes.func,
     closePortal: PropTypes.func
 };
 export default Lightbox

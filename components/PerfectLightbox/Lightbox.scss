@@ -1,4 +1,5 @@
 ﻿@import "../../styles/variables";
+$shadowOffset: 5px;
 
 :local {
     .lightbox {
@@ -6,19 +7,16 @@
         top: 0;
 
         display: inline-block;
-        margin: auto;
+        margin-top: 0;
         padding: 20px 30px;
 
-        transition: transform .45s cubic-bezier(0.23, 1, 0.32, 1);
-
-        border: $borderDarkerColor;
         background-color: $bgWhiteColor;
         box-shadow: $elementBaseShadow;
 
         text-align: left;
 
         :global {
-            animation: lightboxSlideIn .45s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: lightboxSlideIn $transitionSmoothOut;
         }
 
         &.top {
@@ -47,16 +45,23 @@
     }
 
     .closing {
+        margin-top: -$shadowOffset;
+
+        transition: all $transitionSmoothOut;
         transform: translateY(-100%);
     }
 }
 
 @keyframes lightboxSlideIn {
     from {
+        margin-top: -$shadowOffset;
+
         transform: translateY(-100%);
     }
 
     to {
+        margin-top: 0;
+
         transform: translateY(0);
     }
 }

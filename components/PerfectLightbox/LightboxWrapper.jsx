@@ -1,19 +1,22 @@
-import React, { Component, PropTypes } from "react";
+import { Component, PropTypes } from "react";
+import ReactDOM from "react-dom";
 import Portal from "react-portal";
 import cx from "classnames";
 
 import Lightbox from "./Lightbox";
 import positionTypes from "./LightboxPositionType";
 import styles from "./LightboxWrapper.scss";
+import lightboxStyles from "./Lightbox.scss";
+
+const CSS_ANIMATION_TIME = 450;
 
 class LightboxWrapper extends Component {
-    constructor(props) {
-        super(props);
+    _beforeClose = (portalDOMNode, removePortalFromDOM) => {
+        portalDOMNode.className = `${portalDOMNode.className} ${styles.closing}`;
+        this._lightbox.className = `${this._lightbox.className} ${lightboxStyles.closing}`;
 
-        this.state = {
-            isOpened: props.isOpened
-        }
-    }
+        setTimeout(removePortalFromDOM, CSS_ANIMATION_TIME);
+    };
 
     render() {
         const { children, overlayClassName, lightboxClassName, positionType } = this.props;
@@ -23,22 +26,24 @@ class LightboxWrapper extends Component {
             overlayClassName
         );
 
-        const portalProps = { ...this.props };
+        const portalProps = {
+            ...this.props,
+            beforeClose: this._beforeClose
+        };
+
         delete portalProps.children;
         delete portalProps.overlayClassName;
         delete portalProps.lightboxClassName;
         delete portalProps.positionType;
 
-        const lightBoxElement = React.cloneElement(
-            <Lightbox className={lightboxClassName} positionType={positionType} beforeClose={this._beforeCloseLightbox}>
-                {children}
-            </Lightbox>,
-            { closePortal: this.props.closePortal }
-        );
-
         return (
             <Portal { ...portalProps } className={ portalClassNames }>
-                {lightBoxElement}
+                <Lightbox
+                    className={lightboxClassName}
+                    positionType={positionType}
+                    ref={(elm) => { this._lightbox = ReactDOM.findDOMNode(elm) }}>
+                    {children}
+                </Lightbox>
             </Portal>
         );
     }
@@ -53,7 +58,6 @@ LightboxWrapper.propTypes = {
     onOpen: PropTypes.func,
     beforeClose: PropTypes.func,
     onClose: PropTypes.func,
-    closePortal: PropTypes.func,
 
     overlayClassName: PropTypes.string,
     lightboxClassName: PropTypes.string,
@@ -61,8 +65,7 @@ LightboxWrapper.propTypes = {
 };
 
 LightboxWrapper.defaultProps = {
-    positionType: positionTypes.top,
-    isOpened: false
+    positionType: positionTypes.top
 };
 
 export default LightboxWrapper

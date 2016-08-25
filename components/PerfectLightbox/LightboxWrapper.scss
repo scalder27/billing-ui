@@ -10,16 +10,12 @@
         width: 100%;
         height: 100%;
 
-        overflow-y: scroll;
-
-        transition: background-color $transitionBaseTime $transitionBaseTimingFunction;
-
-        background-color: rgba($bgWhiteColor, .7);
+        background-color: rgba($bgWhiteColor, 0.7);
 
         text-align: center;
 
         :global {
-            animation: lightboxFadeIn $transitionBaseTime $transitionBaseTimingFunction;
+            animation: lightboxFadeIn $transitionSmoothOut;
         }
 
         &:before,
@@ -33,6 +29,9 @@
         }
 
         &.closing {
+            transition: background-color $transitionSmoothOut;
+
+            background-color: rgba($bgWhiteColor, 0);
         }
     }
 }
