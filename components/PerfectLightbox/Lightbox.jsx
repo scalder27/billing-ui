@@ -41,7 +41,7 @@ Lightbox.propTypes = {
     positionType: PropTypes.oneOf(Object.keys(positionTypes)),
     beforeClose: PropTypes.func,
     closeClick: PropTypes.func,
-    closePortal: PropTypes.func,
+    closePortal: PropTypes.func, // передаётся сюда из Portal
     width: PropTypes.number
 };
 export default Lightbox
