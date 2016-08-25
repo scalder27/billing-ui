@@ -114,7 +114,7 @@ class CalendarWrapper extends Component {
         this.changeDate(value);
 
         if (onChange && !date.isSame(convertISOString(value), "day")) {
-            onChange(date.toISOString(), {
+            onChange(date.format(), {
                 date,
                 isValid,
                 errorType
@@ -133,13 +133,13 @@ class CalendarWrapper extends Component {
         const { isValid, errorType } = this.validate(date);
 
         this.setState({
-            date,
+            date: this._getTime(date),
             isValid,
             errorType
         });
 
         if (onChange && !date.isSame(convertISOString(value), "day")) {
-            onChange(date.toISOString(), {
+            onChange(date.format(), {
                 date,
                 isValid,
                 errorType
@@ -214,7 +214,7 @@ class CalendarWrapper extends Component {
         const { isValid, errorType } = this.validate(momentDate);
 
         this.setState({
-            date: momentDate,
+            date: this._getTime(momentDate),
             isValid,
             errorType
         });
@@ -249,6 +249,11 @@ class CalendarWrapper extends Component {
         this._selectBlock(selectedBlock === 0 ? 0 : selectedBlock - 1);
     }
 
+    _getTime(date) {
+        const { type } = this.props;
+        return type === "time" ? date : date.set({ "hour": "00", "minute": "00", "second": "00" })
+    }
+
     renderPicker() {
         if (!this.state.opened) {
             return;
@@ -259,11 +264,11 @@ class CalendarWrapper extends Component {
         return (
             <div className={styles.picker} onKeyDown={this.handlePickerKey}>
                 <Picker value={convertISOString(value)}
-                    verticalShift={this.state.height}
-                    minYear={minYear}
-                    maxYear={maxYear}
-                    onPick={this.handlePick}
-                    onClose={this.handlePickerClose}
+                        verticalShift={this.state.height}
+                        minYear={minYear}
+                        maxYear={maxYear}
+                        onPick={this.handlePick}
+                        onClose={this.handlePickerClose}
                 />
             </div>
         );
@@ -317,7 +322,8 @@ CalendarWrapper.propTypes = {
     minDate: CustomPropTypes.date,
     value: CustomPropTypes.date,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    className: PropTypes.string
+    className: PropTypes.string,
+    type: PropTypes.string
 };
 
 CalendarWrapper.defaultProps = {
