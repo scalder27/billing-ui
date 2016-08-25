@@ -15,7 +15,7 @@
         text-align: center;
 
         :global {
-            animation: lightboxFadeIn $transitionSmoothOut;
+            animation: lightboxOverlayFadeIn $transitionSmoothOut;
         }
 
         &:before,
@@ -29,19 +29,29 @@
         }
 
         &.closing {
-            transition: background-color $transitionSmoothOut;
-
-            background-color: rgba($bgWhiteColor, 0);
+            :global {
+                animation: lightboxOverlayFadeOut $transitionSmoothOut;
+            }
         }
     }
 }
 
-@keyframes lightboxFadeIn {
+@keyframes lightboxOverlayFadeIn {
     from {
         background-color: rgba($bgWhiteColor, 0);
     }
 
     to {
         background-color: rgba($bgWhiteColor, .7);
+    }
+}
+
+@keyframes lightboxOverlayFadeOut {
+    from {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, 0);
     }
 }

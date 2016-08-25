@@ -8,12 +8,12 @@ import positionTypes from "./LightboxPositionType";
 import styles from "./LightboxWrapper.scss";
 import lightboxStyles from "./Lightbox.scss";
 
-const CSS_ANIMATION_TIME = 450;
+const CSS_ANIMATION_TIME = 400;
 
 class LightboxWrapper extends Component {
     _beforeClose = (portalDOMNode, removePortalFromDOM) => {
-        portalDOMNode.className = `${portalDOMNode.className} ${styles.closing}`;
-        this._lightbox.className = `${this._lightbox.className} ${lightboxStyles.closing}`;
+        portalDOMNode.className += " " + styles.closing;
+        this._lightbox.className += " " + lightboxStyles.closing;
 
         setTimeout(removePortalFromDOM, CSS_ANIMATION_TIME);
     };

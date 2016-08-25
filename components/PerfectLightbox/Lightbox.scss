@@ -4,7 +4,6 @@ $shadowOffset: 5px;
 :local {
     .lightbox {
         position: relative;
-        top: 0;
 
         display: inline-block;
         margin-top: 0;
@@ -15,20 +14,46 @@ $shadowOffset: 5px;
 
         text-align: left;
 
-        :global {
-            animation: lightboxSlideIn $transitionSmoothOut;
-        }
-
         &.top {
             vertical-align: top;
+
+            :global {
+                animation: lightboxSlideInDown $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: lightboxSlideOutDown $transitionSmoothOut;
+                }
+            }
         }
 
         &.middle {
             vertical-align: middle;
+
+            :global {
+                animation: lightboxFadeIn $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: lightboxFadeOut $transitionSmoothOut;
+                }
+            }
         }
 
         &.bottom {
             vertical-align: bottom;
+
+            :global {
+                animation: lightboxSlideInUp $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: lightboxSlideOutUp $transitionSmoothOut;
+                }
+            }
         }
     }
 
@@ -43,16 +68,9 @@ $shadowOffset: 5px;
 
         cursor: pointer;
     }
-
-    .closing {
-        margin-top: -$shadowOffset;
-
-        transition: all $transitionSmoothOut;
-        transform: translateY(-100%);
-    }
 }
 
-@keyframes lightboxSlideIn {
+@keyframes lightboxSlideInDown {
     from {
         margin-top: -$shadowOffset;
 
@@ -63,5 +81,59 @@ $shadowOffset: 5px;
         margin-top: 0;
 
         transform: translateY(0);
+    }
+}
+
+@keyframes lightboxSlideOutDown {
+    from {
+        margin-top: -$shadowOffset;
+
+        transform: translateY(0);
+    }
+
+    to {
+        margin-top: -$shadowOffset;
+
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes lightboxFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes lightboxFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes lightboxSlideInUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes lightboxSlideOutUp {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
     }
 }
