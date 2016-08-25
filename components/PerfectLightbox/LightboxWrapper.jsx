@@ -14,6 +14,7 @@ class LightboxWrapper extends PureComponent {
     _beforeClose = (portalDOMNode, removePortalFromDOM) => {
         portalDOMNode.className += " " + styles.closing;
         this._lightbox.className += " " + lightboxStyles.closing;
+        this.props.beforeClose && this.props.beforeClose();
 
         setTimeout(removePortalFromDOM, CSS_ANIMATION_TIME);
     };
