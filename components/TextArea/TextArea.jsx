@@ -2,7 +2,7 @@ import { Component, PropTypes } from "react";
 
 import TextInput from "../TextInput";
 import TextInputType from "../TextInput/TextInputType";
-import TooltipType from "../TextInput/TooltipType";
+import {PositionTypes} from "../Tooltip";
 import styles from "./TextArea.scss";
 
 class TextArea extends Component {
@@ -98,7 +98,7 @@ TextArea.propTypes = {
     value: PropTypes.string,
     isValid: PropTypes.bool,
     tooltipCaption: PropTypes.node,
-    tooltipPosition: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key])),
+    tooltipPosition: PropTypes.oneOf(Object.keys(PositionTypes).map((key) => PositionTypes[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
