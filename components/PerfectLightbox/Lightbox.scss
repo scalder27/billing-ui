@@ -1,0 +1,75 @@
+﻿@import "../../styles/variables";
+@import "./LightboxAnimations";
+@import "../../styles/animations/fade";
+@import "../../styles/bourbon";
+
+:local {
+    .lightbox {
+        position: relative;
+
+        display: inline-block;
+        margin-top: 0;
+        padding: 20px 30px;
+
+        background-color: $bgWhiteColor;
+        box-shadow: $elementBaseShadow;
+
+        text-align: left;
+
+        &.top {
+            vertical-align: top;
+
+            :global {
+                animation: lightboxSlideInDown $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: lightboxSlideOutDown $transitionSmoothOut;
+                }
+            }
+        }
+
+        &.middle {
+            vertical-align: middle;
+
+            :global {
+                animation: fadeIn $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: fadeOut $transitionSmoothOut;
+                }
+            }
+        }
+
+        &.bottom {
+            vertical-align: bottom;
+
+            :global {
+                animation: lightboxSlideInUp $transitionSmoothOut;
+            }
+
+            &.closing {
+                :global {
+                    animation: lightboxSlideOutUp $transitionSmoothOut;
+                }
+            }
+        }
+    }
+
+    .close-button {
+        @include position(absolute, 0 0 null null);
+        @include size(35px);
+
+        background: transparent url("billing-ui/img/Cross.svg") no-repeat center center;
+
+        cursor: pointer;
+
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+}

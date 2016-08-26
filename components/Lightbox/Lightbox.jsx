@@ -1,6 +1,12 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 
+/*
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !!!!!!!!!!!!!DEPRECATED!!!!!!!!!!!!!!!
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
 class Lightbox extends Component {
     componentDidMount() {
         const { isOpen } = this.props;
