@@ -1,1 +1,1 @@
-export SlideToggle from "./SlideToggle.jsx";
+export slideToggle from "./SlideToggle.jsx";

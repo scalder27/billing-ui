@@ -3,7 +3,7 @@ import TweenLite from "gsap";
 import { findDOMNode } from "react-dom";
 import shouldPureComponentUpdate from "react-pure-render/function";
 
-const SlideToggle = (Component, options = { duration: 0.2 }) => {
+const slideToggle = (Component, options = { duration: 0.2 }) => {
     return class SlideToggle extends react.Component {
         shouldPureComponentUpdate = shouldPureComponentUpdate;
 
@@ -37,4 +37,4 @@ const SlideToggle = (Component, options = { duration: 0.2 }) => {
     };
 };
 
-export default SlideToggle;
+export default slideToggle;
