@@ -42,11 +42,11 @@ class CalendarWrapper extends Component {
     }
 
     componentDidUpdate() {
-        const height = ReactDOM.findDOMNode(this).getBoundingClientRect().height;
+        this._defineHeight();
+    }
 
-        if (this.state.height !== height) {
-            this.setState({ height })
-        }
+    componentDidMount() {
+        this._defineHeight();
     }
 
     validate(date) {
@@ -252,6 +252,14 @@ class CalendarWrapper extends Component {
     _getTime(date) {
         const { type } = this.props;
         return type === "time" ? date : date.set({ "hour": "00", "minute": "00", "second": "00" })
+    }
+
+    _defineHeight() {
+        const height = ReactDOM.findDOMNode(this).getBoundingClientRect().height;
+
+        if (this.state.height !== height) {
+            this.setState({ height })
+        }
     }
 
     renderPicker() {
