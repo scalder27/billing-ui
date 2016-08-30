@@ -29,7 +29,7 @@ class CompactTextInput extends Component {
         });
 
         return (
-            <div className={wrapperClassNames} style={{"width": width}}>
+            <div className={wrapperClassNames}>
                 <Input
                     {...inputProps}
                     value={value}
