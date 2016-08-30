@@ -17,3 +17,15 @@
         opacity: 0;
     }
 }
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+
+        transform: translateY(-100%);
+    }
+}

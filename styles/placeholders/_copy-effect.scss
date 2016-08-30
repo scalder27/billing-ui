@@ -1,0 +1,23 @@
+﻿@import "../bourbon";
+@import "../animations/_fade";
+
+%copy-effect {
+    position: relative;
+
+    animation-duration: 1000ms;
+
+    &:before {
+        @include position(absolute, 0 null null 0);
+
+        content: attr(data-content);
+
+        display: block;
+
+        opacity: 0;
+
+        :global {
+            animation: fadeSlideUp $transitionSmoothOut;
+            animation-duration: inherit;
+        }
+    }
+}
