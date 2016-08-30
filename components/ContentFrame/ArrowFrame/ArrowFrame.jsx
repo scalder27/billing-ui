@@ -1,24 +1,18 @@
 import { PureComponent, PropTypes } from "react";
-import RouteLink from "react-router/lib/Link";
-import Icon, { IconTypes } from "../../Icon";
+import ArrowFrameLink from "./ArrowFrameLink.jsx";
 import arrowFrameStyles from "./ArrowFrame.scss";
 
 class ArrowFrame extends PureComponent {
     render() {
-        const { closeUrl, backText, title, children } = this.props;
+        const { title, styles, children } = this.props;
 
         return (
-            <div className={arrowFrameStyles.frame}>
-                <div className={arrowFrameStyles.header}>
-                    <RouteLink to={closeUrl}>
-                        <div className={arrowFrameStyles.back}>
-                            <Icon type={IconTypes.ArrowChevronLeft} className={arrowFrameStyles.icon} />
-                            <div className={arrowFrameStyles["back-text"]}>{backText}</div>
-                        </div>
-                    </RouteLink>
-                    <div className={arrowFrameStyles.title}>{title}</div>
+            <div className={styles.frame}>
+                <div className={styles.header}>
+                    <ArrowFrameLink closeUrl={this.props.closeUrl} backText={this.props.backText} styles={styles} />
+                    <div className={styles.title}>{title}</div>
                 </div>
-                <div className={arrowFrameStyles.content}>{children}</div>
+                <div className={styles.content}>{children}</div>
             </div>
         );
     }
