@@ -1,4 +1,4 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import Input from "./TextInput";
 import Clear from "./Clear";
@@ -6,7 +6,7 @@ import Clear from "./Clear";
 import textInputStyles from "./DefaultTextInput.scss";
 import classnames from "classnames";
 
-class DefaultTextInput extends Component {
+class DefaultTextInput extends PureComponent {
     handleChange = (evt, value) => {
         const { onChange } = this.props;
 
@@ -31,18 +31,20 @@ class DefaultTextInput extends Component {
 
         return (
             <span className={wrapperClassNames}>
-                <span className={placeholderWrapperClassNames} onClick={() => { this.input.focus() }}>
+                <span className={placeholderWrapperClassNames} onClick={() => {
+                    this.input.focus()
+                }}>
                     <span className={placeholderClassNames}>{placeholder}</span>
                 </span>
                 <Input {...inputProps}
-                    value={value}
-                    clearable={clearable}
-                    styles={styles}
-                    onChange={this.handleChange}
-                    ref={(el) => {
-                        var inputNode = ReactDOM.findDOMNode(el);
-                        this.input = inputNode && (inputNode.getElementsByTagName("input")[0] || inputNode.getElementsByTagName("textarea")[0]);
-                    }}
+                       value={value}
+                       clearable={clearable}
+                       styles={styles}
+                       onChange={this.handleChange}
+                       ref={(el) => {
+                           var inputNode = ReactDOM.findDOMNode(el);
+                           this.input = inputNode && (inputNode.getElementsByTagName("input")[0] || inputNode.getElementsByTagName("textarea")[0]);
+                       }}
                 />
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.handleClearClick} />}
             </span>

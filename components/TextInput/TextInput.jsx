@@ -1,10 +1,10 @@
-import { Component, PropTypes } from "react";
+import { PureComponent, PropTypes } from "react";
 import MaskedInput from "react-input-mask";
 
 import Tooltip, { TriggerTypes, PositionTypes, TooltipTypes } from "../Tooltip";
 import classnames from "classnames";
 
-class TextInput extends Component {
+class TextInput extends PureComponent {
     state = {
         wasTouched: false
     };
