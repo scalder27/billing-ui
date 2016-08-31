@@ -25,7 +25,7 @@
 
             &.closing {
                 :global {
-                    animation: lightboxSlideOutDown $transitionSmoothOut;
+                    animation: lightboxSlideOutDown $transitionSmoothOut forwards;
                 }
             }
         }
@@ -39,7 +39,7 @@
 
             &.closing {
                 :global {
-                    animation: fadeOut $transitionSmoothOut;
+                    animation: fadeOut $transitionSmoothOut forwards;
                 }
             }
         }
@@ -53,7 +53,7 @@
 
             &.closing {
                 :global {
-                    animation: lightboxSlideOutUp $transitionSmoothOut;
+                    animation: lightboxSlideOutUp $transitionSmoothOut forwards;
                 }
             }
         }

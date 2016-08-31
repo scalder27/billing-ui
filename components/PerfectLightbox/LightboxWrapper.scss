@@ -29,7 +29,7 @@
 
         &.closing {
             :global {
-                animation: lightboxOverlayFadeOut $transitionSmoothOut;
+                animation: lightboxOverlayFadeOut $transitionSmoothOut forwards;
             }
         }
     }
