@@ -3,9 +3,19 @@ import checkboxStyles from "./Checkbox.scss";
 import classnames from "classnames";
 
 class Checkbox extends Component {
+    handleChange = (evt) => {
+        const { checked, onChange } = this.props;
+
+        if (onChange) {
+            onChange(!checked, evt)
+        }
+    };
+
     render() {
-        const {checked, onChange, checkboxClassName, labelClassName, wrapperClassName, styles,
-               children, disabled, readonly, ...checkboxProps} = this.props;
+        const {
+            checked, checkboxClassName, labelClassName, wrapperClassName, styles,
+            children, disabled, readonly, ...checkboxProps
+        } = this.props;
         const labelClassNames = classnames(styles.label, labelClassName);
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const checkboxClassNames = classnames(styles.checkbox, checkboxClassName, {
@@ -21,7 +31,7 @@ class Checkbox extends Component {
                     readOnly={readonly}
                     className={checkboxClassNames}
                     type="checkbox"
-                    onChange={onChange}/>
+                    onChange={this.handleChange} />
                 <span className={labelClassNames}>
                     {children}
                 </span>
