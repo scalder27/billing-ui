@@ -43,7 +43,7 @@ class CompactTextInput extends PureComponent {
     handleClearClick = (evt) => {
         this.input.focus();
         this.handleChange("", evt, {
-            validationResult: validate(this.props.validate, "")
+            validationResult: validate("", this.props.validateFunction)
         });
     };
 
@@ -90,7 +90,7 @@ CompactTextInput.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
-    validate: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
+    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

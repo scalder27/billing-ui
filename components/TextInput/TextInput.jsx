@@ -22,7 +22,7 @@ class TextInput extends PureComponent {
         if (typeof this.props.onChange === "function") {
             const value = evt.target.value;
             this.props.onChange(value, evt, {
-                validationResult: validate(this.props.validate, value)
+                validationResult: validate(value, this.props.validateFunction)
             });
         }
     };
@@ -31,7 +31,7 @@ class TextInput extends PureComponent {
         if (typeof this.props.onFocus === "function") {
             const value = evt.target.value;
             this.props.onFocus(evt, {
-                validationResult: validate(this.props.validate, value)
+                validationResult: validate(value, this.props.validateFunction)
             });
         }
     };
@@ -40,7 +40,7 @@ class TextInput extends PureComponent {
         if (typeof this.props.onBlur === "function") {
             const value = evt.target.value;
             this.props.onBlur(evt, {
-                validationResult: validate(this.props.validate, value)
+                validationResult: validate(value, this.props.validateFunction)
             });
         }
     };
@@ -133,7 +133,7 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
-    validate: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
+    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     isTextArea: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

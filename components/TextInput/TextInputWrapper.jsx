@@ -46,7 +46,7 @@ TextInputWrapper.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
-    validate: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
+    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     tooltipCaption: PropTypes.node,
     tooltipClassName: PropTypes.string,
     tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),
@@ -76,7 +76,7 @@ TextInputWrapper.defaultProps = {
     isValid: true,
     isTextArea: false,
     type: TextInputType.default,
-    validate: Validation.Anything
+    validateFunction: Validation.Anything
 };
 
 export default TextInputWrapper;

@@ -1,13 +1,13 @@
-export const validate = (validate, value) => {
-    if (typeof validate === "function") {
-        return validate(value);
+export const validate = (value, validateFunction) => {
+    if (typeof validateFunction === "function") {
+        return validateFunction(value);
     }
 
-    if (Array.isArray(validate)) {
+    if (Array.isArray(validateFunction)) {
         let validationResult;
 
-        for (let i = 0; i < validate.length; i++) {
-            validationResult = validate[i](value);
+        for (let i = 0; i < validateFunction.length; i++) {
+            validationResult = validateFunction[i](value);
             if (!validationResult.isValid) {
                 return validationResult;
             }
@@ -16,7 +16,7 @@ export const validate = (validate, value) => {
         return validationResult;
     }
 
-    throw new Error("Wrong type of validation fn " + typeof fn);
+    throw new Error("Wrong type of validation validateFunction " + typeof validateFunction);
 };
 
 const Validation = {
