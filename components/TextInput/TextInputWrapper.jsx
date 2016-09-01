@@ -4,7 +4,7 @@ import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import { TooltipTypes, PositionTypes } from "../Tooltip";
-
+import Validation from "../../helpers/ValidationHelpers";
 class TextInputWrapper extends PureComponent {
 
     _inputDom = null;
@@ -46,6 +46,7 @@ TextInputWrapper.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
+    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     tooltipCaption: PropTypes.node,
     tooltipClassName: PropTypes.string,
     tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),
@@ -74,7 +75,8 @@ TextInputWrapper.defaultProps = {
     width: 180,
     isValid: true,
     isTextArea: false,
-    type: TextInputType.default
+    type: TextInputType.default,
+    validateFunction: Validation.Anything
 };
 
 export default TextInputWrapper;

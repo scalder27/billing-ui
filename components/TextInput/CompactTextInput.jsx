@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Input from "./TextInput";
 import Clear from "./Clear";
 
+import { validate } from "../../helpers/ValidationHelpers";
 import textInputStyles from "./CompactTextInput.scss";
 import classnames from "classnames";
 
@@ -11,37 +12,39 @@ class CompactTextInput extends PureComponent {
         isFocused: false
     };
 
-    handleFocus = () => {
+    handleFocus = (evt, data) => {
         this.setState({
             isFocused: true
         });
 
         if (this.props.onFocus) {
-            this.props.onFocus();
+            this.props.onFocus(evt, data);
         }
     };
 
-    handleBlur = () => {
+    handleBlur = (evt, data) => {
         this.setState({
             isFocused: false
         });
 
         if (this.props.onBlur) {
-            this.props.onBlur();
+            this.props.onBlur(evt, data);
         }
     };
 
-    handleChange = (evt, value) => {
+    handleChange = (value, evt, data) => {
         const { onChange } = this.props;
 
         if (onChange) {
-            onChange(value || evt.target.value || "", evt);
+            onChange(value, evt, data);
         }
     };
 
     handleClearClick = (evt) => {
         this.input.focus();
-        this.handleChange(evt, "");
+        this.handleChange("", evt, {
+            validationResult: validate("", this.props.validateFunction)
+        });
     };
 
     render() {
@@ -87,6 +90,7 @@ CompactTextInput.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
+    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -31,7 +31,7 @@ class TextArea extends Component {
         return this._textArea.getDomNode();
     }
 
-    handleChange(value, evt) {
+    handleChange(value, evt, data) {
         const { onChange } = this.props;
 
         const textArea = evt.target;
@@ -39,7 +39,7 @@ class TextArea extends Component {
         this.changeHeight(textArea);
 
         if (onChange) {
-            onChange(value, evt);
+            onChange(value, evt, data);
         }
     }
 
@@ -97,6 +97,7 @@ TextArea.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
+    validate: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     tooltipCaption: PropTypes.node,
     tooltipPosition: PropTypes.oneOf(Object.keys(PositionTypes).map((key) => PositionTypes[key])),
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
