@@ -11,19 +11,22 @@ const ActionsBar = ({
     submitText, cancelText,
     submitDisabled, cancelDisabled,
     onSubmitClick, onCancelClick,
+    submitAttributes, cancelAttributes,
     children
 }) => (
     <div className={cx(styles.actionsBar, barClassName)}>
         <Button type={ButtonType.button}
                 onClick={onSubmitClick}
                 disabled={submitDisabled}
-                className={cx(styles.actionSubmit, submitClassName, {[styles.disabled]: submitDisabled})}>
+                className={cx(styles.actionSubmit, submitClassName, {[styles.disabled]: submitDisabled})}
+                attributes={submitAttributes} >
             {submitText}
         </Button>
         {showCancel && (
             <button type="button"
                     onClick={() => { if (!cancelDisabled) onCancelClick() }}
-                    className={cx(styles.actionCancel, cancelClassName, { [styles.disabled]: cancelDisabled })}>
+                    className={cx(styles.actionCancel, cancelClassName, { [styles.disabled]: cancelDisabled })}
+                    { ...cancelAttributes } >
                 {cancelText}
             </button>
         )}
@@ -33,6 +36,9 @@ const ActionsBar = ({
 
 ActionsBar.propTypes = {
     showCancel: PropTypes.bool.isRequired,
+
+    submitAttributes: PropTypes.object,
+    cancelAttributes: PropTypes.object,
 
     barClassName: PropTypes.string,
     submitClassName: PropTypes.string,

@@ -7,7 +7,7 @@ class ArrowFrameLink extends PureComponent {
         const { closeUrl, styles, backText } = this.props;
 
         return (
-            <RouteLink to={closeUrl}>
+            <RouteLink to={closeUrl} data-ft-id="frame-back-link">
                 <div className={styles.back}>
                     <Icon type={IconTypes.ArrowChevronLeft} className={styles.icon} />
                     <div className={styles["back-text"]}>{backText}</div>

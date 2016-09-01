@@ -10,7 +10,7 @@ class Link extends PureComponent {
         if (disabled) {
             const disabledClassNames = classnames(className, styles.disabled);
             return (
-                <span className={disabledClassNames}>{children}</span>
+                <span { ...this.props } className={disabledClassNames}>{children}</span>
             );
         }
 
@@ -18,12 +18,12 @@ class Link extends PureComponent {
 
         if (href) {
             return (
-                <a {...this.props} className={linkClassNames}>{children}</a>
+                <a { ...this.props } className={linkClassNames}>{children}</a>
             );
         }
 
         return (
-            <span {...this.props} className={linkClassNames}>{children}</span>
+            <span { ...this.props } className={linkClassNames}>{children}</span>
         );
     }
 }

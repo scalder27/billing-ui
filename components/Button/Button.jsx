@@ -24,7 +24,7 @@ class Button extends Component {
     }
 
     render() {
-        const { href, target, className, children, appearance, type, size, disabled, active, styles } = this.props;
+        const { href, target, className, children, appearance, type, size, disabled, active, styles, attributes } = this.props;
         const classNames = classnames(
             styles.button,
             className,
@@ -35,14 +35,14 @@ class Button extends Component {
             });
 
         if (href) {
-            return <Link onClick={this._resolveOnClick} href={href} className={classNames} target={target}>{children}</Link>;
+            return <Link onClick={this._resolveOnClick} href={href} className={classNames} target={target} { ...attributes }>{children}</Link>;
         }
 
         if (type) {
-            return <button onClick={this._resolveOnClick} className={classNames} type={type}>{children}</button>;
+            return <button onClick={this._resolveOnClick} className={classNames} type={type} { ...attributes }>{children}</button>;
         }
 
-        return <span onClick={this._resolveOnClick} className={classNames}>{children}</span>;
+        return <span onClick={this._resolveOnClick} className={classNames} { ...attributes }>{children}</span>;
     }
 }
 
@@ -59,6 +59,7 @@ Button.propTypes = {
     type: PropTypes.oneOf(Object.keys(ButtonType).map((key) => ButtonType[key])),
     size: PropTypes.oneOf(Object.keys(ButtonSize).map((key) => ButtonSize[key])),
     appearance: PropTypes.oneOf(Object.keys(AppearanceType).map((key) => AppearanceType[key])),
+    attributes: PropTypes.object,
     children: PropTypes.node
 };
 
