@@ -2,6 +2,7 @@ import { PureComponent, PropTypes } from "react";
 import MaskedInput from "react-input-mask";
 
 import Tooltip, { TriggerTypes, PositionTypes, TooltipTypes } from "../Tooltip";
+import { validate } from "../../helpers/ValidationHelpers";
 import classnames from "classnames";
 
 class TextInput extends PureComponent {
@@ -17,29 +18,32 @@ class TextInput extends PureComponent {
         }
     }
 
-    _handleOnChange(evt) {
-        const { onChange } = this.props;
-
-        if (typeof onChange === "function") {
-            onChange(evt);
+    _handleOnChange = (evt) => {
+        if (typeof this.props.onChange === "function") {
+            const value = evt.target.value;
+            this.props.onChange(value, evt, {
+                validationResult: validate(this.props.validate, value)
+            });
         }
-    }
+    };
 
-    _handleOnFocus(evt) {
-        const { onFocus } = this.props;
-
-        if (typeof onFocus === "function") {
-            onFocus(evt);
+    _handleOnFocus = (evt) => {
+        if (typeof this.props.onFocus === "function") {
+            const value = evt.target.value;
+            this.props.onFocus(evt, {
+                validationResult: validate(this.props.validate, value)
+            });
         }
-    }
+    };
 
-    _handleOnBlur(evt) {
-        const { onBlur } = this.props;
-
-        if (typeof onBlur === "function") {
-            onBlur(evt);
+    _handleOnBlur = (evt) => {
+        if (typeof this.props.onBlur === "function") {
+            const value = evt.target.value;
+            this.props.onBlur(evt, {
+                validationResult: validate(this.props.validate, value)
+            });
         }
-    }
+    };
 
     render() {
         const {
@@ -81,9 +85,9 @@ class TextInput extends PureComponent {
             },
             type: "text",
             className: inputClassNames,
-            onChange: (evt) => this._handleOnChange(evt),
-            onFocus: (evt) => this._handleOnFocus(evt),
-            onBlur: (evt) => this._handleOnBlur(evt)
+            onChange: this._handleOnChange,
+            onFocus: this._handleOnFocus,
+            onBlur: this._handleOnBlur
         };
 
         const hasTooltip = ((tooltipType !== TooltipTypes.validation || isInvalid)) && tooltipCaption != null;
@@ -129,6 +133,7 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
+    validate: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     isTextArea: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -146,7 +151,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
     tooltipType: TooltipTypes.validation,
-    tooltipPosition: PositionTypes.bottomLeft,
+    tooltipPosition: PositionTypes.rightMiddle,
     tooltipClassName: ""
 };
 
