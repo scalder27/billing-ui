@@ -46,7 +46,7 @@ TextInputWrapper.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.string,
     isValid: PropTypes.bool,
-    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
+    validateFunction: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     tooltipCaption: PropTypes.node,
     tooltipClassName: PropTypes.string,
     tooltipType: PropTypes.oneOf(Object.keys(TooltipTypes).map((key) => TooltipTypes[key])),

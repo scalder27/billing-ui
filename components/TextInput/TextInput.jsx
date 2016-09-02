@@ -89,6 +89,7 @@ class TextInput extends PureComponent {
             onFocus: this._handleOnFocus,
             onBlur: this._handleOnBlur
         };
+        delete inputProps.validateFunction;
 
         const hasTooltip = ((tooltipType !== TooltipTypes.validation || isInvalid)) && tooltipCaption != null;
 
@@ -133,7 +134,7 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
-    validateFunction: PropTypes.oneOf([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
+    validateFunction: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     isTextArea: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
