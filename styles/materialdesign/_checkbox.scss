@@ -32,7 +32,7 @@
 
     &:disabled,
     &:disabled ~ %stylized-checkBox-label {
-        opacity: 0.5;
+        opacity: .5;
 
         color: $textBaseColor;
 

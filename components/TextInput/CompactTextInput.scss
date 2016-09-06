@@ -40,7 +40,7 @@
 
             & ~ .highlight {
                 :global {
-                    animation: inputHighlighter 0.3s ease;
+                    animation: inputHighlighter .3s ease;
                 }
             }
 
@@ -83,7 +83,7 @@
 
         box-sizing: border-box;
 
-        transition: 0.2s ease all;
+        transition: .2s ease all;
 
         color: $textSecondaryColor;
         font-weight: normal;
@@ -105,7 +105,7 @@
         height: 50%;
         box-sizing: border-box;
 
-        opacity: 0.5;
+        opacity: .5;
 
         pointer-events: none;
     }

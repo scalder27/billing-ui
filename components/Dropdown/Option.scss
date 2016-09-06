@@ -22,14 +22,14 @@
             width: 100%;
             height: 15px;
 
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgb(255, 255, 255) 75%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, .2), rgb(255, 255, 255) 75%);
         }
 
         &.as-active {
             background: $bgElementActiveLightColor;
 
             &:after {
-                background: linear-gradient(to bottom, rgba(245, 245, 245, 0.2), rgb(245, 245, 245) 75%);
+                background: linear-gradient(to bottom, rgba(245, 245, 245, .2), rgb(245, 245, 245) 75%);
             }
         }
 
@@ -37,7 +37,7 @@
             background: $bgButtonColor;
 
             &:after {
-                background: linear-gradient(to bottom, rgba(237, 237, 237, 0.2), rgb(237, 237, 237) 75%);
+                background: linear-gradient(to bottom, rgba(237, 237, 237, .2), rgb(237, 237, 237) 75%);
             }
         }
 

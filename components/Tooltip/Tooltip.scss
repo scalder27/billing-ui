@@ -34,7 +34,7 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
         &.as-open {
             visibility: visible;
 
-            animation-duration: 0.3s;
+            animation-duration: .3s;
 
             animation-fill-mode: both;
         }
@@ -170,7 +170,7 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
         }
 
         &.validation {
-            animation-duration: 0.2s;
+            animation-duration: .2s;
 
             &.as-open {
                 :global {
