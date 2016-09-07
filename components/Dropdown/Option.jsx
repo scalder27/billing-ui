@@ -48,7 +48,7 @@ Option.propTypes = {
     isSelected: PropTypes.bool,
     disabled: PropTypes.bool,
     value: PropTypes.string,
-    caption: PropTypes.string.isRequired,
+    caption: PropTypes.string,
     children: PropTypes.node,
     additionalData: PropTypes.string,
     wrapperClassName: PropTypes.string,

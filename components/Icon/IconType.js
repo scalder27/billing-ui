@@ -57,6 +57,7 @@ const IconType = {
     ArrowTriangleUpDown: "\ue049",
     DocumentAdd: "\ue025",
     DocumentCheck: "\ue07f",
+    DocumentCheck2: "\ue0c4",
     DocumentConvert: "\ue0b9",
     DocumentCopy: "\ue026",
     DocumentFolder: "\ue028",
