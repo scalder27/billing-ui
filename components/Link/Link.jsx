@@ -5,10 +5,10 @@ import styles from "./Link.scss";
 
 class Link extends PureComponent {
     render() {
-        const { href, children, className, disabled } = this.props;
+        const { href, children, className, disabledClassName, disabled } = this.props;
 
         if (disabled) {
-            const disabledClassNames = classnames(className, styles.disabled);
+            const disabledClassNames = classnames(className, disabledClassName, styles.disabled);
             return (
                 <span { ...this.props } className={disabledClassNames}>{children}</span>
             );
@@ -32,6 +32,7 @@ Link.propTypes = {
     href: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
+    disabledClassName: PropTypes.string,
     disabled: PropTypes.bool
 };
 
