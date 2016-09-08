@@ -96,7 +96,7 @@ class Picker extends Component {
                         />
                         <DateSelect type="month"
                                     value={date.month()}
-                                    width={90}
+                                    width={95}
                                     onChange={this.handleMonthChange}
                         />
                     </div>
