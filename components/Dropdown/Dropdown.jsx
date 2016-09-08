@@ -221,7 +221,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
     defaultCaption: PropTypes.string,
     additionalData: PropTypes.string,
     onSelect: PropTypes.func,

@@ -47,7 +47,7 @@ Option.propTypes = {
     isActive: PropTypes.bool,
     isSelected: PropTypes.bool,
     disabled: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
     caption: PropTypes.string,
     children: PropTypes.node,
     additionalData: PropTypes.string,
