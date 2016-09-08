@@ -196,7 +196,7 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { value, additionalData, width, disabled, styles, className } = this.props;
+        const { value, additionalData, width, disabled, styles, className, attributes } = this.props;
         const wrapperClassNames = classnames(styles.wrapper, className);
         const selectClassNames = classnames(styles.select, {
             [styles.disabled]: disabled,
@@ -204,7 +204,7 @@ class Dropdown extends Component {
         });
 
         return (
-            <div className={wrapperClassNames}>
+            <div className={wrapperClassNames} { ...attributes }>
                 <span className={selectClassNames} onClick={this.handleClick.bind(this)} title={this._caption}>
                     <span className={styles["select-input"]} style={{"width": width}}>
                         <span className={styles.caption}>{this._caption}</span>
@@ -228,6 +228,7 @@ Dropdown.propTypes = {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     styles: PropTypes.object,
+    attributes: PropTypes.object,
     children: PropTypes.node.isRequired
 };
 
