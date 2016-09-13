@@ -106,20 +106,11 @@ class CalendarWrapper extends Component {
     };
 
     handleBlur = () => {
-        const { onChange, value } = this.props;
-        const { date, isValid, errorType } = this.state;
+        const { value } = this.props;
         this._focused = false;
         this._selectedBlock = null;
 
         this.changeDate(value);
-
-        if (onChange && !date.isSame(convertISOString(value), "day")) {
-            onChange(date.format(), {
-                date,
-                isValid,
-                errorType
-            });
-        }
     };
 
     handlePickerKey = (evt) => {
@@ -210,14 +201,25 @@ class CalendarWrapper extends Component {
     }
 
     changeDate(date) {
+        const { onChange, value } = this.props;
+
         const momentDate = convertISOString(date);
         const { isValid, errorType } = this.validate(momentDate);
+        const dateTime = this._getTime(momentDate);
 
         this.setState({
-            date: this._getTime(momentDate),
+            date: dateTime,
             isValid,
             errorType
         });
+
+        if (onChange && dateTime && !dateTime.isSame(convertISOString(value), "day") && dateTime.isValid()) {
+            onChange(dateTime.format(), {
+                date: dateTime,
+                isValid,
+                errorType
+            });
+        }
     }
 
     _increase() {
