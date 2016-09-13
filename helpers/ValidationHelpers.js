@@ -36,7 +36,7 @@ const Validation = {
         }
     },
 
-    Anything: () => {
+    Anything: () => () => {
         return {
             isValid: true,
             error: ""
