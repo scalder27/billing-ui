@@ -2,6 +2,7 @@ import { PureComponent, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import events from "add-event-listener";
 
+import KeyCodes from "../../helpers/KeyCodes";
 import PositionType from "./PositionType";
 import TriggerType from "./TriggerType";
 import TooltipType from "./TooltipType";
@@ -54,10 +55,10 @@ class Tooltip extends PureComponent {
         this._tryUpdatePositionType();
 
         this._setPosition();
-        this._attachEventListener();
+        this._attachEventListeners();
     }
 
-    _attachEventListener() {
+    _attachEventListeners() {
         const { trigger } = this.props;
 
         if (trigger === TriggerType.hover) {
@@ -72,8 +73,9 @@ class Tooltip extends PureComponent {
 
         if (trigger === TriggerType.focus) {
             events.addEventListener(this._target, "focus", this._toggleTooltip);
-            events.addEventListener(this._target, "blur", this._toggleTooltip);
             events.addEventListener(this._target, "keyup", this._toggleTooltip);
+            events.addEventListener(window, "click", this._resolveGlobalClick);
+            events.addEventListener(window, "keydown", this._resolveGlobalKeydown);
         }
 
         events.addEventListener(window, "resize", this._redraw);
@@ -85,10 +87,11 @@ class Tooltip extends PureComponent {
         events.removeEventListener(this._target, "mouseleave", this._toggleTooltip);
         events.removeEventListener(this._target, "click", this._toggleTooltip);
         events.removeEventListener(this._target, "focus", this._toggleTooltip);
-        events.removeEventListener(this._target, "blur", this._toggleTooltip);
         events.removeEventListener(this._target, "keyup", this._toggleTooltip);
 
         events.removeEventListener(window, "resize", this._redraw);
+        events.removeEventListener(window, "click", this._resolveGlobalClick);
+        events.removeEventListener(window, "keydown", this._resolveGlobalKeydown);
         events.removeEventListener(this._wrapper, "scroll", this._redraw);
     }
 
@@ -133,7 +136,6 @@ class Tooltip extends PureComponent {
                     show = true;
                     break;
                 case "mouseleave":
-                case "blur":
                     show = false;
                     break;
                 case "click":
@@ -142,7 +144,38 @@ class Tooltip extends PureComponent {
             }
         }
 
+        this._toggleOpenTooltip(show);
+    };
+
+    _resolveGlobalClick = (evt) => {
+        const { isOpen } = this.state;
+        let show = isOpen;
+
+        if (evt) {
+            const childNodesArray = Array.prototype.slice.call(this._tooltip.getElementsByTagName("*"));
+            show = evt.target === this._tooltip || childNodesArray.includes(evt.target) || evt.target === this._target;
+        }
+
+        this._toggleOpenTooltip(show);
+    };
+
+    _resolveGlobalKeydown = (evt) => {
+        const { isOpen } = this.state;
+        let show = isOpen;
+
+        if (evt && evt.keyCode === KeyCodes.tab) {
+            show = false;
+        }
+
+        this._toggleOpenTooltip(show);
+    };
+
+    _toggleOpenTooltip = (show) => {
         this.setState({ isOpen: show });
+
+        if (!show) {
+            events.removeEventListener(window, "keydown", this._resolveGlobalKeydown);
+        }
     };
 
     render() {
