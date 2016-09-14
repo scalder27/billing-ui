@@ -324,6 +324,7 @@ class CalendarWrapper extends Component {
 
 CalendarWrapper.propTypes = {
     isValid: PropTypes.bool,
+    forceInvalid: PropTypes.bool,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
     maxYear: PropTypes.number,

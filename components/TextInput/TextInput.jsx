@@ -61,11 +61,13 @@ class TextInput extends PureComponent {
             tooltipPosition,
             tooltipClassName,
             clearable,
+            forceInvalid,
             ...others
         } = this.props;
         const { wasTouched } = this.state;
 
-        const isInvalid = !isValid && wasTouched;
+        const isInvalid = (!isValid && wasTouched) || forceInvalid;
+
         const inputClassNames = classnames(styles.input, inputClassName, {
             [styles["input-validation-error"]]: isInvalid,
             [styles.readonly]: others.readonly,
@@ -134,6 +136,7 @@ TextInput.propTypes = {
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
     isValid: PropTypes.bool,
+    forceInvalid: PropTypes.bool,
     validateFunction: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]),
     isTextArea: PropTypes.bool,
     maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -153,7 +156,8 @@ TextInput.propTypes = {
 TextInput.defaultProps = {
     tooltipType: TooltipTypes.validation,
     tooltipPosition: PositionTypes.rightMiddle,
-    tooltipClassName: ""
+    tooltipClassName: "",
+    forceInvalid: false
 };
 
 export default TextInput;
