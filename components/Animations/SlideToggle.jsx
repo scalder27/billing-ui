@@ -19,6 +19,8 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
                     onComplete: callback
                 });
             }
+
+            callback();
         }
 
         componentWillEnter(callback) {
