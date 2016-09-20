@@ -106,7 +106,7 @@ class Tooltip extends PureComponent {
     }
 
     _setPosition() {
-        const position = calcPosition(this.state.positionType, this._target, this._tooltip, this.props.type);
+        const position = calcPosition(this.state.positionType, this._target, this._tooltip, this.props.type, this.props.offsetPosition);
 
         Object.keys(position).map(property => {
             this._tooltip.style[property] = position[property]
@@ -200,6 +200,7 @@ Tooltip.propTypes = {
     getTarget: PropTypes.func.isRequired,
     trigger: PropTypes.oneOf(Object.keys(TriggerType).map((key) => TriggerType[key])),
     positionType: PropTypes.oneOf(Object.keys(PositionType).map((key) => PositionType[key])),
+    offsetPosition: PropTypes.object,
     className: PropTypes.string,
     wrapper: PropTypes.node,
     type: PropTypes.oneOf(Object.keys(TooltipType).map((key) => TooltipType[key]))
