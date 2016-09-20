@@ -1,6 +1,6 @@
 {
   "name": "billing-ui",
-  "version": "1.12.11",
+  "version": "1.12.12",
   "description": "KonturBilling ui components",
   "private": true,
   "scripts": {
