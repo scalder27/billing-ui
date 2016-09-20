@@ -37,7 +37,8 @@ class CalendarWrapper extends Component {
 
     componentWillReceiveProps(newProps) {
         if (!this._focused) {
-            this.changeDate(newProps.value);
+            const { value, minDate, maxDate } = newProps;
+            this.changeDate(value, minDate, maxDate);
         }
     }
 
@@ -49,9 +50,7 @@ class CalendarWrapper extends Component {
         this._defineHeight();
     }
 
-    validate(date) {
-        const { minDate, maxDate } = this.props;
-
+    validate(date, minDate = this.props.minDate, maxDate = this.props.maxDate) {
         if (!date.isValid()) {
             if (date.creationData().input.indexOf("_") !== -1) {
                 return {
@@ -200,12 +199,14 @@ class CalendarWrapper extends Component {
         }
     }
 
-    changeDate(date) {
+    changeDate(date, minDate, maxDate) {
         const { onChange, value } = this.props;
 
         const momentDate = convertISOString(date);
-        const { isValid, errorType } = this.validate(momentDate);
+        const { isValid, errorType } = this.validate(momentDate, minDate, maxDate);
         const dateTime = this._getTime(momentDate);
+        const dateHasChanged = !dateTime.isSame(convertISOString(value), "day");
+        const validityHasChanged = this.state.isValid !== isValid;
 
         this.setState({
             date: dateTime,
@@ -213,7 +214,7 @@ class CalendarWrapper extends Component {
             errorType
         });
 
-        if (onChange && dateTime && !dateTime.isSame(convertISOString(value), "day") && dateTime.isValid()) {
+        if (onChange && dateTime && (dateHasChanged || validityHasChanged) && dateTime.isValid()) {
             onChange(dateTime.format(), {
                 date: dateTime,
                 isValid,
