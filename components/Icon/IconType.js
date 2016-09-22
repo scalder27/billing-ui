@@ -1,10 +1,11 @@
-const IconType = {
+export const IconTypes = {
     Add: "\ue00d",
     ArchivePack: "\ue076",
     ArchiveUnpack: "\ue077",
     Attach: "\ue045",
     BaseLine: "\ue003",
     Clear: "\ue030",
+    Crown: "\ue0ba",
     Copy: "\ue097",
     Delete: "\ue00e",
     Download: "\ue015",
@@ -185,4 +186,4 @@ const IconType = {
     Ruble: "\u20b6"
 };
 
-export default IconType;
+export default IconTypes;

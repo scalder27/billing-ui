@@ -1,3 +1,3 @@
-import Icon, * as props from "./Icon.jsx";
-export const IconTypes = props.IconTypes;
+import Icon from "./Icon.jsx";
+export { IconTypes } from "./IconType";
 export default Icon;
