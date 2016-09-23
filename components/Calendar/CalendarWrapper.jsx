@@ -36,8 +36,8 @@ class CalendarWrapper extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (!this._focused) {
-            const { value, minDate, maxDate } = newProps;
+        const { value, minDate, maxDate } = newProps;
+        if (!this._focused || minDate !== this.props.minDate || maxDate !== this.props.maxDate) {
             this.changeDate(value, minDate, maxDate);
         }
     }
