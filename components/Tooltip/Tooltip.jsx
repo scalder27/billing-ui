@@ -153,7 +153,7 @@ class Tooltip extends PureComponent {
 
         if (evt) {
             const childNodesArray = Array.prototype.slice.call(this._tooltip.getElementsByTagName("*"));
-            show = evt.target === this._tooltip || childNodesArray.includes(evt.target) || evt.target === this._target;
+            show = evt.target === this._tooltip || childNodesArray.indexOf(evt.target) !== -1 || evt.target === this._target;
         }
 
         this._toggleOpenTooltip(show);
