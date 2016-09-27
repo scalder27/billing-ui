@@ -247,11 +247,11 @@ class Autocomplete extends PureComponent {
         delete inputProps.defaultValue;
 
         return (
-            <span className={styles.root}>
+            <span className={cx(styles.root, this.props.autocompleteWrapperClassName)}>
                 <TextInput {...inputProps}/>
                 {this.renderOptionsList()}
             </span>
-        )
+        );
     }
 }
 
@@ -269,6 +269,7 @@ Autocomplete.propTypes = {
     onSelect: PropTypes.func,
     onChange: PropTypes.func,
     url: PropTypes.string.isRequired,
+    autocompleteWrapperClassName: PropTypes.object,
     requestData: PropTypes.object
 };
 

@@ -35,9 +35,20 @@
         }
     }
 
+    .option {
+        margin-bottom: 5px;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
     .description {
+        overflow: hidden;
+
         color: $textDarkColor;
-        font-size: 12px;
+        font-size: $fontSizeSmall;
+        text-overflow: ellipsis;
     }
 
     .empty {
