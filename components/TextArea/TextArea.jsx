@@ -1,4 +1,5 @@
 import { Component, PropTypes } from "react";
+import cx from "classnames";
 
 import TextInput from "../TextInput";
 import TextInputType from "../TextInput/TextInputType";
@@ -44,6 +45,14 @@ class TextArea extends Component {
     }
 
     componentDidMount() {
+        this._changeTextAreaNodeHeight();
+    }
+
+    componentDidUpdate() {
+        this._changeTextAreaNodeHeight();
+    }
+
+    _changeTextAreaNodeHeight() {
         const textAreaDom = this._textArea.getDomNode();
         this.changeHeight(textAreaDom);
     }
@@ -74,10 +83,11 @@ class TextArea extends Component {
         const { height } = this.state;
         const textInputProps = { ...this.props };
         delete textInputProps.minHeight;
+        delete textInputProps.inputClassName;
 
         return (
             <TextInput isTextArea={true}
-                       inputClassName={styles.textArea}
+                       inputClassName={cx(styles.textArea, this.props.inputClassName)}
                        height={height}
                        {...textInputProps}
                        onChange={this.handleChange}
