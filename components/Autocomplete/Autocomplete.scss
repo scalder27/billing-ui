@@ -12,7 +12,7 @@
     }
 
     .menu {
-        @include position(absolute, -2px 0 null -3px);
+        @include position(absolute, 1px 0 null -3px);
 
         position: absolute;
         z-index: $dropdownZIndex;
