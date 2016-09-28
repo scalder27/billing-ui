@@ -15,7 +15,7 @@
         @include position(absolute, -2px 0 null -3px);
 
         position: absolute;
-        z-index: 1000;
+        z-index: $dropdownZIndex;
 
         padding: 0;
 

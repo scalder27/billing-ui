@@ -9,9 +9,13 @@ import styles from "./Autocomplete.scss";
 import cx from "classnames";
 
 class Autocomplete extends PureComponent {
+    _valueCreator = null;
+
     constructor(props, context) {
         super(props, context);
         const { value, defaultValue } = props;
+
+        this._valueCreator = props.valueCreator;
 
         this.state = {
             searchResult: [],
@@ -145,7 +149,7 @@ class Autocomplete extends PureComponent {
 
     choose(index) {
         const { onChange } = this.props;
-        var value = this.state.searchResult[index].Text;
+        const value = this._valueCreator(this.state.searchResult[index]);
 
         if (!this.props.value) {
             this.setState({
@@ -270,12 +274,14 @@ Autocomplete.propTypes = {
     onChange: PropTypes.func,
     url: PropTypes.string.isRequired,
     autocompleteWrapperClassName: PropTypes.object,
-    requestData: PropTypes.object
+    requestData: PropTypes.object,
+    valueCreator: PropTypes.func
 };
 
 Autocomplete.defaultProps = {
     requestData: {},
-    defaultValue: ""
+    defaultValue: "",
+    valueCreator: (searchItem) => searchItem.Text
 };
 
 export default Autocomplete;
