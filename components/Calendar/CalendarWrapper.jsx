@@ -21,6 +21,7 @@ class CalendarWrapper extends Component {
     _selectionRanges = [{ start: 0, end: 2, type: "days" }, { start: 3, end: 5, type: "months" }, { start: 6, end: 10, type: "years" }];
     _selectedBlock = null;
     _focused = false;
+    _emptyDate = "__.__.____";
 
     constructor(props, context) {
         super(props, context);
@@ -202,7 +203,7 @@ class CalendarWrapper extends Component {
     changeDate(date, minDate, maxDate) {
         const { onChange, value } = this.props;
 
-        const momentDate = convertISOString(date);
+        const momentDate = convertISOString(date || this._emptyDate);
         const { isValid, errorType } = this.validate(momentDate, minDate, maxDate);
         const dateTime = this._getTime(momentDate);
         const dateHasChanged = !dateTime.isSame(convertISOString(value), "day");
