@@ -16,8 +16,6 @@ class Dropdown extends Component {
     _ignoreMouseOver = false;
     _optionsListNode = null;
     _ignoreTimeout = null;
-    _handleDocumentClick = this.handleDocumentClick.bind(this);
-    _handleKeyDown = this.handleKeyDown.bind(this);
 
     constructor(props) {
         const { defaultCaption } = props;
@@ -26,9 +24,9 @@ class Dropdown extends Component {
         this._caption = defaultCaption;
     }
 
-    componentWillMount() {
-        events.addEventListener(document, "click", this._handleDocumentClick);
-        events.addEventListener(document, "keydown", this._handleKeyDown);
+    componentDidMount() {
+        events.addEventListener(document, "click", this.handleDocumentClick);
+        events.addEventListener(document, "keydown", this.handleKeyDown);
     }
 
     componentWillUpdate(nextProps) {
@@ -40,34 +38,29 @@ class Dropdown extends Component {
     }
 
     componentWillUnmount() {
-        events.removeEventListener(document, "click", this._handleDocumentClick);
-        events.removeEventListener(document, "keydown", this._handleKeyDown);
+        events.removeEventListener(document, "click", this.handleDocumentClick);
+        events.removeEventListener(document, "keydown", this.handleKeyDown);
     }
 
     setActiveOption(activeOption) {
-        const newState = {
-            ...this.state,
-            activeOption: activeOption
-        };
-
-        this.setState(newState);
+        this.setState({ activeOption });
     }
 
-    setValue(newValue) {
+    setValue = (newValue) => {
         const { value, onSelect } = this.props;
         this.toggleOptions(false);
 
         if (newValue !== value && onSelect) {
             onSelect(newValue);
         }
-    }
+    };
 
     toggleOptions(isOpened) {
         if (!this.props.disabled) {
             this.setState({
                 activeOption: null,
                 isOpened: isOpened
-            })
+            });
         }
     }
 
@@ -89,20 +82,20 @@ class Dropdown extends Component {
         }
     }
 
-    handleClick(evt) {
+    handleClick = (evt) => {
         evt.stopPropagation();
         evt.preventDefault();
 
         this.toggleOptions(!this.state.isOpened);
-    }
+    };
 
-    handleDocumentClick(evt) {
+    handleDocumentClick = (evt) => {
         if (this.state.isOpened && !ReactDOM.findDOMNode(this).contains(evt.target)) {
             this.toggleOptions(false);
         }
-    }
+    };
 
-    handleKeyDown(evt) {
+    handleKeyDown = (evt) => {
         const { activeOption, isOpened } = this.state;
 
         if (!isOpened || !this.optionValues) {
@@ -145,13 +138,13 @@ class Dropdown extends Component {
                 }
                 break;
         }
-    }
+    };
 
-    handleMouseOver(activeOption) {
+    handleMouseOver = (activeOption) => {
         if (!this._ignoreMouseOver) {
             this.setActiveOption(activeOption);
         }
-    }
+    };
 
     _initOptions({ value, children, defaultCaption }) {
         const options = Children.toArray(children).filter(option => option.type === Option);
@@ -177,8 +170,8 @@ class Dropdown extends Component {
                     isSelected: value === option.props.value,
                     isActive: this.state.activeOption === option.props.value,
                     ref: option.props.value,
-                    onClick: this.setValue.bind(this),
-                    onMouseOver: this.handleMouseOver.bind(this)
+                    onClick: this.setValue,
+                    onMouseOver: this.handleMouseOver
                 });
             }
             return option;
@@ -205,7 +198,7 @@ class Dropdown extends Component {
 
         return (
             <div className={wrapperClassNames} { ...attributes }>
-                <span className={selectClassNames} onClick={this.handleClick.bind(this)} title={this._caption}>
+                <span className={selectClassNames} onClick={this.handleClick} title={this._caption}>
                     <span className={styles["select-input"]} style={{"width": width}}>
                         <span className={styles.caption}>{this._caption}</span>
                         <span className={styles["additional-text"]}>{additionalData}</span>
