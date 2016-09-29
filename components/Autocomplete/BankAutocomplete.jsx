@@ -7,7 +7,7 @@ class BankAutocomplete extends PureComponent {
 
     _validateLength = (error = `БИК должен состоять из ${this._bikLength} цифр`) => (value) => {
         const valueSplitted = value.split(" ");
-        const re = /^\d{9}$/;
+        const re = /^(\d{9})?$/;
 
         return {
             isValid: re.test(valueSplitted[0]),
