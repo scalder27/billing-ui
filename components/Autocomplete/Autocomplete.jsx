@@ -249,6 +249,7 @@ class Autocomplete extends PureComponent {
         delete inputProps.requestData;
         delete inputProps.onSelect;
         delete inputProps.defaultValue;
+        delete inputProps.autocompleteWrapperClassName;
 
         return (
             <span className={cx(styles.root, this.props.autocompleteWrapperClassName)}>
@@ -273,7 +274,7 @@ Autocomplete.propTypes = {
     onSelect: PropTypes.func,
     onChange: PropTypes.func,
     url: PropTypes.string.isRequired,
-    autocompleteWrapperClassName: PropTypes.object,
+    autocompleteWrapperClassName: PropTypes.string,
     requestData: PropTypes.object,
     valueCreator: PropTypes.func
 };
