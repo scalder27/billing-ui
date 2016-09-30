@@ -6,11 +6,13 @@ import styles from "./Link.scss";
 class Link extends PureComponent {
     render() {
         const { href, children, className, disabledClassName, disabled } = this.props;
+        const tagProps = { ...this.props };
+        delete tagProps.disabledClassName;
 
         if (disabled) {
             const disabledClassNames = classnames(className, disabledClassName, styles.disabled);
             return (
-                <span { ...this.props } className={disabledClassNames}>{children}</span>
+                <span { ...tagProps } className={disabledClassNames}>{children}</span>
             );
         }
 
@@ -18,12 +20,12 @@ class Link extends PureComponent {
 
         if (href) {
             return (
-                <a { ...this.props } className={linkClassNames}>{children}</a>
+                <a { ...tagProps } className={linkClassNames}>{children}</a>
             );
         }
 
         return (
-            <span { ...this.props } className={linkClassNames}>{children}</span>
+            <span { ...tagProps } className={linkClassNames}>{children}</span>
         );
     }
 }
