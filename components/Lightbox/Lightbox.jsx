@@ -1,10 +1,8 @@
 import { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 
-/*
- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- !!!!!!!!!!!!!DEPRECATED!!!!!!!!!!!!!!!
- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/**
+ * @deprecated
  */
 
 class Lightbox extends Component {

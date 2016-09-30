@@ -3,11 +3,9 @@ import Autocomplete from "react-ui/Autocomplete";
 import $ from "jquery";
 import styles from "./AutocompleteWrapper.scss";
 
-/*
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!DEPRECATED!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-*/
+/**
+ * @deprecated
+ */
 
 class AutocompleteWrapper extends Component {
     lastSearchResult = {};

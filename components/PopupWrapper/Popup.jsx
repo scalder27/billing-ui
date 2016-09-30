@@ -138,8 +138,10 @@ Popup.propTypes = {
     position: PropTypes.object,
     shouldUpdate: PropTypes.bool,
 
+    /**
+    * @deprecated Кажется что обновление без закрытия должно работать и без внешнего контракта.
+    */
     // todo: попробовать сделать ресайз покрасивее при рефакторинге (выбор контейнера?)
-    // todo: deprecated!!! Кажется что обновление без закрытия должно работать и без внешнего контракта.
     // todo: Т.е. нужно доточить реализацию Popup, перевести на react
     updateWithoutClosing: PropTypes.bool,
 
