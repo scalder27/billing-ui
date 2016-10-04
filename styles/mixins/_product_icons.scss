@@ -1,108 +1,78 @@
-﻿$productIconSpriteUrl: "/ContentBase/img/ProductIcons/product_icons_20x20.png";
+﻿$productIconSVGSpriteUrl: "/ContentBase/img/ProductIcons/product_icons.svg";
+$sizeMultiplier: 1;
+$spriteWidth: 76px !default;
+$iconArea: 28px !default;
 
-$transparentType: transparent;
-$filledType: filled;
-$halfFilledType: half;
-
-$transparentIcons: (
-    customs: 0px -460px,
-    diadoc: 0px -20px,
-    diadoc-custom: 0px -20px,
-    otchetru: 0px -520px,
-    evrika: 0px -80px,
-    pii: 0px -260px,
-    kemb: 0px 0px,
-    focus: 0px -40px,
-    fms: 0px -480px,
-    kep: 0px -300px,
-    kepegais: 0px -300px,
-    dopuc: 0px -300px,
-    rosreestr: 0px -300px,
-    smev: 0px -300px,
-    sertum: -20px -300px,
-    edi: 0px -220px,
-    zakupki: 0 -240px,
-);
-
-//diadoc-custom, kep, kepegais, dopuc, rosreestr, smev - выглядят как transparent
-$filledIcons: (
-    customs: -20px -460px,
-    diadoc: -20px -20px,
-    diadoc-custom: 0px -20px,
-    otchetru: -20px -520px,
-    evrika: -20px -80px,
-    pii: -20px -260px,
-    kemb: -20px 0px,
-    focus: -20px -40px,
-    fms: -20px -480px,
-    kep: 0px -300px,
-    kepegais: 0px -300px,
-    dopuc: 0px -300px,
-    sertum: -20px -300px,
-    rosreestr: 0px -300px,
-    smev: 0px -300px,
-    edi: -20px -220px,
-    zakupki: -20px -240px,
-);
-
-$halfFilledIcons: (
-    customs: -40px -460px,
-    diadoc: -40px -20px,
-    diadoc-custom: -40px -20px,
-    otchetru: -40px -520px,
-    evrika: -40px -80px,
-    pii: -40px -260px,
-    kemb: -40px 0px,
-    focus: -40px -40px,
-    fms: -40px -480px,
-    kep: -40px -300px,
-    kepegais: -40px -300px,
-    dopuc: -40px -300px,
-    sertum: -40px -300px,
-    rosreestr: -40px -300px,
-    smev: -40px -300px,
-    edi: -40px -220px,
-    zakupki: -40px -240px,
-);
-
-@function getProducts($type) {
-    @if $type == $transparentType {
-        @return $transparentIcons;
+@mixin calculate-size-multiplier($isSmall) {
+    @if($isSmall) {
+        $sizeMultiplier: 0.8 !global;
     }
-    @if $type == $filledType {
-        @return $filledIcons;
-    }
-    @if $type == $halfFilledType {
-        @return $halfFilledIcons;
-    }
-    @warn "Unfortunately, there is no such product type as `#{$type}`. "
-        + "Please make sure it is defined.";
-    @return $filledIcons;
 }
 
-@mixin product-icons($type: $filledType) {
-    $products: getProducts($type);
+@mixin handle-product-icons($isSmall) {
+    $products: (
+        kemb: 0 0,
+        diadoc: 0 -1*$iconArea,
+        focus: 0 -2*$iconArea,
+        normativ: 0 -3*$iconArea,
+        evrika: 0 -4*$iconArea,
+        elba: 0 -5*$iconArea,
+        kopf: 0 -6*$iconArea,
+        documentoved: 0 -7*$iconArea,
+        expert: 0 -8*$iconArea,
+        alkodeclaration: 0 -9*$iconArea,
+        alkosverka: 0 -10*$iconArea,
+        egais: 0 -11*$iconArea,
+        edi: 0 -12*$iconArea,
+        zakupki: 0 -13*$iconArea,
+        pii: 0 -14*$iconArea,
+        retail: 0 -15*$iconArea,
+        kep: 0 -16*$iconArea,
+        security: 0 -17*$iconArea,
+        crypto: 0 -18*$iconArea,
+        finguru: 0 -19*$iconArea,
+        buhonline: 0 -20*$iconArea,
+        school-b: 0 -21*$iconArea,
+        school-academy: 0 -22*$iconArea,
+        school-et: 0 -23*$iconArea,
+        sales: 0 -24*$iconArea,
+        billing: 0 -25*$iconArea,
+        customs: 0 -26*$iconArea,
+        fms: 0 -27*$iconArea,
+        sverka: 0 -28*$iconArea,
+        otchetru: 0 -29*$iconArea,
+        kontur: 0 -30*$iconArea
+    ) !global;
+}
+
+@mixin product-icons($isSmall: false) {
+    @include handle-product-icons($isSmall);
+    @include calculate-size-multiplier($isSmall);
 
     @each $product, $position in $products {
         &.#{$product} {
-            background-image: url($productIconSpriteUrl);
-            background-repeat: no-repeat;
-            background-position: #{$position};
+            width: $iconArea;
+            height: $iconArea;
+            background: url($productIconSVGSpriteUrl) no-repeat #{$position};
+            background-size: $spriteWidth auto;
+            transform: scale($sizeMultiplier);
         }
     }
 }
 
-@mixin product-icon($product, $type: $filledType) {
-    $products: getProducts($type);
+@mixin product-icon($product, $isSmall: false) {
+    @include handle-product-icons($isSmall);
+    @include calculate-size-multiplier($isSmall);
 
     @if map-has-key($products, $product) {
         &.#{$product} {
-            background-image: url($productIconSpriteUrl);
-            background-repeat: no-repeat;
-            background-position: #{map-get($products, $product)};
+            width: $iconArea;
+            height: $iconArea;
+            background: url($productIconSVGSpriteUrl) no-repeat #{map-get($products, $product)};
+            background-size: $spriteWidth auto;
+            transform: scale($sizeMultiplier);
         }
-    }
-    @else {
+    } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$product}`. "
         + "Please make sure it is defined in `$products` map.";
     }
