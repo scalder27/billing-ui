@@ -1,5 +1,7 @@
 # billing-ui
 
+[![npm version](https://badge.fury.io/js/billing-ui.svg)](https://badge.fury.io/js/billing-ui)
+
 ## Как работать над проектом локально
 1. В корне "billing-ui" репозитория, через консольку, выполняем команду `npm link`
 2. В корне репозитория, который использует "billing-ui", выполняем команду `npm link billing-ui`
