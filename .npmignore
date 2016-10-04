@@ -1,0 +1,6 @@
+/test/*
+.eslintrc
+.eslintignore
+.csscomb.json
+.editorconfig
+.gitignore
