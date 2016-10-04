@@ -1,19 +1,20 @@
 {
   "name": "billing-ui",
   "version": "1.15.3",
-  "description": "KonturBilling ui components",
-  "private": true,
+  "description": "KonturBilling UI components",
   "scripts": {
     "precommit": "npm run comb && npm run eslint -- --fix && npm test -- --reporter min",
+
     "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
     "comb": "gulp sass:comb",
+
     "preversion": "npm test",
     "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
-    "url": "git@git.skbkontur.ru:catalogue/retail-ui.git"
+    "url": "git@github.com:skbkontur/billing-ui.git"
   },
   "authors": "KonturBilling",
   "devDependencies": {
