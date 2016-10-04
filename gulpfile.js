@@ -22,11 +22,14 @@ gulp.task("sass:comb", function() {
                 colorShorthand: true,
                 format: "expanded",
                 indentSize: 4,
+                trimLeadingZero: true,
+                trimTrailingZeros: true,
                 maxAtRuleLength: 80,
                 maxSelectorLength: 4,
                 maxValueLength: 80,
                 sourcemap: false,
-                syntax: "scss"
+                syntax: "scss",
+                zeroLengthNoUnit: true
             }),
             postcssSorting({
                 "sort-order": sortOrder,
