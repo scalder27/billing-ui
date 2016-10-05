@@ -2,6 +2,8 @@
 $sizeMultiplier: 1;
 $spriteWidth: 76px !default;
 $iconArea: 28px !default;
+$iconPadding: 4px !default;
+$positionX: 0 !default;
 
 @mixin calculate-size-multiplier($isSmall) {
     @if($isSmall) {
@@ -9,45 +11,58 @@ $iconArea: 28px !default;
     }
 }
 
-@mixin handle-product-icons($isSmall) {
+@mixin calculate-positionX($type) {
+    @if($type == "outline") {
+        $positionX: 0 !global;
+    } @else if ($type == "filled") {
+        $positionX: - $iconArea + $iconPadding !global;
+    } @else if ($type == "partly-filled") {
+        $positionX: - 2 * $iconArea + $iconPadding !global;
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$type}`.";
+    }
+}
+
+@mixin handle-product-icons($isSmall, $type) {
     $products: (
-        kemb: 0 0,
-        diadoc: 0 -1*$iconArea,
-        focus: 0 -2*$iconArea,
-        normativ: 0 -3*$iconArea,
-        evrika: 0 -4*$iconArea,
-        elba: 0 -5*$iconArea,
-        kopf: 0 -6*$iconArea,
-        documentoved: 0 -7*$iconArea,
-        expert: 0 -8*$iconArea,
-        alkodeclaration: 0 -9*$iconArea,
-        alkosverka: 0 -10*$iconArea,
-        egais: 0 -11*$iconArea,
-        edi: 0 -12*$iconArea,
-        zakupki: 0 -13*$iconArea,
-        pii: 0 -14*$iconArea,
-        retail: 0 -15*$iconArea,
-        kep: 0 -16*$iconArea,
-        security: 0 -17*$iconArea,
-        crypto: 0 -18*$iconArea,
-        finguru: 0 -19*$iconArea,
-        buhonline: 0 -20*$iconArea,
-        school-b: 0 -21*$iconArea,
-        school-academy: 0 -22*$iconArea,
-        school-et: 0 -23*$iconArea,
-        sales: 0 -24*$iconArea,
-        billing: 0 -25*$iconArea,
-        customs: 0 -26*$iconArea,
-        fms: 0 -27*$iconArea,
-        sverka: 0 -28*$iconArea,
-        otchetru: 0 -29*$iconArea,
-        kontur: 0 -30*$iconArea
+        kemb: $positionX 0,
+        diadoc: $positionX -1*$iconArea,
+        focus: $positionX -2*$iconArea,
+        normativ: $positionX -3*$iconArea,
+        evrika: $positionX -4*$iconArea,
+        elba: $positionX -5*$iconArea,
+        kopf: $positionX -6*$iconArea,
+        documentoved: $positionX -7*$iconArea,
+        expert: $positionX -8*$iconArea,
+        alkodeclaration: $positionX -9*$iconArea,
+        alkosverka: $positionX -10*$iconArea,
+        egais: $positionX -11*$iconArea,
+        edi: $positionX -12*$iconArea,
+        zakupki: $positionX -13*$iconArea,
+        pii: $positionX -14*$iconArea,
+        retail: $positionX -15*$iconArea,
+        kep: $positionX -16*$iconArea,
+        security: $positionX -17*$iconArea,
+        crypto: $positionX -18*$iconArea,
+        finguru: $positionX -19*$iconArea,
+        buhonline: $positionX -20*$iconArea,
+        school-b: $positionX -21*$iconArea,
+        school-academy: $positionX -22*$iconArea,
+        school-et: $positionX -23*$iconArea,
+        sales: $positionX -24*$iconArea,
+        billing: $positionX -25*$iconArea,
+        customs: $positionX -26*$iconArea,
+        fms: $positionX -27*$iconArea,
+        sverka: $positionX -28*$iconArea,
+        otchetru: $positionX -29*$iconArea,
+        kontur: $positionX -30*$iconArea
     ) !global;
 }
 
-@mixin product-icons($isSmall: false) {
-    @include handle-product-icons($isSmall);
+@mixin product-icons($isSmall: true, $type: "outline") {
     @include calculate-size-multiplier($isSmall);
+    @include calculate-positionX($type);
+    @include handle-product-icons($isSmall, $type);
 
     @each $product, $position in $products {
         &.#{$product} {
@@ -60,9 +75,10 @@ $iconArea: 28px !default;
     }
 }
 
-@mixin product-icon($product, $isSmall: false) {
-    @include handle-product-icons($isSmall);
+@mixin product-icon($product, $isSmall: true, $type: "outline") {
     @include calculate-size-multiplier($isSmall);
+    @include calculate-positionX($type);
+    @include handle-product-icons($isSmall, $type);
 
     @if map-has-key($products, $product) {
         &.#{$product} {
