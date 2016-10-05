@@ -1,5 +1,6 @@
 # billing-ui
 
+[![Build Status](https://travis-ci.org/skbkontur/billing-ui.svg?branch=master)](https://travis-ci.org/skbkontur/billing-ui)
 [![npm version](https://badge.fury.io/js/billing-ui.svg)](https://badge.fury.io/js/billing-ui)
 
 ## Как работать над проектом локально
