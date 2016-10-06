@@ -1,11 +1,11 @@
 import { Component, PropTypes, Children, cloneElement } from "react";
 import ReactDOM from "react-dom";
 import events from "add-event-listener";
+import classnames from "classnames";
 import KeyCodes from "./../../helpers/KeyCodes";
 import Icon, { IconTypes } from "./../Icon";
 import Option from "./Option.jsx";
 import dropdownStyles from "./Dropdown.scss";
-import classnames from "classnames";
 import { getScrollTopMenu, getSiblingOptions } from "./DropdownHelpers";
 
 class Dropdown extends Component {
@@ -189,7 +189,7 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { value, additionalData, width, disabled, styles, className, attributes } = this.props;
+        const { value, additionalData, width, disabled, styles, className, attributes, fadeCaption } = this.props;
         const wrapperClassNames = classnames(styles.wrapper, className);
         const selectClassNames = classnames(styles.select, {
             [styles.disabled]: disabled,
@@ -198,13 +198,13 @@ class Dropdown extends Component {
 
         return (
             <div className={wrapperClassNames} { ...attributes }>
-                <span className={selectClassNames} onClick={this.handleClick} title={this._caption}>
-                    <span className={styles["select-input"]} style={{"width": width}}>
-                        <span className={styles.caption}>{this._caption}</span>
-                        <span className={styles["additional-text"]}>{additionalData}</span>
-                    </span>
+                <div className={selectClassNames} onClick={this.handleClick} title={this._caption}>
+                    <div className={styles["select-input"]} style={{"width": width}}>
+                        <div className={classnames(styles.caption, { [styles["with-fade"]]: fadeCaption })}>{this._caption}</div>
+                        <div className={styles["additional-text"]}>{additionalData}</div>
+                    </div>
                     <Icon className={styles.icon} type={IconTypes.ArrowTriangleDown} />
-                </span>
+                </div>
 
                 {this.state.isOpened && this.getOptionsList()}
             </div>
@@ -216,6 +216,7 @@ Dropdown.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
     defaultCaption: PropTypes.string,
+    fadeCaption: PropTypes.bool,
     additionalData: PropTypes.string,
     onSelect: PropTypes.func,
     disabled: PropTypes.bool,
@@ -227,7 +228,8 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
     styles: dropdownStyles,
-    defaultCaption: "Выберите"
+    defaultCaption: "Выберите",
+    fadeCaption: false
 };
 
 export default Dropdown;

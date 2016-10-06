@@ -1,5 +1,6 @@
 ﻿@import "./../../styles/variables";
 @import "./../../styles/placeholders";
+@import "./../../styles/mixins";
 
 :local {
     .wrapper {
@@ -54,6 +55,12 @@
         line-height: $lineHeightRegular;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        &.with-fade {
+            @include baseFade();
+
+            text-overflow: clip;
+        }
     }
 
     .additional-text {
