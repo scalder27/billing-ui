@@ -12,7 +12,7 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
-## v1.15.6 (06.10.2016)
+## v1.15.7 (06.10.2016)
 ### :house: Infrastructure
 - Настройка CI
 
