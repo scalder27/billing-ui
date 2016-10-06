@@ -1,9 +1,5 @@
 # Change Log
 
-Все изменения с момента переезда на GitHub описываем здесь.
-Формат основан на [Keep a Changelog](http://keepachangelog.com/ru/0.3.0/).
-Поддерживаем [Semantic Versioning](http://semver.org/).
-
 > **Теги:**
 > - :boom:      [Breaking Change]
 > - :rocket:    [New Feature]
@@ -18,3 +14,10 @@
 
 ### :bug: Bug Fix
 - Исправлен формат вывода в BankAutocomplete
+
+## v1.15.8 (06.10.2016)
+### :rocket: New Feature
+- Добавлено свойство _fadeCaption_ в Dropdown
+
+### :bug: Bug Fix
+- Подправлена верстка в Dropdown и Option
