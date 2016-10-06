@@ -22,7 +22,7 @@ class Option extends Component {
     }
 
     render() {
-        const { styles, caption, children, additionalData, wrapperClassName, captionClassName, isActive, isSelected, disabled } = this.props;
+        const { styles, caption, children, additionalData, wrapperClassName, captionClassName, isActive, isSelected, disabled, beforeCaption } = this.props;
         const wrapperClassNames = classnames(styles.option, wrapperClassName, {
             [styles.disabled]: disabled,
             [styles["as-active"]]: isActive,
@@ -34,6 +34,7 @@ class Option extends Component {
             <div className={wrapperClassNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}
                 title={caption}
                 ref={ node => { this._optionNode = node } }>
+                {beforeCaption}
                 <div className={captionClassNames}>{children || caption}</div>
                 {additionalData && <span className={styles["additional-text"]}>{additionalData}</span>}
             </div>
@@ -49,6 +50,7 @@ Option.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
     caption: PropTypes.string,
+    beforeCaption: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.element]),
     children: PropTypes.node,
     additionalData: PropTypes.string,
     wrapperClassName: PropTypes.string,

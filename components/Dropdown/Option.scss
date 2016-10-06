@@ -64,11 +64,13 @@
 
         line-height: $lineHeightRegular;
 
-        :local(.option.as-active) &:after {
+        :local(.option.as-active) &:after,
+        :local(.option.as-active) &:before {
             background-image: linear-gradient(to right, rgba($bgElementActiveLightColor, 0), rgba($bgElementActiveLightColor, 1));
         }
 
-        :local(.option.as-selected) &:after {
+        :local(.option.as-selected) &:after,
+        :local(.option.as-selected) &:before {
             background-image: linear-gradient(to right, rgba($bgButtonColor, 0), rgba($bgButtonColor, 1));
         }
     }
