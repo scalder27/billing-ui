@@ -190,7 +190,7 @@ class Dropdown extends Component {
 
     render() {
         const { value, additionalData, width, disabled, styles, className, attributes, fadeCaption } = this.props;
-        const wrapperClassNames = classnames(styles.wrapper, className);
+        const wrapperClassNames = classnames(styles.wrapper, className, {"with-fade": fadeCaption});
         const selectClassNames = classnames(styles.select, {
             [styles.disabled]: disabled,
             [styles.inactive]: !value
@@ -200,7 +200,7 @@ class Dropdown extends Component {
             <div className={wrapperClassNames} { ...attributes }>
                 <div className={selectClassNames} onClick={this.handleClick} title={this._caption}>
                     <div className={styles["select-input"]} style={{"width": width}}>
-                        <div className={classnames(styles.caption, { [styles["with-fade"]]: fadeCaption })}>{this._caption}</div>
+                        <div className={styles.caption}>{this._caption}</div>
                         <div className={styles["additional-text"]}>{additionalData}</div>
                     </div>
                     <Icon className={styles.icon} type={IconTypes.ArrowTriangleDown} />

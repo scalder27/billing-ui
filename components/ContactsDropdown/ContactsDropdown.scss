@@ -12,12 +12,4 @@
         top: 17px;
         left: 10px;
     }
-
-    .name {
-        overflow: hidden;
-
-        line-height: $lineHeightRegular;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
 }

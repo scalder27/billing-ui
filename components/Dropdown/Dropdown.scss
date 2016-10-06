@@ -56,7 +56,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
 
-        &.with-fade {
+        :global(.with-fade) & {
             @include baseFade();
 
             text-overflow: clip;

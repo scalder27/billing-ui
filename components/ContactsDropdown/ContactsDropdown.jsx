@@ -32,9 +32,10 @@ export class ContactsDropdown extends PureComponent {
                             caption={contact[nameFieldName]}
                             beforeCaption={contact[isDirectorFieldName] && directorIcon}
                             additionalData={contact[postFieldName]}
+                            fadeCaption={true}
                             wrapperClassName={cx(optionWrapperClassName, {[styles["has-director"]]: hasDirectorContacts })}
                     >
-                        <div className={styles["name"]}>{contact[nameFieldName]}</div>
+                        {contact[nameFieldName]}
                     </Option>
                 ))}
             </Dropdown>

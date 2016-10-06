@@ -56,13 +56,15 @@
     }
 
     .caption {
-        @include baseFade();
-
         min-width: 20px;
 
         overflow: hidden;
 
         line-height: $lineHeightRegular;
+
+        :global(.with-fade) & {
+            @include baseFade();
+        }
 
         :local(.option.as-active) &:after,
         :local(.option.as-active) &:before {
