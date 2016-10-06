@@ -157,7 +157,7 @@ class Dropdown extends Component {
             return result;
         }, {});
 
-        this._caption = value ? optionCaptions[value] : defaultCaption;
+        this._caption = value && optionCaptions[value] ? optionCaptions[value] : defaultCaption;
     }
 
     getOptionsList() {
