@@ -1,6 +1,7 @@
 ﻿@import "./../../styles/bourbon";
 @import "./../../styles/variables";
 @import "./../../styles/placeholders";
+@import "./../../styles/mixins";
 
 :local {
     .option {
@@ -54,17 +55,27 @@
     }
 
     .caption {
+        @include baseFade();
+
         min-width: 20px;
         max-height: 65px;
 
         overflow: hidden;
 
         line-height: $lineHeightRegular;
-        word-wrap: break-word;
+
+        :local(.option.as-active) &:after {
+            background-image: linear-gradient(to right, rgba($bgElementActiveLightColor, 0), rgba($bgElementActiveLightColor, 1));
+        }
+
+        :local(.option.as-selected) &:after {
+            background-image: linear-gradient(to right, rgba($bgButtonColor, 0), rgba($bgButtonColor, 1));
+        }
     }
 
     .additional-text {
         @extend %as-inline-block;
+        @extend %as-word-break;
 
         color: $textSecondaryColor;
     }

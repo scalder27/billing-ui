@@ -39,13 +39,15 @@
     .select-input {
         @extend %as-inline-block;
 
-        margin-right: 10px;
+        float: left;
+        width: 90%;
+        padding-right: 10px;
     }
 
     .caption {
         @extend %as-inline-block;
 
-        max-width: 100%;
+        width: 100%;
 
         overflow: hidden;
 

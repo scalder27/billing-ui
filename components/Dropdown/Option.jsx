@@ -1,6 +1,6 @@
 import { Component, PropTypes } from "react";
-import optionStyles from "./Option.scss";
 import classnames from "classnames";
+import optionStyles from "./Option.scss";
 
 class Option extends Component {
     _optionNode = null;
