@@ -8,7 +8,7 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
-## Unreleased
+## v1.17.1 (10.10.2016)
 ### :bug: Bug Fix
 - Исправлены новые функции валидации
 - Исправлен баг с позиционированием Tooltip
