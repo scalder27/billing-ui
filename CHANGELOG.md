@@ -8,6 +8,12 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## Unreleased
+### :bug: Bug Fix
+- Исправлены новые функции валидации
+- Исправлен баг с позиционированием Tooltip
+
+
 ## v1.17.0 (10.10.2016)
 ### :rocket: New Feature
 - Добавлены новые функции валидации
