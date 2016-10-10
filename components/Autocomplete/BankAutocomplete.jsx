@@ -28,7 +28,7 @@ class BankAutocomplete extends PureComponent {
         const props = {
             ...this.props,
             onChange: this.handleChange,
-            valueCreator: searchResultItem => `${searchResultItem.Value} ${searchResultItem.Text}`
+            valueCreator: searchResultItem => `${searchResultItem.Value} ${searchResultItem.Description}`
         };
 
         return (
