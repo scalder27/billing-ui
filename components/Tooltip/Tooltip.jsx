@@ -28,17 +28,14 @@ class Tooltip extends PureComponent {
             isOpen: props.isOpen,
             positionType: props.positionType
         };
-
-        this._margin = props.type === TooltipType.validation ? -1 : 15;
     }
-
 
     componentDidMount() {
         this._init();
     }
 
     componentWillUpdate() {
-        this._detachEventListener();
+        this._detachEventListeners();
     }
 
     componentDidUpdate() {
@@ -46,7 +43,7 @@ class Tooltip extends PureComponent {
     }
 
     componentWillUnmount() {
-        this._detachEventListener();
+        this._detachEventListeners();
     }
 
     _init() {
@@ -60,6 +57,8 @@ class Tooltip extends PureComponent {
 
     _attachEventListeners() {
         const { trigger } = this.props;
+
+        this._detachEventListeners();
 
         if (trigger === TriggerType.hover) {
             events.addEventListener(this._target, "mouseover", this._toggleTooltip);
@@ -82,7 +81,7 @@ class Tooltip extends PureComponent {
         events.addEventListener(this._wrapper, "scroll", this._redraw);
     }
 
-    _detachEventListener() {
+    _detachEventListeners() {
         events.removeEventListener(this._target, "mouseover", this._toggleTooltip);
         events.removeEventListener(this._target, "mouseleave", this._toggleTooltip);
         events.removeEventListener(this._target, "click", this._toggleTooltip);
@@ -96,7 +95,7 @@ class Tooltip extends PureComponent {
     }
 
     _tryUpdatePositionType() {
-        const positionType = adjustPositionType(this.props.positionType, this._target, this._tooltip, this.props.type);
+        const positionType = adjustPositionType(this.state.positionType, this._target, this._tooltip, this.props.type);
 
         if (this.state.positionType !== positionType) {
             this.setState({
