@@ -37,7 +37,7 @@ const Validation = {
     },
 
     StringMinLength: (length, error = "Нужно больше символов") => (value) => {
-        const re = new RegExp(`^[\s\S]{${length},}$`);
+        const re = new RegExp(`^[\\s\\S]{${length},}$`);
 
         return {
             isValid: re.test(value),
@@ -46,7 +46,7 @@ const Validation = {
     },
 
     StringMaxLength: (length, error = "Превышена максимальная длина строки") => (value) => {
-        const re = new RegExp(`^[\s\S]{0,${length}}$`);
+        const re = new RegExp(`^[\\s\\S]{0,${length}}$`);
 
         return {
             isValid: re.test(value),
