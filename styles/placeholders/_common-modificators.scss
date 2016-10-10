@@ -41,6 +41,8 @@
     word-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+
+    overflow-wrap: break-word;
 }
 
 %as-text-overflow-ellipsis {
