@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.17.0 (10.10.2016)
+### :rocket: New Feature
+- Добавлены новые функции валидации
+
+
 ## v1.16.1 (10.10.2016)
 ### :bug: Bug Fix
 - Исправлен баг с отображением Option

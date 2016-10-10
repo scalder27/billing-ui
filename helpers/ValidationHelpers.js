@@ -36,6 +36,24 @@ const Validation = {
         };
     },
 
+    StringMinLength: (length, error = "Нужно больше символов") => (value) => {
+        const re = new RegExp(`^[\s\S]{${length},}$`);
+
+        return {
+            isValid: re.test(value),
+            error
+        };
+    },
+
+    StringMaxLength: (length, error = "Превышена максимальная длина строки") => (value) => {
+        const re = new RegExp(`^[\s\S]{0,${length}}$`);
+
+        return {
+            isValid: re.test(value),
+            error
+        };
+    },
+
     Kpp: (error = "Некорректный КПП") => (value) => {
         const re = /^(\d{9})?$/;
 
