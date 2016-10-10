@@ -8,6 +8,13 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.16.1 (10.10.2016)
+### :bug: Bug Fix
+- Исправлен баг с отображением Option
+- Исправлен баг с форматом BankAutocomplete
+- Подправлен плейсхолдер word-break
+
+
 ## v1.16.0 (06.10.2016)
 ### :rocket: New Feature
 - Добавлен ContactsDropdown ([@scalder27](https://github.com/scalder27))
