@@ -95,7 +95,7 @@ class Tooltip extends PureComponent {
     }
 
     _tryUpdatePositionType() {
-        const positionType = adjustPositionType(this.state.positionType, this._target, this._tooltip, this.props.type);
+        const positionType = adjustPositionType(this.props.positionType, this._target, this._tooltip, this.props.type);
 
         if (this.state.positionType !== positionType) {
             this.setState({

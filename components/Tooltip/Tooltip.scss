@@ -13,6 +13,7 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
         position: absolute;
         z-index: $tooltipZIndex;
 
+        width: 150px;
         padding: 10px 20px;
 
         visibility: hidden;

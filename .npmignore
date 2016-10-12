@@ -5,3 +5,6 @@
 .editorconfig
 .gitignore
 .travis.yml
+.idea
+.eslintcache
+.babelrc
