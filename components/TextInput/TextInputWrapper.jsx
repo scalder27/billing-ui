@@ -4,7 +4,7 @@ import DefaultTextInput from "./DefaultTextInput";
 import CompactTextInput from "./CompactTextInput";
 import TextInputType from "./TextInputType";
 import { TooltipTypes, PositionTypes } from "../Tooltip";
-import Validation from "../../helpers/ValidationHelpers";
+import Validation, { validate } from "../../helpers/ValidationHelpers";
 class TextInputWrapper extends PureComponent {
 
     _inputDom = null;
@@ -22,6 +22,10 @@ class TextInputWrapper extends PureComponent {
 
     focus() {
         this._inputDom.focus();
+    }
+
+    getValidationResult() {
+        return validate(this.props.value, this.props.validateFunction);
     }
 
     render() {

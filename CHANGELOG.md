@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.18.0 (12.10.2016)
+### :rocket: New Feature
+- Добавлен внешний метод _getValidationResult_ для инпутов
+
+
 ## v1.17.2 (12.10.2016)
 ### :bug: Bug Fix
 - Исправлен баг с позиционированием Tooltip

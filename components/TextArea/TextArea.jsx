@@ -32,6 +32,10 @@ class TextArea extends Component {
         return this._textArea.getDomNode();
     }
 
+    getValidationResult() {
+        return this._textArea.getValidationResult();
+    }
+
     handleChange(value, evt, data) {
         const { onChange } = this.props;
 
