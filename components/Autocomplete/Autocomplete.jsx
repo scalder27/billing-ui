@@ -1,4 +1,5 @@
 ﻿import { PureComponent, PropTypes } from "react";
+import { debounce } from "underscore";
 import axios from "../../libs/axios";
 
 import keyCodes from "../../helpers/KeyCodes";
@@ -23,6 +24,8 @@ class Autocomplete extends PureComponent {
             value: value ? value : defaultValue,
             opened: false
         };
+
+        this.showNewOptions = debounce(this.showNewOptions, 200);
     }
 
     componentWillReceiveProps(props) {
