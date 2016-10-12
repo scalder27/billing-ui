@@ -13,9 +13,8 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
             if (slideOnWillAppear) {
                 const node = findDOMNode(this);
 
-                TweenLite.fromTo(node, duration, { height: 0, opacity: 0 }, {
+                TweenLite.fromTo(node, duration, { height: 0, overflow: "hidden" }, {
                     height: node.offsetHeight,
-                    opacity: 1,
                     onComplete: callback
                 });
             }
@@ -27,9 +26,9 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
             const node = findDOMNode(this);
             const { duration } = options;
 
-            TweenLite.fromTo(node, duration, { height: 0, opacity: 0 }, {
+
+            TweenLite.fromTo(node, duration, { height: 0, overflow: "hidden" }, {
                 height: node.offsetHeight,
-                opacity: 1,
                 onComplete: callback
             });
         }
@@ -38,9 +37,8 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
             const node = findDOMNode(this);
             const { duration } = options;
 
-            TweenLite.fromTo(node, duration, { height: node.offsetHeight, opacity: 1 }, {
+            TweenLite.fromTo(node, duration, { height: node.offsetHeight, overflow: "hidden" }, {
                 height: 0,
-                opacity: 0,
                 onComplete: callback
             });
         }
