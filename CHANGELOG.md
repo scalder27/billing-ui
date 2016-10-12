@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.18.3 (12.10.2016)
+### :bug: Bug Fix
+- Добавлен debounce для Autocomplete
+
+
 ## v1.18.2 (12.10.2016)
 ### :bug: Bug Fix
 - Изменены размеры ButtonSize.small
