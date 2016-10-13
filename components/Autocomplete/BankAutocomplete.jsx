@@ -1,5 +1,6 @@
 import { PureComponent, PropTypes } from "react";
 import { validate } from "../../helpers/ValidationHelpers";
+import BankAutocompleteOptionTypes from "./BankAutocompleteOptionTypes";
 import Autocomplete from "./Autocomplete";
 
 class BankAutocomplete extends PureComponent {
@@ -28,7 +29,15 @@ class BankAutocomplete extends PureComponent {
         const props = {
             ...this.props,
             onChange: this.handleChange,
-            valueCreator: searchResultItem => `${searchResultItem.Value} ${searchResultItem.Description}`
+            valueCreator: searchResultItem => {
+                let result = "";
+                if (searchResultItem.Data.type === BankAutocompleteOptionTypes.bik) {
+                    result = `${searchResultItem.Text} ${searchResultItem.Description}`;
+                } else {
+                    result = `${searchResultItem.Value} ${searchResultItem.Text}`;
+                }
+                return result;
+            }
         };
 
         return (
