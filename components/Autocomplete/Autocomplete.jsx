@@ -1,5 +1,6 @@
 ﻿import { PureComponent, PropTypes } from "react";
 import { debounce } from "underscore";
+import Highlighter from "react-highlight-words";
 import axios from "../../libs/axios";
 
 import keyCodes from "../../helpers/KeyCodes";
@@ -209,7 +210,7 @@ class Autocomplete extends PureComponent {
                     ? renderItem(optionData)
                     : (<div>
                         <div className={styles.option}>
-                            {Text}
+                            <Highlighter textToHighlight={Text} searchWords={[this.state.value]} highlightClassName={styles.highlight} />
                         </div>
                         <div className={styles.description}>
                             {Description}
