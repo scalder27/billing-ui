@@ -8,6 +8,14 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.18.4 (13.10.2016)
+### :rocket: New Feature
+- Добавлена подсветка текста для Autocomplete
+
+### :bug: Bug Fix
+- Исправлен формат вывода для BankAutocomplete
+
+
 ## v1.18.3 (12.10.2016)
 ### :bug: Bug Fix
 - Добавлен debounce для Autocomplete
