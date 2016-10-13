@@ -29,6 +29,15 @@ export const findIndex = (predicate, arr = []) => {
     return -1;
 };
 
+export const findEntity = (predicate, arr) => {
+    const entityIndex = findIndex(predicate, arr);
+    if (entityIndex === -1) {
+        return [entityIndex, null];
+    }
+
+    return arr[entityIndex];
+};
+
 export const findIndexAndEntity = (predicate, arr) => {
     const entityIndex = findIndex(predicate, arr);
     if (entityIndex === -1) {
