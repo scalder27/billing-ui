@@ -1,6 +1,6 @@
 {
   "name": "billing-ui",
-  "version": "1.18.3",
+  "version": "1.18.4",
   "description": "KonturBilling UI components",
   "scripts": {
     "precommit": "npm run comb",
