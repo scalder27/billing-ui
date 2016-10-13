@@ -7,6 +7,11 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
     return class SlideToggle extends react.Component {
         shouldPureComponentUpdate = shouldPureComponentUpdate;
 
+        _onComplete(callback, node) {
+            node.style["height"] = "auto";
+            callback();
+        }
+
         componentWillAppear(callback) {
             const { duration, slideOnWillAppear } = options;
 
@@ -26,10 +31,9 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
             const node = findDOMNode(this);
             const { duration } = options;
 
-
             TweenLite.fromTo(node, duration, { height: 0, overflow: "hidden" }, {
                 height: node.offsetHeight,
-                onComplete: callback
+                onComplete: () => this._onComplete(callback, node)
             });
         }
 
@@ -39,7 +43,7 @@ const slideToggle = (Component, options = { duration: 0.2, slideOnWillAppear: fa
 
             TweenLite.fromTo(node, duration, { height: node.offsetHeight, overflow: "hidden" }, {
                 height: 0,
-                onComplete: callback
+                onComplete: () => this._onComplete(callback, node)
             });
         }
 
