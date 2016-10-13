@@ -8,6 +8,13 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.18.5 (13.10.2016)
+### :rocket: New Feature
+- Добавлен новый хелпер findEntity
+
+### :bug: Bug Fix
+- Добавлено сбрасывание высоты блока при завершении аниамации SlideToggle
+
 ## v1.18.4 (13.10.2016)
 ### :rocket: New Feature
 - Добавлена подсветка текста для Autocomplete
