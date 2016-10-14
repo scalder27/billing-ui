@@ -8,6 +8,10 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.18.6 (13.10.2016)
+### :house: Infrastructure
+- Добавлены тесты на хелпер findEntity
+
 ## v1.18.5 (13.10.2016)
 ### :rocket: New Feature
 - Добавлен новый хелпер findEntity
