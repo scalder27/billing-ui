@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import freeze from "deep-freeze";
-import { replaceByIndex, findIndex, findIndexAndEntity, arrayReduceHelper, omitEntityByIndex } from "../../helpers/ArrayHelper";
+import { replaceByIndex, findIndex, findEntity, findIndexAndEntity, arrayReduceHelper, omitEntityByIndex } from "../../helpers/ArrayHelper";
 
 describe("ArrayHelper", () => {
     describe("replace element by index", () => {
@@ -65,6 +65,24 @@ describe("ArrayHelper", () => {
 
             const actual = findIndex(item => item === "a", initString);
             expect(actual).to.equal(expectedResult);
+        });
+    });
+
+    describe("find entity", () => {
+        const initArr = freeze([1, 2, "a", 4, 5]);
+
+        it("should find element and return it", () => {
+            const expectedEntity = "a";
+
+            const actualEntity = findEntity(item => item === "a", initArr);
+            expect(actualEntity).to.equal(expectedEntity);
+        });
+
+        it("should return null if element couldn't be found", () => {
+            const expectedEntity = null;
+
+            const actualEntity = findEntity(item => item === "c", initArr);
+            expect(actualEntity).to.equal(expectedEntity);
         });
     });
 
