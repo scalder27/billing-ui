@@ -51,6 +51,17 @@ class CalendarWrapper extends Component {
         this._defineHeight();
     }
 
+    getValidationResult() {
+        const date = convertISOString(this.props.value || this._emptyDate);
+        const { isValid, errorType } = this.validate(date);
+
+        return {
+            date,
+            isValid,
+            errorType
+        };
+    }
+
     validate(date, minDate = this.props.minDate, maxDate = this.props.maxDate) {
         if (!date.isValid()) {
             if (date.creationData().input.indexOf("_") !== -1) {
