@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.19.1 (18.10.2016)
+### :bug: Bug Fix
+- Добавлена возможность делать _Calendar_ пустым
+
+
 ## v1.19.0 (18.10.2016)
 ### :rocket: New Feature
 - Добавлен публичный метод _getValidationResult_ в _Calendar_
