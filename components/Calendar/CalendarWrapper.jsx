@@ -15,7 +15,7 @@ import { filterObjectKeys } from "./../../helpers/ArrayHelper";
 
 import styles from "./CalendarWrapper.scss";
 
-const excludedInputProps = ["minYear", "maxYear", "minDate", "maxDate"];
+const excludedInputProps = ["minYear", "maxYear", "minDate", "maxDate", "isNullable"];
 
 class CalendarWrapper extends Component {
     _selectionRanges = [{ start: 0, end: 2, type: "days" }, { start: 3, end: 5, type: "months" }, { start: 6, end: 10, type: "years" }];
@@ -98,7 +98,13 @@ class CalendarWrapper extends Component {
     }
 
     handleChange = (textValue) => {
-        const date = convertString(textValue);
+        let date;
+        if (textValue === this._emptyDate && this.props.isNullable) {
+            date = null;
+        } else {
+            date = convertString(textValue);
+        }
+
         this.changeDate(date);
     };
 
@@ -212,7 +218,21 @@ class CalendarWrapper extends Component {
     }
 
     changeDate(date, minDate, maxDate) {
-        const { onChange, value } = this.props;
+        const { onChange, value, isNullable } = this.props;
+
+        if (isNullable && !date) {
+            onChange(null, {
+                date: null,
+                isValid: true
+            });
+
+            this.setState({
+                date: null,
+                isValid: true
+            });
+
+            return;
+        }
 
         const momentDate = convertISOString(date || this._emptyDate);
         const { isValid, errorType } = this.validate(momentDate, minDate, maxDate);
@@ -345,6 +365,7 @@ CalendarWrapper.propTypes = {
     maxDate: CustomPropTypes.date,
     minDate: CustomPropTypes.date,
     value: CustomPropTypes.date,
+    isNullable: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     className: PropTypes.string,
     type: PropTypes.string
@@ -357,7 +378,8 @@ CalendarWrapper.defaultProps = {
     maxYear: 2100,
     className: "",
     disabled: false,
-    isValid: true
+    isValid: true,
+    isNullable: false
 };
 
 export default CalendarWrapper;
