@@ -223,12 +223,14 @@ class CalendarWrapper extends Component {
         if (isNullable && !date) {
             onChange(null, {
                 date: null,
-                isValid: true
+                isValid: true,
+                errorType: null
             });
 
             this.setState({
                 date: null,
-                isValid: true
+                isValid: true,
+                errorType: null
             });
 
             return;
