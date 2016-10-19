@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.19.2 (19.10.2016)
+### :bug: Bug Fix
+- Добавлено изменение _fileId_ при обновлении _FileUploadForm_
+
+
 ## v1.19.1 (18.10.2016)
 ### :bug: Bug Fix
 - Добавлена возможность делать _Calendar_ пустым
