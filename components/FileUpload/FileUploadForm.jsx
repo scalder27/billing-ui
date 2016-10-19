@@ -31,6 +31,10 @@ class FileUploadForm extends Component {
         this._attachFileUploadEvents();
     }
 
+    componentDidUpdate() {
+        this._fileId = createGuid();
+    }
+
     componentWillUnmount() {
         this._detachFileUploadEvents();
         this._fileUploadControl.destroy();
