@@ -21,7 +21,7 @@ export const validate = (value, validateFunction) => {
 
 const Validation = {
     Email: (error = "Неверный формат e-mail") => (value) => {
-        const re = /^[\W]*([a-zA-Zа-яА-Я+\-.%]+@[a-zA-Zа-яА-Я\-.]+\.[a-zA-Zа-яА-Я]{2,4}[\W]*[,;]{1}[\W]*)*([a-zA-Zа-яА-Я+\-.%]+@[a-zA-Zа-яА-Я\-.]+\.[a-zA-Zа-яА-Я]{2,4})[\W]*$/;
+        const re = /^[\W]*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4}[\W]*[,;]{1}[\W]*)*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4})[\W]*$/;
 
         return {
             isValid: re.test(value),
