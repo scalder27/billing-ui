@@ -1,24 +1,29 @@
-import { Component, PropTypes, cloneElement } from "react";
+import { Component, PropTypes } from "react";
 import { copyCommandSupportChecker } from "../../helpers/QueryCommandSupportChecker";
 
-let Clipboard = (props) => cloneElement(props.children);
-const copyToClipboardAvailableCheck = copyCommandSupportChecker();
+let Clipboard = null;
 
-require.ensure([], require => {
-    try {
-        Clipboard = require("clipboard");
-    } catch (e) {}
+const copyToClipboardAvailableCheck = copyCommandSupportChecker();
+const clipboardUploaded = new Promise((resolve, reject) => {
+    require.ensure([], require => {
+        try {
+            Clipboard = require("clipboard");
+            resolve();
+        } catch (e) {
+            reject();
+        }
+    });
 });
 
 class ClipboardWrapper extends Component {
     _clipboardTarget = null;
-    state = {copyToClipboardAvailable: false};
+    state = { copyToClipboardAvailable: false };
 
-    _reinitClipboard() {
+    _reInitClipboard() {
         const { value, onSuccess, onError } = this.props;
         const { copyToClipboardAvailable } = this.state;
 
-        if (copyToClipboardAvailable) {
+        if (Clipboard !== null && copyToClipboardAvailable) {
             this._removeClipboard();
             this._clipboard = new Clipboard(this._clipboardTarget, {
                 text: () => value
@@ -39,13 +44,20 @@ class ClipboardWrapper extends Component {
     }
 
     _removeClipboard() {
-        this._clipboard && this._clipboard.destroy();
+        if (this._clipboard && this._clipboard.destroy) {
+            this._clipboard.destroy();
+            this._clipboard = null;
+        }
     }
 
     _resolveCopyToClipboard() {
-        copyToClipboardAvailableCheck
-            .then(() => { this.setState({copyToClipboardAvailable: true}) })
-            .catch(() => { this.setState({copyToClipboardAvailable: false}) });
+        Promise.all([clipboardUploaded, copyToClipboardAvailableCheck])
+            .then(() => {
+                this.setState({ copyToClipboardAvailable: true });
+            })
+            .catch(() => {
+                this.setState({ copyToClipboardAvailable: false });
+            });
     }
 
     componentDidMount() {
@@ -53,7 +65,7 @@ class ClipboardWrapper extends Component {
     }
 
     componentDidUpdate() {
-        this._reinitClipboard();
+        this._reInitClipboard();
     }
 
     componentWillUnmount() {
@@ -66,7 +78,9 @@ class ClipboardWrapper extends Component {
 
         if (copyToClipboardAvailable) {
             return (
-                <div ref={node => { this._clipboardTarget = node }} className={className}>
+                <div ref={node => {
+                    this._clipboardTarget = node
+                }} className={className}>
                     {children}
                 </div>
             );
