@@ -8,6 +8,10 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.20.1 (20.10.2016)
+### :bug: Bug Fix
+- Исправлен импорт _MessageType_ для _WarningMessage_
+
 ## v1.19.6 (20.10.2016)
 ### :bug: Bug Fix
 - Исправлена работа _FileUploadForm_ с несколькими файлами
