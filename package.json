@@ -4,7 +4,7 @@
   "description": "KonturBilling UI components",
   "scripts": {
     "precommit": "npm run comb",
-    "test:ci": "npm run eslint && npm test -- --reporter min",
+    "test:ci": "npm run eslint -- --rule 'linebreak-style: 0' && npm test -- --reporter min",
     "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
     "comb": "gulp sass:comb",
