@@ -8,6 +8,16 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.19.5 (20.10.2016)
+### :bug: Bug Fix
+- Исправлены id для функ тестов на _Checkbox_
+
+
+## v1.19.4 (20.10.2016)
+### :bug: Bug Fix
+- Исправлена ошибка при вызове _destroy_ на _Clipboard_
+
+
 ## v1.19.2 (19.10.2016)
 ### :bug: Bug Fix
 - Добавлено изменение _fileId_ при обновлении _FileUploadForm_
