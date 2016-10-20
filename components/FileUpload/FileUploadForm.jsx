@@ -31,10 +31,6 @@ class FileUploadForm extends Component {
         this._attachFileUploadEvents();
     }
 
-    componentDidUpdate() {
-        this._fileId = createGuid();
-    }
-
     componentWillUnmount() {
         this._detachFileUploadEvents();
         this._fileUploadControl.destroy();
@@ -47,6 +43,10 @@ class FileUploadForm extends Component {
                     this.props[propName](evt, data, this._fileId);
                 })
             });
+
+        this._fileUploadControl.on("fileUploadDone", () => {
+            this._fileId = createGuid();
+        });
     }
 
     _detachFileUploadEvents() {

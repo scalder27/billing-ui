@@ -8,9 +8,14 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.19.6 (20.10.2016)
+### :bug: Bug Fix
+- Исправлена работа _FileUploadForm_ с несколькими файлами
+
+
 ## v1.19.5 (20.10.2016)
 ### :bug: Bug Fix
-- Исправлены id для функ тестов на _Checkbox_
+- Исправлены id для автотестов на _Checkbox_
 
 
 ## v1.19.4 (20.10.2016)
