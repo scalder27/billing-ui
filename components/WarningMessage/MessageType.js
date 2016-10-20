@@ -1,4 +1,4 @@
-export const MessageType = {
+const MessageType = {
     error: "error",
     warning: "warning",
     base: "base"

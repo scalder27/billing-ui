@@ -1,2 +1,5 @@
-export default from "./WarningMessage";
-export MessageTypes from "./MessageType.js";
+import MessageType from "./MessageType";
+import WarningMessage from "./WarningMessage.jsx";
+
+export { MessageType };
+export default WarningMessage;
