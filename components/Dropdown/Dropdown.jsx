@@ -179,7 +179,7 @@ class Dropdown extends Component {
 
         if (options) {
             return (
-                <div className={styles.options} ref={node => { this._optionsListNode = node }}>
+                <div className={styles.options} ref={node => { this._optionsListNode = node }} data-ft-id="dropdown-popup">
                     {options}
                 </div>
             )

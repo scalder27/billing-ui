@@ -31,9 +31,14 @@ class Option extends Component {
         const captionClassNames = classnames(styles.caption, captionClassName);
 
         return (
-            <div className={wrapperClassNames} onClick={this.handleClick.bind(this)} onMouseOver={this.handleHover.bind(this)}
-                title={caption}
-                ref={ node => { this._optionNode = node } }>
+            <div className={wrapperClassNames}
+                 onClick={this.handleClick.bind(this)}
+                 onMouseOver={this.handleHover.bind(this)}
+                 title={caption}
+                 data-ft-id="dropdown-option"
+                 ref={ node => {
+                     this._optionNode = node
+                 } }>
                 {beforeCaption}
                 <div className={captionClassNames}>{children || caption}</div>
                 {additionalData && <span className={styles["additional-text"]}>{additionalData}</span>}

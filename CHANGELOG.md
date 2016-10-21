@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.20.3 (21.10.2016)
+### :rocket: New Feature
+- Добавлены id для автотестов в _Dropdown_ и _Option_
+
+
 ## v1.20.2 (21.10.2016)
 ### :bug: Bug Fix
 - Исправлен баг с резервированием места для _WarningMessage_ при скрытии
@@ -17,6 +22,11 @@
 ## v1.20.1 (20.10.2016)
 ### :bug: Bug Fix
 - Исправлен импорт _MessageType_ для _WarningMessage_
+
+
+## v1.20.0 (20.10.2016)
+### :boom: Breaking Change
+- Удален старый _AutocompleteWrapper_
 
 
 ## v1.19.6 (20.10.2016)
