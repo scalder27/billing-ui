@@ -40,7 +40,7 @@ class Option extends Component {
                      this._optionNode = node
                  } }>
                 {beforeCaption}
-                <div className={captionClassNames}>{children || caption}</div>
+                <div className={captionClassNames} data-ft-id="dropdown-option-caption">{children || caption}</div>
                 {additionalData && <span className={styles["additional-text"]}>{additionalData}</span>}
             </div>
         );

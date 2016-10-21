@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.20.4 (21.10.2016)
+### :rocket: New Feature
+- Добавлен id для автотестов для текста _Option_
+
+
 ## v1.20.3 (21.10.2016)
 ### :rocket: New Feature
 - Добавлены id для автотестов в _Dropdown_ и _Option_
