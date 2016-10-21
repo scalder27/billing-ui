@@ -8,9 +8,16 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+
+## v1.20.2 (21.10.2016)
+### :bug: Bug Fix
+- Исправлен баг с резервированием места для _WarningMessage_ при скрытии
+
+
 ## v1.20.1 (20.10.2016)
 ### :bug: Bug Fix
 - Исправлен импорт _MessageType_ для _WarningMessage_
+
 
 ## v1.19.6 (20.10.2016)
 ### :bug: Bug Fix
