@@ -8,6 +8,11 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.20.5 (22.10.2016)
+### :rocket: New Feature
+### :bug: Bug Fix
+- Добавлен экспорт типа тултипа для TextInput
+- Исправлен бар валидации email
 
 ## v1.20.4 (21.10.2016)
 ### :rocket: New Feature
