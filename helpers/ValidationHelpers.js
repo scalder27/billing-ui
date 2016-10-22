@@ -24,7 +24,7 @@ const Validation = {
         const re = /^[\W]*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4}[\W]*[,;]{1}[\W]*)*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4})[\W]*$/;
 
         return {
-            isValid: re.test(value),
+            isValid: value.trim() === "" || re.test(value),
             error
         };
     },
