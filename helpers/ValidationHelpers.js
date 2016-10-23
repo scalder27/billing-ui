@@ -29,6 +29,15 @@ const Validation = {
         };
     },
 
+    Phone: (error = "Неверный формат телефона") => (value) => {
+        const re = /^((\+7|8)(([\s|\(|\)|\t|\n|-]*\d){10})$)|(\+7$)/;
+
+        return {
+            isValid: value.trim() === "" || re.test(value),
+            error
+        };
+    },
+
     Required: (error = "Поле не должно быть пустым") => (value) => {
         return {
             isValid: value.trim() !== "",
