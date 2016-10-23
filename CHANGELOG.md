@@ -8,6 +8,10 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.20.6 (23.10.2016)
+### :rocket: New Feature
+- Добавлена валидация на телефон
+
 ## v1.20.5 (22.10.2016)
 ### :rocket: New Feature
 ### :bug: Bug Fix
