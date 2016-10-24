@@ -63,6 +63,8 @@
         @include position(absolute, 0 0 null null);
         @include size(35px);
 
+        z-index: 1;
+
         background: transparent url("billing-ui/img/Cross.svg") no-repeat center center;
 
         cursor: pointer;
