@@ -64,19 +64,19 @@ const Validation = {
     },
 
     Kpp: (error = "Некорректный КПП") => (value) => {
-        const re = /^(\d{9})?$/;
+        const re = /^\d{9}$/;
 
         return {
-            isValid: re.test(value),
+            isValid: value.trim() === "" || re.test(value),
             error
         };
     },
 
     SettlementAccount: (error = "Некорректный расчетный счет") => (value) => {
-        const re = /^(\d{20})?$/;
+        const re = /^\d{20}$/;
 
         return {
-            isValid: re.test(value),
+            isValid: value.trim() === "" || re.test(value),
             error
         };
     },
