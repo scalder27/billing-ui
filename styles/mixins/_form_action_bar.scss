@@ -13,15 +13,6 @@
     .actionSubmit {
         @extend %stylized-button;
         @extend %as-inline-block;
-
-        &:focus {
-            box-shadow: 0 0 0 2px #db3052;
-        }
-
-        &.disabled:focus {
-            outline: none;
-            box-shadow: none;
-        }
     }
 
     .actionCancel {
@@ -33,23 +24,10 @@
 
         font-size: 16px;
 
-        &:focus {
-            border: none;
-            outline: 2px solid #db3052;
-            box-shadow: none;
-
-            color: $linkBaseColor;
-        }
-
         &.disabled {
             color: $textInactiveColor;
 
             cursor: default;
-
-            &:focus {
-                outline: none;
-                box-shadow: none;
-            }
         }
     }
 }

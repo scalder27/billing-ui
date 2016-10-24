@@ -29,7 +29,8 @@
 
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
         top: -1px;
 
         box-shadow: 0 5px 0 $backgroundShadow;

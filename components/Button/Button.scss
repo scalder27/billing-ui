@@ -10,7 +10,8 @@
         &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 box-shadow: 0 3px 0 $backgroundShadow;
             }
         }
@@ -24,7 +25,8 @@
         &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 box-shadow: 0 3px 0 $backgroundShadow;
             }
         }
@@ -38,7 +40,8 @@
         &.size-small {
             box-shadow: 0 2px 0 $backgroundShadow;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 box-shadow: 0 3px 0 $backgroundShadow;
             }
         }
