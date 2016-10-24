@@ -1,5 +1,6 @@
 /test/*
 .eslintrc
+.ci_eslintrc
 .eslintignore
 .csscomb.json
 .editorconfig
