@@ -9,6 +9,15 @@
 > - :nail_care: [Polish]
 
 
+## Unreleased
+### :house: Infrastructure
+- Добавлен конфиг для _eslint_ при прогоне на сервере CI
+- Добавлены тесты для _ValidationHelpers_
+
+### :nail_care: Polish
+- Подправлены _ValidationHelpers_
+
+
 ## v1.20.9 (24.10.2016)
 ### :bug: Bug Fix
 - Добавлен вертикальный скролл для _PerfectLightbox_
@@ -31,8 +40,9 @@
 
 ## v1.20.5 (22.10.2016)
 ### :rocket: New Feature
-### :bug: Bug Fix
 - Добавлен экспорт типа тултипа для _TextInput_
+
+### :bug: Bug Fix
 - Исправлен бар валидации email
 
 
