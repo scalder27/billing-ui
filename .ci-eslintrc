@@ -12,8 +12,7 @@
         "jquery": true
     },
     "rules": {
-        // global
-        "linebreak-style": 0, // the difference
+        "linebreak-style": 0,
         "eqeqeq": [2, "allow-null"],
         "no-cond-assign": 2,
         "constructor-super": 2,
@@ -57,7 +56,6 @@
         "yield-star-spacing": [2, "both"],
         "yoda": [1, "never"],
 
-        // variables
         "id-length": [2, {"min": 1}],
         "no-param-reassign": [2, {"props": false}],
         "no-redeclare": 2,
@@ -66,7 +64,6 @@
         "no-unused-vars": [2, { "vars": "all", "args": "none" }],
         "one-var": [1, { "initialized": "never" }],
 
-        // codestyle
         "quotes": [1, "double"],
         "indent": [1, 4, { "VariableDeclarator": { "var": 2, "let": 2, "const": 2 }, "SwitchCase": 1 }],
         "max-len": [1, 160, 4, { "ignoreComments": true, "ignoreUrls": true }],
@@ -88,7 +85,7 @@
         "no-trailing-spaces": 2,
         "operator-linebreak": [1, "after", { "overrides": { "?": "before", ":": "before" } }],
         "padded-blocks": [1, "never"],
-        "semi": 0, // Отключено потому что отрабатывает не так как мы хотим в jsx и стрелочных функциях
+        "semi": 0,
         "semi-spacing": [1, { "before": false, "after": true }],
         "space-before-blocks": [1, "always"],
         "space-before-function-paren": [1, "never"],
@@ -97,21 +94,17 @@
         "space-unary-ops": [1, { "words": true, "nonwords": false }],
         "spaced-comment": [1, "always", { "markers": ["global", "globals", "eslint", "eslint-disable", "*package", "!", ","] }],
 
-        // typos
         "no-extra-semi": 2,
         "comma-dangle": [2, "never"],
 
-        // debugging info
         "no-alert": 2,
         "no-console": 2,
         "no-debugger": 2,
         "no-undef": 2,
 
-        // nodejs
         "no-path-concat": 2,
         "no-new-require": 2,
 
-        // react
         "react/prop-types": 1,
         "react/jsx-boolean-value": [2, "always"],
         "react/jsx-indent": [1, 4],
@@ -122,7 +115,6 @@
         "react/no-is-mounted": 2,
         "react/no-unknown-property": 2,
 
-        // tests
         "mocha/no-exclusive-tests": 2,
         "chai-expect/missing-assertion": 2,
         "chai-expect/terminating-properties": 1,

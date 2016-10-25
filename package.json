@@ -6,7 +6,7 @@
     "precommit": "npm run comb",
     "test:ci": "npm run eslint:ci && npm test -- --reporter min",
     "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
-    "eslint:ci": "eslint --config ./.ci-eslintrc ./**/**.js --cache && eslint ./**/**.jsx --cache",
+    "eslint:ci": "eslint --config ./.ci-eslintrc ./**/**.js && eslint ./**/**.jsx",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
     "comb": "gulp sass:comb",
     "preversion": "npm test",
