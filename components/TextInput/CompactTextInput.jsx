@@ -12,6 +12,10 @@ class CompactTextInput extends PureComponent {
         isFocused: false
     };
 
+    handleOnClickLabel = () => {
+        this.input.focus();
+    };
+
     handleFocus = (evt, data) => {
         this.setState({
             isFocused: true
@@ -72,7 +76,7 @@ class CompactTextInput extends PureComponent {
                     }}
                 />
                 <span className={styles.highlight} />
-                <span className={labelClassNames}>{placeholder}</span>
+                <span className={labelClassNames} onClick={this.handleOnClickLabel}>{placeholder}</span>
                 {(clearable && value) && <Clear className={styles.clear} onClick={this.handleClearClick} />}
             </div>
         );
