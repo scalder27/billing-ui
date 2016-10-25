@@ -9,7 +9,10 @@
 > - :nail_care: [Polish]
 
 
-## Unreleased
+## v1.20.10 (25.10.2016)
+### :bug: Bug Fix
+- Исправлен баг с фокусом на компактном инпуте в ie
+
 ### :house: Infrastructure
 - Добавлен конфиг для _eslint_ при прогоне на сервере CI
 - Добавлены тесты для _ValidationHelpers_
