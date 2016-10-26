@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.20.13 (26.10.2016)
+### :house: Infrastructure
+- Добавлен data-аттрибут с id для кнопки закрытия _PerfectLightbox_
+
+
 ## v1.20.12 (26.10.2016)
 ### :rocket: New Feature
 - Добавлен хелпер для _redux-saga_
