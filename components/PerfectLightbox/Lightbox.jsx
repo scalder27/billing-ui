@@ -24,9 +24,7 @@ class Lightbox extends PureComponent {
         };
         return (
             <div className={ lightboxClassNames } style={lightboxStyle}>
-                <button
-                    className={styles["close-button"]} onClick={this._handleCloseClick}>
-                </button>
+                <button className={styles["close-button"]} onClick={this._handleCloseClick} data-ft-id="lightbox-close-button" />
                 {children}
             </div>
         )
