@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.20.12 (26.10.2016)
+### :rocket: New Feature
+- Добавлен хелпер для _redux-saga_
+
+
 ## v1.20.11 (25.10.2016)
 ### :nail_care: Polish
 - Убрана зависимость от класса у миксина _product-icon_
