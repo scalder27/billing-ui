@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.20.14 (27.10.2016)
+### :bug: Bug Fix
+- Исправлены стили у _RadioButton_ (background color)
+
+
 ## v1.20.13 (26.10.2016)
 ### :house: Infrastructure
 - Добавлен data-аттрибут с id для кнопки закрытия _PerfectLightbox_
