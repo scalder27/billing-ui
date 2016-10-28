@@ -11,6 +11,11 @@
 
 ## v1.20.14 (27.10.2016)
 ### :bug: Bug Fix
+- Исправлены _ValidationHelpers_
+
+
+## v1.20.14 (27.10.2016)
+### :bug: Bug Fix
 - Исправлены стили у _RadioButton_ (background color)
 
 

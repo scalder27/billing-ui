@@ -24,7 +24,7 @@ const Validation = {
         const re = /^[\W]*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4}[\W]*[,;]{1}[\W]*)*([\wа-яА-Я\d+\-.%]+@[\wа-яА-Я\d\-.]+\.[\wа-яА-Я\d]{2,4})[\W]*$/;
 
         return {
-            isValid: value.trim() === "" || re.test(value),
+            isValid: !value || value.trim() === "" || re.test(value),
             error
         };
     },
@@ -33,14 +33,14 @@ const Validation = {
         const re = /^((\+7|8)(([\s|\(|\)|\t|\n|-]*\d){10})$)|(\+7$)/;
 
         return {
-            isValid: value.trim() === "" || re.test(value),
+            isValid: !value || value.trim() === "" || re.test(value),
             error
         };
     },
 
     Required: (error = "Поле не должно быть пустым") => (value) => {
         return {
-            isValid: value.trim() !== "",
+            isValid: value && value.trim() !== "",
             error
         };
     },
@@ -67,7 +67,7 @@ const Validation = {
         const re = /^\d{9}$/;
 
         return {
-            isValid: value.trim() === "" || re.test(value),
+            isValid: !value || value.trim() === "" || re.test(value),
             error
         };
     },
@@ -76,7 +76,7 @@ const Validation = {
         const re = /^\d{20}$/;
 
         return {
-            isValid: value.trim() === "" || re.test(value),
+            isValid: !value || value.trim() === "" || re.test(value),
             error
         };
     },
