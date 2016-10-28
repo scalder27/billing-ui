@@ -9,7 +9,7 @@
 > - :nail_care: [Polish]
 
 
-## v1.20.14 (27.10.2016)
+## v1.20.16 (28.10.2016)
 ### :bug: Bug Fix
 - Исправлены _ValidationHelpers_
 

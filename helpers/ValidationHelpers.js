@@ -40,7 +40,7 @@ const Validation = {
 
     Required: (error = "Поле не должно быть пустым") => (value) => {
         return {
-            isValid: value && value.trim() !== "",
+            isValid: !!value && value.trim() !== "",
             error
         };
     },
