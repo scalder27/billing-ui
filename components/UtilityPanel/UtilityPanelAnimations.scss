@@ -1,0 +1,52 @@
+@import "../../styles/variables";
+
+$shadowOffset: 5px;
+
+@keyframes slideInRight {
+    from {
+        margin-left: -$shadowOffset;
+
+        transform: translateX(-100%);
+    }
+
+    to {
+        margin-left: 0;
+
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        margin-top: -$shadowOffset;
+
+        transform: translateX(0);
+    }
+
+    to {
+        margin-top: -$shadowOffset;
+
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes utilityPanelOverlayFadeIn {
+    from {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+}
+
+@keyframes utilityPanelOverlayFadeOut {
+    from {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+}
+

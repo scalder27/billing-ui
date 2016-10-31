@@ -1,0 +1,61 @@
+﻿@import "../../styles/variables";
+@import "./UtilityPanelAnimations";
+
+:local {
+    .container {
+        position: fixed;
+        z-index: 34;
+        top: 0;
+        bottom: 0;
+        left: 0;
+
+        width: 510px;
+
+        transition: left .3s ease-out .2s, width .3s ease-out .2s;
+
+        background: $bgWhiteColor;
+        box-shadow: $elementBaseShadow;
+
+        :global {
+            animation: slideInRight $transitionSmoothOut;
+        }
+
+        &.closing {
+            :global {
+                animation: slideOutLeft $transitionSmoothOut forwards;
+            }
+        }
+    }
+
+    .header {
+        position: relative;
+
+        padding: 17px 40px 17px;
+
+        border-bottom: 2px solid $themeMainColor;
+
+        color: $themeMainColor;
+        font-size: $fontSizeGreat;
+        font-weight: bold;
+    }
+
+    .close {
+        display: inline-block;
+        margin: -17px 0 -17px -40px;
+        padding: 15px 10px 17px 14px;
+
+        transition: $transitionEase;
+
+        font-size: 20px;
+
+        cursor: pointer;
+
+        &:hover {
+            background: $bgElementActiveLightColor;
+        }
+    }
+
+    .body {
+        padding: 20px 30px;
+    }
+}
