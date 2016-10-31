@@ -1,6 +1,6 @@
-﻿$shadowOffset: 5px;
+$shadowOffset: 5px;
 
-@keyframes lightboxSlideInDown {
+@keyframes slideInDown {
     from {
         margin-top: -$shadowOffset;
 
@@ -14,7 +14,7 @@
     }
 }
 
-@keyframes lightboxSlideOutDown {
+@keyframes slideOutDown {
     from {
         margin-top: -$shadowOffset;
 
@@ -28,7 +28,7 @@
     }
 }
 
-@keyframes lightboxSlideInUp {
+@keyframes slideInUp {
     from {
         transform: translateY(100%);
     }
@@ -38,7 +38,7 @@
     }
 }
 
-@keyframes lightboxSlideOutUp {
+@keyframes slideOutUp {
     from {
         transform: translateY(0);
     }
@@ -48,22 +48,30 @@
     }
 }
 
-@keyframes lightboxOverlayFadeIn {
+@keyframes slideInRight {
     from {
-        background-color: rgba($bgWhiteColor, 0);
+        margin-left: -$shadowOffset;
+
+        transform: translateX(-100%);
     }
 
     to {
-        background-color: rgba($bgWhiteColor, .7);
+        margin-left: 0;
+
+        transform: translateX(0);
     }
 }
 
-@keyframes lightboxOverlayFadeOut {
+@keyframes slideOutLeft {
     from {
-        background-color: rgba($bgWhiteColor, .7);
+        margin-top: -$shadowOffset;
+
+        transform: translateX(0);
     }
 
     to {
-        background-color: rgba($bgWhiteColor, 0);
+        margin-top: -$shadowOffset;
+
+        transform: translateX(-100%);
     }
 }

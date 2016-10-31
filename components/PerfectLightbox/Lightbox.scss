@@ -1,5 +1,5 @@
 ﻿@import "../../styles/variables";
-@import "./LightboxAnimations";
+@import "../../styles/animations";
 @import "../../styles/animations/fade";
 @import "../../styles/bourbon";
 
@@ -20,12 +20,12 @@
             vertical-align: top;
 
             :global {
-                animation: lightboxSlideInDown $transitionSmoothOut;
+                animation: slideInDown $transitionSmoothOut;
             }
 
             &.closing {
                 :global {
-                    animation: lightboxSlideOutDown $transitionSmoothOut forwards;
+                    animation: slideOutDown $transitionSmoothOut forwards;
                 }
             }
         }
@@ -48,12 +48,12 @@
             vertical-align: bottom;
 
             :global {
-                animation: lightboxSlideInUp $transitionSmoothOut;
+                animation: slideInUp $transitionSmoothOut;
             }
 
             &.closing {
                 :global {
-                    animation: lightboxSlideOutUp $transitionSmoothOut forwards;
+                    animation: slideOutUp $transitionSmoothOut forwards;
                 }
             }
         }

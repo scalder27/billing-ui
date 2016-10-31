@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+@keyframes overlayFadeIn {
+    from {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+}
+
+@keyframes overlayFadeOut {
+    from {
+        background-color: rgba($bgWhiteColor, .7);
+    }
+
+    to {
+        background-color: rgba($bgWhiteColor, 0);
+    }
+}
