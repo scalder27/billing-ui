@@ -4,7 +4,6 @@
         "at-rule-name-space-after": "always-single-line",
         "at-rule-semicolon-newline-after": "always",
         "block-closing-brace-empty-line-before": "never",
-        "block-closing-brace-newline-after": "always",
         "block-closing-brace-newline-before": "always-multi-line",
         "block-closing-brace-space-before": "always-single-line",
         "block-no-empty": true,
@@ -92,11 +91,6 @@
         "selector-list-comma-newline-after": "always",
         "selector-list-comma-space-before": "never",
         "selector-max-empty-lines": 0,
-        "selector-no-attribute": true,
-        "selector-no-type": [true, {
-            "ignoreTypes": ["/^%[\\S]*/"]
-        }],
-        "selector-no-universal": true,
         "selector-pseudo-class-case": "lower",
         "selector-pseudo-class-no-unknown": [true, {
             "ignorePseudoClasses": ["global", "local"]
@@ -113,7 +107,6 @@
         "string-quotes": "double",
         "unit-case": "lower",
         "unit-no-unknown": true,
-        "value-keyword-case": "lower",
         "value-list-comma-newline-after": "always-multi-line",
         "value-list-comma-space-after": "always-single-line",
         "value-list-comma-space-before": "never"
