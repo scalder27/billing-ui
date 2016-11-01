@@ -1,0 +1,61 @@
+﻿@import "../../styles/bourbon";
+@import "../../styles/variables";
+@import "../../styles/animations";
+
+$verticalIndent: 17px;
+$horizontalIndent: 40px;
+
+:local {
+    .container {
+        @include position(fixed, 0 null 0 0);
+
+        width: 510px;
+
+        transition: left .3s ease-out .2s, width .3s ease-out .2s;
+
+        background: $bgWhiteColor;
+        box-shadow: $elementBaseShadow;
+
+        :global {
+            animation: slideInRight $transitionSmoothOut;
+        }
+
+        &.closing {
+            :global {
+                animation: slideOutLeft $transitionSmoothOut forwards;
+            }
+        }
+    }
+
+    .header {
+        position: relative;
+
+        padding: $verticalIndent $horizontalIndent;
+
+        border-bottom: 2px solid $themeMainColor;
+
+        color: $themeMainColor;
+        font-size: $fontSizeGreat;
+        font-weight: bold;
+    }
+
+    .close {
+        display: inline-block;
+        margin: (-$verticalIndent) 0 (-$verticalIndent) (-$horizontalIndent);
+        padding: 15px 10px $verticalIndent 14px;
+
+        transition: $transitionEase;
+
+        font-size: 20px;
+
+        cursor: pointer;
+
+        &:hover {
+            background: $bgElementActiveLightColor;
+        }
+    }
+
+    .body {
+        padding: 20px 30px;
+    }
+}

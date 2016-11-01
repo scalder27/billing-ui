@@ -1,38 +1,13 @@
-﻿@import "../../styles/variables";
-@import "./LightboxAnimations";
-@import "../../styles/bourbon";
+﻿@import "../../styles/placeholders";
 
 :local {
     .overlay {
-        @include position(fixed, 0 null null 0);
-        @include size(100%);
+        @extend %overlay;
 
-        z-index: 100;
+        z-index: $dropdownZIndex;
 
         overflow-y: scroll;
 
-        background-color: rgba($bgWhiteColor, .7);
-
         text-align: center;
-
-        :global {
-            animation: lightboxOverlayFadeIn $transitionSmoothOut;
-        }
-
-        &:before,
-        &:after {
-            content: '';
-
-            display: inline-block;
-            height: 100%;
-
-            vertical-align: middle;
-        }
-
-        &.closing {
-            :global {
-                animation: lightboxOverlayFadeOut $transitionSmoothOut forwards;
-            }
-        }
     }
 }

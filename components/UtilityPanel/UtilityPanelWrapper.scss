@@ -1,0 +1,10 @@
+﻿@import "../../styles/variables";
+@import "../../styles/placeholders";
+
+:local {
+    .overlay {
+        @extend %overlay;
+
+        z-index: $panelZIndex;
+    }
+}

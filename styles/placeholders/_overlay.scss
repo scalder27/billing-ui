@@ -1,0 +1,29 @@
+﻿@import "../../styles/variables";
+@import "../../styles/bourbon";
+
+%overlay {
+    @include position(fixed, 0 null null 0);
+    @include size(100%);
+
+    background-color: rgba($bgWhiteColor, .7);
+
+    :global {
+        animation: utilityPanelOverlayFadeIn $transitionSmoothOut;
+    }
+
+    &:before,
+    &:after {
+        content: "";
+
+        display: inline-block;
+        height: 100%;
+
+        vertical-align: middle;
+    }
+
+    &.closing {
+        :global {
+            animation: utilityPanelOverlayFadeOut $transitionSmoothOut forwards;
+        }
+    }
+}
