@@ -4,10 +4,12 @@
   "description": "KonturBilling UI components",
   "scripts": {
     "precommit": "npm run comb",
-    "test:ci": "npm run eslint:ci && npm test -- --reporter min",
+    "test:ci": "npm run eslint:ci && npm run stylelint && npm test -- --reporter min",
     "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
     "eslint:ci": "eslint --config ./.ci-eslintrc ./**/**.js && eslint ./**/**.jsx",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
+    "stylelint": "stylelint ./**/*.scss --color --syntax scss",
+    "stylefmt": "stylefmt --recursive ./styles && stylefmt --recursive ./components",
     "comb": "gulp sass:comb",
     "preversion": "npm test",
     "postversion": "git push && git push --tags"
@@ -55,11 +57,13 @@
     "perfectionist": ">= 2.1.3 < 3",
     "postcss-scss": "^0.1.6",
     "postcss-sorting": "^1.2.1",
+    "react": "latest",
     "react-dom": "latest",
+    "stylefmt": "^4.3.1",
+    "stylelint": "^7.5.0",
     "susy": ">= 2.2.12",
     "underscore": "^1.8.3",
-    "webpack": "^1.12.14",
-    "react": "latest"
+    "webpack": "^1.12.14"
   },
   "peerDependencies": {
     "gsap": ">= 1.19.0 < 2",
