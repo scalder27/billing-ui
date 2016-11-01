@@ -1,13 +1,13 @@
-﻿@import "../../styles/variables";
+﻿@import "../../styles/bourbon";
+@import "../../styles/variables";
 @import "../../styles/animations";
+
+$verticalIndent: 17px;
+$horizontalIndent: 40px;
 
 :local {
     .container {
-        position: fixed;
-        z-index: 34;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        @include position(fixed, 0 null 0 0);
 
         width: 510px;
 
@@ -30,7 +30,7 @@
     .header {
         position: relative;
 
-        padding: 17px 40px 17px;
+        padding: $verticalIndent $horizontalIndent;
 
         border-bottom: 2px solid $themeMainColor;
 
@@ -41,8 +41,8 @@
 
     .close {
         display: inline-block;
-        margin: -17px 0 -17px -40px;
-        padding: 15px 10px 17px 14px;
+        margin: (-$verticalIndent) 0 (-$verticalIndent) (-$horizontalIndent);
+        padding: 15px 10px $verticalIndent 14px;
 
         transition: $transitionEase;
 

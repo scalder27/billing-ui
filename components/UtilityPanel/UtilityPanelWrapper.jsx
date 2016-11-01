@@ -42,8 +42,8 @@ class UtilityPanelWrapper extends PureComponent {
                 <UtilityPanel
                     title={title}
                     className={panelClassName}
-                    ref={(elm) => {
-                        this._utilityPanel = ReactDOM.findDOMNode(elm)
+                    ref={(el) => {
+                        this._utilityPanel = ReactDOM.findDOMNode(el)
                     }}>
                     {children}
                 </UtilityPanel>
