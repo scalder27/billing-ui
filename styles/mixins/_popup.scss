@@ -14,7 +14,7 @@ $popup-rigt-padding: 10px;
 $popup-close-top: 5px;
 $popup-close-right: 5px;
 
-@mixin popup-wrapper {
+@mixin popup-wrapper() {
     padding: $popup-top-padding $popup-rigt-padding $popup-bottom-padding $popup-left-padding;
 
     border: 1px solid $borderDarkColor;
@@ -80,7 +80,7 @@ $popup-close-right: 5px;
     }
 }
 
-@mixin popup-close {
+@mixin popup-close() {
     position: absolute;
     top: $popup-close-top;
     right: $popup-close-right;

@@ -1,7 +1,7 @@
-﻿@import "../mixins/_popup.scss";
+﻿@import "../mixins/popup";
 
 %popup {
-    @include popup-wrapper;
+    @include popup-wrapper();
 }
 
 %popup-arrow-top {
