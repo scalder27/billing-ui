@@ -1,26 +1,26 @@
-﻿$productIconSpriteUrl: "/ContentBase/img/ProductIcons/product_icons_20x20.png";
+$productIconSpriteUrl: "/ContentBase/img/ProductIcons/product_icons_20x20.png";
 
 $transparentType: transparent;
 $filledType: filled;
 $halfFilledType: half;
 
 $transparentIcons: (
-    customs: 0px -460px,
-    diadoc: 0px -20px,
-    diadoc-custom: 0px -20px,
-    otchetru: 0px -520px,
-    evrika: 0px -80px,
-    pii: 0px -260px,
-    kemb: 0px 0px,
-    focus: 0px -40px,
-    fms: 0px -480px,
-    kep: 0px -300px,
-    kepegais: 0px -300px,
-    dopuc: 0px -300px,
-    rosreestr: 0px -300px,
-    smev: 0px -300px,
+    customs: 0 -460px,
+    diadoc: 0 -20px,
+    diadoc-custom: 0 -20px,
+    otchetru: 0 -520px,
+    evrika: 0 -80px,
+    pii: 0 -260px,
+    kemb: 0 0,
+    focus: 0 -40px,
+    fms: 0 -480px,
+    kep: 0 -300px,
+    kepegais: 0 -300px,
+    dopuc: 0 -300px,
+    rosreestr: 0 -300px,
+    smev: 0 -300px,
     sertum: -20px -300px,
-    edi: 0px -220px,
+    edi: 0 -220px,
     zakupki: 0 -240px,
     ofd: 0 -560px
 );
@@ -29,19 +29,19 @@ $transparentIcons: (
 $filledIcons: (
     customs: -20px -460px,
     diadoc: -20px -20px,
-    diadoc-custom: 0px -20px,
+    diadoc-custom: 0 -20px,
     otchetru: -20px -520px,
     evrika: -20px -80px,
     pii: -20px -260px,
-    kemb: -20px 0px,
+    kemb: -20px 0,
     focus: -20px -40px,
     fms: -20px -480px,
-    kep: 0px -300px,
-    kepegais: 0px -300px,
-    dopuc: 0px -300px,
+    kep: 0 -300px,
+    kepegais: 0 -300px,
+    dopuc: 0 -300px,
     sertum: -20px -300px,
-    rosreestr: 0px -300px,
-    smev: 0px -300px,
+    rosreestr: 0 -300px,
+    smev: 0 -300px,
     edi: -20px -220px,
     zakupki: -20px -240px,
     ofd: -20px -560px
@@ -54,7 +54,7 @@ $halfFilledIcons: (
     otchetru: -40px -520px,
     evrika: -40px -80px,
     pii: -40px -260px,
-    kemb: -40px 0px,
+    kemb: -40px 0,
     focus: -40px -40px,
     fms: -40px -480px,
     kep: -40px -300px,
@@ -72,14 +72,17 @@ $halfFilledIcons: (
     @if $type == $transparentType {
         @return $transparentIcons;
     }
+
     @if $type == $filledType {
         @return $filledIcons;
     }
+
     @if $type == $halfFilledType {
         @return $halfFilledIcons;
     }
-    @warn "Unfortunately, there is no such product type as `#{$type}`. "
-        + "Please make sure it is defined.";
+
+    @warn "Unfortunately, there is no such product type as `#{$type}`. Please make sure it is defined.";
+
     @return $filledIcons;
 }
 
@@ -102,9 +105,7 @@ $halfFilledIcons: (
         background-image: url($productIconSpriteUrl);
         background-repeat: no-repeat;
         background-position: #{map-get($products, $product)};
-    }
-    @else {
-        @warn "Unfortunately, no value could be retrieved from `#{$product}`. "
-        + "Please make sure it is defined in `$products` map.";
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$product}`. Please make sure it is defined in `$products` map.";
     }
 }

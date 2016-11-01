@@ -185,7 +185,7 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
             &:after {
                 left: 50%;
 
-                margin-left: - $triangleWidth/2;
+                margin-left: - $triangleWidth / 2;
             }
         }
 
@@ -194,7 +194,7 @@ $validationBorder: $validationBorderWidth solid $borderErrorColor;
             &:after {
                 top: 50%;
 
-                margin-top: - $triangleWidth/2;
+                margin-top: - $triangleWidth / 2;
             }
         }
 
