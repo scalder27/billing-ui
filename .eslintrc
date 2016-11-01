@@ -86,7 +86,7 @@
         "no-multiple-empty-lines": [2, { "max": 2 }],
         "no-spaced-func": 2,
         "no-trailing-spaces": 2,
-        "operator-linebreak": [1, "after", { "overrides": { "?": "before", ":": "before" } }],
+        "operator-linebreak": [1, "before"],
         "padded-blocks": [1, "never"],
         "semi": 0, // Отключено потому что отрабатывает не так как мы хотим в jsx и стрелочных функциях
         "semi-spacing": [1, { "before": false, "after": true }],

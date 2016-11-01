@@ -42,8 +42,8 @@ export const getArrowPositionType = (arrowPos, positionTarget, tooltip, type, ma
             const leftLine = positionTarget.left + positionTarget.width / 2 - tooltip.offsetWidth / 2;
 
             return (
-                rightLine < mainWrapper.clientWidth &&
-                leftLine >= 0
+                rightLine < mainWrapper.clientWidth
+                && leftLine >= 0
                     ? arrowPos
                     : rightLine > mainWrapper.clientWidth
                     ? "right"
@@ -72,8 +72,8 @@ export const getArrowPositionType = (arrowPos, positionTarget, tooltip, type, ma
             const topLine = positionTarget.top + arrowPoints - tooltip.offsetHeight / 2;
 
             return (
-                bottomLine <= mainWrapper.clientHeight &&
-                topLine >= 0
+                bottomLine <= mainWrapper.clientHeight
+                && topLine >= 0
                     ? "middle"
                     : bottomLine > mainWrapper.clientHeight
                     ? "bottom"
