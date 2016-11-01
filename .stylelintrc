@@ -1,4 +1,7 @@
 {
+    "plugins": [
+        "stylelint-scss"
+    ],
     "rules": {
         "at-rule-name-case": "lower",
         "at-rule-name-space-after": "always-single-line",
@@ -109,6 +112,13 @@
         "unit-no-unknown": true,
         "value-list-comma-newline-after": "always-multi-line",
         "value-list-comma-space-after": "always-single-line",
-        "value-list-comma-space-before": "never"
+        "value-list-comma-space-before": "never",
+
+        "scss/at-extend-no-missing-placeholder": true,
+        "scss/at-import-no-partial-leading-underscore": true,
+        "scss/at-import-partial-extension-blacklist": ["scss", "sass"],
+        "scss/at-mixin-argumentless-call-parentheses": "always",
+        "scss/dollar-variable-colon-space-after": "always-single-line",
+        "scss/operator-no-unspaced": true
     }
 }
