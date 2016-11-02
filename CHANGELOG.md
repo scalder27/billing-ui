@@ -9,6 +9,14 @@
 > - :nail_care: [Polish]
 
 
+## UNRELEASED
+### :rocket: New Feature
+- HTTP методы вынесены в _httpMethod_ в sagas helper
+
+### :bug: Bug Fix
+- Исправлена валидация ИНН
+
+
 ## v1.21.2 (02.11.2016)
 ### :rocket: New Feature
 - Добавлена возможность прокидывать атрибуты для лейбла в  _RadioButton_
