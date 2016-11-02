@@ -5,7 +5,7 @@ import classnames from "classnames";
 class RadioButton extends Component {
     render() {
         const { checked, value, onChange, radioClassName, labelClassName, wrapperClassName,
-                styles, children, disabled, readonly, ...radioProps } = this.props;
+                styles, children, disabled, readonly, labelAttributes, ...radioProps } = this.props;
         const labelClassNames = classnames(styles.label, labelClassName);
         const wrapperClassNames = classnames(styles.wrapper, wrapperClassName);
         const radioClassNames = classnames(styles.radio, radioClassName, {
@@ -14,7 +14,7 @@ class RadioButton extends Component {
         });
 
         return (
-            <label className={wrapperClassNames}>
+            <label className={wrapperClassNames} { ...labelAttributes }>
                 <input {...radioProps}
                     checked={checked}
                     disabled={disabled}
@@ -41,6 +41,7 @@ RadioButton.propTypes = {
     wrapperClassName: PropTypes.string,
     radioClassName: PropTypes.string,
     styles: PropTypes.object,
+    labelAttributes: PropTypes.object,
     children: PropTypes.node
     // Так же можно передать остальные стандартные атрибуты радиобатона, но визуально они ни как не обрабатываются
 };
