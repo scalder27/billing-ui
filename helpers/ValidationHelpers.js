@@ -91,7 +91,7 @@ const Validation = {
         return {
             isValid: (value.length === LEGAL_INN_LENGTH || value.length === INDIVIDUAL_INN_LENGTH)
                         && DIGITS_ONLY_REGEXP.test(value)
-                        && (value !== "0000000000" && value === "000000000000")
+                        && (value !== "0000000000" && value !== "000000000000")
                         && matchInnCheckSum(value),
             error
         };
