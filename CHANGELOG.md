@@ -8,8 +8,10 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.22.0
+### :house: Infrastructure
+- Выпилен `why-did-you-update`
 
-## UNRELEASED
 ### :rocket: New Feature
 - HTTP методы вынесены в _httpMethod_ в sagas helper
 

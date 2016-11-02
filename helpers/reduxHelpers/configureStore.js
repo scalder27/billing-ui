@@ -1,15 +1,11 @@
 import {compose, createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
-import react from "react";
 
 import analyticsMiddleware from "./analyticsMiddleware";
 const __DEV__ = process.env.NODE_ENV !== "production";
 
 if (__DEV__) {
-    const { whyDidYouUpdate } = require("why-did-you-update");
-    whyDidYouUpdate(react, { exclude: [/^Connect\(.*\)$/, "ReactTransitionGroup", "ReactCSSTransitionGroup", "ReactCSSTransitionGroupChild"] });
-
     const reactPerf = require("react-addons-perf");
     window.ReactPerf = reactPerf;
 }
