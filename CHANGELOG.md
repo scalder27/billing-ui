@@ -9,6 +9,11 @@
 > - :nail_care: [Polish]
 
 
+## v1.21.1 (02.11.2016)
+### :rocket: New Feature
+- Добавлена валидация инн
+
+
 ## v1.21.0 (01.11.2016)
 ### :rocket: New Feature
 - Добавлена компонента _UtilityPanel_
