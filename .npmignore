@@ -10,3 +10,5 @@
 .eslintcache
 .babelrc
 .npmrc
+.yarnrc
+yarn.lock
