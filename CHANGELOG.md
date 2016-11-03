@@ -8,7 +8,7 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
-## v1.21.2 (03.11.2016)
+## v1.21.1 (03.11.2016)
 ### :rocket: New Feature
 - Добавлена анимацию слайда справа
 
