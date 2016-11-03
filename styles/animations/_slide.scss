@@ -62,6 +62,34 @@
     }
 }
 
+@keyframes slideOutRight {
+    from {
+        margin-right: 0;
+
+        transform: translate(0);
+    }
+
+    to {
+        margin-right: -$shadowOffset;
+
+        transform: translate(100%);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        margin-right: -$shadowOffset;
+
+        transform: translate(100%);
+    }
+
+    to {
+        margin-right: 0;
+
+        transform: translate(0);
+    }
+}
+
 @keyframes slideOutLeft {
     from {
         margin-top: -$shadowOffset;
