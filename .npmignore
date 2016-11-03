@@ -12,3 +12,4 @@
 .npmrc
 .yarnrc
 yarn.lock
+/docs/*

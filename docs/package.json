@@ -1,0 +1,29 @@
+{
+  "name": "docs",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@kadira/react-storybook-addon-info": "^3.3.0",
+    "@kadira/storybook": "^2.21.0",
+    "@kadira/storybook-addon-knobs": "^1.4.1",
+    "autoprefixer": "^6.5.1",
+    "billing-ui": "^1.22.2",
+    "classnames": "^2.2.5",
+    "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.11.1",
+    "postcss-loader": "^1.1.0",
+    "postcss-pseudoelements": "^3.0.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-input-mask": "^0.7.5",
+    "react-storybook-addon-backgrounds": "^0.0.7",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "webpack-merge": "^0.15.0"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
+}
