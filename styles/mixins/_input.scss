@@ -18,11 +18,8 @@
 
 %input-readonly-focused {
     border: none;
-    border-bottom: 1px dashed $borderInputColor;
     background: none;
     box-shadow: none;
-
-    color: #e4e4e4;
 }
 
 %input-base-invalid {
