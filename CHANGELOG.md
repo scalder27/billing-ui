@@ -8,6 +8,10 @@
 > - :house:     [Infrastructure]
 > - :nail_care: [Polish]
 
+## v1.21.2 (03.11.2016)
+### :rocket: New Feature
+- Добавлена анимацию слайда справа
+
 ## v1.22.0
 ### :house: Infrastructure
 - Выпилен `why-did-you-update`
