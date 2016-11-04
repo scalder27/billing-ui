@@ -1,11 +1,11 @@
 {
   "name": "billing-ui",
-  "version": "1.22.2",
+  "version": "1.23.0",
   "description": "KonturBilling UI components",
   "scripts": {
     "precommit": "npm run comb",
     "test:ci": "npm run eslint:ci && npm test -- --reporter min",
-    "test": "mocha ./test/**/*.test.js --compilers js:babel-register --reporter nyan --inline-diffs --colors",
+    "test": "mocha ./test/**/*.test.js",
     "eslint:ci": "eslint --config ./.ci-eslintrc ./**/**.js && eslint ./**/**.jsx",
     "eslint": "eslint ./**/**.js --cache && eslint ./**/**.jsx --cache",
     "comb": "gulp sass:comb",
@@ -51,6 +51,8 @@
     "gulp-postcss": "^6.1.0",
     "husky": "^0.11.4",
     "mocha": "^2.5.3",
+    "jsdom": "latest",
+    "jsdom-global": "latest",
     "moment": "^2.12.0",
     "perfectionist": ">= 2.1.3 < 3",
     "postcss-scss": "^0.1.6",
