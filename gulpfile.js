@@ -13,7 +13,13 @@ const csscombOptions = require("./.csscomb.json");
 const sortOrder = csscombOptions["sort-order"];
 
 gulp.task("sass:comb", function() {
-    return gulp.src(["**/*.{scss, sass}", "!**/_product_icons.scss", "!**/_**-settings.scss"])
+    return gulp.src([
+        "**/*.{scss, sass}",
+        "!**/_product_icons.scss",
+        "!**/_**-settings.scss",
+        "!node_modules/**/*.{scss, sass}",
+        "!**/node_modules/**/*.{scss, sass}",
+    ])
         .pipe(plugins.postcss([
             autoprefixer({ add: false, browsers: [] }),
             perfectionist({

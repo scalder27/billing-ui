@@ -1,0 +1,17 @@
+﻿@font-face {
+    font-family: "Iconic";
+    font-weight: normal;
+    font-style: normal;
+
+    src: url("./../fonts/Iconic/Kontur-Iconic-eco-webfont.eot");
+    src: url("./../fonts/Iconic/Kontur-Iconic-eco-webfont.eot?#iefix") format("embedded-opentype"),
+         url("./../fonts/Iconic/Kontur-Iconic-eco-webfont.woff") format("woff"),
+         url("./../fonts/Iconic/Kontur-Iconic-eco-webfont.ttf") format("truetype"),
+         url("./../fonts/Iconic/Kontur-Iconic-eco-webfont.svg#Iconic") format("svg");
+}
+
+.iconic {
+    font-family: "Iconic" !important;
+    font-weight: normal !important;
+    -webkit-font-smoothing: antialiased;
+}
